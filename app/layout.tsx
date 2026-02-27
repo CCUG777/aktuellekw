@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     template: "%s | aktuellekw.de",
   },
   description:
-    "Aktuelle Kalenderwoche sofort ablesen. Welche KW haben wir heute? Kalenderwochen 2026 nach ISO 8601 mit Start- und Enddatum. Schnell & kostenlos.",
+    "Aktuelle KW sofort ablesen. Welche KW haben wir heute? Kalenderwochen 2026 nach ISO 8601 mit Start- und Enddatum. Schnell & kostenlos.",
   keywords: [
     "aktuelle KW",
     "aktuelle Kalenderwoche",
@@ -46,14 +46,14 @@ export const metadata: Metadata = {
     siteName: "aktuellekw.de",
     title: "Aktuelle KW 2026 – Welche Kalenderwoche haben wir heute?",
     description:
-      "Aktuelle Kalenderwoche sofort ablesen. Welche KW haben wir heute? KW nach ISO 8601 – schnell und kostenlos.",
+      "Aktuelle KW sofort ablesen. Welche KW haben wir heute? KW nach ISO 8601 – schnell und kostenlos.",
     // OG-Image: 1200×630 px – Platzhalter, bitte durch echtes Bild ersetzen
     images: [
       {
         url: "/og/og-default.png",
         width: 1200,
         height: 630,
-        alt: "aktuellekw.de – Aktuelle Kalenderwoche nach ISO 8601",
+        alt: "aktuellekw.de – Aktuelle KW nach ISO 8601",
         type: "image/png",
       },
     ],
@@ -62,12 +62,12 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Aktuelle KW 2026 – Welche Kalenderwoche haben wir heute?",
     description:
-      "Aktuelle Kalenderwoche sofort ablesen. Welche KW haben wir heute? KW nach ISO 8601 mit Start- und Enddatum.",
+      "Aktuelle KW sofort ablesen. Welche KW haben wir heute? KW nach ISO 8601 mit Start- und Enddatum.",
     // Twitter Card Image: 1200×630 px – Platzhalter, bitte durch echtes Bild ersetzen
     images: [
       {
         url: "/og/og-default.png",
-        alt: "aktuellekw.de – Aktuelle Kalenderwoche nach ISO 8601",
+        alt: "aktuellekw.de – Aktuelle KW nach ISO 8601",
       },
     ],
   },
@@ -89,10 +89,10 @@ function WebSiteJsonLd() {
     "@context": "https://schema.org",
     "@type": "WebSite",
     name: "aktuellekw.de",
-    alternateName: ["Aktuelle Kalenderwoche", "Aktuelle KW"],
+    alternateName: ["Aktuelle KW", "Aktuelle Kalenderwoche"],
     url: "https://aktuellekw.de",
     description:
-      "Aktuelle Kalenderwoche nach ISO 8601. Welche KW haben wir heute? Alle Kalenderwochen 2026 im Überblick.",
+      "Aktuelle KW nach ISO 8601. Welche KW haben wir heute? Alle Kalenderwochen 2026 im Überblick.",
     inLanguage: "de-DE",
     publisher: {
       "@type": "Organization",

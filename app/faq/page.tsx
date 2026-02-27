@@ -41,7 +41,7 @@ const faqs = [
   {
     question: "Welche Kalenderwoche haben wir aktuell?",
     answer:
-      "Die aktuelle Kalenderwoche wird auf unserer Startseite live angezeigt – mit genauer KW-Nummer, Jahr sowie Start- und Enddatum (Montag bis Sonntag nach ISO 8601). Die Seite aktualisiert sich stündlich automatisch.",
+      "Die aktuelle KW wird auf unserer Startseite live angezeigt – mit genauer KW-Nummer, Jahr sowie Start- und Enddatum (Montag bis Sonntag nach ISO 8601). Die Seite aktualisiert sich stündlich automatisch.",
   },
   {
     question: "Welche KW ist heute?",
@@ -103,7 +103,7 @@ const faqs = [
       "ISO 8601 ist ein internationaler Standard zur Darstellung von Datum und Uhrzeit. Er legt fest, dass Wochen am Montag beginnen und KW 1 den ersten Donnerstag des Jahres enthält. In Deutschland gilt dieser Standard verbindlich.",
   },
   {
-    question: "Wie wird die aktuelle Kalenderwoche berechnet?",
+    question: "Wie wird die aktuelle KW berechnet?",
     answer:
       "Die KW wird nach ISO 8601 berechnet: Man sucht den nächsten Donnerstag zum aktuellen Datum und bestimmt, die wievielte Woche des Jahres dieser Donnerstag angehört. Jede Woche beginnt am Montag.",
   },
@@ -169,7 +169,7 @@ export default function FaqPage() {
           53&nbsp;Kalenderwochen haben und wie Sie jedes beliebige Datum einer
           KW zuordnen. Die{" "}
           <a href="/" className="text-accent hover:underline">
-            aktuelle Kalenderwoche
+            aktuelle KW
           </a>{" "}
           finden Sie jederzeit auf unserer Startseite.
         </p>
@@ -196,7 +196,7 @@ export default function FaqPage() {
         <div className="mt-10 pt-8 border-t border-border">
           <p className="text-text-secondary text-sm flex flex-wrap gap-x-6 gap-y-2">
             <a href="/" className="text-accent hover:underline">
-              ← Aktuelle Kalenderwoche
+              ← Aktuelle KW
             </a>
             <a href="/kalenderwoche" className="text-accent hover:underline">
               Alle Kalenderwochen im Überblick

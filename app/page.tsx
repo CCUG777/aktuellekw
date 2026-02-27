@@ -18,7 +18,7 @@ export const revalidate = 3600;
 
 export async function generateMetadata(): Promise<Metadata> {
   const kw = getCurrentKW();
-  const ogTitle = `KW ${kw.weekNumber} ${kw.year} – Aktuelle Kalenderwoche heute`;
+  const ogTitle = `KW ${kw.weekNumber} ${kw.year} – Aktuelle KW heute`;
   const ogDescription = `Heute ist KW ${kw.weekNumber} ${kw.year} (${formatDateDE(kw.startDate)}–${formatDateDE(kw.endDate)}). Aktuelle KW nach ISO 8601.`;
   // OG-Image: 1200×630 px – Platzhalter, bitte durch echtes Bild mit KW-Nummer ersetzen
   const ogImage = {
@@ -30,7 +30,7 @@ export async function generateMetadata(): Promise<Metadata> {
   };
   return {
     title: ogTitle,
-    description: `Heute ist KW ${kw.weekNumber} ${kw.year} (${formatDateDE(kw.startDate)}–${formatDateDE(kw.endDate)}). Aktuelle Kalenderwoche nach ISO 8601. Welche KW haben wir? Schnell & kostenlos.`,
+    description: `Heute ist KW ${kw.weekNumber} ${kw.year} (${formatDateDE(kw.startDate)}–${formatDateDE(kw.endDate)}). Aktuelle KW nach ISO 8601. Welche KW haben wir? Schnell & kostenlos.`,
     alternates: { canonical: "https://aktuellekw.de" },
     openGraph: {
       title: ogTitle,
@@ -129,9 +129,9 @@ export default function Home() {
     {
       "@context": "https://schema.org",
       "@type": "WebApplication",
-      name: "Aktuelle Kalenderwoche – aktuellekw.de",
+      name: "Aktuelle KW – aktuellekw.de",
       url: "https://aktuellekw.de",
-      description: `Die aktuelle Kalenderwoche ist KW ${kw.weekNumber} ${kw.year} (${formatDateDE(kw.startDate)} – ${formatDateDE(kw.endDate)}).`,
+      description: `Die aktuelle KW ist KW ${kw.weekNumber} ${kw.year} (${formatDateDE(kw.startDate)} – ${formatDateDE(kw.endDate)}).`,
       applicationCategory: "UtilityApplication",
       operatingSystem: "All",
       inLanguage: "de-DE",
@@ -170,7 +170,7 @@ export default function Home() {
       {/* ── 1. HERO ─────────────────────────────────────────────── */}
       <section className="flex flex-col items-center justify-center px-4 pt-10 pb-8 md:pt-14 md:pb-12 fade-in">
         <h1 className="text-text-secondary text-xs uppercase tracking-[0.22em] mb-8 font-normal">
-          Aktuelle Kalenderwoche
+          Aktuelle KW
         </h1>
         <KWDisplay weekNumber={kw.weekNumber} year={kw.year} />
         <p className="text-text-secondary mt-7 text-base md:text-lg text-center">
@@ -375,7 +375,7 @@ export default function Home() {
         </div>
         <p className="text-text-secondary text-sm mb-5 leading-relaxed">
           Alle Kalenderwochen {kw.year} auf einen Blick – von KW&nbsp;1 bis
-          KW&nbsp;{weeksInYear}. Die aktuelle Kalenderwoche (KW&nbsp;{kw.weekNumber})
+          KW&nbsp;{weeksInYear}. Die aktuelle KW (KW&nbsp;{kw.weekNumber})
           ist hervorgehoben. Klicken Sie auf eine beliebige Woche, um Details
           wie Start- und Enddatum nach ISO&nbsp;8601 zu sehen.
         </p>

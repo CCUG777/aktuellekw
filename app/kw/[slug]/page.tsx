@@ -325,7 +325,7 @@ export default async function KWDetailPage({
         {/* ── Internal links ───────────────────────────────────── */}
         <div className="border-t border-border pt-6 flex flex-wrap gap-x-6 gap-y-2 text-sm">
           <a href="/" className="text-accent hover:underline">
-            ← Aktuelle Kalenderwoche
+            ← Aktuelle KW
           </a>
           <a
             href={`/kalenderwochen/${kwInfo.year}`}

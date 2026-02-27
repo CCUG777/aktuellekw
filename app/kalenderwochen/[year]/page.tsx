@@ -248,7 +248,7 @@ export default async function KalenderwochenYearPage({
         {/* ── Footer links ─────────────────────────────────────── */}
         <div className="border-t border-border pt-6 flex flex-wrap gap-x-6 gap-y-2 text-sm fade-in-delay-2">
           <a href="/" className="text-accent hover:underline">
-            ← Aktuelle Kalenderwoche
+            ← Aktuelle KW
           </a>
           <a href="/kalenderwoche" className="text-accent hover:underline">
             Übersicht aktuelles Jahr

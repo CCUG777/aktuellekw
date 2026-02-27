@@ -187,7 +187,7 @@ export default function KalenderwochePage() {
           </p>
           <p className="text-text-secondary text-sm">
             <a href="/" className="text-accent hover:underline">
-              ← Aktuelle Kalenderwoche
+              ← Aktuelle KW
             </a>
           </p>
         </div>

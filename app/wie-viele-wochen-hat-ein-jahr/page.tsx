@@ -180,7 +180,7 @@ export default function WieVieleWochenPage() {
               : `Der 1. Januar ${currentYear} fällt nicht auf einen Donnerstag, daher hat ${currentYear} reguläre 52 KW.`}{" "}
             Die{" "}
             <a href="/" className="text-accent hover:underline">
-              aktuelle Kalenderwoche
+              aktuelle KW
             </a>{" "}
             ist KW&nbsp;{currentKW.weekNumber}.
           </p>
@@ -240,7 +240,7 @@ export default function WieVieleWochenPage() {
         {/* Internal Links */}
         <div className="mt-10 pt-8 border-t border-border flex flex-wrap gap-x-6 gap-y-2 text-sm">
           <a href="/" className="text-accent hover:underline">
-            ← Aktuelle Kalenderwoche
+            ← Aktuelle KW
           </a>
           <a href="/kalenderwoche" className="text-accent hover:underline">
             Alle Kalenderwochen {currentYear}
