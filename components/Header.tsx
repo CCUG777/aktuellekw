@@ -1,9 +1,10 @@
 import Link from "next/link";
 import Image from "next/image";
+import ThemeToggle from "./ThemeToggle";
 
 export default function Header() {
   return (
-    <header className="border-b border-border">
+    <header className="border-b border-border bg-surface">
       <nav className="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between">
         <Link href="/" className="flex items-center">
           <Image
@@ -34,6 +35,7 @@ export default function Header() {
           >
             FAQ
           </Link>
+          <ThemeToggle />
         </div>
       </nav>
     </header>

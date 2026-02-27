@@ -72,7 +72,7 @@ export default function KWRechner() {
           type="date"
           value={dateStr}
           onChange={(e) => setDateStr(e.target.value)}
-          className="flex-1 min-w-0 bg-surface-tertiary border border-border rounded-xl px-4 py-3 text-text-primary text-sm focus:outline-none focus:border-accent transition-colors [color-scheme:dark]"
+          className="flex-1 min-w-0 bg-surface-tertiary border border-border rounded-xl px-4 py-3 text-text-primary text-sm focus:outline-none focus:border-accent transition-colors"
         />
 
         {/* Result */}

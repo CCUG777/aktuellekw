@@ -12,7 +12,7 @@ export default function KWDisplay({ weekNumber, year }: KWDisplayProps) {
         className="absolute w-80 h-80 md:w-[28rem] md:h-[28rem] bg-blue-500/10 blur-[100px] rounded-full pointer-events-none"
       />
       {/* Main KW number */}
-      <div className="relative text-[9rem] md:text-[15rem] font-bold tracking-tight leading-none text-white">
+      <div className="relative text-[9rem] md:text-[15rem] font-bold tracking-tight leading-none text-text-primary">
         {weekNumber}
       </div>
       {/* KW · Year subtitle */}

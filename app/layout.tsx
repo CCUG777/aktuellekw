@@ -115,8 +115,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="de" className={`dark ${inter.variable}`}>
+    <html lang="de" className={inter.variable} suppressHydrationWarning>
       <body className="font-sans antialiased bg-surface text-text-primary min-h-screen flex flex-col">
+        {/*
+         * Theme-Init-Script: läuft synchron vor dem ersten Paint.
+         * Verhindert FOUC (Flash of Unstyled Content) beim Laden.
+         * Priorität: 1. localStorage  2. prefers-color-scheme  3. Light (Default)
+         */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var s=localStorage.getItem('theme');var d=window.matchMedia('(prefers-color-scheme: dark)').matches;var h=document.documentElement;if(s==='dark'||(s===null&&d)){h.classList.add('dark');}else{h.classList.add('light');}}catch(e){}})();`,
+          }}
+        />
         <WebSiteJsonLd />
         <Header />
         <main className="flex-1">{children}</main>
