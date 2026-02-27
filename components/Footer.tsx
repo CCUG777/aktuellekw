@@ -32,6 +32,12 @@ export default function Footer() {
           >
             Impressum
           </Link>
+          <Link
+            href="/datenschutz"
+            className="hover:text-text-primary transition-colors"
+          >
+            Datenschutz
+          </Link>
         </div>
       </div>
     </footer>

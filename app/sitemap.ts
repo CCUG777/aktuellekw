@@ -43,6 +43,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "yearly",
       priority: 0.2,
     },
+    {
+      url: "https://aktuellekw.de/datenschutz",
+      lastModified: new Date("2026-02-27"),
+      changeFrequency: "yearly",
+      priority: 0.2,
+    },
   ];
 
   // ── Cluster 2: Year overview pages (/kalenderwochen/[year]) ───

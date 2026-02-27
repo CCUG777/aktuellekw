@@ -236,7 +236,7 @@ export default function ImpressumPage() {
         </div>
 
         {/* Back link */}
-        <div className="mt-10 pt-8 border-t border-border">
+        <div className="mt-10 pt-8 border-t border-border flex items-center gap-6">
           <Link
             href="/"
             className="inline-flex items-center gap-2 text-text-secondary hover:text-text-primary transition-colors text-sm"
@@ -244,7 +244,13 @@ export default function ImpressumPage() {
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden>
               <path d="M10 12L6 8l4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
-            Zurück zur Startseite
+            Startseite
+          </Link>
+          <Link
+            href="/datenschutz"
+            className="text-text-secondary hover:text-text-primary transition-colors text-sm"
+          >
+            Datenschutzerklärung
           </Link>
         </div>
       </div>
