@@ -168,10 +168,10 @@ export default function Home() {
       />
 
       {/* ── 1. HERO ─────────────────────────────────────────────── */}
-      <section className="flex flex-col items-center justify-center px-4 pt-14 pb-8 md:pt-20 md:pb-12 fade-in">
-        <p className="text-text-secondary text-xs uppercase tracking-[0.22em] mb-8">
+      <section className="flex flex-col items-center justify-center px-4 pt-10 pb-8 md:pt-14 md:pb-12 fade-in">
+        <h1 className="text-text-secondary text-xs uppercase tracking-[0.22em] mb-8 font-normal">
           Aktuelle Kalenderwoche
-        </p>
+        </h1>
         <KWDisplay weekNumber={kw.weekNumber} year={kw.year} />
         <p className="text-text-secondary mt-7 text-base md:text-lg text-center">
           {formatDateDE(kw.startDate)} – {formatDateDE(kw.endDate)}
@@ -203,7 +203,7 @@ export default function Home() {
             href={`/kw/${kw.weekNumber}-${kw.year}`}
             className="text-xs text-text-secondary hover:text-accent transition-colors px-2"
           >
-            Details →
+            KW {kw.weekNumber} Details →
           </a>
           <a
             href={`/kw/${nextKW.weekNumber}-${nextKW.year}`}
@@ -327,14 +327,12 @@ export default function Home() {
         <h2 className="text-2xl font-semibold mb-2">
           Häufige Fragen zur Kalenderwoche
         </h2>
-        {/*
-          [PLACEHOLDER: Einleitungstext FAQ – 40–60 Wörter.
-           Keywords: welche Kalenderwoche haben wir, aktuelle KW, ISO 8601.
-           Tone: kurz, direkt, einladend.]
-        */}
         <p className="text-text-secondary text-sm mb-6 leading-relaxed">
-          Antworten auf die häufigsten Fragen rund um die Kalenderwoche –
-          von der Berechnung nach ISO 8601 bis zur aktuellen KW.
+          Welche Kalenderwoche haben wir gerade? Wie wird die aktuelle KW
+          berechnet? Hier finden Sie Antworten auf die wichtigsten Fragen
+          rund um die Kalenderwoche nach ISO&nbsp;8601 – von der Berechnung
+          über die Anzahl der Wochen pro Jahr bis hin zu den Besonderheiten
+          der KW&nbsp;1 und KW&nbsp;53.
         </p>
         <div className="space-y-2.5">
           {homeFaqs.map((faq, i) => (
@@ -375,11 +373,12 @@ export default function Home() {
             Vollansicht →
           </a>
         </div>
-        {/*
-          [PLACEHOLDER: Kurztext Jahresübersicht – 30–50 Wörter.
-           Keywords: Kalenderwochen 2026, alle KW im Überblick, KW Kalender 2026.
-           Tone: sachlich, informierend. Verweis auf aktuelle KW-Hervorhebung.]
-        */}
+        <p className="text-text-secondary text-sm mb-5 leading-relaxed">
+          Alle Kalenderwochen {kw.year} auf einen Blick – von KW&nbsp;1 bis
+          KW&nbsp;{weeksInYear}. Die aktuelle Kalenderwoche (KW&nbsp;{kw.weekNumber})
+          ist hervorgehoben. Klicken Sie auf eine beliebige Woche, um Details
+          wie Start- und Enddatum nach ISO&nbsp;8601 zu sehen.
+        </p>
         <KWTable weeks={allWeeks} currentWeek={kw.weekNumber} />
         <a
           href="/kalenderwoche"

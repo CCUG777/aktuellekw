@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { type KWInfo, formatDateDE } from "@/lib/kw";
 
 interface KWTableProps {
@@ -13,13 +14,14 @@ export default function KWTable({ weeks, currentWeek }: KWTableProps) {
         const isPast = week.weekNumber < currentWeek;
 
         return (
-          <div
+          <Link
             key={week.weekNumber}
-            className={`relative rounded-xl p-3 border transition-all duration-200 ${
+            href={`/kw/${week.weekNumber}-${week.year}`}
+            className={`relative rounded-xl p-3 border transition-all duration-200 block ${
               isCurrent
                 ? "border-accent bg-accent/10 shadow-[0_0_24px_rgba(10,132,255,0.12)]"
                 : isPast
-                ? "border-border/40 bg-surface-secondary/20 opacity-45"
+                ? "border-border/40 bg-surface-secondary/20 opacity-45 hover:opacity-70"
                 : "border-border bg-surface-secondary hover:bg-surface-tertiary hover:border-border/70"
             }`}
           >
@@ -40,7 +42,7 @@ export default function KWTable({ weeks, currentWeek }: KWTableProps) {
               <br />
               {formatDateDE(week.endDate)}
             </div>
-          </div>
+          </Link>
         );
       })}
     </div>

@@ -160,18 +160,18 @@ export default function FaqPage() {
           Häufige Fragen zur Kalenderwoche
         </h1>
 
-        {/*
-          [PLACEHOLDER: Einleitungstext FAQ-Seite – 60–80 Wörter.
-           Keywords: welche Kalenderwoche haben wir, Kalenderwoche berechnen,
-           ISO 8601, wie viele Wochen hat ein Jahr.
-           Inhalt: Kurze Einführung, welche Themen die FAQs abdecken – Berechnung,
-           ISO-Standard, spezifische KW-Anfragen. Verweis auf Startseite für die
-           aktuelle KW-Anzeige. Tone: freundlich, prägnant, direkt.]
-        */}
         <p className="text-text-secondary mb-8 leading-relaxed">
-          Hier finden Sie Antworten auf die häufigsten Fragen rund um die
-          Kalenderwoche (KW): von der Berechnung nach ISO 8601 über „Wie viele
-          Wochen hat ein Jahr?" bis hin zur aktuellen KW.
+          Welche Kalenderwoche haben wir heute? Wie wird die Kalenderwoche
+          berechnet? Und wie viele Wochen hat ein Jahr eigentlich? Auf dieser
+          Seite beantworten wir die häufigsten Fragen rund um die
+          Kalenderwoche (KW) nach dem internationalen Standard ISO&nbsp;8601.
+          Erfahren Sie, wann KW&nbsp;1 beginnt, warum manche Jahre
+          53&nbsp;Kalenderwochen haben und wie Sie jedes beliebige Datum einer
+          KW zuordnen. Die{" "}
+          <a href="/" className="text-accent hover:underline">
+            aktuelle Kalenderwoche
+          </a>{" "}
+          finden Sie jederzeit auf unserer Startseite.
         </p>
 
         <div className="space-y-2.5">

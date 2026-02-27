@@ -29,6 +29,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.7,
     },
+    // Cluster 4: Ratgeber – Wie viele Wochen hat ein Jahr?
+    {
+      url: "https://aktuellekw.de/wie-viele-wochen-hat-ein-jahr",
+      lastModified: new Date("2026-02-27"),
+      changeFrequency: "yearly",
+      priority: 0.75,
+    },
   ];
 
   // ── Cluster 2: Year overview pages (/kalenderwochen/[year]) ───

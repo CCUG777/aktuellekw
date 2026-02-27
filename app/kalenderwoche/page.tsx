@@ -144,20 +144,25 @@ export default function KalenderwochePage() {
           </a>
         </nav>
 
-        {/*
-          [PLACEHOLDER: Einleitungstext Kalenderwochen-Übersicht – 100–150 Wörter.
-           Keywords: Kalenderwochen 2026, alle KW im Überblick, Kalenderwoche 2026,
-           kw 2026, kw im Kalender, KW Kalender, Kalenderwochen übersicht.
-           Inhalt: Erklärung der Tabelle, wie man die aktuelle KW findet, Verweis auf
-           ISO 8601. Hinweis auf KW 53 wenn vorhanden. Nützlichkeit für
-           Projektplanung und Terminkoordination. Tone: informativ, klar.]
-        */}
-
-        <p className="text-text-secondary mb-8 leading-relaxed">
-          Die folgende Tabelle zeigt alle Kalenderwochen {currentKW.year} mit
-          dem jeweiligen Start- (Montag) und Enddatum (Sonntag) nach ISO 8601.
-          Die aktuelle Woche (KW {currentKW.weekNumber}) ist hervorgehoben.
-        </p>
+        <div className="text-text-secondary mb-8 leading-relaxed space-y-3">
+          <p>
+            Diese Übersicht zeigt alle Kalenderwochen {currentKW.year} im
+            Detail – von KW&nbsp;1 bis KW&nbsp;{weeksInYear}. Jede
+            Kalenderwoche ist mit dem exakten Start- (Montag) und Enddatum
+            (Sonntag) nach ISO&nbsp;8601 angegeben. Die aktuelle
+            Woche (KW&nbsp;{currentKW.weekNumber}) ist farblich hervorgehoben,
+            damit Sie sie auf einen Blick finden.
+          </p>
+          <p>
+            {weeksInYear === 53
+              ? `Das Jahr ${currentKW.year} hat 53 Kalenderwochen – ein sogenanntes langes Jahr. Das tritt auf, weil der 1. Januar ${currentKW.year} auf einen Donnerstag fällt.`
+              : `Das Jahr ${currentKW.year} hat ${weeksInYear} Kalenderwochen.`}{" "}
+            Klicken Sie auf eine beliebige KW, um alle Details wie
+            Wochentage und genaue Datumsangaben zu sehen. Die Übersicht eignet
+            sich ideal für Projektplanung, Terminkoordination und die schnelle
+            Zuordnung von Kalenderwochen zu konkreten Zeiträumen.
+          </p>
+        </div>
 
         <KWTable weeks={allWeeks} currentWeek={currentKW.weekNumber} />
 
@@ -166,22 +171,22 @@ export default function KalenderwochePage() {
           <KWRechner />
         </div>
 
-        <div className="mt-10 pt-8 border-t border-border">
-          {/*
-            [PLACEHOLDER: Abschlusstext Kalenderwochen-Übersicht – 60–80 Wörter.
-             Keywords: wie viele Kalenderwochen hat ein Jahr, KW Wochen, kw woche,
-             Wochenkalender, kalender 2026 mit KW.
-             Inhalt: Hinweis auf {weeksInYear} Wochen in {year}, warum es
-             manchmal 53 KWs gibt, Verweis auf FAQ-Seite für mehr Infos.]
-          */}
-          <p className="text-text-secondary text-sm">
-            {currentKW.year} hat {weeksInYear} Kalenderwochen.{" "}
-            <a href="/faq" className="text-blue-400 hover:underline">
-              Warum gibt es manchmal eine KW 53?
+        <div className="mt-10 pt-8 border-t border-border space-y-3">
+          <p className="text-text-secondary text-sm leading-relaxed">
+            Wie viele Kalenderwochen hat ein Jahr? Die meisten Jahre haben
+            52&nbsp;KW, doch {currentKW.year} hat{" "}
+            {weeksInYear}&nbsp;Kalenderwochen.{" "}
+            {weeksInYear === 53
+              ? "Eine 53. Woche entsteht, wenn der 1. Januar auf einen Donnerstag fällt – oder in Schaltjahren auf einen Mittwoch. "
+              : ""}
+            Nutzen Sie diese Übersicht als Wochenkalender {currentKW.year} für
+            Ihre Termin- und Projektplanung.{" "}
+            <a href="/faq" className="text-accent hover:underline">
+              Weitere Fragen zur Kalenderwoche →
             </a>
           </p>
-          <p className="text-text-secondary text-sm mt-2">
-            <a href="/" className="text-blue-400 hover:underline">
+          <p className="text-text-secondary text-sm">
+            <a href="/" className="text-accent hover:underline">
               ← Aktuelle Kalenderwoche
             </a>
           </p>
