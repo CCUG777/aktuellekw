@@ -222,6 +222,42 @@ export default function Home() {
         </nav>
       </section>
 
+      {/* ── 1a. SEO-ERKLÄRTEXT: Aktuelle KW ──────────────────────
+       * PLACEHOLDER – Cluster 1: aktuelle KW
+       * Zielkeywords: aktuelle KW, aktuelle Kalenderwoche, heutige KW,
+       *   welche KW haben wir, Kalenderwoche heute, KW aktuell
+       * Ziel: 150–200 Wörter
+       * Hinweis: Dieser Text wird durch redaktionellen SEO-Content ersetzt.
+       * ──────────────────────────────────────────────────────────── */}
+      <section className="max-w-2xl mx-auto px-4 pb-10 text-center fade-in">
+        <h2 className="text-xl font-semibold mb-3">
+          Was ist die aktuelle KW?
+        </h2>
+        <div className="text-text-secondary text-sm leading-relaxed space-y-3">
+          <p>
+            Die aktuelle KW (Kalenderwoche) gibt an, in welcher Woche des Jahres
+            wir uns gerade befinden. Heute ist <strong className="text-text-primary">KW&nbsp;{kw.weekNumber}&nbsp;{kw.year}</strong> –
+            sie läuft vom {formatDateDE(kw.startDate)} bis {formatDateDE(kw.endDate)}.
+            Die Zählung der Kalenderwochen folgt dem internationalen Standard
+            ISO&nbsp;8601, der in Deutschland, Österreich und der Schweiz
+            verbindlich ist. Danach beginnt jede Woche am Montag und endet am
+            Sonntag.
+          </p>
+          <p>
+            Ob für die Projektplanung, Terminabsprachen oder die Lohnabrechnung –
+            die aktuelle Kalenderwoche ist im Alltag allgegenwärtig. Auf dieser
+            Seite sehen Sie die heutige KW sofort auf einen Blick, inklusive
+            Wochentage, Jahresfortschritt und einer Übersicht aller
+            Kalenderwochen&nbsp;{kw.year}. Sie können außerdem jedes beliebige
+            Datum mit dem{" "}
+            <a href="#kw-rechner-input" className="text-accent hover:underline">
+              KW-Rechner
+            </a>{" "}
+            in eine Kalenderwoche umrechnen.
+          </p>
+        </div>
+      </section>
+
       {/* ── 1b. WEEKDAY TABLE ───────────────────────────────────── */}
       <section className="max-w-3xl mx-auto px-4 pb-10 fade-in">
         <h2 className="text-sm font-semibold text-text-secondary uppercase tracking-wider mb-3">
@@ -322,17 +358,28 @@ export default function Home() {
         <KWRechner />
       </section>
 
-      {/* ── 4. FAQ ──────────────────────────────────────────────── */}
+      {/* ── 4. FAQ ──────────────────────────────────────────────
+       * PLACEHOLDER – Cluster 3: welche KW haben wir
+       * Zielkeywords: welche Kalenderwoche haben wir, welche KW ist heute,
+       *   Kalenderwoche heute, heutige Kalenderwoche, KW berechnen
+       * Ziel: 60–80 Wörter
+       * Hinweis: Dieser Text wird durch redaktionellen SEO-Content ersetzt.
+       * ──────────────────────────────────────────────────────────── */}
       <section className="max-w-2xl mx-auto px-4 pb-16">
         <h2 className="text-2xl font-semibold mb-2">
           Häufige Fragen zur Kalenderwoche
         </h2>
         <p className="text-text-secondary text-sm mb-6 leading-relaxed">
           Welche Kalenderwoche haben wir gerade? Wie wird die aktuelle KW
-          berechnet? Hier finden Sie Antworten auf die wichtigsten Fragen
-          rund um die Kalenderwoche nach ISO&nbsp;8601 – von der Berechnung
-          über die Anzahl der Wochen pro Jahr bis hin zu den Besonderheiten
-          der KW&nbsp;1 und KW&nbsp;53.
+          berechnet und wann beginnt KW&nbsp;1? Hier beantworten wir die
+          häufigsten Fragen rund um die Kalenderwoche nach ISO&nbsp;8601.
+          Erfahren Sie, warum manche Jahre 53&nbsp;KW haben, wie Sie die
+          heutige Kalenderwoche schnell bestimmen und was der Unterschied
+          zwischen deutschem und amerikanischem Wochensystem ist. Weitere
+          Antworten finden Sie auf unserer{" "}
+          <a href="/faq" className="text-accent hover:underline">
+            ausführlichen FAQ-Seite
+          </a>.
         </p>
         <div className="space-y-2.5">
           {homeFaqs.map((faq, i) => (
@@ -360,7 +407,13 @@ export default function Home() {
         </a>
       </section>
 
-      {/* ── 5. KW JAHRESÜBERSICHT ───────────────────────────────── */}
+      {/* ── 5. KW JAHRESÜBERSICHT ──────────────────────────────────
+       * PLACEHOLDER – Cluster 2: Kalenderwochen Jahresübersicht
+       * Zielkeywords: Kalenderwochen 2026, alle KW, KW Übersicht,
+       *   KW Jahresüberblick, Wochenkalender, Kalenderwochen Tabelle
+       * Ziel: 50–70 Wörter
+       * Hinweis: Dieser Text wird durch redaktionellen SEO-Content ersetzt.
+       * ──────────────────────────────────────────────────────────── */}
       <section className="max-w-4xl mx-auto px-4 pb-16">
         <div className="flex items-baseline justify-between mb-5">
           <h2 className="text-2xl font-semibold">
@@ -374,10 +427,15 @@ export default function Home() {
           </a>
         </div>
         <p className="text-text-secondary text-sm mb-5 leading-relaxed">
-          Alle Kalenderwochen {kw.year} auf einen Blick – von KW&nbsp;1 bis
-          KW&nbsp;{weeksInYear}. Die aktuelle KW (KW&nbsp;{kw.weekNumber})
-          ist hervorgehoben. Klicken Sie auf eine beliebige Woche, um Details
-          wie Start- und Enddatum nach ISO&nbsp;8601 zu sehen.
+          Alle {weeksInYear} Kalenderwochen {kw.year} auf einen Blick – von
+          KW&nbsp;1 bis KW&nbsp;{weeksInYear}. Die aktuelle KW
+          (KW&nbsp;{kw.weekNumber}) ist blau hervorgehoben. Klicken Sie auf
+          eine beliebige Woche, um Start- und Enddatum, Feiertage und
+          Details nach ISO&nbsp;8601 zu sehen. Die vollständige{" "}
+          <a href="/kalenderwoche" className="text-accent hover:underline">
+            Kalenderwochen-Übersicht mit Jahresnavigation
+          </a>{" "}
+          finden Sie auf der Unterseite.
         </p>
         <KWTable weeks={allWeeks} currentWeek={kw.weekNumber} />
         <a

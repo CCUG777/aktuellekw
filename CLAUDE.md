@@ -14,6 +14,10 @@ Domain: aktuellekw.de
 - SEO optimized for "aktuelle KW" keyword cluster
 - ISR: revalidate = 3600 (homepage + KW pages), 86400 (year pages)
 
+## Git & Deployment
+- Remote: https://github.com/CCUG777/aktuellekw.git (branch: main)
+- **Automatisch committen und pushen** in logischen Abschnitten – nach jeder abgeschlossenen Feature-Implementierung, Bugfix oder zusammenhängenden Änderung eigenständig `git add`, `git commit` und `git push origin main` ausführen. Nicht auf eine explizite Aufforderung warten.
+
 ## Commands
 - `npm run dev` – Start development server
 - `npm run build` – Production build

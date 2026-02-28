@@ -269,6 +269,43 @@ export default async function KWDetailPage({
           </div>
         </section>
 
+        {/* ── SEO-ERKLÄRTEXT ──────────────────────────────────────
+         * PLACEHOLDER – Cluster 5: Spezifische KW-Seiten
+         * Zielkeywords: KW [Nr] [Jahr], Kalenderwoche [Nr],
+         *   welche Woche ist [Datum], KW berechnen, ISO 8601
+         * Ziel: 80–120 Wörter
+         * Hinweis: Dieser Text wird durch redaktionellen SEO-Content ersetzt.
+         * ──────────────────────────────────────────────────────────── */}
+        <section className="mb-10 fade-in-delay-2">
+          <div className="text-text-secondary text-sm leading-relaxed space-y-3">
+            <p>
+              Die Kalenderwoche&nbsp;{kwInfo.weekNumber} im
+              Jahr&nbsp;{kwInfo.year} beginnt am Montag,
+              den&nbsp;{formatDateDE(kwInfo.startDate)}, und endet am Sonntag,
+              den&nbsp;{formatDateDE(kwInfo.endDate)}. Die Berechnung folgt
+              dem internationalen Standard ISO&nbsp;8601, nach dem jede Woche am
+              Montag startet und die erste KW des Jahres die Woche ist, die den
+              ersten Donnerstag im Januar enthält.
+            </p>
+            <p>
+              {isCurrent
+                ? `KW ${kwInfo.weekNumber} ist die aktuelle Kalenderwoche. `
+                : ""}
+              Insgesamt hat das Jahr&nbsp;{kwInfo.year}{" "}
+              {weeksInYear}&nbsp;Kalenderwochen. Über die Navigation können Sie
+              schnell zur vorherigen oder nächsten KW wechseln. Für eine
+              Gesamtübersicht aller Wochen besuchen Sie die{" "}
+              <a
+                href={`/kalenderwochen/${kwInfo.year}`}
+                className="text-accent hover:underline"
+              >
+                Kalenderwochen&nbsp;{kwInfo.year}
+              </a>
+              .
+            </p>
+          </div>
+        </section>
+
         {/* ── Prev / Next Navigation ───────────────────────────── */}
         <nav
           aria-label="Wochennavigation"
@@ -364,6 +401,7 @@ export default async function KWDetailPage({
  * [x] fade-in Animationen
  * [x] revalidate = 3600 (stündliche ISR)
  * [x] Interne Links: /, /kalenderwochen/[year], /faq
+ * [x] PLACEHOLDER: SEO-Erklärtext (80–120 Wörter) mit Cluster-5-Keywords
  * [ ] TODO: OG-Image mit KW-Nummer (1200×630 px)
  * [ ] TODO: Speakable Schema für KI-Sprachsuche
  * [ ] TODO: Verlinkung von KWTable-Zellen auf /kw/[n]-[year]

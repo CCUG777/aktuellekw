@@ -144,6 +144,13 @@ export default function KalenderwochePage() {
           </a>
         </nav>
 
+        {/* ── SEO-EINLEITUNGSTEXT ──────────────────────────────────
+         * PLACEHOLDER – Cluster 2: Kalenderwochen Jahresübersicht
+         * Zielkeywords: Kalenderwochen 2026, KW 2026, KW Kalender,
+         *   alle Kalenderwochen, Wochenkalender, KW Übersicht, ISO 8601
+         * Ziel: 100–150 Wörter
+         * Hinweis: Dieser Text wird durch redaktionellen SEO-Content ersetzt.
+         * ──────────────────────────────────────────────────────────── */}
         <div className="text-text-secondary mb-8 leading-relaxed space-y-3">
           <p>
             Diese Übersicht zeigt alle Kalenderwochen {currentKW.year} im
@@ -162,6 +169,12 @@ export default function KalenderwochePage() {
             sich ideal für Projektplanung, Terminkoordination und die schnelle
             Zuordnung von Kalenderwochen zu konkreten Zeiträumen.
           </p>
+          <p>
+            Über die Jahresnavigation können Sie auch die Kalenderwochen
+            anderer Jahre ({prevYear} und {nextYear}) einsehen. Nutzen Sie
+            den KW-Rechner weiter unten, um ein beliebiges Datum in die
+            entsprechende Kalenderwoche umzurechnen.
+          </p>
         </div>
 
         <KWTable weeks={allWeeks} currentWeek={currentKW.weekNumber} />
@@ -171,6 +184,13 @@ export default function KalenderwochePage() {
           <KWRechner />
         </div>
 
+        {/* ── SEO-ABSCHLUSSTEXT ───────────────────────────────────
+         * PLACEHOLDER – Cluster 2 + 4: Kalenderwochen & Wissen
+         * Zielkeywords: wie viele Kalenderwochen hat ein Jahr,
+         *   KW Wochen, Wochenkalender, 52 oder 53 KW, ISO 8601
+         * Ziel: 60–80 Wörter
+         * Hinweis: Dieser Text wird durch redaktionellen SEO-Content ersetzt.
+         * ──────────────────────────────────────────────────────────── */}
         <div className="mt-10 pt-8 border-t border-border space-y-3">
           <p className="text-text-secondary text-sm leading-relaxed">
             Wie viele Kalenderwochen hat ein Jahr? Die meisten Jahre haben
@@ -179,8 +199,14 @@ export default function KalenderwochePage() {
             {weeksInYear === 53
               ? "Eine 53. Woche entsteht, wenn der 1. Januar auf einen Donnerstag fällt – oder in Schaltjahren auf einen Mittwoch. "
               : ""}
+            Nach ISO&nbsp;8601 beginnt jede Kalenderwoche am Montag. Die erste
+            KW des Jahres ist die Woche, die den ersten Donnerstag im Januar
+            enthält.
+          </p>
+          <p className="text-text-secondary text-sm leading-relaxed">
             Nutzen Sie diese Übersicht als Wochenkalender {currentKW.year} für
-            Ihre Termin- und Projektplanung.{" "}
+            Ihre Termin- und Projektplanung. Alle Angaben werden nach dem
+            international gültigen Standard ISO&nbsp;8601 berechnet.{" "}
             <a href="/faq" className="text-accent hover:underline">
               Weitere Fragen zur Kalenderwoche →
             </a>
