@@ -48,5 +48,6 @@ export default function robots(): MetadataRoute.Robots {
  * [x] Google-Extended: explizit allow "/" (Google SGE / Gemini)
  * [x] ClaudeBot + anthropic-ai: explizit allow "/"
  * [x] Sitemap-URL korrekt verlinkt
+ * [x] llms.txt + llms-full.txt: /public/ (selbstentdeckbar per Konvention, kein robots.txt-Eintrag nötig)
  * [ ] TODO: Beim Aufbau von /admin oder /api-Routen: disallow ergänzen
  */

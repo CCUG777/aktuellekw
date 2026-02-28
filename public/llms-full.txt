@@ -1,0 +1,61 @@
+# aktuellekw.de
+
+> Deutschsprachiges Online-Tool zur Bestimmung der aktuellen Kalenderwoche (KW) nach ISO 8601. Zeigt die heutige KW, alle Kalenderwochen im Jahresüberblick, einen Datum-zu-KW-Rechner und umfassende FAQ. Zielregion: Deutschland, Österreich, Schweiz.
+
+## Über die Website
+
+aktuellekw.de ist ein deutschsprachiges Nachschlagewerk für Kalenderwochen. Alle Berechnungen folgen dem internationalen Standard ISO 8601:
+
+- Jede Kalenderwoche beginnt am Montag und endet am Sonntag.
+- KW 1 ist die Woche, die den ersten Donnerstag des Jahres enthält.
+- Die meisten Jahre haben 52 Kalenderwochen. Ein Jahr hat 53 KW, wenn der 1. Januar auf einen Donnerstag fällt – oder in Schaltjahren auf einen Mittwoch.
+- Der Standard gilt verbindlich in Deutschland, Österreich, der Schweiz und den meisten europäischen Ländern.
+
+Die Website richtet sich an Nutzer, die schnell die aktuelle Kalenderwoche nachschlagen, ein Datum in eine KW umrechnen oder alle KW eines Jahres einsehen möchten. Typische Anwendungsfälle: Projektplanung, Terminkoordination, Lohnabrechnung, Logistik.
+
+## Technische Details
+
+- Framework: Next.js 16 (App Router) mit TypeScript
+- Rendering: Static Site Generation (SSG) mit Incremental Static Regeneration (ISR)
+- Revalidierung: Startseite und KW-Seiten alle 3600 Sekunden, Jahresseiten alle 86400 Sekunden
+- Client-JavaScript: Minimal – nur 2 Client Components (KW-Rechner und Live-Datumsanzeige)
+- Sprache: Deutsch (de-DE)
+- Domain: aktuellekw.de
+- Hoster: Vercel
+
+## Hauptseiten
+
+- [Aktuelle KW – Startseite](https://aktuellekw.de/): Zeigt die aktuelle Kalenderwoche prominent als große Zahl mit Ambient-Glow-Effekt. Enthält eine 7-Tage-Wochenansicht mit Heute-Highlight, Jahresfortschritts-Statistiken (Tag des Jahres, verbleibende Tage, Fortschrittsbalken), einen interaktiven Datum-zu-KW-Rechner, 8 häufig gestellte Fragen und eine KW-Jahresübersicht als Tabelle. Navigation zur vorherigen und nächsten KW.
+- [Kalenderwochen Jahresübersicht](https://aktuellekw.de/kalenderwoche): Alle Kalenderwochen des aktuellen Jahres in einer Tabelle mit exaktem Start- (Montag) und Enddatum (Sonntag). Die aktuelle KW ist farblich hervorgehoben. Enthält Jahresnavigation (Vorjahr/Folgejahr mit KW-Anzahl) und einen KW-Rechner. Zeigt dynamisch an, ob das Jahr 52 oder 53 KW hat.
+- [FAQ zur Kalenderwoche](https://aktuellekw.de/faq): 13 strukturierte Fragen und Antworten rund um Kalenderwochen. Themen: Was ist eine Kalenderwoche, ISO 8601 Berechnung, KW 1 Definition, 52 vs. 53 KW, Unterschied deutsches/amerikanisches System, Schaltjahre, Programmier-Funktionen, Geschichte der Kalenderwoche.
+- [Wie viele Wochen hat ein Jahr?](https://aktuellekw.de/wie-viele-wochen-hat-ein-jahr): Ausführlicher Ratgeber-Artikel. Erklärt, warum ein Jahr 52 oder 53 Kalenderwochen haben kann, wann eine 53. KW auftritt, wie Schaltjahre die KW-Zählung beeinflussen und wie ISO 8601 die Berechnung regelt. Enthält eine Tabelle mit allen Jahren von 2020–2032 und deren KW-Anzahl.
+
+## Dynamische Seiten
+
+- [KW-Einzelseiten](https://aktuellekw.de/kw/9-2026): Detailseite für jede einzelne Kalenderwoche. Zeigt KW-Nummer, Jahr, Start- und Enddatum, eine Tabelle aller 7 Wochentage (Montag bis Sonntag) mit Datum und Heute-Markierung, sowie eine Info-Karte mit Eckdaten. Navigation zu Vor- und Folgewoche mit automatischem Jahreswechsel (KW 1 → letzte KW Vorjahr und umgekehrt). Badge „Aktuelle Woche" bei der laufenden KW. URL-Schema: /kw/{nummer}-{jahr} (z.B. /kw/9-2026, /kw/1-2025). Verfügbar für aktuelles Jahr ± 1.
+- [Kalenderwochen nach Jahr](https://aktuellekw.de/kalenderwochen/2026): Jahresübersicht mit allen KW des gewählten Jahres. Enthält Jahresnavigation zu Vorjahr und Folgejahr mit Anzeige der jeweiligen KW-Anzahl. Die aktuelle KW ist hervorgehoben. URL-Schema: /kalenderwochen/{jahr} (z.B. /kalenderwochen/2025, /kalenderwochen/2026, /kalenderwochen/2027).
+
+## Strukturierte Daten (Schema.org)
+
+Die Website verwendet folgende JSON-LD Schema.org-Typen:
+- WebSite (alle Seiten): Name, URL, Sprache, Publisher
+- WebApplication (Startseite): KW-Tool als Web-Anwendung
+- FAQPage (Startseite + FAQ): Strukturierte Fragen und Antworten
+- Dataset (Kalenderwoche + Jahresseiten): Kalenderwochen-Datensätze
+- Event (KW-Einzelseiten): Wochenzeitraum mit Start- und Enddatum
+- BreadcrumbList (alle Seiten): Hierarchische Navigation
+
+## Schlüsselbegriffe und Keywords
+
+- Aktuelle KW, aktuelle Kalenderwoche, welche KW haben wir, heutige Kalenderwoche
+- Kalenderwochen 2025, Kalenderwochen 2026, Kalenderwochen 2027, KW Kalender
+- KW 1 2026, KW 9 2026 (spezifische Kalenderwochen)
+- Wie viele Wochen hat ein Jahr, 52 oder 53 Kalenderwochen
+- ISO 8601, Kalenderwoche berechnen, KW Rechner, Datum in KW umrechnen
+
+## Optional
+
+- [Impressum](https://aktuellekw.de/impressum): Anbieterkennzeichnung nach § 5 TMG. Betreiber: Common Consulting UG, Neumünster.
+- [Datenschutzerklärung](https://aktuellekw.de/datenschutz): DSGVO-konforme Datenschutzerklärung mit 12 Abschnitten zu Datenverarbeitung, Hosting (Vercel), SSL/TLS, Server-Logs, Cookies und Betroffenenrechten.
+- [Sitemap](https://aktuellekw.de/sitemap.xml): XML-Sitemap mit ca. 165 URLs (Kern-Seiten, Jahresübersichten, alle KW-Einzelseiten)
+- [robots.txt](https://aktuellekw.de/robots.txt): Alle Crawler erlaubt, inkl. GPTBot, ChatGPT-User, PerplexityBot, Google-Extended, ClaudeBot
