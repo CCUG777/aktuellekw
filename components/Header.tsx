@@ -3,8 +3,8 @@ import ThemeToggle from "./ThemeToggle";
 
 export default function Header() {
   return (
-    <header className="border-b border-border bg-surface">
-      <nav className="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between">
+    <header className="sticky top-0 z-50 border-b border-border bg-surface/80 backdrop-blur-lg supports-[backdrop-filter]:bg-surface/60">
+      <nav aria-label="Hauptnavigation" className="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between">
 
         {/* Wordmark – SEO-optimiert als Text, kein Bild */}
         <Link

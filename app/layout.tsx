@@ -127,9 +127,17 @@ export default function RootLayout({
             __html: `(function(){try{var s=localStorage.getItem('theme');var d=window.matchMedia('(prefers-color-scheme: dark)').matches;var h=document.documentElement;if(s==='dark'||(s===null&&d)){h.classList.add('dark');}else{h.classList.add('light');}}catch(e){}})();`,
           }}
         />
+        {/* Skip-to-Content Link – sichtbar nur bei Tastaturfokus */}
+        <a
+          href="#main-content"
+          className="skip-to-content"
+        >
+          Zum Inhalt springen
+        </a>
+
         <WebSiteJsonLd />
         <Header />
-        <main className="flex-1">{children}</main>
+        <main id="main-content" role="main" className="flex-1">{children}</main>
         <Footer />
       </body>
     </html>
@@ -152,6 +160,8 @@ export default function RootLayout({
  * [x] lang="de" am <html>-Tag (wichtig für hreflang & KI-Suchen)
  * [x] OG-Image: Fallback og-default.png in /public/og/ (Platzhalter 1×1px, ersetzbar)
  * [x] Twitter Card Image: og-default.png, alt gesetzt
+ * [x] Skip-to-Content Link für Barrierefreiheit
+ * [x] <main id="main-content" role="main"> ARIA Landmark
  * [ ] TODO: og-default.png durch echtes 1200×630px Bild ersetzen
  * [ ] TODO: favicon.ico & apple-touch-icon.png prüfen/ergänzen
  */

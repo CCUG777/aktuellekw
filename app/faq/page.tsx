@@ -156,6 +156,19 @@ export default function FaqPage() {
     <>
       <FaqJsonLd />
       <section className="max-w-2xl mx-auto px-4 py-12 md:py-16">
+
+        {/* ── Sichtbare Breadcrumb-Navigation ──────────────────── */}
+        <nav
+          aria-label="Breadcrumb"
+          className="text-xs text-text-secondary mb-8 flex items-center gap-1.5 flex-wrap"
+        >
+          <a href="/" className="hover:text-accent transition-colors">
+            Startseite
+          </a>
+          <span aria-hidden="true">›</span>
+          <span className="text-text-primary">FAQ</span>
+        </nav>
+
         <h1 className="text-3xl md:text-4xl font-bold mb-4">
           Häufige Fragen zur Kalenderwoche
         </h1>
