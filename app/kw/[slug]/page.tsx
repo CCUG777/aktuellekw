@@ -82,15 +82,6 @@ export async function generateMetadata({
 
   const title = `KW ${kwInfo.weekNumber} ${kwInfo.year} – ${formatDateDE(kwInfo.startDate)} bis ${formatDateDE(kwInfo.endDate)}`;
   const description = `Kalenderwoche ${kwInfo.weekNumber} ${kwInfo.year}: ${formatDateDE(kwInfo.startDate)} (Montag) bis ${formatDateDE(kwInfo.endDate)} (Sonntag). Alle 7 Tage im Überblick, berechnet nach ISO 8601.`;
-  // OG-Image: 1200×630 px – Platzhalter, bitte durch echtes Bild mit KW-Nummer ersetzen
-  const ogImage = {
-    url: "/og/og-kw.png",
-    width: 1200,
-    height: 630,
-    alt: `KW ${kwInfo.weekNumber} ${kwInfo.year} – ${formatDateDE(kwInfo.startDate)} bis ${formatDateDE(kwInfo.endDate)}`,
-    type: "image/png" as const,
-  };
-
   return {
     title,
     description,
@@ -104,13 +95,11 @@ export async function generateMetadata({
       type: "website",
       locale: "de_DE",
       siteName: "aktuellekw.de",
-      images: [ogImage],
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
-      images: [{ url: ogImage.url, alt: ogImage.alt }],
     },
   };
 }

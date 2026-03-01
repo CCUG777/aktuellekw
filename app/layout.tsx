@@ -47,29 +47,12 @@ export const metadata: Metadata = {
     title: "Aktuelle KW 2026 – Welche Kalenderwoche haben wir heute?",
     description:
       "Aktuelle KW sofort ablesen. Welche KW haben wir heute? KW nach ISO 8601 – schnell und kostenlos.",
-    // OG-Image: 1200×630 px – Platzhalter, bitte durch echtes Bild ersetzen
-    images: [
-      {
-        url: "/og/og-default.png",
-        width: 1200,
-        height: 630,
-        alt: "aktuellekw.de – Aktuelle KW nach ISO 8601",
-        type: "image/png",
-      },
-    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Aktuelle KW 2026 – Welche Kalenderwoche haben wir heute?",
     description:
       "Aktuelle KW sofort ablesen. Welche KW haben wir heute? KW nach ISO 8601 mit Start- und Enddatum.",
-    // Twitter Card Image: 1200×630 px – Platzhalter, bitte durch echtes Bild ersetzen
-    images: [
-      {
-        url: "/og/og-default.png",
-        alt: "aktuellekw.de – Aktuelle KW nach ISO 8601",
-      },
-    ],
   },
   robots: {
     index: true,

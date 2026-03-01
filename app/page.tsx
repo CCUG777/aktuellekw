@@ -20,14 +20,6 @@ export async function generateMetadata(): Promise<Metadata> {
   const kw = getCurrentKW();
   const ogTitle = `KW ${kw.weekNumber} ${kw.year} – Aktuelle KW heute`;
   const ogDescription = `Heute ist KW ${kw.weekNumber} ${kw.year} (${formatDateDE(kw.startDate)}–${formatDateDE(kw.endDate)}). Aktuelle KW nach ISO 8601.`;
-  // OG-Image: 1200×630 px – Platzhalter, bitte durch echtes Bild mit KW-Nummer ersetzen
-  const ogImage = {
-    url: "/og/og-home.png",
-    width: 1200,
-    height: 630,
-    alt: `Aktuelle KW ${kw.weekNumber} ${kw.year} – aktuellekw.de`,
-    type: "image/png" as const,
-  };
   return {
     title: ogTitle,
     description: `Heute ist KW ${kw.weekNumber} ${kw.year} (${formatDateDE(kw.startDate)}–${formatDateDE(kw.endDate)}). Aktuelle KW nach ISO 8601. Welche KW haben wir? Schnell & kostenlos.`,
@@ -39,13 +31,11 @@ export async function generateMetadata(): Promise<Metadata> {
       type: "website",
       locale: "de_DE",
       siteName: "aktuellekw.de",
-      images: [ogImage],
     },
     twitter: {
       card: "summary_large_image",
       title: ogTitle,
       description: ogDescription,
-      images: [{ url: ogImage.url, alt: ogImage.alt }],
     },
   };
 }

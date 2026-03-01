@@ -8,14 +8,6 @@ export async function generateMetadata(): Promise<Metadata> {
   const weeksInYear = getWeeksInYear(kw.year);
   const ogTitle = `Kalenderwochen ${kw.year} – Alle ${weeksInYear} KW im Jahresüberblick`;
   const ogDescription = `KW 1 bis KW ${weeksInYear} mit genauen Datumsangaben. Aktuelle KW ${kw.weekNumber} auf einen Blick.`;
-  // OG-Image: 1200×630 px – Platzhalter, bitte durch echtes Bild ersetzen
-  const ogImage = {
-    url: "/og/og-kalenderwoche.png",
-    width: 1200,
-    height: 630,
-    alt: `Kalenderwochen ${kw.year} – alle ${weeksInYear} KW im Überblick`,
-    type: "image/png" as const,
-  };
   return {
     title: ogTitle,
     description: `Alle Kalenderwochen ${kw.year} auf einen Blick: KW 1 bis KW ${weeksInYear} mit Start- und Enddatum nach ISO 8601. Aktuelle KW ${kw.weekNumber} ist hervorgehoben.`,
@@ -29,13 +21,11 @@ export async function generateMetadata(): Promise<Metadata> {
       type: "website",
       locale: "de_DE",
       siteName: "aktuellekw.de",
-      images: [ogImage],
     },
     twitter: {
       card: "summary_large_image",
       title: ogTitle,
       description: ogDescription,
-      images: [{ url: ogImage.url, alt: ogImage.alt }],
     },
   };
 }

@@ -40,15 +40,6 @@ export async function generateMetadata({
   const weeksInYear = getWeeksInYear(year);
   const title = `Kalenderwochen ${year} – Alle ${weeksInYear} KW im Überblick`;
   const description = `Alle Kalenderwochen ${year} auf einen Blick: KW 1 bis KW ${weeksInYear} mit Start- und Enddatum. Jahreskalender ${year} nach ISO 8601.`;
-  // OG-Image: 1200×630 px – Platzhalter, bitte durch echtes Bild ersetzen
-  const ogImage = {
-    url: "/og/og-kalenderwochen.png",
-    width: 1200,
-    height: 630,
-    alt: `Kalenderwochen ${year} – alle ${weeksInYear} KW im Überblick`,
-    type: "image/png" as const,
-  };
-
   return {
     title,
     description,
@@ -62,13 +53,11 @@ export async function generateMetadata({
       type: "website",
       locale: "de_DE",
       siteName: "aktuellekw.de",
-      images: [ogImage],
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
-      images: [{ url: ogImage.url, alt: ogImage.alt }],
     },
   };
 }

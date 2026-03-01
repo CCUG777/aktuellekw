@@ -15,24 +15,12 @@ export const metadata: Metadata = {
     type: "website",
     locale: "de_DE",
     siteName: "aktuellekw.de",
-    // OG-Image: 1200×630 px – Platzhalter, bitte durch echtes Bild ersetzen
-    images: [
-      {
-        url: "/og/og-faq.png",
-        width: 1200,
-        height: 630,
-        alt: "FAQ zur Kalenderwoche – aktuellekw.de",
-        type: "image/png",
-      },
-    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "FAQ – Häufige Fragen zur Kalenderwoche (KW)",
     description:
       "Welche KW haben wir? Wie viele Wochen hat ein Jahr? Alle Antworten rund um die Kalenderwoche nach ISO 8601.",
-    // Twitter Card Image: 1200×630 px – Platzhalter, bitte durch echtes Bild ersetzen
-    images: [{ url: "/og/og-faq.png", alt: "FAQ zur Kalenderwoche – aktuellekw.de" }],
   },
 };
 
