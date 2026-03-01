@@ -18,8 +18,8 @@ export const revalidate = 3600;
 
 export async function generateMetadata(): Promise<Metadata> {
   const kw = getCurrentKW();
-  const ogTitle = `KW ${kw.weekNumber} ${kw.year} – Aktuelle KW heute`;
-  const ogDescription = `Heute ist KW ${kw.weekNumber} ${kw.year} (${formatDateDE(kw.startDate)}–${formatDateDE(kw.endDate)}). Aktuelle KW nach ISO 8601.`;
+  const ogTitle = `Aktuelle KW ${kw.weekNumber} (${kw.year}) – Welche Kalenderwoche haben wir heute?`;
+  const ogDescription = `Welche KW haben wir heute? Die aktuelle Kalenderwoche ${kw.year} ist KW ${kw.weekNumber} (${formatDateDE(kw.startDate)}–${formatDateDE(kw.endDate)}). ISO 8601.`;
   return {
     title: ogTitle,
     description: `Welche KW haben wir heute? Die aktuelle Kalenderwoche ${kw.year} ist KW ${kw.weekNumber} (${formatDateDE(kw.startDate)}–${formatDateDE(kw.endDate)}). Inklusive Start- und Enddatum sowie Tipps für Excel.`,
