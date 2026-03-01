@@ -22,7 +22,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const ogDescription = `Heute ist KW ${kw.weekNumber} ${kw.year} (${formatDateDE(kw.startDate)}–${formatDateDE(kw.endDate)}). Aktuelle KW nach ISO 8601.`;
   return {
     title: ogTitle,
-    description: `Heute ist KW ${kw.weekNumber} ${kw.year} (${formatDateDE(kw.startDate)}–${formatDateDE(kw.endDate)}). Aktuelle KW nach ISO 8601. Welche KW haben wir? Schnell & kostenlos.`,
+    description: `Welche KW haben wir heute? Die aktuelle Kalenderwoche ${kw.year} ist KW ${kw.weekNumber} (${formatDateDE(kw.startDate)}–${formatDateDE(kw.endDate)}). Inklusive Start- und Enddatum sowie Tipps für Excel.`,
     alternates: { canonical: "https://aktuellekw.de" },
     openGraph: {
       title: ogTitle,
@@ -68,6 +68,12 @@ export default function Home() {
       ? { weekNumber: 1, year: kw.year + 1 }
       : { weekNumber: kw.weekNumber + 1, year: kw.year };
 
+  // Next KW dates for comparison table
+  const nextKWStart = new Date(kw.startDate);
+  nextKWStart.setUTCDate(nextKWStart.getUTCDate() + 7);
+  const nextKWEnd = new Date(kw.endDate);
+  nextKWEnd.setUTCDate(nextKWEnd.getUTCDate() + 7);
+
   // Server-side date values passed as fallback to the LiveDate client component
   const serverDayName = getDayNameDE(today);
   const serverFormattedDate = formatDateDE(today);
@@ -112,6 +118,10 @@ export default function Home() {
       question: "Wie unterscheiden sich KW und Wochennummer?",
       answer:
         "Die Begriffe Kalenderwoche (KW) und Wochennummer werden im deutschsprachigen Raum synonym verwendet. Beide beziehen sich auf den ISO-8601-Standard, der die Nummerierung nach dem Donnerstag-Prinzip definiert.",
+    },
+    {
+      question: "Welche KW haben wir am nächsten Montag?",
+      answer: `Ab dem nächsten Montag befinden wir uns in der KW\u00a0${nextKW.weekNumber}\u00a0${nextKW.year}.`,
     },
   ];
 
@@ -212,40 +222,22 @@ export default function Home() {
         </nav>
       </section>
 
-      {/* ── 1a. SEO-ERKLÄRTEXT: Aktuelle KW ──────────────────────
-       * PLACEHOLDER – Cluster 1: aktuelle KW
-       * Zielkeywords: aktuelle KW, aktuelle Kalenderwoche, heutige KW,
+      {/* ── 1a. SEO-ERKLÄRTEXT: Aktuelle KW ── Cluster 1 ─────────
+       * Keywords: aktuelle KW, aktuelle Kalenderwoche, heutige KW,
        *   welche KW haben wir, Kalenderwoche heute, KW aktuell
-       * Ziel: 150–200 Wörter
-       * Hinweis: Dieser Text wird durch redaktionellen SEO-Content ersetzt.
        * ──────────────────────────────────────────────────────────── */}
       <section className="max-w-2xl mx-auto px-4 pb-10 text-center fade-in">
         <h2 className="text-xl font-semibold mb-3">
-          Was ist die aktuelle KW?
+          Aktuelle KW: Alles, was Du wissen musst
         </h2>
-        <div className="text-text-secondary text-sm leading-relaxed space-y-3">
-          <p>
-            Die aktuelle KW (Kalenderwoche) gibt an, in welcher Woche des Jahres
-            wir uns gerade befinden. Heute ist <strong className="text-text-primary">KW&nbsp;{kw.weekNumber}&nbsp;{kw.year}</strong> –
-            sie läuft vom {formatDateDE(kw.startDate)} bis {formatDateDE(kw.endDate)}.
-            Die Zählung der Kalenderwochen folgt dem internationalen Standard
-            ISO&nbsp;8601, der in Deutschland, Österreich und der Schweiz
-            verbindlich ist. Danach beginnt jede Woche am Montag und endet am
-            Sonntag.
-          </p>
-          <p>
-            Ob für die Projektplanung, Terminabsprachen oder die Lohnabrechnung –
-            die aktuelle Kalenderwoche ist im Alltag allgegenwärtig. Auf dieser
-            Seite sehen Sie die heutige KW sofort auf einen Blick, inklusive
-            Wochentage, Jahresfortschritt und einer Übersicht aller
-            Kalenderwochen&nbsp;{kw.year}. Sie können außerdem jedes beliebige
-            Datum mit dem{" "}
-            <a href="#kw-rechner-input" className="text-accent hover:underline">
-              KW-Rechner
-            </a>{" "}
-            in eine Kalenderwoche umrechnen.
-          </p>
-        </div>
+        <p className="text-text-secondary text-sm leading-relaxed">
+          Die kurze Antwort lautet: Wir haben heute den{" "}
+          <strong className="text-text-primary">{formatDateDE(todayUTC)}</strong>.
+          Die <strong className="text-text-primary">aktuelle KW</strong> ist die{" "}
+          <strong className="text-text-primary">Kalenderwoche&nbsp;{kw.weekNumber}</strong>.
+          Diese Woche begann am Montag, den {formatDateDE(kw.startDate)}, und
+          endet am Sonntag, den {formatDateDE(kw.endDate)}.
+        </p>
       </section>
 
       {/* ── 1b. WEEKDAY TABLE ───────────────────────────────────── */}
@@ -346,6 +338,167 @@ export default function Home() {
       {/* ── 3b. KW RECHNER ──────────────────────────────────────── */}
       <section className="max-w-3xl mx-auto px-4 pb-14 fade-in-delay-2">
         <KWRechner />
+      </section>
+
+      {/* ── 3c. HINTERGRÜNDE: Aktuelle KW ── Cluster 1 ─────────── */}
+      <section className="max-w-2xl mx-auto px-4 pb-14">
+        <h2 className="text-2xl font-semibold mb-4">
+          Hintergründe zu Aktuelle KW
+        </h2>
+        <p className="text-text-secondary text-sm leading-relaxed mb-4">
+          Hier erfährst Du alles Wissenswerte über die Zählweise und Definition
+          der Wochen in Deutschland und Europa:
+        </p>
+        <ul className="space-y-3 text-text-secondary text-sm leading-relaxed">
+          <li className="flex gap-2.5">
+            <span className="text-accent mt-0.5 shrink-0">•</span>
+            <span>
+              <strong className="text-text-primary">ISO&nbsp;8601 Standard:</strong>{" "}
+              In Deutschland und den meisten europäischen Ländern wird die{" "}
+              <strong className="text-text-primary">aktuelle Kalenderwoche</strong>{" "}
+              nach der Norm ISO&nbsp;8601 bestimmt.
+            </span>
+          </li>
+          <li className="flex gap-2.5">
+            <span className="text-accent mt-0.5 shrink-0">•</span>
+            <span>
+              <strong className="text-text-primary">Der erste Donnerstag:</strong>{" "}
+              Die KW&nbsp;1 eines Jahres ist immer die Woche, die den{" "}
+              <strong className="text-text-primary">ersten Donnerstag</strong> des
+              Jahres enthält. Das bedeutet auch, dass sie immer den 4.&nbsp;Januar
+              einschließt.
+            </span>
+          </li>
+          <li className="flex gap-2.5">
+            <span className="text-accent mt-0.5 shrink-0">•</span>
+            <span>
+              <strong className="text-text-primary">Wochenstart:</strong>{" "}
+              Eine Kalenderwoche beginnt gemäß DIN&nbsp;1355 immer am{" "}
+              <strong className="text-text-primary">Montag</strong> und endet am
+              Sonntag.
+            </span>
+          </li>
+          <li className="flex gap-2.5">
+            <span className="text-accent mt-0.5 shrink-0">•</span>
+            <span>
+              <strong className="text-text-primary">Anzahl der Wochen:</strong>{" "}
+              Ein Kalenderjahr hat in der Regel 52&nbsp;Wochen. In sogenannten
+              Gemeinjahren mit 53&nbsp;Wochen spricht man von einem
+              „Saturationsjahr".
+            </span>
+          </li>
+        </ul>
+      </section>
+
+      {/* ── 3d. ALLTAGS-TIPPS: Aktuelle KW ── Cluster 1 ──────────── */}
+      <section className="max-w-2xl mx-auto px-4 pb-14">
+        <h2 className="text-2xl font-semibold mb-4">
+          So nutzt Du die aktuelle KW im Alltag
+        </h2>
+        <p className="text-text-secondary text-sm leading-relaxed mb-4">
+          Die Planung nach Kalenderwochen ist besonders im Business-Kontext
+          essenziell:
+        </p>
+        <ol className="space-y-3 text-text-secondary text-sm leading-relaxed list-none">
+          <li className="flex gap-3">
+            <span className="text-accent font-semibold shrink-0">1.</span>
+            <span>
+              <strong className="text-text-primary">Terminplanung:</strong>{" "}
+              Nutze die KW-Angabe in Outlook oder Google Kalender, um Deadlines
+              präzise zu kommunizieren.
+            </span>
+          </li>
+          <li className="flex gap-3">
+            <span className="text-accent font-semibold shrink-0">2.</span>
+            <span>
+              <strong className="text-text-primary">Excel-Berechnung:</strong>{" "}
+              Berechne die <strong className="text-text-primary">aktuelle
+              Kalenderwoche heute</strong> in Excel mit der Formel{" "}
+              <code className="bg-surface-secondary border border-border rounded px-1.5 py-0.5 text-xs text-accent font-mono">
+                =KALENDERWOCHE(HEUTE();21)
+              </code>.
+            </span>
+          </li>
+          <li className="flex gap-3">
+            <span className="text-accent font-semibold shrink-0">3.</span>
+            <span>
+              <strong className="text-text-primary">Papierkalender:</strong>{" "}
+              Achte beim Kauf darauf, dass die Wochennummern am Rand vermerkt
+              sind, um schnell zu sehen,{" "}
+              <strong className="text-text-primary">welche KW wir haben</strong>.
+            </span>
+          </li>
+        </ol>
+      </section>
+
+      {/* ── 3e. VERGLEICHSTABELLE: Aktuelle + Nächste KW ─────────── */}
+      <section className="max-w-2xl mx-auto px-4 pb-14">
+        <h2 className="text-2xl font-semibold mb-4">
+          Übersicht: Der aktuelle Zeitraum {kw.year}
+        </h2>
+        <div className="overflow-x-auto rounded-xl border border-border">
+          <table className="w-full text-sm">
+            <thead>
+              <tr className="border-b border-border bg-surface-secondary">
+                <th className="text-left px-5 py-3 font-medium text-text-secondary">
+                  Zeitraum
+                </th>
+                <th className="text-left px-5 py-3 font-medium text-text-secondary">
+                  Kalenderwoche
+                </th>
+                <th className="text-left px-5 py-3 font-medium text-text-secondary">
+                  Datum (Mo–So)
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="border-b border-border bg-accent/5">
+                <td className="px-5 py-3 font-semibold text-accent">
+                  Aktuell
+                </td>
+                <td className="px-5 py-3 font-semibold text-text-primary">
+                  KW&nbsp;{kw.weekNumber}
+                </td>
+                <td className="px-5 py-3 text-text-primary">
+                  {formatDateDE(kw.startDate)} – {formatDateDE(kw.endDate)}
+                </td>
+              </tr>
+              <tr>
+                <td className="px-5 py-3 text-text-secondary">
+                  Nächste Woche
+                </td>
+                <td className="px-5 py-3 text-text-secondary">
+                  KW&nbsp;{nextKW.weekNumber}
+                </td>
+                <td className="px-5 py-3 text-text-secondary">
+                  {formatDateDE(nextKWStart)} – {formatDateDE(nextKWEnd)}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      {/* ── 3f. ZUSAMMENFASSUNG ── Cluster 1 ─────────────────────── */}
+      <section className="max-w-2xl mx-auto px-4 pb-16">
+        <h2 className="text-2xl font-semibold mb-3">
+          Zusammenfassung &amp; Ausblick
+        </h2>
+        <p className="text-text-secondary text-sm leading-relaxed">
+          Zusammengefasst bedeutet das: Wir befinden uns in der{" "}
+          <strong className="text-text-primary">KW&nbsp;{kw.weekNumber}</strong>{" "}
+          des Jahres {kw.year}. Die Planung nach Wochennummern hilft Dir dabei,
+          Projekte effizienter zu strukturieren. Nutze unseren{" "}
+          <a href="#kw-rechner-input" className="text-accent hover:underline">
+            KW-Rechner
+          </a>{" "}
+          oben, um jedes beliebige Datum in eine Kalenderwoche umzurechnen, oder
+          schau Dir die vollständige{" "}
+          <a href="/kalenderwoche" className="text-accent hover:underline">
+            Kalenderwochen-Übersicht {kw.year}
+          </a>{" "}
+          an.
+        </p>
       </section>
 
       {/* ── 4. FAQ ──────────────────────────────────────────────
@@ -449,7 +602,7 @@ export default function Home() {
  * [x] H1 (via KWDisplay): „Aktuelle Kalenderwoche" (Cluster 1)
  * [x] H2 #1: „Häufige Fragen zur Kalenderwoche" (Cluster 3, mit FAQPage Schema)
  * [x] H2 #2: „Alle Kalenderwochen [Jahr]" (Cluster 2)
- * [x] Schema.org: WebApplication, BreadcrumbList, FAQPage (8 Fragen)
+ * [x] Schema.org: WebApplication, BreadcrumbList, FAQPage (9 Fragen)
  * [x] Stats-Grid: LiveDate (Echtzeit), Jahresfortschritt %, Verbleibende KWs
  * [x] Jahresfortschrittsbalken mit KW-Markierung + Glowing Dot
  * [x] progress-fill-anim (CSS-only, kein JS, animiert beim Laden)
@@ -463,6 +616,8 @@ export default function Home() {
  * [x] KWRechner: Beliebiges Datum → KW-Berechnung (Client Component)
  * [x] Prev/Next KW Navigation im Hero (links zu /kw/[n]-[year])
  * [x] „Details →" Link zu /kw/[kw]-[year] (Cluster 5)
- * [ ] TODO: Hero-OG-Image mit KW-Nummer (1200×630px)
+ * [x] Cluster 1 SEO-Content: Intro, Hintergründe, Alltags-Tipps, Tabelle, Zusammenfassung
+ * [x] Vergleichstabelle aktuelle KW + nächste KW (dynamisch)
+ * [x] OG-Image: dynamisch via opengraph-image.tsx (1200×630px)
  * [ ] TODO: Speakable Schema für KI-Sprachsuche
  */
