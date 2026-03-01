@@ -255,7 +255,7 @@ export default function KalenderwochePage() {
  *     kw kalender, kalenderwoche 2026, kalenderwochen übersicht
  * [x] Jahresnavigation: Links zu /kalenderwochen/[prevYear] und /kalenderwochen/[nextYear]
  * [x] KWRechner: beliebiges Datum → KW (Client Component)
- * [ ] TODO: Verlinkung KWTable-Zellen auf /kw/[n]-[year]
+ * [x] Verlinkung KWTable-Zellen auf /kw/[n]-[year] (via Link-Component in KWTable.tsx)
  * [ ] TODO: hreflang für AT/CH ergänzen wenn mehrsprachig ausgebaut
  * [ ] TODO: Tabelle mit strukturierten Event-Daten (Schema.org Event) ausbauen
  */

@@ -404,5 +404,5 @@ export default async function KWDetailPage({
  * [x] PLACEHOLDER: SEO-Erklärtext (80–120 Wörter) mit Cluster-5-Keywords
  * [ ] TODO: OG-Image mit KW-Nummer (1200×630 px)
  * [ ] TODO: Speakable Schema für KI-Sprachsuche
- * [ ] TODO: Verlinkung von KWTable-Zellen auf /kw/[n]-[year]
+ * [x] Verlinkung KWTable-Zellen auf /kw/[n]-[year] (via Link-Component in KWTable.tsx)
  */
