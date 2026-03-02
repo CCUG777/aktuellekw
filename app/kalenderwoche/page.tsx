@@ -178,6 +178,11 @@ export default function KalenderwochePage() {
             Diese Woche begann am Montag, den {formatDateDE(currentKW.startDate)},
             und endet am Sonntag, den {formatDateDE(currentKW.endDate)}.
           </p>
+          <p>
+            Unser <strong className="text-text-primary">Kalender mit Wochen</strong>{" "}
+            zeigt Dir alle {weeksInYear}&nbsp;Kalenderwochen {currentKW.year} auf einen
+            Blick – inklusive Start- und Enddatum nach ISO&nbsp;8601.
+          </p>
           <div className="bg-surface-secondary border border-border rounded-xl p-4 text-sm">
             <strong className="text-text-primary">Schnell-Info:</strong>{" "}
             Wenn Du nur wissen willst, welche Woche wir exakt in diesem Moment
@@ -316,6 +321,8 @@ export default function KalenderwochePage() {
               <span className="text-accent font-semibold shrink-0">3.</span>
               <span>
                 <strong className="text-text-primary">Kalender-Abgleich:</strong>{" "}
+                Verwende einen <strong className="text-text-primary">Kalender mit
+                Wochen</strong>, um die Nummerierung stets im Blick zu behalten.
                 Prüfe beim Jahreswechsel immer, ob Dein digitaler Kalender die{" "}
                 <strong className="text-text-primary">Kalenderwoche {prevYear}</strong>{" "}
                 korrekt abgeschlossen hat, da hier oft Synchronisationsfehler

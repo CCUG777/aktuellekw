@@ -236,7 +236,9 @@ export default function Home() {
           Die <strong className="text-text-primary">aktuelle KW</strong> ist die{" "}
           <strong className="text-text-primary">Kalenderwoche&nbsp;{kw.weekNumber}</strong>.
           Diese Woche begann am Montag, den {formatDateDE(kw.startDate)}, und
-          endet am Sonntag, den {formatDateDE(kw.endDate)}.
+          endet am Sonntag, den {formatDateDE(kw.endDate)}. Ob Du nach der{" "}
+          <strong className="text-text-primary">aktuellen Kalender Woche</strong>{" "}
+          oder dem genauen Datum suchst – hier wirst Du fündig.
         </p>
       </section>
 
@@ -356,7 +358,8 @@ export default function Home() {
               <strong className="text-text-primary">ISO&nbsp;8601 Standard:</strong>{" "}
               In Deutschland und den meisten europäischen Ländern wird die{" "}
               <strong className="text-text-primary">aktuelle Kalenderwoche</strong>{" "}
-              nach der Norm ISO&nbsp;8601 bestimmt.
+              (auch oft als <em>aktuelle Kalender&shy;Woche</em> gesucht) nach
+              der Norm ISO&nbsp;8601 bestimmt.
             </span>
           </li>
           <li className="flex gap-2.5">
