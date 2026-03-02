@@ -36,6 +36,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "yearly",
       priority: 0.75,
     },
+    // Cluster 3: Welche Kalenderwoche haben wir
+    {
+      url: "https://aktuellekw.de/welche-kalenderwoche-haben-wir",
+      lastModified: now,
+      changeFrequency: "daily",
+      priority: 0.8,
+    },
     // Rechtliches
     {
       url: "https://aktuellekw.de/impressum",
