@@ -14,7 +14,7 @@ export const revalidate = 3600;
 export async function generateMetadata(): Promise<Metadata> {
   const kw = getCurrentKW();
   const weeksInYear = getWeeksInYear(kw.year);
-  const ogTitle = `Kalenderwochen ${kw.year} – Alle ${weeksInYear} KW im Jahresüberblick`;
+  const ogTitle = `Kalenderwochen ${kw.year} – Alle KW im Jahresüberblick`;
   const ogDescription = `Hier findest Du die aktuelle Kalenderwoche ${kw.year}. Erfahre alles über KW ${kw.year}, KW ${kw.year - 1} und wie Du die Kalenderwoche heute nach ISO 8601 berechnest.`;
   return {
     title: ogTitle,
