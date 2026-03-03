@@ -18,11 +18,11 @@ export const revalidate = 3600;
 
 export async function generateMetadata(): Promise<Metadata> {
   const kw = getCurrentKW();
-  const ogTitle = `KW ${kw.weekNumber} ${kw.year} – Aktuelle KW heute`;
-  const ogDescription = `Heute ist KW ${kw.weekNumber} ${kw.year} (${formatDateDE(kw.startDate)}–${formatDateDE(kw.endDate)}). Aktuelle KW nach ISO 8601.`;
+  const ogTitle = `Aktuelle KW – Welche Kalenderwoche ist heute?`;
+  const ogDescription = `KW aktuell: Heute ist KW ${kw.weekNumber} ${kw.year} (${formatDateDE(kw.startDate)}–${formatDateDE(kw.endDate)}). Aktuelle KW nach ISO 8601.`;
   return {
     title: ogTitle,
-    description: `Heute ist KW ${kw.weekNumber} ${kw.year} (${formatDateDE(kw.startDate)}–${formatDateDE(kw.endDate)}). Aktuelle KW nach ISO 8601. Welche KW haben wir? Schnell & kostenlos.`,
+    description: `KW aktuell: Heute ist KW ${kw.weekNumber} ${kw.year} (${formatDateDE(kw.startDate)}–${formatDateDE(kw.endDate)}). Die aktuelle Kalenderwoche nach ISO 8601 – schnell & kostenlos.`,
     alternates: { canonical: "https://aktuellekw.de" },
     openGraph: {
       title: ogTitle,
@@ -180,6 +180,16 @@ export default function Home() {
           Montag bis Sonntag · ISO 8601
         </p>
 
+        {/* Heutige Kalenderwoche – dynamischer Snippet-Text */}
+        <p className="text-accent font-semibold text-lg mt-5" aria-label="Kalenderwoche heute">
+          Heute ist KW&nbsp;{kw.weekNumber}
+        </p>
+        <p className="text-text-secondary text-sm mt-1 text-center max-w-md">
+          KW heute: Die <strong className="text-text-primary">heutige Kalenderwoche</strong> ist
+          die KW&nbsp;{kw.weekNumber}&nbsp;{kw.year}. Die KW Woche heute
+          läuft vom {formatDateDE(kw.startDate)} bis {formatDateDE(kw.endDate)}.
+        </p>
+
         {/* Prev / Next KW navigation */}
         <nav
           aria-label="Wochennavigation"
@@ -228,7 +238,7 @@ export default function Home() {
        * ──────────────────────────────────────────────────────────── */}
       <section className="max-w-2xl mx-auto px-4 pb-10 text-center fade-in">
         <h2 className="text-xl font-semibold mb-3">
-          Aktuelle KW: Alles, was Du wissen musst
+          Aktuelle Kalenderwoche – Was Du wissen musst
         </h2>
         <p className="text-text-secondary text-sm leading-relaxed">
           Die kurze Antwort lautet: Wir haben heute den{" "}
@@ -237,8 +247,9 @@ export default function Home() {
           <strong className="text-text-primary">Kalenderwoche&nbsp;{kw.weekNumber}</strong>.
           Diese Woche begann am Montag, den {formatDateDE(kw.startDate)}, und
           endet am Sonntag, den {formatDateDE(kw.endDate)}. Ob Du nach der{" "}
-          <strong className="text-text-primary">aktuellen Kalender Woche</strong>{" "}
-          oder dem genauen Datum suchst – hier wirst Du fündig.
+          <strong className="text-text-primary">Kalenderwoche heute</strong>{" "}
+          oder der <strong className="text-text-primary">KW Woche heute</strong>{" "}
+          suchst – hier wirst Du fündig.
         </p>
       </section>
 
@@ -504,6 +515,59 @@ export default function Home() {
         </p>
       </section>
 
+      {/* ── 3g. SEO-TEXT PLATZHALTER – CLUSTER 1 ────────────────
+       * H2: "Was ist die aktuelle Kalenderwoche?"
+       * Ca. 150–200 Wörter | Keywords: aktuelle KW, Kalenderwoche heute, KW aktuell
+       * TODO: SEO-Text hier einfügen
+       * ──────────────────────────────────────────────────────────── */}
+      <section className="max-w-2xl mx-auto px-4 pb-14">
+        <h2 className="text-2xl font-semibold mb-4">
+          Was ist die aktuelle Kalenderwoche?
+        </h2>
+        <div className="text-text-secondary text-sm leading-relaxed space-y-3">
+          <p>
+            Die <strong className="text-text-primary">aktuelle KW</strong> bezeichnet
+            die laufende Kalenderwoche nach dem internationalen Standard ISO&nbsp;8601.
+            In Deutschland, Österreich und der Schweiz ist diese Zählweise verbindlich.
+            Die <strong className="text-text-primary">Kalenderwoche heute</strong>{" "}
+            (KW&nbsp;{kw.weekNumber}) begann am {formatDateDE(kw.startDate)} und endet
+            am {formatDateDE(kw.endDate)}.
+          </p>
+          <p>
+            Wer wissen möchte, welche <strong className="text-text-primary">KW aktuell</strong>{" "}
+            gilt, findet die Antwort hier sofort: Wir befinden uns in der
+            KW&nbsp;{kw.weekNumber}&nbsp;{kw.year}. Die Berechnung basiert auf dem
+            Donnerstag-Prinzip – KW&nbsp;1 ist stets die Woche, die den ersten
+            Donnerstag im Januar enthält. Jede Woche beginnt am Montag und endet am Sonntag.
+          </p>
+        </div>
+      </section>
+
+      {/* ── 3h. CLUSTER 4: Woche im Jahr ── Info-Section ──────────── */}
+      <section className="max-w-2xl mx-auto px-4 pb-14">
+        <h2 className="text-2xl font-semibold mb-3">
+          Die wievielte Woche im Jahr ist heute?
+        </h2>
+        <p className="text-text-secondary text-sm leading-relaxed mb-3">
+          Wir befinden uns in{" "}
+          <strong className="text-text-primary">
+            Woche&nbsp;{kw.weekNumber} von {weeksInYear}
+          </strong>{" "}
+          im Jahr {kw.year}. Das bedeutet, dass bereits{" "}
+          {kw.weekNumber - 1}&nbsp;KW Wochen vergangen sind und
+          noch {remainingWeeks}&nbsp;Wochen in diesem Jahr verbleiben.
+        </p>
+        <p className="text-text-secondary text-sm leading-relaxed">
+          Die Zählung der Wochen im Jahr folgt dem ISO-8601-Standard. Ein normales
+          Kalenderjahr hat 52&nbsp;Wochen, in Ausnahmefällen 53. Das aktuelle
+          Jahr {kw.year} hat insgesamt {weeksInYear}&nbsp;Kalenderwochen.
+        </p>
+        {/* SEO-TEXT PLATZHALTER – CLUSTER 4
+            Abschnitt: "Die wievielte Woche im Jahr ist heute?"
+            Ca. 80–100 Wörter | Keywords: Woche Jahr, KW Wochen
+            TODO: SEO-Text hier einfügen */}
+      </section>
+
       {/* ── 4. FAQ ──────────────────────────────────────────────
        * PLACEHOLDER – Cluster 3: welche KW haben wir
        * Zielkeywords: welche Kalenderwoche haben wir, welche KW ist heute,
@@ -516,7 +580,7 @@ export default function Home() {
           Häufige Fragen zur Kalenderwoche
         </h2>
         <p className="text-text-secondary text-sm mb-6 leading-relaxed">
-          Welche Kalenderwoche haben wir gerade? Wie wird die aktuelle KW
+          Die Kalenderwoche aktuell: Welche KW haben wir gerade, wie wird sie
           berechnet und wann beginnt KW&nbsp;1? Hier beantworten wir die
           häufigsten Fragen rund um die Kalenderwoche nach ISO&nbsp;8601.
           Erfahren Sie, warum manche Jahre 53&nbsp;KW haben, wie Sie die

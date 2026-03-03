@@ -38,6 +38,18 @@ export default function Header() {
             Kalenderwochen
           </Link>
           <Link
+            href="/kalender-mit-kalenderwochen"
+            className="hover:text-text-primary transition-colors hidden md:inline"
+          >
+            KW-Kalender
+          </Link>
+          <Link
+            href="/kalenderwochen-uebersicht"
+            className="hover:text-text-primary transition-colors hidden md:inline"
+          >
+            Übersicht
+          </Link>
+          <Link
             href="/faq"
             className="hover:text-text-primary transition-colors"
           >

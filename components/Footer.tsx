@@ -7,7 +7,7 @@ export default function Footer() {
     <footer role="contentinfo" className="border-t border-border mt-auto">
       <div className="max-w-4xl mx-auto px-4 py-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-text-secondary">
         <p>&copy; {year} aktuellekw.de</p>
-        <nav aria-label="Footer-Navigation" className="flex gap-6">
+        <nav aria-label="Footer-Navigation" className="flex flex-wrap gap-x-6 gap-y-2">
           <Link
             href="/"
             className="hover:text-text-primary transition-colors"
@@ -19,6 +19,18 @@ export default function Footer() {
             className="hover:text-text-primary transition-colors"
           >
             Kalenderwochen
+          </Link>
+          <Link
+            href="/kalender-mit-kalenderwochen"
+            className="hover:text-text-primary transition-colors"
+          >
+            Kalender mit KW
+          </Link>
+          <Link
+            href="/kalenderwochen-uebersicht"
+            className="hover:text-text-primary transition-colors"
+          >
+            KW-Übersicht
           </Link>
           <Link
             href="/faq"

@@ -43,6 +43,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "daily",
       priority: 0.8,
     },
+    // Cluster 2: Kalender mit Kalenderwochen
+    {
+      url: "https://aktuellekw.de/kalender-mit-kalenderwochen",
+      lastModified: now,
+      changeFrequency: "yearly",
+      priority: 0.85,
+    },
+    // Cluster 3: Kalenderwochen-Übersicht
+    {
+      url: "https://aktuellekw.de/kalenderwochen-uebersicht",
+      lastModified: now,
+      changeFrequency: "yearly",
+      priority: 0.8,
+    },
     // Rechtliches
     {
       url: "https://aktuellekw.de/impressum",

@@ -80,7 +80,7 @@ export async function generateMetadata({
   const kwInfo = getKWInfoByNumberAndYear(parsed.weekNumber, parsed.year);
   if (!kwInfo) return { title: "KW nicht gefunden" };
 
-  const title = `KW ${kwInfo.weekNumber} ${kwInfo.year} – ${formatDateDE(kwInfo.startDate)} bis ${formatDateDE(kwInfo.endDate)}`;
+  const title = `Kalenderwoche ${kwInfo.weekNumber} – Datum & Infos zur KW ${kwInfo.weekNumber}`;
   const description = `Kalenderwoche ${kwInfo.weekNumber} ${kwInfo.year}: ${formatDateDE(kwInfo.startDate)} (Montag) bis ${formatDateDE(kwInfo.endDate)} (Sonntag). Alle 7 Tage im Überblick, berechnet nach ISO 8601.`;
   return {
     title,
@@ -203,9 +203,9 @@ export default async function KWDetailPage({
               Aktuelle Woche
             </span>
           )}
-          <p className="text-text-secondary text-xs uppercase tracking-[0.22em] mb-6">
-            Kalenderwoche {kwInfo.year}
-          </p>
+          <h1 className="text-text-secondary text-xs uppercase tracking-[0.22em] mb-6 font-normal">
+            Kalenderwoche {kwInfo.weekNumber} {kwInfo.year}
+          </h1>
           <KWDisplay weekNumber={kwInfo.weekNumber} year={kwInfo.year} />
           <p className="text-text-secondary mt-6 text-base md:text-lg">
             {formatDateDE(kwInfo.startDate)} – {formatDateDE(kwInfo.endDate)}
@@ -259,13 +259,16 @@ export default async function KWDetailPage({
         </section>
 
         {/* ── SEO-ERKLÄRTEXT ──────────────────────────────────────
-         * PLACEHOLDER – Cluster 5: Spezifische KW-Seiten
-         * Zielkeywords: KW [Nr] [Jahr], Kalenderwoche [Nr],
+         * SEO-TEXT PLATZHALTER – CLUSTER 5
+         * H2: "Infos zur Kalenderwoche {X}"
+         * Ca. 80–100 Wörter (template-basiert)
+         * Keywords: KW [Nr] [Jahr], Kalenderwoche [Nr],
          *   welche Woche ist [Datum], KW berechnen, ISO 8601
-         * Ziel: 80–120 Wörter
-         * Hinweis: Dieser Text wird durch redaktionellen SEO-Content ersetzt.
          * ──────────────────────────────────────────────────────────── */}
         <section className="mb-10 fade-in-delay-2">
+          <h2 className="text-lg font-semibold mb-4">
+            Infos zur Kalenderwoche {kwInfo.weekNumber}
+          </h2>
           <div className="text-text-secondary text-sm leading-relaxed space-y-3">
             <p>
               Die Kalenderwoche&nbsp;{kwInfo.weekNumber} im
