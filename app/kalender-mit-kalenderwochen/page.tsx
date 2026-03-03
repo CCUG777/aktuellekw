@@ -207,10 +207,40 @@ export default function KalenderMitKalenderwochenPage() {
           </ul>
         </div>
 
-        {/* SEO-TEXT PLATZHALTER – CLUSTER 2
-            H2: "Kalender mit Kalenderwochen 2026"
-            Ca. 120–150 Wörter | Keywords: Kalender mit Wochen, Kalenderwochen, KW im Kalender
-            TODO: SEO-Text hier einfügen */}
+        {/* ── SEO-TEXT – CLUSTER 2 ──────────────────────────────── */}
+        <section className="mt-12 space-y-4">
+          <h2 className="text-2xl font-semibold">
+            Warum ein Kalender mit Kalenderwochen?
+          </h2>
+          <div className="text-text-secondary text-sm leading-relaxed space-y-3">
+            <p>
+              Ein <strong className="text-text-primary">Kalender mit Wochen</strong>{" "}
+              erleichtert die Terminplanung im Beruf und Alltag erheblich. Statt
+              umständlich Tage zu zählen, genügt ein Blick auf die{" "}
+              <strong className="text-text-primary">KW im Kalender</strong>, um
+              Deadlines, Urlaubswochen oder Projektmeilensteine sofort einzuordnen.
+              Besonders in Deutschland, Österreich und der Schweiz ist die Angabe
+              der Kalenderwoche im geschäftlichen Umfeld Standard.
+            </p>
+            <p>
+              Unser <strong className="text-text-primary">Kalender mit KW</strong>{" "}
+              zeigt alle {getWeeksInYear(currentKW.year)}&nbsp;Kalenderwochen
+              des Jahres {currentKW.year} mit Start- und Enddatum nach ISO&nbsp;8601.
+              Die aktuelle Woche (KW&nbsp;{currentKW.weekNumber}) ist farblich
+              hervorgehoben, vergangene Wochen sind abgedimmt. Ein Klick auf eine
+              beliebige Woche führt zur Detailseite mit allen Informationen.
+            </p>
+            <p>
+              Der <strong className="text-text-primary">KW Kalender</strong> eignet
+              sich ideal zum Abgleich mit Outlook, Google Calendar oder gedruckten
+              Wandkalendern. Über die Jahresnavigation oben kannst Du bequem
+              zwischen {currentKW.year - 1} und {currentKW.year + 1} wechseln –
+              so hast Du alle{" "}
+              <strong className="text-text-primary">Kalenderwochen</strong> immer
+              griffbereit.
+            </p>
+          </div>
+        </section>
 
         {/* ── Abschluss-Links ────────────────────────────────── */}
         <div className="mt-10 pt-8 border-t border-border flex flex-wrap gap-4 text-sm">

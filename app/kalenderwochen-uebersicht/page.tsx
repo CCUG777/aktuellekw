@@ -219,10 +219,38 @@ export default function KalenderwochenUebersichtPage() {
           </div>
         </div>
 
-        {/* SEO-TEXT PLATZHALTER – CLUSTER 3
-            H2: "Alle Kalenderwochen 2026 im Überblick"
-            Ca. 100–130 Wörter | Keywords: Kalenderwochen Überblick, Wochenübersicht
-            TODO: SEO-Text hier einfügen */}
+        {/* ── SEO-TEXT – CLUSTER 3 ──────────────────────────────── */}
+        <section className="mt-12 space-y-4">
+          <h2 className="text-2xl font-semibold">
+            Alle Kalenderwochen {currentKW.year} im Überblick
+          </h2>
+          <div className="text-text-secondary text-sm leading-relaxed space-y-3">
+            <p>
+              Diese <strong className="text-text-primary">Kalenderwochen Übersicht</strong>{" "}
+              zeigt Dir sämtliche {weeksInYear}&nbsp;KW des Jahres {currentKW.year} auf
+              einen Blick. Die <strong className="text-text-primary">Wochenübersicht</strong>{" "}
+              enthält das exakte Start- und Enddatum jeder Woche nach ISO&nbsp;8601 –
+              ideal zum schnellen Nachschlagen oder als Ergänzung zu Deinem
+              Taschenkalender.
+            </p>
+            <p>
+              Der <strong className="text-text-primary">Überblick Kalenderwochen</strong>{" "}
+              hilft Dir, auf einen Blick zu erkennen, wann eine bestimmte KW beginnt
+              und endet. Das ist besonders nützlich bei der Urlaubsplanung, für
+              Quartalsberichte oder die Abstimmung von Lieferterminen. Die aktuelle
+              KW&nbsp;{currentKW.weekNumber} ist blau markiert, vergangene Wochen
+              sind optisch abgedimmt.
+            </p>
+            <p>
+              Über die Jahresnavigation oben wechselst Du bequem
+              zu {currentKW.year - 1} oder {currentKW.year + 1}. Für noch mehr
+              Details zu einer einzelnen Woche klicke auf die entsprechende
+              KW-Kachel – dort findest Du Wochentage, Feiertage und
+              weitere Informationen zur gewählten{" "}
+              <strong className="text-text-primary">Kalenderwoche</strong>.
+            </p>
+          </div>
+        </section>
 
         {/* ── Abschluss-Links ────────────────────────────────── */}
         <div className="mt-10 pt-8 border-t border-border flex flex-wrap gap-4 text-sm">

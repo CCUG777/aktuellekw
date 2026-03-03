@@ -519,10 +519,9 @@ export default function Home() {
         </p>
       </section>
 
-      {/* ── 3g. SEO-TEXT PLATZHALTER – CLUSTER 1 ────────────────
+      {/* ── 3g. SEO-TEXT – CLUSTER 1 ──────────────────────────────
        * H2: "Was ist die aktuelle Kalenderwoche?"
-       * Ca. 150–200 Wörter | Keywords: aktuelle KW, Kalenderwoche heute, KW aktuell
-       * TODO: SEO-Text hier einfügen
+       * ~180 Wörter | Keywords: aktuelle KW, Kalenderwoche heute, KW aktuell
        * ──────────────────────────────────────────────────────────── */}
       <section className="max-w-2xl mx-auto px-4 pb-14">
         <h2 className="text-2xl font-semibold mb-4">
@@ -543,6 +542,26 @@ export default function Home() {
             KW&nbsp;{kw.weekNumber}&nbsp;{kw.year}. Die Berechnung basiert auf dem
             Donnerstag-Prinzip – KW&nbsp;1 ist stets die Woche, die den ersten
             Donnerstag im Januar enthält. Jede Woche beginnt am Montag und endet am Sonntag.
+          </p>
+          <p>
+            Der Begriff <strong className="text-text-primary">aktuelle Kalenderwoche</strong>{" "}
+            wird im Geschäftsalltag häufig für Deadlines, Liefertermine und
+            Projektplanung verwendet. Statt ein genaues Datum zu nennen, sagt man
+            etwa „Lieferung in KW&nbsp;{kw.weekNumber}" – jeder weiß sofort, welcher
+            Zeitraum gemeint ist. Auch in Outlook, Google Kalender und vielen
+            ERP-Systemen lässt sich die{" "}
+            <strong className="text-text-primary">KW-Nummer</strong> einblenden, um
+            Termine schneller zuzuordnen.
+          </p>
+          <p>
+            Im Unterschied zum amerikanischen System, bei dem die Woche am Sonntag
+            beginnt, startet die <strong className="text-text-primary">KW nach
+            ISO&nbsp;8601</strong> immer am Montag. Auch die Nummerierung weicht ab:
+            In den USA kann es eine Woche&nbsp;0 geben, während in Europa
+            KW&nbsp;1 die erste Woche mit mindestens vier Tagen im neuen Jahr ist.
+            aktuellekw.de zeigt Dir die{" "}
+            <strong className="text-text-primary">heutige Kalenderwoche</strong>{" "}
+            stets nach dem in Deutschland gültigen Standard.
           </p>
         </div>
       </section>
@@ -566,10 +585,26 @@ export default function Home() {
           Kalenderjahr hat 52&nbsp;Wochen, in Ausnahmefällen 53. Das aktuelle
           Jahr {kw.year} hat insgesamt {weeksInYear}&nbsp;Kalenderwochen.
         </p>
-        {/* SEO-TEXT PLATZHALTER – CLUSTER 4
-            Abschnitt: "Die wievielte Woche im Jahr ist heute?"
-            Ca. 80–100 Wörter | Keywords: Woche Jahr, KW Wochen
-            TODO: SEO-Text hier einfügen */}
+        <p className="text-text-secondary text-sm leading-relaxed mt-3">
+          Die Frage „<strong className="text-text-primary">Wieviele Wochen hat ein
+          Jahr?</strong>" lässt sich nicht pauschal beantworten. Nach ISO&nbsp;8601
+          hat ein Kalenderjahr entweder 52 oder 53&nbsp;Kalenderwochen. Eine
+          53.&nbsp;KW entsteht, wenn der 1.&nbsp;Januar auf einen Donnerstag fällt –
+          oder in Schaltjahren auf einen Mittwoch. Diese sogenannten{" "}
+          <strong className="text-text-primary">Langwochen-Jahre</strong> treten
+          im Schnitt alle fünf bis sechs Jahre auf.
+        </p>
+        <p className="text-text-secondary text-sm leading-relaxed mt-3">
+          Wer schnell wissen möchte, in welcher{" "}
+          <strong className="text-text-primary">Woche des Jahres</strong> wir uns
+          befinden, kann unseren{" "}
+          <a href="#kw-rechner-input" className="text-accent hover:underline">
+            KW-Rechner
+          </a>{" "}
+          nutzen: Beliebiges Datum eingeben und sofort die zugehörige
+          Kalenderwoche erfahren – inklusive Start- und Enddatum der{" "}
+          <strong className="text-text-primary">KW Woche</strong>.
+        </p>
       </section>
 
       <hr className="section-divider" />
