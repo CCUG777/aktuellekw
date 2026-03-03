@@ -232,6 +232,8 @@ export default function Home() {
         </nav>
       </section>
 
+      <hr className="section-divider" />
+
       {/* ── 1a. SEO-ERKLÄRTEXT: Aktuelle KW ── Cluster 1 ─────────
        * Keywords: aktuelle KW, aktuelle Kalenderwoche, heutige KW,
        *   welche KW haben wir, Kalenderwoche heute, KW aktuell
@@ -347,6 +349,8 @@ export default function Home() {
           {kw.year}
         </p>
       </section>
+
+      <hr className="section-divider" />
 
       {/* ── 3b. KW RECHNER ──────────────────────────────────────── */}
       <section className="max-w-3xl mx-auto px-4 pb-14 fade-in-delay-2">
@@ -568,6 +572,8 @@ export default function Home() {
             TODO: SEO-Text hier einfügen */}
       </section>
 
+      <hr className="section-divider" />
+
       {/* ── 4. FAQ ──────────────────────────────────────────────
        * PLACEHOLDER – Cluster 3: welche KW haben wir
        * Zielkeywords: welche Kalenderwoche haben wir, welche KW ist heute,
@@ -616,6 +622,8 @@ export default function Home() {
           Alle Fragen zur Kalenderwoche →
         </a>
       </section>
+
+      <hr className="section-divider" />
 
       {/* ── 5. KW JAHRESÜBERSICHT ──────────────────────────────────
        * PLACEHOLDER – Cluster 2: Kalenderwochen Jahresübersicht

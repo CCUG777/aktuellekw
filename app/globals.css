@@ -148,3 +148,37 @@ details[open] .details-content {
     transform: translateY(0);
   }
 }
+
+/* ── Section Divider ──────────────────────────────────────── */
+.section-divider {
+  border: none;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--color-border) 30%,
+    var(--color-border) 70%,
+    transparent 100%
+  );
+  opacity: 0.5;
+  margin: 0 auto;
+  max-width: 42rem;
+}
+
+/* ── Smooth scrolling ─────────────────────────────────────── */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .fade-in,
+  .fade-in-delay,
+  .fade-in-delay-2,
+  .progress-fill-anim {
+    animation: none !important;
+  }
+}

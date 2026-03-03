@@ -1,5 +1,7 @@
 import Link from "next/link";
 import ThemeToggle from "./ThemeToggle";
+import MobileMenu from "./MobileMenu";
+import ActiveNavLink from "./ActiveNavLink";
 
 export default function Header() {
   return (
@@ -23,39 +25,20 @@ export default function Header() {
           </span>
         </Link>
 
-        {/* Navigation */}
-        <div className="flex items-center gap-5 text-sm text-text-secondary">
-          <Link
-            href="/"
-            className="hover:text-text-primary transition-colors hidden sm:inline"
-          >
-            Startseite
-          </Link>
-          <Link
-            href="/kalenderwoche"
-            className="hover:text-text-primary transition-colors"
-          >
-            Kalenderwochen
-          </Link>
-          <Link
-            href="/kalender-mit-kalenderwochen"
-            className="hover:text-text-primary transition-colors hidden md:inline"
-          >
-            KW-Kalender
-          </Link>
-          <Link
-            href="/kalenderwochen-uebersicht"
-            className="hover:text-text-primary transition-colors hidden md:inline"
-          >
-            Übersicht
-          </Link>
-          <Link
-            href="/faq"
-            className="hover:text-text-primary transition-colors"
-          >
-            FAQ
-          </Link>
+        {/* Desktop Navigation */}
+        <div className="hidden md:flex items-center gap-5 text-sm text-text-secondary">
+          <ActiveNavLink href="/" label="Startseite" />
+          <ActiveNavLink href="/kalenderwoche" label="Kalenderwochen" />
+          <ActiveNavLink href="/kalender-mit-kalenderwochen" label="KW-Kalender" />
+          <ActiveNavLink href="/kalenderwochen-uebersicht" label="Übersicht" />
+          <ActiveNavLink href="/faq" label="FAQ" />
           <ThemeToggle />
+        </div>
+
+        {/* Mobile: Theme Toggle + Hamburger */}
+        <div className="flex md:hidden items-center gap-2">
+          <ThemeToggle />
+          <MobileMenu />
         </div>
       </nav>
     </header>

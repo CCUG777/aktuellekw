@@ -5,52 +5,76 @@ export default function Footer() {
 
   return (
     <footer role="contentinfo" className="border-t border-border mt-auto">
-      <div className="max-w-4xl mx-auto px-4 py-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-text-secondary">
-        <p>&copy; {year} aktuellekw.de</p>
-        <nav aria-label="Footer-Navigation" className="flex flex-wrap gap-x-6 gap-y-2">
-          <Link
-            href="/"
-            className="hover:text-text-primary transition-colors"
-          >
-            Startseite
-          </Link>
-          <Link
-            href="/kalenderwoche"
-            className="hover:text-text-primary transition-colors"
-          >
-            Kalenderwochen
-          </Link>
-          <Link
-            href="/kalender-mit-kalenderwochen"
-            className="hover:text-text-primary transition-colors"
-          >
-            Kalender mit KW
-          </Link>
-          <Link
-            href="/kalenderwochen-uebersicht"
-            className="hover:text-text-primary transition-colors"
-          >
-            KW-Übersicht
-          </Link>
-          <Link
-            href="/faq"
-            className="hover:text-text-primary transition-colors"
-          >
-            FAQ
-          </Link>
-          <Link
-            href="/impressum"
-            className="hover:text-text-primary transition-colors"
-          >
-            Impressum
-          </Link>
-          <Link
-            href="/datenschutz"
-            className="hover:text-text-primary transition-colors"
-          >
-            Datenschutz
-          </Link>
-        </nav>
+      <div className="max-w-4xl mx-auto px-4 py-10">
+        {/* Link-Gruppen */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-8 mb-8">
+          {/* Gruppe 1: Kalenderwochen */}
+          <div>
+            <h3 className="text-xs font-semibold uppercase tracking-wider text-text-secondary mb-3">
+              Kalenderwochen
+            </h3>
+            <nav aria-label="Kalenderwochen-Links" className="flex flex-col gap-2">
+              <Link href="/" className="text-sm text-text-secondary hover:text-text-primary transition-colors">
+                Aktuelle KW
+              </Link>
+              <Link href="/kalenderwoche" className="text-sm text-text-secondary hover:text-text-primary transition-colors">
+                KW-Übersicht {year}
+              </Link>
+              <Link href="/kalender-mit-kalenderwochen" className="text-sm text-text-secondary hover:text-text-primary transition-colors">
+                Kalender mit KW
+              </Link>
+              <Link href="/kalenderwochen-uebersicht" className="text-sm text-text-secondary hover:text-text-primary transition-colors">
+                KW-Übersicht
+              </Link>
+            </nav>
+          </div>
+
+          {/* Gruppe 2: Informationen */}
+          <div>
+            <h3 className="text-xs font-semibold uppercase tracking-wider text-text-secondary mb-3">
+              Informationen
+            </h3>
+            <nav aria-label="Informations-Links" className="flex flex-col gap-2">
+              <Link href="/faq" className="text-sm text-text-secondary hover:text-text-primary transition-colors">
+                FAQ
+              </Link>
+              <Link href="/kalenderwochen/2025" className="text-sm text-text-secondary hover:text-text-primary transition-colors">
+                Kalenderwochen 2025
+              </Link>
+              <Link href="/kalenderwochen/2026" className="text-sm text-text-secondary hover:text-text-primary transition-colors">
+                Kalenderwochen 2026
+              </Link>
+              <Link href="/kalenderwochen/2027" className="text-sm text-text-secondary hover:text-text-primary transition-colors">
+                Kalenderwochen 2027
+              </Link>
+            </nav>
+          </div>
+
+          {/* Gruppe 3: Rechtliches */}
+          <div>
+            <h3 className="text-xs font-semibold uppercase tracking-wider text-text-secondary mb-3">
+              Rechtliches
+            </h3>
+            <nav aria-label="Rechtliche Links" className="flex flex-col gap-2">
+              <Link href="/impressum" className="text-sm text-text-secondary hover:text-text-primary transition-colors">
+                Impressum
+              </Link>
+              <Link href="/datenschutz" className="text-sm text-text-secondary hover:text-text-primary transition-colors">
+                Datenschutz
+              </Link>
+            </nav>
+          </div>
+        </div>
+
+        {/* Trennlinie + Copyright */}
+        <div className="border-t border-border pt-6 flex flex-col sm:flex-row items-center justify-between gap-3">
+          <p className="text-xs text-text-secondary">
+            &copy; {year} aktuellekw.de &middot; Alle Angaben nach ISO 8601
+          </p>
+          <p className="text-xs text-text-secondary">
+            Kalenderwochen-Berechnung nach internationalem Standard
+          </p>
+        </div>
       </div>
     </footer>
   );
