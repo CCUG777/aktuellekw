@@ -146,10 +146,10 @@ export default function RootLayout({
  * [x] robots: index/follow + erweiterte googleBot-Direktiven
  * [x] Schema.org WebSite JSON-LD (global, jede Seite)
  * [x] lang="de" am <html>-Tag (wichtig für hreflang & KI-Suchen)
- * [x] OG-Image: Fallback og-default.png in /public/og/ (Platzhalter 1×1px, ersetzbar)
- * [x] Twitter Card Image: og-default.png, alt gesetzt
+ * [x] OG-Image: Dynamisch via opengraph-image.tsx (1200×630px) pro Route
+ * [x] Twitter Card: nutzt automatisch das OG-Image
  * [x] Skip-to-Content Link für Barrierefreiheit
  * [x] <main id="main-content" role="main"> ARIA Landmark
- * [ ] TODO: og-default.png durch echtes 1200×630px Bild ersetzen
+ * [x] Statische OG-Platzhalter entfernt (public/og/ gelöscht)
  * [ ] TODO: favicon.ico & apple-touch-icon.png prüfen/ergänzen
  */
