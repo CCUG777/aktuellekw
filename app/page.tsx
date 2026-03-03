@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import {
   getCurrentKW,
+  getKWInfo,
   formatDateDE,
   getWeeksInYear,
   getAllKWsForYear,
@@ -74,6 +75,18 @@ export default function Home() {
   const nextKWEnd = new Date(kw.endDate);
   nextKWEnd.setUTCDate(nextKWEnd.getUTCDate() + 7);
 
+  // Prev KW dates for comparison table
+  const prevKWStart = new Date(kw.startDate);
+  prevKWStart.setUTCDate(prevKWStart.getUTCDate() - 7);
+  const prevKWEnd = new Date(kw.endDate);
+  prevKWEnd.setUTCDate(prevKWEnd.getUTCDate() - 7);
+
+  // Tomorrow's KW (dynamic "KW morgen")
+  const tomorrow = new Date(Date.UTC(todayUTC.getUTCFullYear(), todayUTC.getUTCMonth(), todayUTC.getUTCDate() + 1));
+  const tomorrowKW = getKWInfo(tomorrow);
+  const tomorrowDayName = getDayNameDE(tomorrow);
+  const tomorrowIsSameKW = tomorrowKW.weekNumber === kw.weekNumber && tomorrowKW.year === kw.year;
+
   // Server-side date values passed as fallback to the LiveDate client component
   const serverDayName = getDayNameDE(today);
   const serverFormattedDate = formatDateDE(today);
@@ -122,6 +135,21 @@ export default function Home() {
     {
       question: "Welche KW haben wir am nächsten Montag?",
       answer: `Ab dem nächsten Montag befinden wir uns in der KW\u00a0${nextKW.weekNumber}\u00a0${nextKW.year}.`,
+    },
+    {
+      question: "Wie kann ich Kalenderwochen im iPhone- oder Android-Kalender anzeigen?",
+      answer:
+        "Auf dem iPhone: Einstellungen → Kalender → Wochennummern aktivieren. Unter Android (Google Kalender): Einstellungen → Allgemein → Wochennummern anzeigen. Die KW wird dann direkt in der Wochenansicht eingeblendet.",
+    },
+    {
+      question: "Wo finde ich einen Kalender mit Kalenderwochen?",
+      answer:
+        "Auf aktuellekw.de findest Du alle Kalenderwochen im Überblick. Alternativ kannst Du in Outlook, Google Kalender oder Deinem Smartphone-Kalender die Wochennummern einblenden lassen.",
+    },
+    {
+      question: "Warum zeigt mein Kalender eine andere KW an?",
+      answer:
+        "Das liegt meist an einer falschen Einstellung des Wochenstarts. In den USA beginnt die Woche am Sonntag, nach ISO\u00a08601 am Montag. Prüfe in Deinen Kalender-Einstellungen, ob die Region auf Deutschland (oder Europa) und der Wochenstart auf Montag gesetzt ist.",
     },
   ];
 
@@ -271,6 +299,65 @@ export default function Home() {
         <WeekdayTable startDate={kw.startDate} today={todayUTC} />
       </section>
 
+      {/* ── 1c. KW MORGEN & NÄCHSTE KW ─────────────────────────── */}
+      <section className="max-w-2xl mx-auto px-4 pb-10">
+        <h2 className="text-xl font-semibold mb-3">
+          Welche Kalenderwoche haben wir morgen?
+        </h2>
+        <p className="text-text-secondary text-sm leading-relaxed mb-4">
+          Morgen, am{" "}
+          <strong className="text-text-primary">{tomorrowDayName}, {formatDateDE(tomorrow)}</strong>,
+          ist{" "}
+          <strong className="text-text-primary">KW&nbsp;{tomorrowKW.weekNumber}</strong>.{" "}
+          {tomorrowIsSameKW
+            ? "Die Kalenderwoche bleibt gegenüber heute gleich."
+            : `Ab morgen beginnt eine neue Kalenderwoche – KW\u00a0${tomorrowKW.weekNumber}\u00a0${tomorrowKW.year}.`}
+          {" "}Nach ISO&nbsp;8601 wechselt die KW immer am Übergang von Sonntag auf
+          Montag um 00:00&nbsp;Uhr.
+        </p>
+
+        {/* Mini-Übersicht: Prev / Current / Next KW */}
+        <div className="overflow-x-auto rounded-xl border border-border">
+          <table className="w-full text-sm">
+            <thead>
+              <tr className="border-b border-border bg-surface-secondary">
+                <th className="text-left px-4 py-2.5 font-medium text-text-secondary">Zeitraum</th>
+                <th className="text-left px-4 py-2.5 font-medium text-text-secondary">KW</th>
+                <th className="text-left px-4 py-2.5 font-medium text-text-secondary">Datum (Mo–So)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="border-b border-border">
+                <td className="px-4 py-2.5 text-text-secondary">Vorherige</td>
+                <td className="px-4 py-2.5 text-text-secondary">KW&nbsp;{prevKW.weekNumber}</td>
+                <td className="px-4 py-2.5 text-text-secondary">
+                  {formatDateDE(prevKWStart)} – {formatDateDE(prevKWEnd)}
+                </td>
+              </tr>
+              <tr className="border-b border-border bg-accent/5">
+                <td className="px-4 py-2.5 font-semibold text-accent">Aktuell</td>
+                <td className="px-4 py-2.5 font-semibold text-text-primary">KW&nbsp;{kw.weekNumber}</td>
+                <td className="px-4 py-2.5 text-text-primary">
+                  {formatDateDE(kw.startDate)} – {formatDateDE(kw.endDate)}
+                </td>
+              </tr>
+              <tr>
+                <td className="px-4 py-2.5 text-text-secondary">Nächste</td>
+                <td className="px-4 py-2.5 text-text-secondary">KW&nbsp;{nextKW.weekNumber}</td>
+                <td className="px-4 py-2.5 text-text-secondary">
+                  {formatDateDE(nextKWStart)} – {formatDateDE(nextKWEnd)}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p className="text-text-secondary text-xs mt-2">
+          Tipp: Schreib Kalenderwochen immer als{" "}
+          <strong className="text-text-primary">„KW&nbsp;{kw.weekNumber}&nbsp;/&nbsp;{kw.year}"</strong>{" "}
+          – so vermeidest Du Verwechslungen am Jahreswechsel.
+        </p>
+      </section>
+
       {/* ── 2. STATS GRID ───────────────────────────────────────── */}
       <section className="max-w-3xl mx-auto px-4 pb-10 fade-in-delay">
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
@@ -413,6 +500,18 @@ export default function Home() {
               „Saturationsjahr".
             </span>
           </li>
+          <li className="flex gap-2.5">
+            <span className="text-accent mt-0.5 shrink-0">•</span>
+            <span>
+              <strong className="text-text-primary">Was bedeutet „KW"?</strong>{" "}
+              KW ist die Abkürzung für{" "}
+              <strong className="text-text-primary">Kalenderwoche</strong>. Du
+              nutzt sie, wenn Termine schnell und eindeutig stehen sollen –
+              etwa bei Deadlines, Lieferterminen oder in der Urlaubsplanung.
+              Für klare Absprachen schreib immer das Jahr dazu, z.&nbsp;B.{" "}
+              <strong className="text-text-primary">„KW&nbsp;{kw.weekNumber}/{kw.year}"</strong>.
+            </span>
+          </li>
         </ul>
       </section>
 
@@ -457,6 +556,63 @@ export default function Home() {
         </ol>
       </section>
 
+      {/* ── 3d2. KALENDERWOCHEN IN DIGITALEN KALENDERN ─────────── */}
+      <section className="max-w-2xl mx-auto px-4 pb-14">
+        <h2 className="text-2xl font-semibold mb-4">
+          Kalenderwochen im Smartphone &amp; Outlook anzeigen
+        </h2>
+        <p className="text-text-secondary text-sm leading-relaxed mb-4">
+          Du möchtest die <strong className="text-text-primary">Kalenderwoche</strong>{" "}
+          direkt in Deinem Kalender sehen? Öffne die Einstellungen Deiner App
+          und aktiviere <strong className="text-text-primary">Wochennummern</strong>.
+          Der genaue Menüpfad unterscheidet sich je nach Gerät – das Vorgehen
+          bleibt aber gleich:
+        </p>
+        <div className="overflow-x-auto rounded-xl border border-border mb-4">
+          <table className="w-full text-sm">
+            <thead>
+              <tr className="border-b border-border bg-surface-secondary">
+                <th className="text-left px-4 py-2.5 font-medium text-text-secondary">Gerät</th>
+                <th className="text-left px-4 py-2.5 font-medium text-text-secondary">Wo aktivieren?</th>
+                <th className="text-left px-4 py-2.5 font-medium text-text-secondary">Menüpunkt</th>
+                <th className="text-left px-4 py-2.5 font-medium text-text-secondary">Hinweis</th>
+              </tr>
+            </thead>
+            <tbody className="text-text-secondary">
+              <tr className="border-b border-border">
+                <td className="px-4 py-2.5 font-medium text-text-primary">iPhone</td>
+                <td className="px-4 py-2.5">Einstellungen (iOS)</td>
+                <td className="px-4 py-2.5">Wochennummern</td>
+                <td className="px-4 py-2.5">Region &amp; Wochenbeginn prüfen</td>
+              </tr>
+              <tr className="border-b border-border">
+                <td className="px-4 py-2.5 font-medium text-text-primary">Android</td>
+                <td className="px-4 py-2.5">Kalender-App</td>
+                <td className="px-4 py-2.5">Wochennummern</td>
+                <td className="px-4 py-2.5">Wochenbeginn auf Montag stellen</td>
+              </tr>
+              <tr className="border-b border-border">
+                <td className="px-4 py-2.5 font-medium text-text-primary">Outlook</td>
+                <td className="px-4 py-2.5">Optionen → Kalender</td>
+                <td className="px-4 py-2.5">Wochennummern anzeigen</td>
+                <td className="px-4 py-2.5">Regionseinstellungen prüfen</td>
+              </tr>
+              <tr>
+                <td className="px-4 py-2.5 font-medium text-text-primary">Google Kalender</td>
+                <td className="px-4 py-2.5">Einstellungen</td>
+                <td className="px-4 py-2.5">Wochennummern anzeigen</td>
+                <td className="px-4 py-2.5">Bei Problemen App neu starten</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p className="text-text-secondary text-xs">
+          Achte darauf, dass der <strong className="text-text-primary">Wochenbeginn
+          auf Montag</strong> eingestellt ist und die Region auf Deutschland/Europa
+          steht – sonst kann die angezeigte KW abweichen.
+        </p>
+      </section>
+
       {/* ── 3e. VERGLEICHSTABELLE: Aktuelle + Nächste KW ─────────── */}
       <section className="max-w-2xl mx-auto px-4 pb-14">
         <h2 className="text-2xl font-semibold mb-4">
@@ -478,30 +634,117 @@ export default function Home() {
               </tr>
             </thead>
             <tbody>
+              <tr className="border-b border-border">
+                <td className="px-5 py-3 text-text-secondary">Vorherige Woche</td>
+                <td className="px-5 py-3 text-text-secondary">KW&nbsp;{prevKW.weekNumber}</td>
+                <td className="px-5 py-3 text-text-secondary">
+                  {formatDateDE(prevKWStart)} – {formatDateDE(prevKWEnd)}
+                </td>
+              </tr>
               <tr className="border-b border-border bg-accent/5">
-                <td className="px-5 py-3 font-semibold text-accent">
-                  Aktuell
-                </td>
-                <td className="px-5 py-3 font-semibold text-text-primary">
-                  KW&nbsp;{kw.weekNumber}
-                </td>
+                <td className="px-5 py-3 font-semibold text-accent">Aktuell</td>
+                <td className="px-5 py-3 font-semibold text-text-primary">KW&nbsp;{kw.weekNumber}</td>
                 <td className="px-5 py-3 text-text-primary">
                   {formatDateDE(kw.startDate)} – {formatDateDE(kw.endDate)}
                 </td>
               </tr>
               <tr>
-                <td className="px-5 py-3 text-text-secondary">
-                  Nächste Woche
-                </td>
-                <td className="px-5 py-3 text-text-secondary">
-                  KW&nbsp;{nextKW.weekNumber}
-                </td>
+                <td className="px-5 py-3 text-text-secondary">Nächste Woche</td>
+                <td className="px-5 py-3 text-text-secondary">KW&nbsp;{nextKW.weekNumber}</td>
                 <td className="px-5 py-3 text-text-secondary">
                   {formatDateDE(nextKWStart)} – {formatDateDE(nextKWEnd)}
                 </td>
               </tr>
             </tbody>
           </table>
+        </div>
+      </section>
+
+      {/* ── 3e2. HÄUFIGE FEHLER BEI DER KW ────────────────────────── */}
+      <section className="max-w-2xl mx-auto px-4 pb-14">
+        <h2 className="text-2xl font-semibold mb-4">
+          Warum zeigt mein Kalender eine andere KW an?
+        </h2>
+        <p className="text-text-secondary text-sm leading-relaxed mb-4">
+          Wenn die <strong className="text-text-primary">Kalenderwoche heute</strong>{" "}
+          nicht zu Deiner Erwartung passt, liegt das meist an abweichenden
+          Einstellungen: Einige Tools und US-Kalender starten die Woche am{" "}
+          <strong className="text-text-primary">Sonntag</strong> statt am Montag –
+          dadurch verschiebt sich die KW-Zählung. Auch eine falsche Region
+          oder Locale (z.&nbsp;B. USA statt Deutschland) kann die Anzeige
+          beeinflussen.
+        </p>
+        <ol className="space-y-2.5 text-text-secondary text-sm leading-relaxed list-none">
+          <li className="flex gap-3">
+            <span className="text-accent font-semibold shrink-0">1.</span>
+            <span><strong className="text-text-primary">Wochenstart prüfen:</strong>{" "}
+            Stelle in den Einstellungen „Woche beginnt am: Montag" ein.</span>
+          </li>
+          <li className="flex gap-3">
+            <span className="text-accent font-semibold shrink-0">2.</span>
+            <span><strong className="text-text-primary">Region einstellen:</strong>{" "}
+            Wähle Deutschland oder Europa als Locale – nicht USA.</span>
+          </li>
+          <li className="flex gap-3">
+            <span className="text-accent font-semibold shrink-0">3.</span>
+            <span><strong className="text-text-primary">Wochennummern aktivieren:</strong>{" "}
+            Schalte die KW-Anzeige in der Kalender-App explizit ein.</span>
+          </li>
+          <li className="flex gap-3">
+            <span className="text-accent font-semibold shrink-0">4.</span>
+            <span><strong className="text-text-primary">Zeitzone kontrollieren:</strong>{" "}
+            Besonders nach Reisen oder bei VPN-Nutzung kann die Zeitzone falsch stehen.</span>
+          </li>
+          <li className="flex gap-3">
+            <span className="text-accent font-semibold shrink-0">5.</span>
+            <span><strong className="text-text-primary">App aktualisieren:</strong>{" "}
+            Starte die App neu oder synchronisiere den Kalender, wenn Werte „hängen".</span>
+          </li>
+        </ol>
+      </section>
+
+      {/* ── 3e3. KW SCHNELL BESTIMMEN ──────────────────────────────── */}
+      <section className="max-w-2xl mx-auto px-4 pb-14">
+        <h2 className="text-2xl font-semibold mb-4">
+          Kalenderwoche schnell bestimmen – 3 einfache Methoden
+        </h2>
+        <p className="text-text-secondary text-sm leading-relaxed mb-4">
+          Wenn Du die{" "}
+          <strong className="text-text-primary">aktuelle KW herausfinden</strong>{" "}
+          willst, brauchst Du keinen Rechner. In den meisten Fällen reicht ein
+          Blick in Deinen Kalender:
+        </p>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div className="bg-surface-secondary border border-border rounded-xl p-4">
+            <span className="text-accent font-bold text-lg">1</span>
+            <h3 className="font-medium text-text-primary text-sm mt-1 mb-1.5">
+              Smartphone-Kalender
+            </h3>
+            <p className="text-text-secondary text-xs leading-relaxed">
+              Wochennummern in den iOS- oder Android-Einstellungen aktivieren.
+              Die KW steht dann direkt in der Wochenansicht.
+            </p>
+          </div>
+          <div className="bg-surface-secondary border border-border rounded-xl p-4">
+            <span className="text-accent font-bold text-lg">2</span>
+            <h3 className="font-medium text-text-primary text-sm mt-1 mb-1.5">
+              Outlook / Google Kalender
+            </h3>
+            <p className="text-text-secondary text-xs leading-relaxed">
+              KW in den Kalender-Einstellungen einblenden. Ideal im Alltag,
+              weil Du die KW neben Terminen siehst.
+            </p>
+          </div>
+          <div className="bg-surface-secondary border border-border rounded-xl p-4">
+            <span className="text-accent font-bold text-lg">3</span>
+            <h3 className="font-medium text-text-primary text-sm mt-1 mb-1.5">
+              Online-Kalender nutzen
+            </h3>
+            <p className="text-text-secondary text-xs leading-relaxed">
+              Funktioniert sofort im Browser. Achte darauf, dass nach{" "}
+              <strong>ISO&nbsp;8601</strong> (Wochenstart Montag) gezählt wird.
+            </p>
+          </div>
         </div>
       </section>
 
@@ -570,6 +813,14 @@ export default function Home() {
             aktuellekw.de zeigt Dir die{" "}
             <strong className="text-text-primary">heutige Kalenderwoche</strong>{" "}
             stets nach dem in Deutschland gültigen Standard.
+          </p>
+          <p>
+            <strong className="text-text-primary">Aktuelle KW {kw.year} – Jahreseinordnung:</strong>{" "}
+            Rund um den Jahreswechsel gibt es Sonderfälle. KW&nbsp;1 kann bereits
+            Ende Dezember beginnen, und die ersten Tage im Januar können noch zur
+            letzten KW des Vorjahres gehören. Deshalb ist es sinnvoll,
+            Kalenderwochen immer als „KW&nbsp;{kw.weekNumber}&nbsp;/&nbsp;{kw.year}" zu
+            schreiben – so ist sofort erkennbar, welches Jahr gemeint ist.
           </p>
         </div>
       </section>
