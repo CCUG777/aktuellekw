@@ -127,6 +127,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
  *     – Restliche im aktuellen Jahr: priority 0.5, changeFrequency "never"
  *     – Andere Jahre: priority 0.3, changeFrequency "never"
  * [x] lastModified: endDate der KW für vergangene Wochen
- * [ ] TODO: /wie-viele-wochen-hat-ein-jahr ergänzen (Cluster 4)
- * [ ] TODO: /kalender-download ergänzen (Cluster 6)
+ * [x] /wie-viele-wochen-hat-ein-jahr in Sitemap (Cluster 4)
+ * [ ] TODO: /kalender-download ergänzen (Cluster 6, geplant)
  */

@@ -163,6 +163,10 @@ export default async function KWDetailPage({
       endDate: kwInfo.endDate.toISOString().split("T")[0],
       description: `KW ${kwInfo.weekNumber} ${kwInfo.year} nach ISO 8601: ${formatDateDE(kwInfo.startDate)} bis ${formatDateDE(kwInfo.endDate)}.`,
       url: `https://aktuellekw.de/kw/${kwInfo.weekNumber}-${kwInfo.year}`,
+      speakable: {
+        "@type": "SpeakableSpecification",
+        cssSelector: ["h1", "h2"],
+      },
     },
   ];
 
@@ -393,8 +397,8 @@ export default async function KWDetailPage({
  * [x] fade-in Animationen
  * [x] revalidate = 3600 (stündliche ISR)
  * [x] Interne Links: /, /kalenderwochen/[year], /faq
- * [x] PLACEHOLDER: SEO-Erklärtext (80–120 Wörter) mit Cluster-5-Keywords
- * [ ] TODO: OG-Image mit KW-Nummer (1200×630 px)
- * [ ] TODO: Speakable Schema für KI-Sprachsuche
+ * [x] SEO-Erklärtext (80–120 Wörter) mit Cluster-5-Keywords ✅ befüllt
+ * [x] OG-Image: dynamisch via opengraph-image.tsx (1200×630px)
+ * [x] Speakable Schema für KI-Sprachsuche
  * [x] Verlinkung KWTable-Zellen auf /kw/[n]-[year] (via Link-Component in KWTable.tsx)
  */

@@ -38,6 +38,12 @@ export default function Footer() {
               <Link href="/faq" className="text-sm text-text-secondary hover:text-text-primary transition-colors">
                 FAQ
               </Link>
+              <Link href="/welche-kalenderwoche-haben-wir" className="text-sm text-text-secondary hover:text-text-primary transition-colors">
+                Welche KW haben wir?
+              </Link>
+              <Link href="/wie-viele-wochen-hat-ein-jahr" className="text-sm text-text-secondary hover:text-text-primary transition-colors">
+                Wochen im Jahr
+              </Link>
               <Link href="/kalenderwochen/2025" className="text-sm text-text-secondary hover:text-text-primary transition-colors">
                 Kalenderwochen 2025
               </Link>

@@ -136,6 +136,14 @@ export default function Home() {
       operatingSystem: "All",
       inLanguage: "de-DE",
       offers: { "@type": "Offer", price: "0", priceCurrency: "EUR" },
+      speakable: {
+        "@type": "SpeakableSpecification",
+        cssSelector: [
+          "[aria-label='Kalenderwoche heute']",
+          "h1",
+          "h2",
+        ],
+      },
     },
     {
       "@context": "https://schema.org",
@@ -610,11 +618,7 @@ export default function Home() {
       <hr className="section-divider" />
 
       {/* ── 4. FAQ ──────────────────────────────────────────────
-       * PLACEHOLDER – Cluster 3: welche KW haben wir
-       * Zielkeywords: welche Kalenderwoche haben wir, welche KW ist heute,
-       *   Kalenderwoche heute, heutige Kalenderwoche, KW berechnen
-       * Ziel: 60–80 Wörter
-       * Hinweis: Dieser Text wird durch redaktionellen SEO-Content ersetzt.
+       * Cluster 3: welche KW haben wir – SEO-Text ✅ befüllt
        * ──────────────────────────────────────────────────────────── */}
       <section className="max-w-2xl mx-auto px-4 pb-16">
         <h2 className="text-2xl font-semibold mb-2">
@@ -661,11 +665,7 @@ export default function Home() {
       <hr className="section-divider" />
 
       {/* ── 5. KW JAHRESÜBERSICHT ──────────────────────────────────
-       * PLACEHOLDER – Cluster 2: Kalenderwochen Jahresübersicht
-       * Zielkeywords: Kalenderwochen 2026, alle KW, KW Übersicht,
-       *   KW Jahresüberblick, Wochenkalender, Kalenderwochen Tabelle
-       * Ziel: 50–70 Wörter
-       * Hinweis: Dieser Text wird durch redaktionellen SEO-Content ersetzt.
+       * Cluster 2: Kalenderwochen Jahresübersicht – SEO-Text ✅ befüllt
        * ──────────────────────────────────────────────────────────── */}
       <section className="max-w-4xl mx-auto px-4 pb-16">
         <div className="flex items-baseline justify-between mb-5">
@@ -729,5 +729,5 @@ export default function Home() {
  * [x] Cluster 1 SEO-Content: Intro, Hintergründe, Alltags-Tipps, Tabelle, Zusammenfassung
  * [x] Vergleichstabelle aktuelle KW + nächste KW (dynamisch)
  * [x] OG-Image: dynamisch via opengraph-image.tsx (1200×630px)
- * [ ] TODO: Speakable Schema für KI-Sprachsuche
+ * [x] Speakable Schema für KI-Sprachsuche
  */

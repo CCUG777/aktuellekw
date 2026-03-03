@@ -12,6 +12,11 @@ const navLinks = [
   { href: "/faq", label: "FAQ" },
 ];
 
+const moreLinks = [
+  { href: "/welche-kalenderwoche-haben-wir", label: "Welche KW haben wir?" },
+  { href: "/wie-viele-wochen-hat-ein-jahr", label: "Wochen im Jahr" },
+];
+
 export default function MobileMenu() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
@@ -119,6 +124,33 @@ export default function MobileMenu() {
         {/* Links */}
         <div className="px-3 py-4 flex flex-col gap-1">
           {navLinks.map((link) => {
+            const isActive = pathname === link.href;
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={`
+                  px-4 py-3 rounded-xl text-[15px] font-medium
+                  transition-all duration-150
+                  ${
+                    isActive
+                      ? "bg-accent/10 text-accent"
+                      : "text-text-primary hover:bg-surface-tertiary"
+                  }
+                `}
+              >
+                {link.label}
+              </Link>
+            );
+          })}
+        </div>
+
+        {/* Weitere Seiten */}
+        <div className="px-3 pb-4 flex flex-col gap-1 border-t border-border pt-3 mx-3">
+          <span className="px-4 py-1 text-xs font-semibold uppercase tracking-wider text-text-secondary">
+            Ratgeber
+          </span>
+          {moreLinks.map((link) => {
             const isActive = pathname === link.href;
             return (
               <Link

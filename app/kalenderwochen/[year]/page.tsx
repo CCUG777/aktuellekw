@@ -272,7 +272,7 @@ export default async function KalenderwochenYearPage({
  * [x] revalidate = 86400 (tägliche ISR)
  * [x] fade-in Animationen
  * [x] Interne Links: /, /kalenderwoche, /faq
- * [ ] TODO: Verlinkung KWTable-Zellen auf /kw/[n]-[year]
+ * [x] Verlinkung KWTable-Zellen auf /kw/[n]-[year]
  * [ ] TODO: Kalender-Download-Link (Cluster 6, geplant)
  * [ ] TODO: hreflang AT/CH wenn mehrsprachig ausgebaut
  */

@@ -151,5 +151,5 @@ export default function RootLayout({
  * [x] Skip-to-Content Link für Barrierefreiheit
  * [x] <main id="main-content" role="main"> ARIA Landmark
  * [x] Statische OG-Platzhalter entfernt (public/og/ gelöscht)
- * [ ] TODO: favicon.ico & apple-touch-icon.png prüfen/ergänzen
+ * [x] favicon.ico vorhanden, apple-icon.tsx dynamisch generiert
  */

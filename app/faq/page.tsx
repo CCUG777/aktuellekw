@@ -110,6 +110,10 @@ function FaqJsonLd() {
           text: faq.answer,
         },
       })),
+      speakable: {
+        "@type": "SpeakableSpecification",
+        cssSelector: ["h1", ".text-text-secondary.mb-8"],
+      },
     },
     {
       "@context": "https://schema.org",
@@ -225,9 +229,9 @@ export default function FaqPage() {
  *     wie viel Wochen hat ein Jahr, wie viele Kalenderwochen hat ein Jahr
  * [x] Cluster 5: wann beginnt KW 1 2026, wie viele Kalenderwochen hat 2026
  * [x] Einleitungstext mit Keywords (kurz, informativ)
- * [x] PLACEHOLDER: ausführlicher Einleitungstext (60–80 Wörter)
+ * [x] Einleitungstext (60–80 Wörter) ✅ befüllt
  * [x] Interne Links zurück zur Startseite und Jahresübersicht
  * [ ] TODO: „Wann ist KW X 2026?" Fragen dynamisch pro aktuelle KW generieren
- * [ ] TODO: Speakable Schema für KI-Sprachsuche ergänzen
+ * [x] Speakable Schema für KI-Sprachsuche
  * [ ] TODO: Verlinkung zur Kalenderwochen-Übersicht über Frage #11 einbauen
  */
