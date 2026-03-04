@@ -153,48 +153,48 @@ export default function Home() {
     },
   ];
 
-  const pageJsonLd = [
-    {
-      "@context": "https://schema.org",
-      "@type": "WebApplication",
-      name: "Aktuelle KW – aktuellekw.de",
-      url: "https://aktuellekw.de",
-      description: `Die aktuelle KW ist KW ${kw.weekNumber} ${kw.year} (${formatDateDE(kw.startDate)} – ${formatDateDE(kw.endDate)}).`,
-      applicationCategory: "UtilityApplication",
-      operatingSystem: "All",
-      inLanguage: "de-DE",
-      offers: { "@type": "Offer", price: "0", priceCurrency: "EUR" },
-      speakable: {
-        "@type": "SpeakableSpecification",
-        cssSelector: [
-          "[aria-label='Kalenderwoche heute']",
-          "h1",
-          "h2",
+  const pageJsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        name: "Aktuelle KW – aktuellekw.de",
+        url: "https://aktuellekw.de",
+        description: `Die aktuelle KW ist KW ${kw.weekNumber} ${kw.year} (${formatDateDE(kw.startDate)} – ${formatDateDE(kw.endDate)}).`,
+        applicationCategory: "UtilityApplication",
+        operatingSystem: "All",
+        inLanguage: "de-DE",
+        offers: { "@type": "Offer", price: "0", priceCurrency: "EUR" },
+        speakable: {
+          "@type": "SpeakableSpecification",
+          cssSelector: [
+            "[aria-label='Kalenderwoche heute']",
+            "h1",
+            "h2",
+          ],
+        },
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Startseite",
+            item: "https://aktuellekw.de",
+          },
         ],
       },
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      itemListElement: [
-        {
-          "@type": "ListItem",
-          position: 1,
-          name: "Startseite",
-          item: "https://aktuellekw.de",
-        },
-      ],
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      mainEntity: homeFaqs.map((f) => ({
-        "@type": "Question",
-        name: f.question,
-        acceptedAnswer: { "@type": "Answer", text: f.answer },
-      })),
-    },
-  ];
+      {
+        "@type": "FAQPage",
+        mainEntity: homeFaqs.map((f) => ({
+          "@type": "Question",
+          name: f.question,
+          acceptedAnswer: { "@type": "Answer", text: f.answer },
+        })),
+      },
+    ],
+  };
 
   return (
     <>
@@ -299,8 +299,32 @@ export default function Home() {
         <WeekdayTable startDate={kw.startDate} today={todayUTC} />
       </section>
 
+      {/* ── TOC: Anker-Navigation ─────────────────────────────── */}
+      <nav className="max-w-3xl mx-auto px-4 pb-10" aria-label="Inhaltsverzeichnis">
+        <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide sm:flex-wrap sm:justify-center">
+          {[
+            { href: "#kw-morgen", label: "KW morgen" },
+            { href: "#kw-rechner-input", label: "KW-Rechner" },
+            { href: "#hintergruende", label: "Hintergr\u00fcnde" },
+            { href: "#alltag", label: "Alltags-Tipps" },
+            { href: "#kalender-apps", label: "Kalender-Apps" },
+            { href: "#kalender-fehler", label: "Fehlerquellen" },
+            { href: "#faq", label: "FAQ" },
+            { href: "#alle-kw", label: `Alle KW ${kw.year}` },
+          ].map((item) => (
+            <a
+              key={item.href}
+              href={item.href}
+              className="shrink-0 bg-surface-secondary border border-border rounded-full px-3.5 py-1.5 text-xs text-text-secondary hover:text-accent hover:border-accent transition-colors"
+            >
+              {item.label}
+            </a>
+          ))}
+        </div>
+      </nav>
+
       {/* ── 1c. KW MORGEN & NÄCHSTE KW ─────────────────────────── */}
-      <section className="max-w-2xl mx-auto px-4 pb-10">
+      <section id="kw-morgen" className="max-w-2xl mx-auto px-4 pb-10 scroll-mt-20">
         <h2 className="text-xl font-semibold mb-3">
           Welche Kalenderwoche haben wir morgen?
         </h2>
@@ -357,6 +381,9 @@ export default function Home() {
           – so vermeidest Du Verwechslungen am Jahreswechsel.
         </p>
       </section>
+
+      {/* ── Block B: getönter Hintergrund ─────────────────────── */}
+      <div className="bg-surface-secondary/30 py-2">
 
       {/* ── 2. STATS GRID ───────────────────────────────────────── */}
       <section className="max-w-3xl mx-auto px-4 pb-10 fade-in-delay">
@@ -445,15 +472,17 @@ export default function Home() {
         </p>
       </section>
 
-      <hr className="section-divider" />
-
       {/* ── 3b. KW RECHNER ──────────────────────────────────────── */}
       <section className="max-w-3xl mx-auto px-4 pb-14 fade-in-delay-2">
         <KWRechner />
       </section>
 
+      </div>{/* Ende Block B (getönter Hintergrund) */}
+
+      <hr className="section-divider" />
+
       {/* ── 3c. HINTERGRÜNDE: Aktuelle KW ── Cluster 1 ─────────── */}
-      <section className="max-w-2xl mx-auto px-4 pb-14">
+      <section id="hintergruende" className="max-w-2xl mx-auto px-4 pb-14 scroll-mt-20">
         <h2 className="text-2xl font-semibold mb-4">
           Hintergründe zu Aktuelle KW
         </h2>
@@ -516,7 +545,7 @@ export default function Home() {
       </section>
 
       {/* ── 3d. ALLTAGS-TIPPS: Aktuelle KW ── Cluster 1 ──────────── */}
-      <section className="max-w-2xl mx-auto px-4 pb-14">
+      <section id="alltag" className="max-w-2xl mx-auto px-4 pb-14 scroll-mt-20">
         <h2 className="text-2xl font-semibold mb-4">
           So nutzt Du die aktuelle KW im Alltag
         </h2>
@@ -557,7 +586,7 @@ export default function Home() {
       </section>
 
       {/* ── 3d2. KALENDERWOCHEN IN DIGITALEN KALENDERN ─────────── */}
-      <section className="max-w-2xl mx-auto px-4 pb-14">
+      <section id="kalender-apps" className="max-w-2xl mx-auto px-4 pb-14 scroll-mt-20">
         <h2 className="text-2xl font-semibold mb-4">
           Kalenderwochen im Smartphone &amp; Outlook anzeigen
         </h2>
@@ -568,7 +597,8 @@ export default function Home() {
           Der genaue Menüpfad unterscheidet sich je nach Gerät – das Vorgehen
           bleibt aber gleich:
         </p>
-        <div className="overflow-x-auto rounded-xl border border-border mb-4">
+        {/* Desktop: Tabelle */}
+        <div className="hidden sm:block overflow-x-auto rounded-xl border border-border mb-4">
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-border bg-surface-secondary">
@@ -606,6 +636,25 @@ export default function Home() {
             </tbody>
           </table>
         </div>
+        {/* Mobile: Karten-Layout */}
+        <div className="sm:hidden space-y-3 mb-4">
+          {[
+            { device: "iPhone", where: "Einstellungen (iOS)", menu: "Wochennummern", hint: "Region & Wochenbeginn pr\u00fcfen" },
+            { device: "Android", where: "Kalender-App", menu: "Wochennummern", hint: "Wochenbeginn auf Montag stellen" },
+            { device: "Outlook", where: "Optionen \u2192 Kalender", menu: "Wochennummern anzeigen", hint: "Regionseinstellungen pr\u00fcfen" },
+            { device: "Google Kalender", where: "Einstellungen", menu: "Wochennummern anzeigen", hint: "Bei Problemen App neu starten" },
+          ].map((item) => (
+            <div key={item.device} className="bg-surface-secondary border border-border rounded-xl p-4">
+              <span className="text-text-primary font-semibold text-sm">{item.device}</span>
+              <p className="text-text-secondary text-xs mt-1.5">
+                <span className="text-text-secondary/70">Wo:</span> {item.where} → <strong className="text-text-primary">{item.menu}</strong>
+              </p>
+              <p className="text-text-secondary text-xs mt-1">
+                <span className="text-text-secondary/70">Tipp:</span> {item.hint}
+              </p>
+            </div>
+          ))}
+        </div>
         <p className="text-text-secondary text-xs">
           Achte darauf, dass der <strong className="text-text-primary">Wochenbeginn
           auf Montag</strong> eingestellt ist und die Region auf Deutschland/Europa
@@ -613,55 +662,15 @@ export default function Home() {
         </p>
       </section>
 
-      {/* ── 3e. VERGLEICHSTABELLE: Aktuelle + Nächste KW ─────────── */}
-      <section className="max-w-2xl mx-auto px-4 pb-14">
-        <h2 className="text-2xl font-semibold mb-4">
-          Übersicht: Der aktuelle Zeitraum {kw.year}
-        </h2>
-        <div className="overflow-x-auto rounded-xl border border-border">
-          <table className="w-full text-sm">
-            <thead>
-              <tr className="border-b border-border bg-surface-secondary">
-                <th className="text-left px-5 py-3 font-medium text-text-secondary">
-                  Zeitraum
-                </th>
-                <th className="text-left px-5 py-3 font-medium text-text-secondary">
-                  Kalenderwoche
-                </th>
-                <th className="text-left px-5 py-3 font-medium text-text-secondary">
-                  Datum (Mo–So)
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr className="border-b border-border">
-                <td className="px-5 py-3 text-text-secondary">Vorherige Woche</td>
-                <td className="px-5 py-3 text-text-secondary">KW&nbsp;{prevKW.weekNumber}</td>
-                <td className="px-5 py-3 text-text-secondary">
-                  {formatDateDE(prevKWStart)} – {formatDateDE(prevKWEnd)}
-                </td>
-              </tr>
-              <tr className="border-b border-border bg-accent/5">
-                <td className="px-5 py-3 font-semibold text-accent">Aktuell</td>
-                <td className="px-5 py-3 font-semibold text-text-primary">KW&nbsp;{kw.weekNumber}</td>
-                <td className="px-5 py-3 text-text-primary">
-                  {formatDateDE(kw.startDate)} – {formatDateDE(kw.endDate)}
-                </td>
-              </tr>
-              <tr>
-                <td className="px-5 py-3 text-text-secondary">Nächste Woche</td>
-                <td className="px-5 py-3 text-text-secondary">KW&nbsp;{nextKW.weekNumber}</td>
-                <td className="px-5 py-3 text-text-secondary">
-                  {formatDateDE(nextKWStart)} – {formatDateDE(nextKWEnd)}
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
+      {/* Vergleichstabelle entfernt – Daten bereits in "KW morgen" Sektion */}
+
+      <hr className="section-divider" />
+
+      {/* ── Block D: getönter Hintergrund ─────────────────────── */}
+      <div className="bg-surface-secondary/30 py-2">
 
       {/* ── 3e2. HÄUFIGE FEHLER BEI DER KW ────────────────────────── */}
-      <section className="max-w-2xl mx-auto px-4 pb-14">
+      <section id="kalender-fehler" className="max-w-2xl mx-auto px-4 pb-14 scroll-mt-20">
         <h2 className="text-2xl font-semibold mb-4">
           Warum zeigt mein Kalender eine andere KW an?
         </h2>
@@ -747,6 +756,10 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      </div>{/* Ende Block D (getönter Hintergrund) */}
+
+      <hr className="section-divider" />
 
       {/* ── 3f. ZUSAMMENFASSUNG ── Cluster 1 ─────────────────────── */}
       <section className="max-w-2xl mx-auto px-4 pb-16">
@@ -871,7 +884,7 @@ export default function Home() {
       {/* ── 4. FAQ ──────────────────────────────────────────────
        * Cluster 3: welche KW haben wir – SEO-Text ✅ befüllt
        * ──────────────────────────────────────────────────────────── */}
-      <section className="max-w-2xl mx-auto px-4 pb-16">
+      <section id="faq" className="max-w-2xl mx-auto px-4 pb-16 scroll-mt-20">
         <h2 className="text-2xl font-semibold mb-2">
           Häufige Fragen zur Kalenderwoche
         </h2>
@@ -915,10 +928,13 @@ export default function Home() {
 
       <hr className="section-divider" />
 
+      {/* ── Block F: getönter Hintergrund ─────────────────────── */}
+      <div className="bg-surface-secondary/30 py-2">
+
       {/* ── 5. KW JAHRESÜBERSICHT ──────────────────────────────────
        * Cluster 2: Kalenderwochen Jahresübersicht – SEO-Text ✅ befüllt
        * ──────────────────────────────────────────────────────────── */}
-      <section className="max-w-4xl mx-auto px-4 pb-16">
+      <section id="alle-kw" className="max-w-4xl mx-auto px-4 pb-16 scroll-mt-20">
         <div className="flex items-baseline justify-between mb-5">
           <h2 className="text-2xl font-semibold">
             Alle Kalenderwochen {kw.year}
@@ -949,6 +965,7 @@ export default function Home() {
           Vollständige Übersicht →
         </a>
       </section>
+      </div>{/* Ende Block F */}
     </>
   );
 }

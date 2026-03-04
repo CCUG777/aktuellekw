@@ -165,6 +165,15 @@ details[open] .details-content {
   max-width: 42rem;
 }
 
+/* ── Hide scrollbar for TOC horizontal scroll ──────────────── */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
 /* ── Smooth scrolling ─────────────────────────────────────── */
 html {
   scroll-behavior: smooth;
