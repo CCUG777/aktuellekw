@@ -142,8 +142,8 @@ export default function DatenschutzPage() {
               </p>
               <p>
                 E-Mail:{" "}
-                <a href="mailto:info@aktuellekw.de" className="text-accent hover:underline underline-offset-2">
-                  info@aktuellekw.de
+                <a href="mailto:commonconsulting@gmx.de" className="text-accent hover:underline underline-offset-2">
+                  commonconsulting@gmx.de
                 </a>
               </p>
             </address>
@@ -375,10 +375,10 @@ export default function DatenschutzPage() {
               Möchten Sie von Ihrem Widerrufs- oder Widerspruchsrecht Gebrauch machen, genügt eine
               E-Mail an:{" "}
               <a
-                href="mailto:info@aktuellekw.de"
+                href="mailto:commonconsulting@gmx.de"
                 className="text-accent hover:underline underline-offset-2"
               >
-                info@aktuellekw.de
+                commonconsulting@gmx.de
               </a>
             </p>
           </Section>

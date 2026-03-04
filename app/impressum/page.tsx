@@ -60,7 +60,7 @@ function OrganizationJsonLd() {
     contactPoint: {
       "@type": "ContactPoint",
       telephone: "+49-171-3117971",
-      email: "info@aktuellew.de",
+      email: "commonconsulting@gmx.de",
       contactType: "customer service",
     },
   };
@@ -147,10 +147,10 @@ export default function ImpressumPage() {
                 <dt className="text-text-secondary text-sm w-24 shrink-0">E-Mail</dt>
                 <dd>
                   <a
-                    href="mailto:info@aktuellew.de"
+                    href="mailto:commonconsulting@gmx.de"
                     className="text-accent hover:underline underline-offset-2"
                   >
-                    info@aktuellew.de
+                    commonconsulting@gmx.de
                   </a>
                 </dd>
               </div>
