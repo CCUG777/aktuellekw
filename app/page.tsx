@@ -14,6 +14,7 @@ import KWTable from "@/components/KWTable";
 import LiveDate from "@/components/LiveDate";
 import WeekdayTable from "@/components/WeekdayTable";
 import KWRechner from "@/components/KWRechner";
+import StickyTOC from "@/components/StickyTOC";
 
 export const revalidate = 3600;
 
@@ -299,32 +300,22 @@ export default function Home() {
         <WeekdayTable startDate={kw.startDate} today={todayUTC} />
       </section>
 
-      {/* ── TOC: Anker-Navigation ─────────────────────────────── */}
-      <nav className="max-w-3xl mx-auto px-4 pb-10" aria-label="Inhaltsverzeichnis">
-        <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide sm:flex-wrap sm:justify-center">
-          {[
-            { href: "#kw-morgen", label: "KW morgen" },
-            { href: "#kw-rechner-input", label: "KW-Rechner" },
-            { href: "#hintergruende", label: "Hintergr\u00fcnde" },
-            { href: "#alltag", label: "Alltags-Tipps" },
-            { href: "#kalender-apps", label: "Kalender-Apps" },
-            { href: "#kalender-fehler", label: "Fehlerquellen" },
-            { href: "#faq", label: "FAQ" },
-            { href: "#alle-kw", label: `Alle KW ${kw.year}` },
-          ].map((item) => (
-            <a
-              key={item.href}
-              href={item.href}
-              className="shrink-0 bg-surface-secondary border border-border rounded-full px-3.5 py-1.5 text-xs text-text-secondary hover:text-accent hover:border-accent transition-colors"
-            >
-              {item.label}
-            </a>
-          ))}
-        </div>
-      </nav>
+      {/* ── TOC: Sticky Anker-Navigation mit Active-State ────── */}
+      <StickyTOC
+        items={[
+          { href: "#kw-morgen", label: "KW morgen" },
+          { href: "#kw-rechner-input", label: "KW-Rechner" },
+          { href: "#hintergruende", label: "Hintergründe" },
+          { href: "#alltag", label: "Alltags-Tipps" },
+          { href: "#kalender-apps", label: "Kalender-Apps" },
+          { href: "#kalender-fehler", label: "Fehlerquellen" },
+          { href: "#faq", label: "FAQ" },
+          { href: "#alle-kw", label: `Alle KW ${kw.year}` },
+        ]}
+      />
 
       {/* ── 1c. KW MORGEN & NÄCHSTE KW ─────────────────────────── */}
-      <section id="kw-morgen" className="max-w-2xl mx-auto px-4 pb-10 scroll-mt-20">
+      <section id="kw-morgen" className="max-w-2xl mx-auto px-4 pb-10 scroll-mt-28">
         <h2 className="text-xl font-semibold mb-3">
           Welche Kalenderwoche haben wir morgen?
         </h2>
@@ -383,7 +374,7 @@ export default function Home() {
       </section>
 
       {/* ── Block B: getönter Hintergrund ─────────────────────── */}
-      <div className="bg-surface-secondary/30 py-2">
+      <div className="bg-surface-secondary/50 py-2">
 
       {/* ── 2. STATS GRID ───────────────────────────────────────── */}
       <section className="max-w-3xl mx-auto px-4 pb-10 fade-in-delay">
@@ -482,7 +473,7 @@ export default function Home() {
       <hr className="section-divider" />
 
       {/* ── 3c. HINTERGRÜNDE: Aktuelle KW ── Cluster 1 ─────────── */}
-      <section id="hintergruende" className="max-w-2xl mx-auto px-4 pb-14 scroll-mt-20">
+      <section id="hintergruende" className="max-w-2xl mx-auto px-4 pb-14 scroll-mt-28">
         <h2 className="text-2xl font-semibold mb-4">
           Hintergründe zu Aktuelle KW
         </h2>
@@ -545,7 +536,7 @@ export default function Home() {
       </section>
 
       {/* ── 3d. ALLTAGS-TIPPS: Aktuelle KW ── Cluster 1 ──────────── */}
-      <section id="alltag" className="max-w-2xl mx-auto px-4 pb-14 scroll-mt-20">
+      <section id="alltag" className="max-w-2xl mx-auto px-4 pb-14 scroll-mt-28">
         <h2 className="text-2xl font-semibold mb-4">
           So nutzt Du die aktuelle KW im Alltag
         </h2>
@@ -586,7 +577,7 @@ export default function Home() {
       </section>
 
       {/* ── 3d2. KALENDERWOCHEN IN DIGITALEN KALENDERN ─────────── */}
-      <section id="kalender-apps" className="max-w-2xl mx-auto px-4 pb-14 scroll-mt-20">
+      <section id="kalender-apps" className="max-w-2xl mx-auto px-4 pb-14 scroll-mt-28">
         <h2 className="text-2xl font-semibold mb-4">
           Kalenderwochen im Smartphone &amp; Outlook anzeigen
         </h2>
@@ -667,10 +658,10 @@ export default function Home() {
       <hr className="section-divider" />
 
       {/* ── Block D: getönter Hintergrund ─────────────────────── */}
-      <div className="bg-surface-secondary/30 py-2">
+      <div className="bg-surface-secondary/50 py-2">
 
       {/* ── 3e2. HÄUFIGE FEHLER BEI DER KW ────────────────────────── */}
-      <section id="kalender-fehler" className="max-w-2xl mx-auto px-4 pb-14 scroll-mt-20">
+      <section id="kalender-fehler" className="max-w-2xl mx-auto px-4 pb-14 scroll-mt-28">
         <h2 className="text-2xl font-semibold mb-4">
           Warum zeigt mein Kalender eine andere KW an?
         </h2>
@@ -884,7 +875,7 @@ export default function Home() {
       {/* ── 4. FAQ ──────────────────────────────────────────────
        * Cluster 3: welche KW haben wir – SEO-Text ✅ befüllt
        * ──────────────────────────────────────────────────────────── */}
-      <section id="faq" className="max-w-2xl mx-auto px-4 pb-16 scroll-mt-20">
+      <section id="faq" className="max-w-2xl mx-auto px-4 pb-16 scroll-mt-28">
         <h2 className="text-2xl font-semibold mb-2">
           Häufige Fragen zur Kalenderwoche
         </h2>
@@ -929,12 +920,12 @@ export default function Home() {
       <hr className="section-divider" />
 
       {/* ── Block F: getönter Hintergrund ─────────────────────── */}
-      <div className="bg-surface-secondary/30 py-2">
+      <div className="bg-surface-secondary/50 py-2">
 
       {/* ── 5. KW JAHRESÜBERSICHT ──────────────────────────────────
        * Cluster 2: Kalenderwochen Jahresübersicht – SEO-Text ✅ befüllt
        * ──────────────────────────────────────────────────────────── */}
-      <section id="alle-kw" className="max-w-4xl mx-auto px-4 pb-16 scroll-mt-20">
+      <section id="alle-kw" className="max-w-4xl mx-auto px-4 pb-16 scroll-mt-28">
         <div className="flex items-baseline justify-between mb-5">
           <h2 className="text-2xl font-semibold">
             Alle Kalenderwochen {kw.year}
