@@ -2,11 +2,10 @@ import Link from "next/link";
 import ThemeToggle from "./ThemeToggle";
 import MobileMenu from "./MobileMenu";
 import ActiveNavLink from "./ActiveNavLink";
-import ScrollProgress from "./ScrollProgress";
 
 export default function Header() {
   return (
-    <header className="sticky top-0 z-50 border-b border-border bg-surface/80 backdrop-blur-lg supports-[backdrop-filter]:bg-surface/60 relative">
+    <header className="sticky top-0 z-50 border-b border-border bg-surface/80 backdrop-blur-lg supports-[backdrop-filter]:bg-surface/60">
       <nav aria-label="Hauptnavigation" className="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between">
 
         {/* Wordmark – SEO-optimiert als Text, kein Bild */}
@@ -42,7 +41,6 @@ export default function Header() {
           <MobileMenu />
         </div>
       </nav>
-      <ScrollProgress />
     </header>
   );
 }
