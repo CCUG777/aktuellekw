@@ -59,10 +59,13 @@ export default function StickyTOC({ items }: { items: TOCItem[] }) {
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
-    const target = document.querySelector(href);
-    if (target) {
-      target.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
+    const target = document.querySelector(href) as HTMLElement | null;
+    if (!target) return;
+    // scrollIntoView ignoriert auf iOS Safari das CSS scroll-margin-top.
+    // Daher: manueller Offset = sticky Header (~56px) + sticky TOC (~48px) + 8px Puffer
+    const OFFSET = 112;
+    const y = target.getBoundingClientRect().top + window.scrollY - OFFSET;
+    window.scrollTo({ top: Math.max(0, y), behavior: "smooth" });
   };
 
   return (
