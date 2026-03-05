@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 
 interface TOCItem {
   href: string;
@@ -10,6 +10,8 @@ interface TOCItem {
 export default function StickyTOC({ items }: { items: TOCItem[] }) {
   const [activeId, setActiveId] = useState<string>("");
   const navRef = useRef<HTMLDivElement>(null);
+  // Sperrt Observer-Updates während user-initiiertem Smooth-Scroll
+  const isScrollingRef = useRef(false);
 
   useEffect(() => {
     const ids = items.map((i) => i.href.replace("#", ""));
@@ -17,7 +19,9 @@ export default function StickyTOC({ items }: { items: TOCItem[] }) {
 
     const observer = new IntersectionObserver(
       (entries) => {
-        // Track all currently visible sections
+        // Während eines Klick-Scrolls: Observer ignorieren
+        if (isScrollingRef.current) return;
+
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             visibleSet.add(entry.target.id);
@@ -25,7 +29,6 @@ export default function StickyTOC({ items }: { items: TOCItem[] }) {
             visibleSet.delete(entry.target.id);
           }
         });
-        // Pick the topmost visible section (in DOM/items order)
         const topmost = ids.find((id) => visibleSet.has(id));
         if (topmost) {
           setActiveId(topmost);
@@ -42,30 +45,50 @@ export default function StickyTOC({ items }: { items: TOCItem[] }) {
     return () => observer.disconnect();
   }, [items]);
 
-  // Auto-scroll active pill into view on mobile
+  // Pill horizontal zentrieren – NUR den TOC-Container scrollen, NIE die Seite
+  const scrollPillIntoView = useCallback((id: string) => {
+    const nav = navRef.current;
+    if (!nav) return;
+    const pill = nav.querySelector(`[data-toc-id="${id}"]`) as HTMLElement | null;
+    if (!pill) return;
+
+    const navRect = nav.getBoundingClientRect();
+    const pillRect = pill.getBoundingClientRect();
+    // Zentriere den Pill im sichtbaren Bereich des Containers
+    const scrollLeft =
+      pill.offsetLeft - nav.offsetWidth / 2 + pillRect.width / 2;
+    nav.scrollTo({ left: scrollLeft, behavior: "smooth" });
+  }, []);
+
+  // Wenn sich der Active-State durch normales Scrollen ändert → Pill zentrieren
   useEffect(() => {
-    if (!activeId || !navRef.current) return;
-    const activeEl = navRef.current.querySelector(
-      `[data-toc-id="${activeId}"]`
-    );
-    if (activeEl) {
-      activeEl.scrollIntoView({
-        behavior: "smooth",
-        block: "nearest",
-        inline: "center",
-      });
-    }
-  }, [activeId]);
+    if (!activeId) return;
+    scrollPillIntoView(activeId);
+  }, [activeId, scrollPillIntoView]);
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
     const target = document.querySelector(href) as HTMLElement | null;
     if (!target) return;
-    // scrollIntoView ignoriert auf iOS Safari das CSS scroll-margin-top.
-    // Daher: manueller Offset = sticky Header (~56px) + sticky TOC (~48px) + 8px Puffer
-    const OFFSET = 112;
+
+    const clickedId = href.replace("#", "");
+
+    // 1. Active-State sofort setzen (nicht auf Observer warten)
+    setActiveId(clickedId);
+    scrollPillIntoView(clickedId);
+
+    // 2. Observer sperren, damit er während des Scrolls nicht feuert
+    isScrollingRef.current = true;
+
+    // 3. Seite scrollen mit manuellem Offset
+    const OFFSET = 112; // Header ~56px + TOC ~48px + 8px Puffer
     const y = target.getBoundingClientRect().top + window.scrollY - OFFSET;
     window.scrollTo({ top: Math.max(0, y), behavior: "smooth" });
+
+    // 4. Observer nach Scroll-Animation wieder freigeben
+    setTimeout(() => {
+      isScrollingRef.current = false;
+    }, 800);
   };
 
   return (
