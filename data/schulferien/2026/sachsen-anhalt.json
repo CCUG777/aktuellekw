@@ -1,0 +1,51 @@
+{
+  "bundesland": "Sachsen-Anhalt",
+  "code": "ST",
+  "slug": "sachsen-anhalt",
+  "year": 2026,
+  "ferien": [
+    {
+      "name": "Winterferien",
+      "typeId": 3,
+      "starts_on": "2026-01-31",
+      "ends_on": "2026-02-06"
+    },
+    {
+      "name": "Osterferien",
+      "typeId": 4,
+      "starts_on": "2026-03-30",
+      "ends_on": "2026-04-04"
+    },
+    {
+      "name": "Pfingstferien",
+      "typeId": 31,
+      "starts_on": "2026-05-26",
+      "ends_on": "2026-05-29"
+    },
+    {
+      "name": "Himmelfahrt-/Pfingstferien",
+      "typeId": 32,
+      "starts_on": "2026-05-26",
+      "ends_on": "2026-05-29"
+    },
+    {
+      "name": "Sommerferien",
+      "typeId": 6,
+      "starts_on": "2026-07-04",
+      "ends_on": "2026-08-14"
+    },
+    {
+      "name": "Herbstferien",
+      "typeId": 1,
+      "starts_on": "2026-10-19",
+      "ends_on": "2026-10-30"
+    },
+    {
+      "name": "Weihnachtsferien",
+      "typeId": 2,
+      "starts_on": "2026-12-21",
+      "ends_on": "2027-01-02"
+    }
+  ],
+  "lastUpdated": "2026-03-06"
+}

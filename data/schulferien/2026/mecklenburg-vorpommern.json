@@ -1,0 +1,57 @@
+{
+  "bundesland": "Mecklenburg-Vorpommern",
+  "code": "MV",
+  "slug": "mecklenburg-vorpommern",
+  "year": 2026,
+  "ferien": [
+    {
+      "name": "Winterferien",
+      "typeId": 3,
+      "starts_on": "2026-02-09",
+      "ends_on": "2026-02-20"
+    },
+    {
+      "name": "Osterferien",
+      "typeId": 4,
+      "starts_on": "2026-03-30",
+      "ends_on": "2026-04-08"
+    },
+    {
+      "name": "Himmelfahrtsferien",
+      "typeId": 5,
+      "starts_on": "2026-05-15",
+      "ends_on": "2026-05-15"
+    },
+    {
+      "name": "Pfingstferien",
+      "typeId": 31,
+      "starts_on": "2026-05-22",
+      "ends_on": "2026-05-26"
+    },
+    {
+      "name": "Sommerferien",
+      "typeId": 6,
+      "starts_on": "2026-07-13",
+      "ends_on": "2026-08-22"
+    },
+    {
+      "name": "Herbstferien",
+      "typeId": 1,
+      "starts_on": "2026-10-19",
+      "ends_on": "2026-10-24"
+    },
+    {
+      "name": "Herbstferien",
+      "typeId": 1,
+      "starts_on": "2026-11-26",
+      "ends_on": "2026-11-27"
+    },
+    {
+      "name": "Weihnachtsferien",
+      "typeId": 2,
+      "starts_on": "2026-12-19",
+      "ends_on": "2027-01-02"
+    }
+  ],
+  "lastUpdated": "2026-03-06"
+}

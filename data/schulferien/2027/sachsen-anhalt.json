@@ -1,0 +1,51 @@
+{
+  "bundesland": "Sachsen-Anhalt",
+  "code": "ST",
+  "slug": "sachsen-anhalt",
+  "year": 2027,
+  "ferien": [
+    {
+      "name": "Winterferien",
+      "typeId": 3,
+      "starts_on": "2027-02-01",
+      "ends_on": "2027-02-06"
+    },
+    {
+      "name": "Osterferien",
+      "typeId": 4,
+      "starts_on": "2027-03-22",
+      "ends_on": "2027-03-27"
+    },
+    {
+      "name": "Himmelfahrtsferien",
+      "typeId": 5,
+      "starts_on": "2027-05-15",
+      "ends_on": "2027-05-22"
+    },
+    {
+      "name": "Himmelfahrt-/Pfingstferien",
+      "typeId": 32,
+      "starts_on": "2027-05-15",
+      "ends_on": "2027-05-22"
+    },
+    {
+      "name": "Sommerferien",
+      "typeId": 6,
+      "starts_on": "2027-07-10",
+      "ends_on": "2027-08-20"
+    },
+    {
+      "name": "Herbstferien",
+      "typeId": 1,
+      "starts_on": "2027-10-18",
+      "ends_on": "2027-10-23"
+    },
+    {
+      "name": "Weihnachtsferien",
+      "typeId": 2,
+      "starts_on": "2027-12-20",
+      "ends_on": "2027-12-31"
+    }
+  ],
+  "lastUpdated": "2026-03-06"
+}

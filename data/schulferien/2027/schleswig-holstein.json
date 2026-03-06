@@ -1,0 +1,39 @@
+{
+  "bundesland": "Schleswig-Holstein",
+  "code": "SH",
+  "slug": "schleswig-holstein",
+  "year": 2027,
+  "ferien": [
+    {
+      "name": "Osterferien",
+      "typeId": 4,
+      "starts_on": "2027-03-30",
+      "ends_on": "2027-04-10"
+    },
+    {
+      "name": "Himmelfahrtsferien",
+      "typeId": 5,
+      "starts_on": "2027-05-07",
+      "ends_on": "2027-05-07"
+    },
+    {
+      "name": "Sommerferien",
+      "typeId": 6,
+      "starts_on": "2027-07-03",
+      "ends_on": "2027-08-14"
+    },
+    {
+      "name": "Herbstferien",
+      "typeId": 1,
+      "starts_on": "2027-10-11",
+      "ends_on": "2027-10-23"
+    },
+    {
+      "name": "Weihnachtsferien",
+      "typeId": 2,
+      "starts_on": "2027-12-23",
+      "ends_on": "2028-01-08"
+    }
+  ],
+  "lastUpdated": "2026-03-06"
+}

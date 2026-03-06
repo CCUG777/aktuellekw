@@ -1,0 +1,45 @@
+{
+  "bundesland": "Nordrhein-Westfalen",
+  "code": "NW",
+  "slug": "nordrhein-westfalen",
+  "year": 2025,
+  "ferien": [
+    {
+      "name": "Osterferien",
+      "typeId": 4,
+      "starts_on": "2025-04-14",
+      "ends_on": "2025-04-26"
+    },
+    {
+      "name": "Pfingstferien",
+      "typeId": 31,
+      "starts_on": "2025-06-10",
+      "ends_on": "2025-06-10"
+    },
+    {
+      "name": "Sommerferien",
+      "typeId": 6,
+      "starts_on": "2025-07-14",
+      "ends_on": "2025-08-26"
+    },
+    {
+      "name": "Herbstferien",
+      "typeId": 1,
+      "starts_on": "2025-10-13",
+      "ends_on": "2025-10-25"
+    },
+    {
+      "name": "Weihnachtsferien",
+      "typeId": 2,
+      "starts_on": "2024-12-23",
+      "ends_on": "2025-01-06"
+    },
+    {
+      "name": "Weihnachtsferien",
+      "typeId": 2,
+      "starts_on": "2025-12-22",
+      "ends_on": "2026-01-06"
+    }
+  ],
+  "lastUpdated": "2026-03-06"
+}

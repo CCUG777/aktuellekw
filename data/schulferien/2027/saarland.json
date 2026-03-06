@@ -1,0 +1,39 @@
+{
+  "bundesland": "Saarland",
+  "code": "SL",
+  "slug": "saarland",
+  "year": 2027,
+  "ferien": [
+    {
+      "name": "Winterferien",
+      "typeId": 3,
+      "starts_on": "2027-02-08",
+      "ends_on": "2027-02-12"
+    },
+    {
+      "name": "Osterferien",
+      "typeId": 4,
+      "starts_on": "2027-03-30",
+      "ends_on": "2027-04-09"
+    },
+    {
+      "name": "Sommerferien",
+      "typeId": 6,
+      "starts_on": "2027-06-28",
+      "ends_on": "2027-08-06"
+    },
+    {
+      "name": "Herbstferien",
+      "typeId": 1,
+      "starts_on": "2027-10-04",
+      "ends_on": "2027-10-15"
+    },
+    {
+      "name": "Weihnachtsferien",
+      "typeId": 2,
+      "starts_on": "2027-12-20",
+      "ends_on": "2027-12-31"
+    }
+  ],
+  "lastUpdated": "2026-03-06"
+}

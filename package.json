@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "import:schulferien": "node scripts/import-schulferien-api.js",
+    "generate:all": "node scripts/import-schulferien-api.js"
   },
   "dependencies": {
     "next": "16.1.6",

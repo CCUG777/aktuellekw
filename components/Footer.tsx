@@ -44,6 +44,9 @@ export default function Footer() {
               <Link href="/wie-viele-wochen-hat-ein-jahr" className="text-sm text-text-secondary hover:text-text-primary transition-colors">
                 Wochen im Jahr
               </Link>
+              <Link href={`/schulferien/${year}`} className="text-sm text-text-secondary hover:text-text-primary transition-colors">
+                Schulferien {year}
+              </Link>
               <Link href="/kalenderwochen/2025" className="text-sm text-text-secondary hover:text-text-primary transition-colors">
                 Kalenderwochen 2025
               </Link>

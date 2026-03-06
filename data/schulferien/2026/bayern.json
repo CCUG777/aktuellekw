@@ -1,0 +1,45 @@
+{
+  "bundesland": "Bayern",
+  "code": "BY",
+  "slug": "bayern",
+  "year": 2026,
+  "ferien": [
+    {
+      "name": "Frühjahrsferien",
+      "typeId": 30,
+      "starts_on": "2026-02-16",
+      "ends_on": "2026-02-20"
+    },
+    {
+      "name": "Osterferien",
+      "typeId": 4,
+      "starts_on": "2026-03-30",
+      "ends_on": "2026-04-10"
+    },
+    {
+      "name": "Pfingstferien",
+      "typeId": 31,
+      "starts_on": "2026-05-26",
+      "ends_on": "2026-06-05"
+    },
+    {
+      "name": "Sommerferien",
+      "typeId": 6,
+      "starts_on": "2026-08-03",
+      "ends_on": "2026-09-14"
+    },
+    {
+      "name": "Herbstferien",
+      "typeId": 1,
+      "starts_on": "2026-11-02",
+      "ends_on": "2026-11-06"
+    },
+    {
+      "name": "Weihnachtsferien",
+      "typeId": 2,
+      "starts_on": "2026-12-24",
+      "ends_on": "2027-01-08"
+    }
+  ],
+  "lastUpdated": "2026-03-06"
+}

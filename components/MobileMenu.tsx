@@ -15,6 +15,7 @@ const navLinks = [
 const moreLinks = [
   { href: "/welche-kalenderwoche-haben-wir", label: "Welche KW haben wir?" },
   { href: "/wie-viele-wochen-hat-ein-jahr", label: "Wochen im Jahr" },
+  { href: `/schulferien/${new Date().getFullYear()}`, label: `Schulferien ${new Date().getFullYear()}` },
 ];
 
 export default function MobileMenu() {

@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { getAllKWsForYear, getCurrentKW, getWeeksInYear } from "@/lib/kw";
+import { BUNDESLAENDER, CONTENT_YEARS } from "@/lib/constants";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
@@ -112,7 +113,34 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }));
   });
 
-  return [...corePages, ...yearPages, ...kwPages];
+  // ── Schulferien Hub-Seiten (/schulferien-[jahr]) ─────────
+  const schulferienHubPages: MetadataRoute.Sitemap = CONTENT_YEARS.map(
+    (year) => ({
+      url: `https://aktuellekw.de/schulferien/${year}`,
+      lastModified: year === currentYear ? now : new Date(`${year}-01-01`),
+      changeFrequency: "yearly" as const,
+      priority: year === currentYear ? 0.85 : 0.6,
+    })
+  );
+
+  // ── Schulferien Bundesland-Seiten (/schulferien-[jahr]/[bl]) ─
+  const schulferienBlPages: MetadataRoute.Sitemap = CONTENT_YEARS.flatMap(
+    (year) =>
+      BUNDESLAENDER.map((bl) => ({
+        url: `https://aktuellekw.de/schulferien/${year}/${bl.slug}`,
+        lastModified: year === currentYear ? now : new Date(`${year}-01-01`),
+        changeFrequency: "yearly" as const,
+        priority: year === currentYear ? 0.7 : 0.4,
+      }))
+  );
+
+  return [
+    ...corePages,
+    ...yearPages,
+    ...kwPages,
+    ...schulferienHubPages,
+    ...schulferienBlPages,
+  ];
 }
 
 /*

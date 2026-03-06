@@ -1,0 +1,39 @@
+{
+  "bundesland": "Hessen",
+  "code": "HE",
+  "slug": "hessen",
+  "year": 2025,
+  "ferien": [
+    {
+      "name": "Osterferien",
+      "typeId": 4,
+      "starts_on": "2025-04-07",
+      "ends_on": "2025-04-21"
+    },
+    {
+      "name": "Sommerferien",
+      "typeId": 6,
+      "starts_on": "2025-07-07",
+      "ends_on": "2025-08-15"
+    },
+    {
+      "name": "Herbstferien",
+      "typeId": 1,
+      "starts_on": "2025-10-06",
+      "ends_on": "2025-10-18"
+    },
+    {
+      "name": "Weihnachtsferien",
+      "typeId": 2,
+      "starts_on": "2024-12-23",
+      "ends_on": "2025-01-10"
+    },
+    {
+      "name": "Weihnachtsferien",
+      "typeId": 2,
+      "starts_on": "2025-12-22",
+      "ends_on": "2026-01-10"
+    }
+  ],
+  "lastUpdated": "2026-03-06"
+}

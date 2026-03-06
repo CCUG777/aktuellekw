@@ -1,0 +1,51 @@
+{
+  "bundesland": "Baden-Württemberg",
+  "code": "BW",
+  "slug": "baden-wuerttemberg",
+  "year": 2026,
+  "ferien": [
+    {
+      "name": "Osterferien",
+      "typeId": 4,
+      "starts_on": "2026-03-30",
+      "ends_on": "2026-04-11"
+    },
+    {
+      "name": "Pfingstferien",
+      "typeId": 31,
+      "starts_on": "2026-05-26",
+      "ends_on": "2026-06-05"
+    },
+    {
+      "name": "Himmelfahrt-/Pfingstferien",
+      "typeId": 32,
+      "starts_on": "2026-05-26",
+      "ends_on": "2026-06-05"
+    },
+    {
+      "name": "Sommerferien",
+      "typeId": 6,
+      "starts_on": "2026-07-30",
+      "ends_on": "2026-09-12"
+    },
+    {
+      "name": "Herbstferien",
+      "typeId": 1,
+      "starts_on": "2026-10-26",
+      "ends_on": "2026-10-30"
+    },
+    {
+      "name": "Herbstferien",
+      "typeId": 1,
+      "starts_on": "2026-10-31",
+      "ends_on": "2026-10-31"
+    },
+    {
+      "name": "Weihnachtsferien",
+      "typeId": 2,
+      "starts_on": "2026-12-23",
+      "ends_on": "2027-01-09"
+    }
+  ],
+  "lastUpdated": "2026-03-06"
+}

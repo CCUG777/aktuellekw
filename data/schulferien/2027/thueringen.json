@@ -1,0 +1,45 @@
+{
+  "bundesland": "Thüringen",
+  "code": "TH",
+  "slug": "thueringen",
+  "year": 2027,
+  "ferien": [
+    {
+      "name": "Winterferien",
+      "typeId": 3,
+      "starts_on": "2027-02-01",
+      "ends_on": "2027-02-06"
+    },
+    {
+      "name": "Osterferien",
+      "typeId": 4,
+      "starts_on": "2027-03-22",
+      "ends_on": "2027-04-03"
+    },
+    {
+      "name": "Himmelfahrtsferien",
+      "typeId": 5,
+      "starts_on": "2027-05-07",
+      "ends_on": "2027-05-07"
+    },
+    {
+      "name": "Sommerferien",
+      "typeId": 6,
+      "starts_on": "2027-07-10",
+      "ends_on": "2027-08-20"
+    },
+    {
+      "name": "Herbstferien",
+      "typeId": 1,
+      "starts_on": "2027-10-09",
+      "ends_on": "2027-10-23"
+    },
+    {
+      "name": "Weihnachtsferien",
+      "typeId": 2,
+      "starts_on": "2027-12-23",
+      "ends_on": "2027-12-31"
+    }
+  ],
+  "lastUpdated": "2026-03-06"
+}

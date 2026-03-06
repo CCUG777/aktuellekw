@@ -1,0 +1,45 @@
+{
+  "bundesland": "Hamburg",
+  "code": "HH",
+  "slug": "hamburg",
+  "year": 2026,
+  "ferien": [
+    {
+      "name": "Winterferien",
+      "typeId": 3,
+      "starts_on": "2026-01-30",
+      "ends_on": "2026-01-30"
+    },
+    {
+      "name": "Frühjahrsferien",
+      "typeId": 30,
+      "starts_on": "2026-03-02",
+      "ends_on": "2026-03-13"
+    },
+    {
+      "name": "Himmelfahrtsferien",
+      "typeId": 5,
+      "starts_on": "2026-05-11",
+      "ends_on": "2026-05-15"
+    },
+    {
+      "name": "Sommerferien",
+      "typeId": 6,
+      "starts_on": "2026-07-09",
+      "ends_on": "2026-08-19"
+    },
+    {
+      "name": "Herbstferien",
+      "typeId": 1,
+      "starts_on": "2026-10-19",
+      "ends_on": "2026-10-30"
+    },
+    {
+      "name": "Weihnachtsferien",
+      "typeId": 2,
+      "starts_on": "2026-12-21",
+      "ends_on": "2027-01-01"
+    }
+  ],
+  "lastUpdated": "2026-03-06"
+}

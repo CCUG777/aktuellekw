@@ -1,0 +1,33 @@
+{
+  "bundesland": "Hessen",
+  "code": "HE",
+  "slug": "hessen",
+  "year": 2027,
+  "ferien": [
+    {
+      "name": "Osterferien",
+      "typeId": 4,
+      "starts_on": "2027-03-22",
+      "ends_on": "2027-04-02"
+    },
+    {
+      "name": "Sommerferien",
+      "typeId": 6,
+      "starts_on": "2027-06-28",
+      "ends_on": "2027-08-06"
+    },
+    {
+      "name": "Herbstferien",
+      "typeId": 1,
+      "starts_on": "2027-10-04",
+      "ends_on": "2027-10-16"
+    },
+    {
+      "name": "Weihnachtsferien",
+      "typeId": 2,
+      "starts_on": "2027-12-23",
+      "ends_on": "2028-01-11"
+    }
+  ],
+  "lastUpdated": "2026-03-06"
+}

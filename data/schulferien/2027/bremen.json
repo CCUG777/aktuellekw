@@ -1,0 +1,57 @@
+{
+  "bundesland": "Bremen",
+  "code": "HB",
+  "slug": "bremen",
+  "year": 2027,
+  "ferien": [
+    {
+      "name": "Winterferien",
+      "typeId": 3,
+      "starts_on": "2027-02-01",
+      "ends_on": "2027-02-02"
+    },
+    {
+      "name": "Osterferien",
+      "typeId": 4,
+      "starts_on": "2027-03-22",
+      "ends_on": "2027-04-03"
+    },
+    {
+      "name": "Himmelfahrtsferien",
+      "typeId": 5,
+      "starts_on": "2027-05-07",
+      "ends_on": "2027-05-07"
+    },
+    {
+      "name": "Himmelfahrtsferien",
+      "typeId": 5,
+      "starts_on": "2027-05-18",
+      "ends_on": "2027-05-18"
+    },
+    {
+      "name": "Pfingstferien",
+      "typeId": 31,
+      "starts_on": "2027-05-18",
+      "ends_on": "2027-05-18"
+    },
+    {
+      "name": "Sommerferien",
+      "typeId": 6,
+      "starts_on": "2027-07-08",
+      "ends_on": "2027-08-18"
+    },
+    {
+      "name": "Herbstferien",
+      "typeId": 1,
+      "starts_on": "2027-10-18",
+      "ends_on": "2027-10-30"
+    },
+    {
+      "name": "Weihnachtsferien",
+      "typeId": 2,
+      "starts_on": "2027-12-23",
+      "ends_on": "2028-01-08"
+    }
+  ],
+  "lastUpdated": "2026-03-06"
+}
