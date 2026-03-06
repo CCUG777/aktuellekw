@@ -353,7 +353,7 @@ export default function Home() {
           </table>
         </div>
         <p className="text-text-secondary text-xs mt-2">
-          Tipp: Schreib Kalenderwochen immer als{" "}
+          Tipp: Schreib <a href={`/kalenderwochen/${kw.year}`} className="text-accent hover:underline">Kalenderwochen</a> immer als{" "}
           <strong className="text-text-primary">„KW&nbsp;{kw.weekNumber}&nbsp;/&nbsp;{kw.year}"</strong>{" "}
           – so vermeidest Du Verwechslungen am Jahreswechsel.
         </p>
@@ -513,7 +513,7 @@ export default function Home() {
               KW ist die Abkürzung für{" "}
               <strong className="text-text-primary">Kalenderwoche</strong>. Du
               nutzt sie, wenn Termine schnell und eindeutig stehen sollen –
-              etwa bei Deadlines, Lieferterminen oder in der Urlaubsplanung.
+              etwa bei Deadlines, Lieferterminen oder in der <a href="/schulferien/2026" className="text-accent hover:underline">Urlaubsplanung</a>.
               Für klare Absprachen schreib immer das Jahr dazu, z.&nbsp;B.{" "}
               <strong className="text-text-primary">„KW&nbsp;{kw.weekNumber}/{kw.year}"</strong>.
             </span>
@@ -832,7 +832,7 @@ export default function Home() {
         <p className="text-text-secondary text-sm leading-relaxed">
           Die Zählung der Wochen im Jahr folgt dem ISO-8601-Standard. Ein normales
           Kalenderjahr hat 52&nbsp;Wochen, in Ausnahmefällen 53. Das aktuelle
-          Jahr {kw.year} hat insgesamt {weeksInYear}&nbsp;Kalenderwochen.
+          Jahr {kw.year} hat insgesamt {weeksInYear}&nbsp;<a href="/kalenderwoche" className="text-accent hover:underline">Kalenderwochen</a>.
         </p>
         <p className="text-text-secondary text-sm leading-relaxed mt-3">
           Die Frage „<strong className="text-text-primary">Wieviele Wochen hat ein
