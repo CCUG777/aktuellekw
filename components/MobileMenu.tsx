@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -20,7 +21,13 @@ const moreLinks = [
 
 export default function MobileMenu() {
   const [open, setOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const pathname = usePathname();
+
+  // Ensure portal only renders on client
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Close on route change
   useEffect(() => {
@@ -39,39 +46,12 @@ export default function MobileMenu() {
     };
   }, [open]);
 
-  return (
+  const drawer = (
     <>
-      {/* Hamburger Button – only visible on small screens */}
-      <button
-        onClick={() => setOpen(true)}
-        aria-label="Menü öffnen"
-        className="
-          md:hidden w-8 h-8 rounded-full flex items-center justify-center
-          text-text-secondary hover:text-text-primary
-          transition-colors
-        "
-      >
-        <svg
-          width="20"
-          height="20"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          aria-hidden
-        >
-          <line x1="3" y1="6" x2="21" y2="6" />
-          <line x1="3" y1="12" x2="21" y2="12" />
-          <line x1="3" y1="18" x2="21" y2="18" />
-        </svg>
-      </button>
-
       {/* Overlay */}
       <div
         className={`
-          fixed inset-0 z-50 bg-black/50 backdrop-blur-sm
+          fixed inset-0 z-[100] bg-black/60 backdrop-blur-md
           transition-opacity duration-300
           md:hidden
           ${open ? "opacity-100" : "opacity-0 pointer-events-none"}
@@ -84,9 +64,9 @@ export default function MobileMenu() {
       <nav
         aria-label="Mobile Navigation"
         className={`
-          fixed top-0 right-0 z-50 h-full w-72
+          fixed inset-y-0 right-0 z-[101] w-72
           bg-surface border-l border-border
-          shadow-2xl
+          shadow-2xl overflow-y-auto
           transition-transform duration-300 ease-out
           md:hidden
           ${open ? "translate-x-0" : "translate-x-full"}
@@ -173,6 +153,41 @@ export default function MobileMenu() {
           })}
         </div>
       </nav>
+    </>
+  );
+
+  return (
+    <>
+      {/* Hamburger Button – only visible on small screens */}
+      <button
+        onClick={() => setOpen(true)}
+        aria-label="Menü öffnen"
+        className="
+          md:hidden w-8 h-8 rounded-full flex items-center justify-center
+          text-text-secondary hover:text-text-primary
+          transition-colors
+        "
+      >
+        <svg
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          aria-hidden
+        >
+          <line x1="3" y1="6" x2="21" y2="6" />
+          <line x1="3" y1="12" x2="21" y2="12" />
+          <line x1="3" y1="18" x2="21" y2="18" />
+        </svg>
+      </button>
+
+      {/* Portal: Overlay + Drawer rendern außerhalb des Headers,
+          damit backdrop-filter des Headers den fixed-Drawer nicht einschränkt */}
+      {mounted && createPortal(drawer, document.body)}
     </>
   );
 }
