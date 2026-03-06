@@ -85,6 +85,8 @@ export default async function SchulferienBundeslandPage({
 
   const prevYear = year - 1;
   const nextYear = year + 1;
+  const hasPrev = CONTENT_YEARS.includes(prevYear);
+  const hasNext = CONTENT_YEARS.includes(nextYear);
 
   const TAGE = ["So", "Mo", "Di", "Mi", "Do", "Fr", "Sa"];
 
@@ -197,19 +199,31 @@ export default async function SchulferienBundeslandPage({
 
           {/* Jahr-Navigation */}
           <div className="flex items-center justify-center gap-4 mt-5">
-            <Link
-              href={`/schulferien/${prevYear}/${slug}`}
-              className="inline-flex items-center gap-1.5 rounded-full border border-border bg-surface-secondary px-4 py-2 text-sm font-medium text-text-secondary hover:text-accent hover:border-accent transition-all"
-            >
-              ← {prevYear}
-            </Link>
+            {hasPrev ? (
+              <Link
+                href={`/schulferien/${prevYear}/${slug}`}
+                className="inline-flex items-center gap-1.5 rounded-full border border-border bg-surface-secondary px-4 py-2 text-sm font-medium text-text-secondary hover:text-accent hover:border-accent transition-all"
+              >
+                ← {prevYear}
+              </Link>
+            ) : (
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-border/40 bg-surface-secondary/40 px-4 py-2 text-sm font-medium text-text-secondary/40 cursor-not-allowed">
+                ← {prevYear}
+              </span>
+            )}
             <span className="text-sm font-semibold text-accent">{year}</span>
-            <Link
-              href={`/schulferien/${nextYear}/${slug}`}
-              className="inline-flex items-center gap-1.5 rounded-full border border-border bg-surface-secondary px-4 py-2 text-sm font-medium text-text-secondary hover:text-accent hover:border-accent transition-all"
-            >
-              {nextYear} →
-            </Link>
+            {hasNext ? (
+              <Link
+                href={`/schulferien/${nextYear}/${slug}`}
+                className="inline-flex items-center gap-1.5 rounded-full border border-border bg-surface-secondary px-4 py-2 text-sm font-medium text-text-secondary hover:text-accent hover:border-accent transition-all"
+              >
+                {nextYear} →
+              </Link>
+            ) : (
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-border/40 bg-surface-secondary/40 px-4 py-2 text-sm font-medium text-text-secondary/40 cursor-not-allowed">
+                {nextYear} →
+              </span>
+            )}
           </div>
         </section>
 

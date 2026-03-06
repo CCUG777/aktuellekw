@@ -68,6 +68,8 @@ export default async function SchulferienJahrPage({
 
   const prevYear = year - 1;
   const nextYear = year + 1;
+  const hasPrev = CONTENT_YEARS.includes(prevYear);
+  const hasNext = CONTENT_YEARS.includes(nextYear);
 
   return (
     <>
@@ -136,19 +138,31 @@ export default async function SchulferienJahrPage({
 
           {/* Jahr-Navigation */}
           <div className="flex items-center justify-center gap-4 mt-6">
-            <Link
-              href={`/schulferien/${prevYear}`}
-              className="inline-flex items-center gap-1.5 rounded-full border border-border bg-surface-secondary px-4 py-2 text-sm font-medium text-text-secondary hover:text-accent hover:border-accent transition-all"
-            >
-              ← {prevYear}
-            </Link>
+            {hasPrev ? (
+              <Link
+                href={`/schulferien/${prevYear}`}
+                className="inline-flex items-center gap-1.5 rounded-full border border-border bg-surface-secondary px-4 py-2 text-sm font-medium text-text-secondary hover:text-accent hover:border-accent transition-all"
+              >
+                ← {prevYear}
+              </Link>
+            ) : (
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-border/40 bg-surface-secondary/40 px-4 py-2 text-sm font-medium text-text-secondary/40 cursor-not-allowed">
+                ← {prevYear}
+              </span>
+            )}
             <span className="text-sm font-semibold text-accent">{year}</span>
-            <Link
-              href={`/schulferien/${nextYear}`}
-              className="inline-flex items-center gap-1.5 rounded-full border border-border bg-surface-secondary px-4 py-2 text-sm font-medium text-text-secondary hover:text-accent hover:border-accent transition-all"
-            >
-              {nextYear} →
-            </Link>
+            {hasNext ? (
+              <Link
+                href={`/schulferien/${nextYear}`}
+                className="inline-flex items-center gap-1.5 rounded-full border border-border bg-surface-secondary px-4 py-2 text-sm font-medium text-text-secondary hover:text-accent hover:border-accent transition-all"
+              >
+                {nextYear} →
+              </Link>
+            ) : (
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-border/40 bg-surface-secondary/40 px-4 py-2 text-sm font-medium text-text-secondary/40 cursor-not-allowed">
+                {nextYear} →
+              </span>
+            )}
           </div>
         </section>
 
@@ -290,7 +304,7 @@ export default async function SchulferienJahrPage({
               <a
                 href="https://www.mehr-schulferien.de"
                 target="_blank"
-                rel="noopener noreferrer"
+                rel="noopener noreferrer nofollow"
                 className="text-accent hover:underline"
               >
                 mehr-schulferien.de
