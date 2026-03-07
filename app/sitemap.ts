@@ -58,6 +58,27 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "yearly",
       priority: 0.8,
     },
+    // Cluster 4: Woche Jahr
+    {
+      url: "https://aktuellekw.de/woche-jahr",
+      lastModified: now,
+      changeFrequency: "daily",
+      priority: 0.75,
+    },
+    // Cluster 2+6: Kalender mit Wochen
+    {
+      url: "https://aktuellekw.de/kalender-mit-wochen",
+      lastModified: now,
+      changeFrequency: "yearly",
+      priority: 0.75,
+    },
+    // Cluster 6: Kalender Wochenübersicht
+    {
+      url: "https://aktuellekw.de/kalender-wochenuebersicht",
+      lastModified: now,
+      changeFrequency: "yearly",
+      priority: 0.75,
+    },
     // Rechtliches
     {
       url: "https://aktuellekw.de/impressum",

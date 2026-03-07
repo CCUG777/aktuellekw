@@ -26,6 +26,15 @@ export default function Footer() {
               <Link href="/kalenderwochen-uebersicht" className="text-sm text-text-secondary hover:text-text-primary transition-colors">
                 KW-Übersicht
               </Link>
+              <Link href="/kalender-mit-wochen" className="text-sm text-text-secondary hover:text-text-primary transition-colors">
+                Kalender mit Wochen
+              </Link>
+              <Link href="/kalender-wochenuebersicht" className="text-sm text-text-secondary hover:text-text-primary transition-colors">
+                Wochenübersicht
+              </Link>
+              <Link href="/woche-jahr" className="text-sm text-text-secondary hover:text-text-primary transition-colors">
+                Woche im Jahr
+              </Link>
             </nav>
           </div>
 
