@@ -79,6 +79,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "yearly",
       priority: 0.75,
     },
+    // Feiertage Deutschland
+    {
+      url: "https://aktuellekw.de/feiertage",
+      lastModified: now,
+      changeFrequency: "daily",
+      priority: 0.85,
+    },
     // Rechtliches
     {
       url: "https://aktuellekw.de/impressum",
