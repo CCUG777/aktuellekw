@@ -37,7 +37,7 @@ export async function generateMetadata({
   const bl = getBundeslandBySlug(slug);
   if (!bl) return {};
 
-  const title = `Schulferien ${bl.name} ${year} – Alle Termine & Ferienkalender`;
+  const title = `Schulferien ${bl.name} ${year}`;
   const description = `Schulferien ${year} in ${bl.name}: Alle Ferientermine von Winterferien bis Weihnachtsferien. Osterferien, Sommerferien, Herbstferien ${bl.name} ${year} im Überblick.`;
   const url = `https://aktuellekw.de/schulferien/${year}/${slug}`;
 

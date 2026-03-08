@@ -38,7 +38,7 @@ export async function generateMetadata({
   if (!year) return { title: "Jahr nicht gefunden" };
 
   const weeksInYear = getWeeksInYear(year);
-  const title = `Kalenderwochen ${year} – Alle ${weeksInYear} KW im Überblick`;
+  const title = `Kalenderwochen ${year} – Alle KW im Überblick`;
   const description = `Alle Kalenderwochen ${year} auf einen Blick: KW 1 bis KW ${weeksInYear} mit Start- und Enddatum. Jahreskalender ${year} nach ISO 8601.`;
   return {
     title,

@@ -9,7 +9,7 @@ export const revalidate = 3600;
 
 export async function generateMetadata(): Promise<Metadata> {
   const kw = getCurrentKW();
-  const ogTitle = `Wie viele Wochen hat ein Jahr? – Einfach erklärt (${kw.year - 1} & ${kw.year})`;
+  const ogTitle = `Wie viele Wochen hat ein Jahr? – 52 oder 53`;
   const ogDescription = `Wie viele Wochen hat ein Jahr? Erfahre alles über Gemeinjahre mit 52 Wochen und Schaltjahre mit 53 Wochen nach ISO 8601. Inklusive Tabelle für ${kw.year}.`;
   return {
     title: ogTitle,

@@ -14,7 +14,7 @@ export const revalidate = 3600;
 export async function generateMetadata(): Promise<Metadata> {
   const kw = getCurrentKW();
   const ogTitle =
-    "Kalender mit Wochen: aktuelle KW + Tabellen (ISO 8601)";
+    "Kalender mit Wochen: aktuelle KW + Tabellen";
   const ogDescription = `Kalender mit Wochen: aktuelle Kalenderwoche sofort sehen + KW-Tabellen (z.\u00a0B. KW\u00a03/25/26). Auswahlhilfe Print/PDF/Excel/App & Anleitungen iOS/Android/Outlook.`;
   return {
     title: ogTitle,

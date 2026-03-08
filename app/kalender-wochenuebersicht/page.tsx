@@ -11,7 +11,7 @@ export const revalidate = 3600;
 export async function generateMetadata(): Promise<Metadata> {
   const kw = getCurrentKW();
   const ogTitle =
-    "Kalender Wochenübersicht: aktuelle KW & Layout wählen";
+    "Kalender Wochenübersicht – aktuelle KW";
   const ogDescription = `Kalender Wochenübersicht: aktuelle KW ${kw.weekNumber} sofort finden, Anzeige-Optionen prüfen und das passende Layout wählen (Uhrzeit, To-dos, Team). DIN-A4-PDF & ISO-8601.`;
   return {
     title: ogTitle,

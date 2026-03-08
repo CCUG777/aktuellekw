@@ -19,7 +19,7 @@ export const revalidate = 3600;
 
 export async function generateMetadata(): Promise<Metadata> {
   const kw = getCurrentKW();
-  const ogTitle = `Aktuelle KW – Welche Kalenderwoche ist heute?`;
+  const ogTitle = `Aktuelle KW – Welche Kalenderwoche heute?`;
   const ogDescription = `KW aktuell: Heute ist KW ${kw.weekNumber} ${kw.year} (${formatDateDE(kw.startDate)}–${formatDateDE(kw.endDate)}). Aktuelle KW nach ISO 8601.`;
   return {
     title: ogTitle,

@@ -27,7 +27,7 @@ export async function generateMetadata({
   const { jahr } = await params;
   const year = parseInt(jahr, 10);
 
-  const title = `Schulferien ${year} – Alle Bundesländer im Überblick`;
+  const title = `Schulferien ${year} – Alle Bundesländer`;
   const description = `Schulferien ${year} für alle 16 Bundesländer: Termine, Dauer und Ferienkalender. Osterferien, Sommerferien, Herbstferien & Weihnachtsferien ${year}.`;
   const url = `https://aktuellekw.de/schulferien/${year}`;
 

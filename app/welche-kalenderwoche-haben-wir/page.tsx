@@ -11,7 +11,7 @@ export const revalidate = 3600;
 
 export async function generateMetadata(): Promise<Metadata> {
   const kw = getCurrentKW();
-  const ogTitle = "Welche Kalenderwoche haben wir? – KW heute schnell finden";
+  const ogTitle = "Welche Kalenderwoche haben wir? – KW heute";
   const ogDescription = `Du möchtest wissen: Welche Kalenderwoche haben wir heute? Hier findest Du die Antwort sofort – aktuell KW ${kw.weekNumber} ${kw.year}, inklusive Datum, ISO-Standard und praktischen Excel-Tipps.`;
   return {
     title: ogTitle,

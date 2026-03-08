@@ -13,7 +13,7 @@ export const revalidate = 3600;
 
 export async function generateMetadata(): Promise<Metadata> {
   const kw = getCurrentKW();
-  const ogTitle = `Woche Jahr: Welche Woche im Jahr ist heute? [${kw.year}]`;
+  const ogTitle = `Woche Jahr: Welche Woche haben wir heute?`;
   const ogDescription = `Welche Woche im Jahr ist heute? Aktuelle KW ${kw.weekNumber} sofort finden + KW-Tabelle ${kw.year} + Rechner. ISO 8601 einfach erklärt – 52 oder 53 Wochen?`;
   return {
     title: ogTitle,

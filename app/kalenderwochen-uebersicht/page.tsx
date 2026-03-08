@@ -12,7 +12,7 @@ export const revalidate = 3600;
 export async function generateMetadata(): Promise<Metadata> {
   const kw = getCurrentKW();
   const weeksInYear = getWeeksInYear(kw.year);
-  const ogTitle = `Kalenderwochen ${kw.year} – Alle KW auf einen Blick`;
+  const ogTitle = `Kalenderwochen ${kw.year} – Alle KW im Überblick`;
   const ogDescription = `Kalender mit Wochenübersicht: Alle ${weeksInYear} Kalenderwochen ${kw.year} im Überblick. KW 1 bis KW ${weeksInYear} mit Start- und Enddatum nach ISO 8601.`;
   return {
     title: ogTitle,
