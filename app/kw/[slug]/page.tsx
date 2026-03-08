@@ -157,12 +157,17 @@ export default async function KWDetailPage({
     },
     {
       "@context": "https://schema.org",
-      "@type": "Event",
+      "@type": "WebPage",
       name: `Kalenderwoche ${kwInfo.weekNumber} ${kwInfo.year}`,
-      startDate: kwInfo.startDate.toISOString().split("T")[0],
-      endDate: kwInfo.endDate.toISOString().split("T")[0],
       description: `KW ${kwInfo.weekNumber} ${kwInfo.year} nach ISO 8601: ${formatDateDE(kwInfo.startDate)} bis ${formatDateDE(kwInfo.endDate)}.`,
       url: `https://aktuellekw.de/kw/${kwInfo.weekNumber}-${kwInfo.year}`,
+      inLanguage: "de-DE",
+      isPartOf: {
+        "@type": "WebSite",
+        name: "aktuellekw.de",
+        url: "https://aktuellekw.de",
+      },
+      temporalCoverage: `${kwInfo.startDate.toISOString().split("T")[0]}/${kwInfo.endDate.toISOString().split("T")[0]}`,
       speakable: {
         "@type": "SpeakableSpecification",
         cssSelector: ["h1", "h2"],
@@ -386,7 +391,7 @@ export default async function KWDetailPage({
  * [x] H2 #1: „Wochentage KW X YYYY"
  * [x] H2 #2: „Details zu KW X YYYY"
  * [x] Schema.org: BreadcrumbList (3 Ebenen: Startseite → Kalenderwochen → KW X)
- * [x] Schema.org: Event (Wochenzeitraum mit startDate / endDate)
+ * [x] Schema.org: WebPage (mit temporalCoverage für Wochenzeitraum, isPartOf WebSite)
  * [x] WeekdayTable: alle 7 Tage Mo–So mit Datum + Heute-Highlight
  * [x] Infokarte: Beginn, Ende, KW-Nummer, Gesamtwochen, ISO-Standard
  * [x] Prev/Next Navigation: /kw/[prev]-[year] ↔ /kw/[next]-[year]
