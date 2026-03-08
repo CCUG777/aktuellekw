@@ -29,6 +29,7 @@ export default function Header() {
         <div className="hidden md:flex items-center gap-5 text-sm text-text-secondary">
           <ActiveNavLink href="/" label="Startseite" />
           <ActiveNavLink href="/kalenderwoche" label="Kalenderwochen" />
+          <ActiveNavLink href="/feiertage" label="Feiertage" />
           <ActiveNavLink href="/schulferien/2026" label="Schulferien 2026" />
           <ActiveNavLink href="/faq" label="FAQ" />
           <ThemeToggle />
