@@ -101,6 +101,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ];
 
+  // ── Feiertage Jahresseiten (/feiertage/[year]) ──────────────
+  const feiertageYearPages: MetadataRoute.Sitemap = CONTENT_YEARS.map(
+    (year) => ({
+      url: `https://aktuellekw.de/feiertage/${year}`,
+      lastModified: year === currentYear ? now : new Date(`${year}-01-01`),
+      changeFrequency: year === currentYear ? ("daily" as const) : ("yearly" as const),
+      priority: year === currentYear ? 0.85 : 0.6,
+    })
+  );
+
   // ── Cluster 2: Year overview pages (/kalenderwochen/[year]) ───
   const yearPages: MetadataRoute.Sitemap = [
     currentYear - 1,
@@ -164,6 +174,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return [
     ...corePages,
+    ...feiertageYearPages,
     ...yearPages,
     ...kwPages,
     ...schulferienHubPages,

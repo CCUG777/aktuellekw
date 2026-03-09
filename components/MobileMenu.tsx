@@ -14,7 +14,7 @@ const navLinks = [
 ];
 
 const moreLinks = [
-  { href: "/feiertage", label: "Feiertage Deutschland" },
+  { href: "/feiertage/2026", label: "Feiertage 2026" },
   { href: "/welche-kalenderwoche-haben-wir", label: "Welche KW haben wir?" },
   { href: "/wie-viele-wochen-hat-ein-jahr", label: "Wochen im Jahr" },
   { href: `/schulferien/${new Date().getFullYear()}`, label: `Schulferien ${new Date().getFullYear()}` },
