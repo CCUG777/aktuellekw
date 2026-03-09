@@ -40,8 +40,8 @@ export async function generateMetadata({
   const nationwide = holidays.filter((h) => h.isNationwide).length;
   const regional = holidays.filter((h) => !h.isNationwide).length;
 
-  const title = `Feiertage ${year} Deutschland – Alle ${nationwide + regional} gesetzlichen Feiertage`;
-  const description = `Gesetzliche Feiertage ${year} in Deutschland: ${nationwide} bundesweite + ${regional} regionale Feiertage. Datum, Wochentag, KW & Bundesland. Br\u00fcckentage ${year} optimal nutzen.`;
+  const title = `Feiertage ${year} Deutschland – Alle ${nationwide + regional} Feiertage`;
+  const description = `Gesetzliche Feiertage ${year} in Deutschland: ${nationwide} bundesweite + ${regional} regionale Feiertage. Datum, KW & Bundesland. Br\u00fcckentage ${year} clever planen.`;
   const url = `https://aktuellekw.de/feiertage/${year}`;
 
   return {
