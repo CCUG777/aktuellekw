@@ -73,8 +73,8 @@ export default function MobileMenu() {
           ${open ? "translate-x-0" : "translate-x-full"}
         `}
       >
-        {/* Close button */}
-        <div className="flex items-center justify-between px-5 py-4 border-b border-border">
+        {/* Header */}
+        <div className="flex items-center justify-between px-5 py-3 border-b border-border/40">
           <span className="text-sm font-semibold text-text-primary">Navigation</span>
           <button
             onClick={() => setOpen(false)}
@@ -104,7 +104,7 @@ export default function MobileMenu() {
         </div>
 
         {/* Links */}
-        <div className="px-3 py-4 flex flex-col gap-1">
+        <div className="px-3 pt-3 pb-2 flex flex-col gap-0.5">
           {navLinks.map((link) => {
             const isActive = pathname === link.href;
             return (
@@ -112,7 +112,7 @@ export default function MobileMenu() {
                 key={link.href}
                 href={link.href}
                 className={`
-                  px-4 py-3 rounded-xl text-[15px] font-medium
+                  px-3 py-[7px] rounded-lg text-[15px] font-medium
                   transition-all duration-150
                   ${
                     isActive
@@ -128,8 +128,9 @@ export default function MobileMenu() {
         </div>
 
         {/* Weitere Seiten */}
-        <div className="px-3 pb-4 flex flex-col gap-1 border-t border-border pt-3 mx-3">
-          <span className="px-4 py-1 text-xs font-semibold uppercase tracking-wider text-text-secondary">
+        <div className="mx-3 border-t border-border/30" />
+        <div className="px-3 pt-4 pb-3 flex flex-col gap-0.5">
+          <span className="px-3 pb-1 text-xs font-semibold uppercase tracking-wider text-text-secondary">
             Ratgeber
           </span>
           {moreLinks.map((link) => {
@@ -139,7 +140,7 @@ export default function MobileMenu() {
                 key={link.href}
                 href={link.href}
                 className={`
-                  px-4 py-3 rounded-xl text-[15px] font-medium
+                  px-3 py-[7px] rounded-lg text-[15px] font-medium
                   transition-all duration-150
                   ${
                     isActive
