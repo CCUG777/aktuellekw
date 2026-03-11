@@ -5,12 +5,16 @@ import { CONTENT_YEARS } from "@/lib/constants";
 import {
   getEasterDate,
   addDays,
-  getFeiertageFuerJahr,
   getBrueckentage,
   getISOWeekNumber,
   formatDateDE,
   getDayNameDE,
 } from "@/lib/feiertage";
+import {
+  getAllSchulferienForYear,
+  formatDateShort,
+  ferienDauer,
+} from "@/lib/schulferien";
 
 export const revalidate = 86400;
 
@@ -22,41 +26,58 @@ export function generateStaticParams() {
   return OSTERN_YEARS.map((y) => ({ year: String(y) }));
 }
 
-/* ── Ostern-spezifische FAQ ────────────────────────────────────── */
-const OSTERN_FAQS = [
+/* ── Orthodoxes Ostern (Julian calendar → Gregorian) ───────────── */
+function getOrthodoxEasterDate(year: number): Date {
+  const a = year % 19;
+  const b = year % 4;
+  const c = year % 7;
+  const d = (19 * a + 15) % 30;
+  const e = (2 * b + 4 * c - d + 34) % 7;
+  const julianMonth = Math.floor((d + e + 114) / 31); // 1-indexed
+  const julianDay = ((d + e + 114) % 31) + 1;
+  // Convert Julian → Gregorian (+13 days for 21st century)
+  const dt = new Date(Date.UTC(year, julianMonth - 1, julianDay));
+  dt.setUTCDate(dt.getUTCDate() + 13);
+  return dt;
+}
+
+/* ── Ostern-spezifische FAQ (Keyword-optimiert) ────────────────── */
+const getOsternFAQs = (year: number, easterDateStr: string) => [
   {
-    question: "Wann ist Ostern 2026?",
-    answer:
-      "Ostersonntag f\u00e4llt 2026 auf den 5. April. Karfreitag ist am 3. April und Ostermontag am 6. April 2026. Ostern liegt damit in Kalenderwoche 14.",
+    question: `Wann ist Ostern ${year}?`,
+    answer: `Ostersonntag f\u00e4llt ${year} auf den ${easterDateStr}. Karfreitag ist am ${formatDateDE(addDays(getEasterDate(year), -2))} und Ostermontag am ${formatDateDE(addDays(getEasterDate(year), 1))}. Ostern liegt damit in Kalenderwoche\u00a0${getISOWeekNumber(getEasterDate(year))}.`,
+  },
+  {
+    question: `Ist Ostermontag ${year} ein Feiertag?`,
+    answer: `Ja, Ostermontag ist ein bundesweiter gesetzlicher Feiertag in allen 16 Bundesl\u00e4ndern Deutschlands. Zusammen mit Karfreitag (ebenfalls gesetzlicher Feiertag) ergibt sich jedes Jahr ein langes Osterwochenende mit mindestens 4 freien Tagen.`,
+  },
+  {
+    question: `Wann sind Osterferien ${year}?`,
+    answer: `Die Osterferien ${year} variieren je nach Bundesland. In den meisten Bundesl\u00e4ndern liegen sie rund um das Osterwochenende und dauern zwischen 1 und 3 Wochen. Die genauen Termine f\u00fcr alle 16 Bundesl\u00e4nder finden Sie in der Osterferien-Tabelle auf dieser Seite.`,
   },
   {
     question: "Ist Ostersonntag ein gesetzlicher Feiertag?",
-    answer:
-      "Nein, Ostersonntag ist in Deutschland kein gesetzlicher Feiertag. Gesetzliche Feiertage rund um Ostern sind nur Karfreitag und Ostermontag. Ostersonntag ist allerdings ein Sonntag und damit in der Regel ohnehin arbeitsfrei.",
+    answer: "Nein, Ostersonntag ist in Deutschland kein gesetzlicher Feiertag. Gesetzliche Feiertage rund um Ostern sind nur Karfreitag und Ostermontag. Da Ostersonntag aber auf einen Sonntag f\u00e4llt, ist er in der Regel ohnehin arbeitsfrei.",
   },
   {
     question: "Warum \u00e4ndert sich das Osterdatum jedes Jahr?",
-    answer:
-      'Ostern ist ein beweglicher Feiertag, der nach einer astronomischen Regel bestimmt wird: Ostersonntag ist der erste Sonntag nach dem ersten Fr\u00fchlingsvollmond. Dadurch kann Ostern fr\u00fchestens am 22. M\u00e4rz und sp\u00e4testens am 25. April stattfinden. Diese Regel wurde 325 n. Chr. auf dem Konzil von Nic\u00e4a festgelegt.',
+    answer: 'Ostern ist ein beweglicher Feiertag, der nach einer astronomischen Regel bestimmt wird: Ostersonntag ist der erste Sonntag nach dem ersten Fr\u00fchlingsvollmond (nach dem 21.\u00a0M\u00e4rz). Dadurch kann Ostern fr\u00fchestens am 22.\u00a0M\u00e4rz und sp\u00e4testens am 25.\u00a0April stattfinden. Diese Regel wurde 325\u00a0n.\u00a0Chr. auf dem Konzil von Nic\u00e4a festgelegt.',
   },
   {
     question: "Welche Feiertage h\u00e4ngen vom Osterdatum ab?",
-    answer:
-      "Insgesamt richten sich 6 Feiertage nach dem Osterdatum: Karfreitag (2 Tage vor Ostern), Ostermontag (1 Tag nach Ostern), Christi Himmelfahrt (39 Tage nach Ostern), Pfingstsonntag (49 Tage) und Pfingstmontag (50 Tage nach Ostern) sowie Fronleichnam (60 Tage nach Ostern, nur in 6 Bundesl\u00e4ndern).",
+    answer: "Insgesamt richten sich 6 Feiertage nach dem Osterdatum: Karfreitag (\u22122\u00a0Tage), Ostermontag (+1\u00a0Tag), Christi Himmelfahrt (+39\u00a0Tage), Pfingstsonntag (+49\u00a0Tage), Pfingstmontag (+50\u00a0Tage) und Fronleichnam (+60\u00a0Tage, nur in 6 Bundesl\u00e4ndern). Damit bestimmt das Osterdatum fast die H\u00e4lfte aller deutschen Feiertage.",
   },
   {
-    question: "Wie wird das Osterdatum berechnet?",
-    answer:
-      'Die Berechnung des Osterdatums (lat. "Computus") basiert auf dem Mondkalender. Zuerst wird der Fr\u00fchlingsvollmond bestimmt \u2013 der erste Vollmond am oder nach dem 21. M\u00e4rz. Der darauffolgende Sonntag ist Ostersonntag. Moderne Algorithmen wie die Gau\u00df\u2019sche Osterformel oder der anonyme gregorianische Algorithmus berechnen das Datum rein rechnerisch.',
+    question: `Wann ist orthodoxes Ostern ${year}?`,
+    answer: `Orthodoxes Ostern ${year} wird nach dem julianischen Kalender berechnet und f\u00e4llt auf den ${formatDateDE(getOrthodoxEasterDate(year))}. Westliches (katholisches/evangelisches) Ostern ist am ${formatDateDE(getEasterDate(year))}. Die Differenz entsteht durch unterschiedliche Kalendergrundlagen.`,
   },
   {
     question: "Wie viele freie Tage gibt es an Ostern?",
-    answer:
-      "Durch Karfreitag (Freitag) und Ostermontag (Montag) ergibt sich jedes Jahr automatisch ein langes Wochenende mit 4 freien Tagen \u2013 ganz ohne Urlaubstage. Das macht Ostern zu einem der beliebtesten Reisezeitr\u00e4ume in Deutschland.",
+    answer: "Durch Karfreitag (Freitag) und Ostermontag (Montag) ergibt sich jedes Jahr automatisch ein langes Wochenende mit 4 freien Tagen \u2013 ganz ohne Urlaubstage. Mit geschickter Br\u00fcckentag-Planung lassen sich bis zu 10 zusammenh\u00e4ngende freie Tage erzielen.",
   },
 ];
 
-/* ── Metadata ──────────────────────────────────────────────────── */
+/* ── Metadata (Cluster 1: Datum & Termin) ──────────────────────── */
 export async function generateMetadata({
   params,
 }: {
@@ -72,8 +93,9 @@ export async function generateMetadata({
   const easter = getEasterDate(year);
   const easterDateStr = formatDateDE(easter);
 
-  const title = `Ostern ${year} \u2013 Datum, Feiertage & Br\u00fcckentage`;
-  const description = `Ostern ${year}: Ostersonntag am ${easterDateStr}. Karfreitag, Ostermontag & alle beweglichen Feiertage mit KW & Br\u00fcckentage-Tipps.`;
+  // Meta-Titel aus Excel Keyword Cluster (SISTRIX-verifiziert: 408px ✅)
+  const title = `Ostern ${year}: Datum, Termine & alle Feiertage`;
+  const description = `Wann ist Ostern ${year}? Ostersonntag am ${easterDateStr}. Karfreitag, Ostermontag, Osterferien & Br\u00fcckentage \u2013 alle Termine mit KW auf einen Blick.`;
   const url = `https://aktuellekw.de/ostern/${year}`;
 
   return {
@@ -115,7 +137,9 @@ export default async function OsternPage({
 
   /* ── Easter dates ──────────────────────────────────────────── */
   const easter = getEasterDate(year);
+  const gruendonnerstag = addDays(easter, -3);
   const karfreitag = addDays(easter, -2);
+  const ostersamstag = addDays(easter, -1);
   const ostermontag = addDays(easter, 1);
   const himmelfahrt = addDays(easter, 39);
   const pfingstsonntag = addDays(easter, 49);
@@ -123,6 +147,12 @@ export default async function OsternPage({
   const fronleichnam = addDays(easter, 60);
 
   const easterKW = getISOWeekNumber(easter);
+  const easterDateStr = formatDateDE(easter);
+
+  /* ── Orthodoxes Ostern ─────────────────────────────────────── */
+  const orthodoxEaster = getOrthodoxEasterDate(year);
+  const sameDate =
+    easter.getTime() === orthodoxEaster.getTime();
 
   /* ── Countdown ─────────────────────────────────────────────── */
   const daysUntilEaster = Math.ceil(
@@ -144,10 +174,22 @@ export default async function OsternPage({
   /* ── Oster-Feiertage (Kern) ────────────────────────────────── */
   const osterFeiertage = [
     {
+      name: "Gr\u00fcndonnerstag",
+      date: gruendonnerstag,
+      gesetzlich: false,
+      info: "kein gesetzlicher Feiertag",
+    },
+    {
       name: "Karfreitag",
       date: karfreitag,
       gesetzlich: true,
       info: "bundesweit",
+    },
+    {
+      name: "Ostersamstag",
+      date: ostersamstag,
+      gesetzlich: false,
+      info: "kein gesetzlicher Feiertag",
     },
     {
       name: "Ostersonntag",
@@ -165,54 +207,38 @@ export default async function OsternPage({
 
   /* ── Bewegliche Feiertage (abhängig von Ostern) ────────────── */
   const beweglicheFeiertage = [
-    {
-      name: "Karfreitag",
-      date: karfreitag,
-      offset: -2,
-      states: "bundesweit",
-    },
-    {
-      name: "Ostermontag",
-      date: ostermontag,
-      offset: 1,
-      states: "bundesweit",
-    },
-    {
-      name: "Christi Himmelfahrt",
-      date: himmelfahrt,
-      offset: 39,
-      states: "bundesweit",
-    },
-    {
-      name: "Pfingstsonntag",
-      date: pfingstsonntag,
-      offset: 49,
-      states: "kein Feiertag",
-    },
-    {
-      name: "Pfingstmontag",
-      date: pfingstmontag,
-      offset: 50,
-      states: "bundesweit",
-    },
-    {
-      name: "Fronleichnam",
-      date: fronleichnam,
-      offset: 60,
-      states: "BW, BY, HE, NW, RP, SL",
-    },
+    { name: "Karfreitag", date: karfreitag, offset: -2, states: "bundesweit" },
+    { name: "Ostermontag", date: ostermontag, offset: 1, states: "bundesweit" },
+    { name: "Christi Himmelfahrt", date: himmelfahrt, offset: 39, states: "bundesweit" },
+    { name: "Pfingstsonntag", date: pfingstsonntag, offset: 49, states: "kein Feiertag" },
+    { name: "Pfingstmontag", date: pfingstmontag, offset: 50, states: "bundesweit" },
+    { name: "Fronleichnam", date: fronleichnam, offset: 60, states: "BW, BY, HE, NW, RP, SL" },
   ];
+
+  /* ── Osterferien aus Schulferien-Daten ─────────────────────── */
+  const allSchulferien = await getAllSchulferienForYear(year);
+  const osterferienData = allSchulferien
+    .map((sf) => {
+      const osterferien = sf.ferien.find((f) => f.typeId === 4);
+      return osterferien
+        ? {
+            bundesland: sf.bundesland,
+            code: sf.code,
+            slug: sf.slug,
+            start: osterferien.starts_on,
+            end: osterferien.ends_on,
+            dauer: ferienDauer(osterferien.starts_on, osterferien.ends_on),
+          }
+        : null;
+    })
+    .filter((d): d is NonNullable<typeof d> => d !== null)
+    .sort((a, b) => a.start.localeCompare(b.start));
 
   /* ── Ostern-Vergleich (5 Jahre) ────────────────────────────── */
   const comparisonYears = [year - 2, year - 1, year, year + 1, year + 2];
   const osterVergleich = comparisonYears.map((y) => {
     const e = getEasterDate(y);
-    return {
-      year: y,
-      date: e,
-      kw: getISOWeekNumber(e),
-      isCurrent: y === year,
-    };
+    return { year: y, date: e, kw: getISOWeekNumber(e), isCurrent: y === year };
   });
 
   /* ── Year navigation ───────────────────────────────────────── */
@@ -221,30 +247,18 @@ export default async function OsternPage({
   const hasPrev = OSTERN_YEARS.includes(prevYear);
   const hasNext = OSTERN_YEARS.includes(nextYear);
 
+  /* ── FAQs ──────────────────────────────────────────────────── */
+  const osternFAQs = getOsternFAQs(year, easterDateStr);
+
   /* ── JSON-LD ───────────────────────────────────────────────── */
   const jsonLd = [
     {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       itemListElement: [
-        {
-          "@type": "ListItem",
-          position: 1,
-          name: "Startseite",
-          item: "https://aktuellekw.de",
-        },
-        {
-          "@type": "ListItem",
-          position: 2,
-          name: "Feiertage",
-          item: "https://aktuellekw.de/feiertage",
-        },
-        {
-          "@type": "ListItem",
-          position: 3,
-          name: `Ostern ${year}`,
-          item: `https://aktuellekw.de/ostern/${year}`,
-        },
+        { "@type": "ListItem", position: 1, name: "Startseite", item: "https://aktuellekw.de" },
+        { "@type": "ListItem", position: 2, name: "Feiertage", item: "https://aktuellekw.de/feiertage" },
+        { "@type": "ListItem", position: 3, name: `Ostern ${year}`, item: `https://aktuellekw.de/ostern/${year}` },
       ],
     },
     {
@@ -258,27 +272,17 @@ export default async function OsternPage({
       location: {
         "@type": "Place",
         name: "Deutschland",
-        address: {
-          "@type": "PostalAddress",
-          addressCountry: "DE",
-        },
+        address: { "@type": "PostalAddress", addressCountry: "DE" },
       },
-      organizer: {
-        "@type": "Organization",
-        name: "aktuellekw.de",
-        url: "https://aktuellekw.de",
-      },
+      organizer: { "@type": "Organization", name: "aktuellekw.de", url: "https://aktuellekw.de" },
     },
     {
       "@context": "https://schema.org",
       "@type": "FAQPage",
-      mainEntity: OSTERN_FAQS.map((faq) => ({
+      mainEntity: osternFAQs.map((faq) => ({
         "@type": "Question",
         name: faq.question,
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: faq.answer,
-        },
+        acceptedAnswer: { "@type": "Answer", text: faq.answer },
       })),
     },
   ];
@@ -297,13 +301,9 @@ export default async function OsternPage({
           aria-label="Breadcrumb"
           className="text-xs text-text-secondary mb-8 flex items-center gap-1.5 flex-wrap"
         >
-          <Link href="/" className="hover:text-accent transition-colors">
-            Startseite
-          </Link>
+          <Link href="/" className="hover:text-accent transition-colors">Startseite</Link>
           <span aria-hidden="true">&rsaquo;</span>
-          <Link href="/feiertage" className="hover:text-accent transition-colors">
-            Feiertage
-          </Link>
+          <Link href="/feiertage" className="hover:text-accent transition-colors">Feiertage</Link>
           <span aria-hidden="true">&rsaquo;</span>
           <span className="text-text-primary">Ostern {year}</span>
         </nav>
@@ -311,25 +311,15 @@ export default async function OsternPage({
         {/* ── Year Navigation ─────────────────────────────────── */}
         <div className="flex items-center justify-between mb-6">
           {hasPrev ? (
-            <Link
-              href={`/ostern/${prevYear}`}
-              className="text-sm text-accent hover:underline"
-            >
+            <Link href={`/ostern/${prevYear}`} className="text-sm text-accent hover:underline">
               &larr; Ostern {prevYear}
             </Link>
-          ) : (
-            <span />
-          )}
+          ) : <span />}
           {hasNext ? (
-            <Link
-              href={`/ostern/${nextYear}`}
-              className="text-sm text-accent hover:underline"
-            >
+            <Link href={`/ostern/${nextYear}`} className="text-sm text-accent hover:underline">
               Ostern {nextYear} &rarr;
             </Link>
-          ) : (
-            <span />
-          )}
+          ) : <span />}
         </div>
 
         {/* ── H1 + Intro ──────────────────────────────────────── */}
@@ -339,21 +329,20 @@ export default async function OsternPage({
 
         <div className="text-text-secondary leading-relaxed mb-6 space-y-3">
           <p>
-            <strong className="text-text-primary">Ostersonntag {year}</strong>{" "}
-            f&auml;llt auf den{" "}
-            <strong className="text-text-primary">
-              {formatDateDE(easter)}
-            </strong>{" "}
+            <strong className="text-text-primary">Wann ist Ostern {year}?</strong>{" "}
+            Ostersonntag f&auml;llt auf den{" "}
+            <strong className="text-text-primary">{easterDateStr}</strong>{" "}
             ({getDayNameDE(easter)}) in{" "}
             <strong className="text-text-primary">KW&nbsp;{easterKW}</strong>.
-            Karfreitag und Ostermontag sind gesetzliche Feiertage &ndash;
-            zusammen ergibt sich ein langes Wochenende mit 4 freien Tagen.
+            Karfreitag ({formatDateDE(karfreitag)}) und Ostermontag ({formatDateDE(ostermontag)})
+            sind gesetzliche Feiertage &ndash; zusammen ergibt sich ein{" "}
+            <strong className="text-text-primary">langes Wochenende mit 4 freien Tagen</strong>.
           </p>
 
           {/* [PLACEHOLDER: SEO-Einleitungstext „Ostern {year}"] – 150–200 Wörter
-              Keywords: ostern {year}, wann ist ostern, ostersonntag {year}, osterferien
+              Keywords: ostern {year}, wann ist ostern, ostersonntag {year}, ostern {year} datum, osterferien
               Inhalt: Kulturelle Bedeutung von Ostern, Ostertraditionen in Deutschland,
-              Überleitung zu Daten & Brückentagen */}
+              Überleitung zu Feiertagen, Osterferien & Brückentagen */}
         </div>
 
         {/* ── Hero-Box: Ostersonntag ──────────────────────────── */}
@@ -363,7 +352,7 @@ export default async function OsternPage({
               Ostersonntag {year}
             </div>
             <div className="text-5xl md:text-6xl font-bold text-accent mb-2">
-              {formatDateDE(easter)}
+              {easterDateStr}
             </div>
             <div className="text-lg text-text-secondary">
               {getDayNameDE(easter)} &middot; Kalenderwoche {easterKW}
@@ -373,23 +362,15 @@ export default async function OsternPage({
             {year === currentYear && (
               <div className="mt-4 inline-block bg-accent/10 border border-accent/20 rounded-full px-5 py-2 text-sm">
                 {easterIsToday ? (
-                  <span className="text-accent font-semibold">
-                    🥚 Heute ist Ostersonntag!
-                  </span>
+                  <span className="text-accent font-semibold">Heute ist Ostersonntag!</span>
                 ) : easterIsPast ? (
                   <span className="text-text-secondary">
                     Ostern {year} war vor{" "}
-                    <strong className="text-text-primary">
-                      {Math.abs(daysUntilEaster)}
-                    </strong>{" "}
-                    Tagen
+                    <strong className="text-text-primary">{Math.abs(daysUntilEaster)}</strong> Tagen
                   </span>
                 ) : (
                   <span className="text-text-secondary">
-                    Noch{" "}
-                    <strong className="text-accent">
-                      {daysUntilEaster}
-                    </strong>{" "}
+                    Noch <strong className="text-accent">{daysUntilEaster}</strong>{" "}
                     {daysUntilEaster === 1 ? "Tag" : "Tage"} bis Ostern
                   </span>
                 )}
@@ -398,78 +379,70 @@ export default async function OsternPage({
           </div>
         </div>
 
-        {/* ── Oster-Feiertage Tabelle ─────────────────────────── */}
+        {/* ── Stats Row ───────────────────────────────────────── */}
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-10">
+          {[
+            { label: "Ostersonntag", value: easterDateStr },
+            { label: "Kalenderwoche", value: `KW ${easterKW}` },
+            { label: "Gesetzl. Feiertage", value: "2" },
+            { label: "Freie Tage", value: "4" },
+          ].map((stat) => (
+            <div
+              key={stat.label}
+              className="bg-surface-secondary border border-border rounded-xl px-4 py-3 text-center"
+            >
+              <div className="text-lg md:text-xl font-bold text-accent">{stat.value}</div>
+              <div className="text-xs text-text-secondary mt-0.5">{stat.label}</div>
+            </div>
+          ))}
+        </div>
+
+        {/* ══════════════════════════════════════════════════════
+            CLUSTER 2: Feiertage (86.300 SV/Mo)
+            ══════════════════════════════════════════════════════ */}
         <div>
           <h2 className="text-2xl font-semibold mb-4">
-            Oster-Feiertage {year}
+            Oster-Feiertage {year}: Karfreitag, Ostersonntag &amp; Ostermontag
           </h2>
           <p className="text-text-secondary text-sm leading-relaxed mb-4">
-            Die drei Ostertage {year} im &Uuml;berblick &ndash; Karfreitag und
-            Ostermontag sind <strong className="text-text-primary">gesetzliche Feiertage</strong>{" "}
+            Von <strong className="text-text-primary">Gr&uuml;ndonnerstag</strong> bis{" "}
+            <strong className="text-text-primary">Ostermontag</strong> &ndash; alle
+            f&uuml;nf Ostertage {year} im &Uuml;berblick. Karfreitag und Ostermontag
+            sind <strong className="text-text-primary">gesetzliche Feiertage</strong>{" "}
             in allen 16 Bundesl&auml;ndern.
           </p>
           <div className="overflow-x-auto rounded-xl border border-border">
             <table className="w-full text-sm">
               <thead>
                 <tr className="border-b border-border bg-surface-secondary">
-                  <th className="text-left px-4 py-3 font-medium text-text-secondary">
-                    Feiertag
-                  </th>
-                  <th className="text-left px-4 py-3 font-medium text-text-secondary">
-                    Datum
-                  </th>
-                  <th className="text-left px-4 py-3 font-medium text-text-secondary">
-                    Wochentag
-                  </th>
-                  <th className="text-left px-4 py-3 font-medium text-text-secondary">
-                    KW
-                  </th>
-                  <th className="text-left px-4 py-3 font-medium text-text-secondary">
-                    Status
-                  </th>
+                  <th className="text-left px-4 py-3 font-medium text-text-secondary">Feiertag</th>
+                  <th className="text-left px-4 py-3 font-medium text-text-secondary">Datum</th>
+                  <th className="text-left px-4 py-3 font-medium text-text-secondary">Wochentag</th>
+                  <th className="text-left px-4 py-3 font-medium text-text-secondary">KW</th>
+                  <th className="text-left px-4 py-3 font-medium text-text-secondary">Status</th>
                 </tr>
               </thead>
               <tbody>
                 {osterFeiertage.map((h, i) => {
-                  const isPast =
-                    year === currentYear &&
-                    h.date.getTime() < todayUTC.getTime();
-                  const isToday =
-                    year === currentYear &&
-                    h.date.getTime() === todayUTC.getTime();
-
+                  const isPast = year === currentYear && h.date.getTime() < todayUTC.getTime();
+                  const isToday = year === currentYear && h.date.getTime() === todayUTC.getTime();
                   return (
                     <tr
                       key={i}
                       className={`border-b border-border last:border-b-0 ${
-                        isToday
-                          ? "bg-accent/10"
-                          : year === currentYear && !isPast && !easterIsPast
-                          ? "bg-accent/5"
-                          : isPast
-                          ? "opacity-60"
-                          : ""
+                        isToday ? "bg-accent/10" : year === currentYear && !isPast && !easterIsPast ? "bg-accent/5" : isPast ? "opacity-60" : ""
                       }`}
                     >
                       <td className="px-4 py-3 font-medium text-text-primary whitespace-nowrap">
                         {h.name}
                         {isToday && (
-                          <span className="ml-2 text-xs bg-accent text-white px-2 py-0.5 rounded-full">
-                            heute
-                          </span>
+                          <span className="ml-2 text-xs bg-accent text-white px-2 py-0.5 rounded-full">heute</span>
                         )}
                       </td>
-                      <td className="px-4 py-3 text-text-secondary whitespace-nowrap">
-                        {formatDateDE(h.date)}
-                      </td>
-                      <td className="px-4 py-3 text-text-secondary whitespace-nowrap">
-                        {getDayNameDE(h.date)}
-                      </td>
+                      <td className="px-4 py-3 text-text-secondary whitespace-nowrap">{formatDateDE(h.date)}</td>
+                      <td className="px-4 py-3 text-text-secondary whitespace-nowrap">{getDayNameDE(h.date)}</td>
                       <td className="px-4 py-3 text-text-secondary">
-                        <Link
-                          href={`/kw/${getISOWeekNumber(h.date)}-${year}`}
-                          className="text-accent hover:underline"
-                        >
+                        <Link href={`/kw/${getISOWeekNumber(h.date)}-${year}`} className="text-accent hover:underline">
                           KW&nbsp;{getISOWeekNumber(h.date)}
                         </Link>
                       </td>
@@ -488,61 +461,41 @@ export default async function OsternPage({
               </tbody>
             </table>
           </div>
+          <p className="text-text-secondary text-xs mt-2">
+            Feiertage April {year}: Karfreitag ({formatDateDE(karfreitag)}) und
+            Ostermontag ({formatDateDE(ostermontag)}) sind bundesweite gesetzliche Feiertage.
+          </p>
         </div>
 
         {/* ── Bewegliche Feiertage ────────────────────────────── */}
         <div className="mt-14">
           <h2 className="text-2xl font-semibold mb-4">
-            Bewegliche Feiertage {year} (abh&auml;ngig von Ostern)
+            Bewegliche Feiertage {year} &ndash; abh&auml;ngig von Ostern
           </h2>
           <p className="text-text-secondary text-sm leading-relaxed mb-4">
             Diese Feiertage berechnen sich aus dem Osterdatum. Der Abstand zu
-            Ostersonntag ist jedes Jahr gleich, nur das Datum &auml;ndert sich.
+            Ostersonntag ist jedes Jahr gleich, nur das konkrete Datum &auml;ndert sich.
           </p>
           <div className="overflow-x-auto rounded-xl border border-border">
             <table className="w-full text-sm">
               <thead>
                 <tr className="border-b border-border bg-surface-secondary">
-                  <th className="text-left px-4 py-3 font-medium text-text-secondary">
-                    Feiertag
-                  </th>
-                  <th className="text-left px-4 py-3 font-medium text-text-secondary">
-                    Datum
-                  </th>
-                  <th className="text-left px-4 py-3 font-medium text-text-secondary">
-                    Wochentag
-                  </th>
-                  <th className="text-left px-4 py-3 font-medium text-text-secondary">
-                    KW
-                  </th>
-                  <th className="text-left px-4 py-3 font-medium text-text-secondary">
-                    Tage ab Ostern
-                  </th>
-                  <th className="text-left px-4 py-3 font-medium text-text-secondary">
-                    Bundesl&auml;nder
-                  </th>
+                  <th className="text-left px-4 py-3 font-medium text-text-secondary">Feiertag</th>
+                  <th className="text-left px-4 py-3 font-medium text-text-secondary">Datum</th>
+                  <th className="text-left px-4 py-3 font-medium text-text-secondary">Wochentag</th>
+                  <th className="text-left px-4 py-3 font-medium text-text-secondary">KW</th>
+                  <th className="text-left px-4 py-3 font-medium text-text-secondary">Tage</th>
+                  <th className="text-left px-4 py-3 font-medium text-text-secondary">Bundesl&auml;nder</th>
                 </tr>
               </thead>
               <tbody>
                 {beweglicheFeiertage.map((h, i) => (
-                  <tr
-                    key={i}
-                    className="border-b border-border last:border-b-0"
-                  >
-                    <td className="px-4 py-3 font-medium text-text-primary whitespace-nowrap">
-                      {h.name}
-                    </td>
-                    <td className="px-4 py-3 text-text-secondary whitespace-nowrap">
-                      {formatDateDE(h.date)}
-                    </td>
-                    <td className="px-4 py-3 text-text-secondary whitespace-nowrap">
-                      {getDayNameDE(h.date)}
-                    </td>
+                  <tr key={i} className="border-b border-border last:border-b-0">
+                    <td className="px-4 py-3 font-medium text-text-primary whitespace-nowrap">{h.name}</td>
+                    <td className="px-4 py-3 text-text-secondary whitespace-nowrap">{formatDateDE(h.date)}</td>
+                    <td className="px-4 py-3 text-text-secondary whitespace-nowrap">{getDayNameDE(h.date)}</td>
                     <td className="px-4 py-3 text-text-secondary">
-                      <Link
-                        href={`/kw/${getISOWeekNumber(h.date)}-${year}`}
-                        className="text-accent hover:underline"
-                      >
+                      <Link href={`/kw/${getISOWeekNumber(h.date)}-${year}`} className="text-accent hover:underline">
                         KW&nbsp;{getISOWeekNumber(h.date)}
                       </Link>
                     </td>
@@ -551,12 +504,8 @@ export default async function OsternPage({
                     </td>
                     <td className="px-4 py-3 text-text-secondary text-xs">
                       {h.states === "bundesweit" ? (
-                        <span className="font-medium text-text-primary">
-                          alle
-                        </span>
-                      ) : (
-                        h.states
-                      )}
+                        <span className="font-medium text-text-primary">alle</span>
+                      ) : h.states}
                     </td>
                   </tr>
                 ))}
@@ -565,63 +514,49 @@ export default async function OsternPage({
           </div>
         </div>
 
-        {/* ── Brückentage rund um Ostern ──────────────────────── */}
+        {/* ══════════════════════════════════════════════════════
+            CLUSTER 3: Osterferien (345.080 SV/Mo)
+            ══════════════════════════════════════════════════════ */}
         <div className="mt-14">
           <h2 className="text-2xl font-semibold mb-4">
-            Br&uuml;ckentage rund um Ostern {year}
+            Osterferien {year} &ndash; alle Bundesl&auml;nder im &Uuml;berblick
           </h2>
           <p className="text-text-secondary text-sm leading-relaxed mb-4">
-            So holen Sie mit <strong className="text-text-primary">wenig Urlaubstagen</strong>{" "}
-            das Maximum an freien Tagen rund um Ostern und die Folge-Feiertage heraus:
+            <strong className="text-text-primary">Wann sind Osterferien {year}?</strong>{" "}
+            Die Schulferien rund um Ostern variieren je nach Bundesland.
+            Hier die Termine f&uuml;r alle 16 Bundesl&auml;nder:
           </p>
-          {osterBrueckentage.length > 0 ? (
+
+          {osterferienData.length > 0 ? (
             <div className="overflow-x-auto rounded-xl border border-border">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b border-border bg-surface-secondary">
-                    <th className="text-left px-4 py-3 font-medium text-text-secondary">
-                      Feiertag
-                    </th>
-                    <th className="text-left px-4 py-3 font-medium text-text-secondary">
-                      Datum
-                    </th>
-                    <th className="text-left px-4 py-3 font-medium text-text-secondary">
-                      Wochentag
-                    </th>
-                    <th className="text-left px-4 py-3 font-medium text-text-secondary">
-                      Br&uuml;ckentag-Tipp
-                    </th>
-                    <th className="text-left px-4 py-3 font-medium text-text-secondary">
-                      Urlaub
-                    </th>
-                    <th className="text-left px-4 py-3 font-medium text-text-secondary">
-                      Frei
-                    </th>
+                    <th className="text-left px-4 py-3 font-medium text-text-secondary">Bundesland</th>
+                    <th className="text-left px-4 py-3 font-medium text-text-secondary">Beginn</th>
+                    <th className="text-left px-4 py-3 font-medium text-text-secondary">Ende</th>
+                    <th className="text-left px-4 py-3 font-medium text-text-secondary">Dauer</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {osterBrueckentage.map((b, i) => (
-                    <tr
-                      key={i}
-                      className="border-b border-border last:border-b-0"
-                    >
+                  {osterferienData.map((d) => (
+                    <tr key={d.code} className="border-b border-border last:border-b-0">
                       <td className="px-4 py-3 font-medium text-text-primary whitespace-nowrap">
-                        {b.feiertag}
+                        <Link
+                          href={`/schulferien/${year}/${d.slug}`}
+                          className="text-accent hover:underline"
+                        >
+                          {d.bundesland}
+                        </Link>
                       </td>
                       <td className="px-4 py-3 text-text-secondary whitespace-nowrap">
-                        {formatDateDE(b.feiertagDate)}
+                        {formatDateShort(d.start)}
                       </td>
                       <td className="px-4 py-3 text-text-secondary whitespace-nowrap">
-                        {b.wochentag}
+                        {formatDateShort(d.end)}
                       </td>
                       <td className="px-4 py-3 text-text-secondary">
-                        {b.tipp}
-                      </td>
-                      <td className="px-4 py-3 text-accent font-semibold text-center">
-                        {b.urlaubstage}
-                      </td>
-                      <td className="px-4 py-3 text-text-primary font-semibold text-center">
-                        {b.freieTage}
+                        {d.dauer} Tage
                       </td>
                     </tr>
                   ))}
@@ -630,24 +565,87 @@ export default async function OsternPage({
             </div>
           ) : (
             <div className="bg-surface-secondary border border-border rounded-xl p-4 text-sm text-text-secondary">
-              Rund um Ostern {year} ergeben sich keine klassischen
-              Br&uuml;ckentage bei den bundesweiten Feiertagen. Karfreitag und
-              Ostermontag bilden jedoch immer ein langes Wochenende (4 Tage
-              frei).
+              F&uuml;r {year} liegen noch keine Osterferien-Termine vor.
+            </div>
+          )}
+
+          {osterferienData.length > 0 && (
+            <p className="text-text-secondary text-xs mt-2">
+              Alle Angaben ohne Gew&auml;hr. Quelle: Kultusministerkonferenz.
+              Detaillierte Ferienkalender unter{" "}
+              <Link href={`/schulferien/${year}`} className="text-accent hover:underline">
+                Schulferien {year}
+              </Link>.
+            </p>
+          )}
+        </div>
+
+        {/* ══════════════════════════════════════════════════════
+            CLUSTER 4: Brückentage & Urlaub (900 SV/Mo)
+            ══════════════════════════════════════════════════════ */}
+        <div className="mt-14">
+          <h2 className="text-2xl font-semibold mb-4">
+            Br&uuml;ckentage Ostern {year}: So planst du freie Tage
+          </h2>
+          <p className="text-text-secondary text-sm leading-relaxed mb-4">
+            Mit <strong className="text-text-primary">wenig Urlaubstagen</strong>{" "}
+            das Maximum an Freizeit herausholen &ndash; so nutzt du die Feiertage rund
+            um Ostern und die Folge-Feiertage optimal:
+          </p>
+
+          {/* Immer: Oster-Grundinfo */}
+          <div className="bg-surface-secondary border border-border rounded-xl p-4 text-sm text-text-secondary mb-4">
+            <strong className="text-text-primary">Basispaket Ostern:</strong>{" "}
+            Karfreitag + Wochenende + Ostermontag = <strong className="text-accent">4 freie Tage</strong>{" "}
+            ohne einen einzigen Urlaubstag.
+          </div>
+
+          {osterBrueckentage.length > 0 ? (
+            <div className="overflow-x-auto rounded-xl border border-border">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="border-b border-border bg-surface-secondary">
+                    <th className="text-left px-4 py-3 font-medium text-text-secondary">Feiertag</th>
+                    <th className="text-left px-4 py-3 font-medium text-text-secondary">Datum</th>
+                    <th className="text-left px-4 py-3 font-medium text-text-secondary">Wochentag</th>
+                    <th className="text-left px-4 py-3 font-medium text-text-secondary">Br&uuml;ckentag-Tipp</th>
+                    <th className="text-left px-4 py-3 font-medium text-text-secondary">Urlaub</th>
+                    <th className="text-left px-4 py-3 font-medium text-text-secondary">Frei</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {osterBrueckentage.map((b, i) => (
+                    <tr key={i} className="border-b border-border last:border-b-0">
+                      <td className="px-4 py-3 font-medium text-text-primary whitespace-nowrap">{b.feiertag}</td>
+                      <td className="px-4 py-3 text-text-secondary whitespace-nowrap">{formatDateDE(b.feiertagDate)}</td>
+                      <td className="px-4 py-3 text-text-secondary whitespace-nowrap">{b.wochentag}</td>
+                      <td className="px-4 py-3 text-text-secondary">{b.tipp}</td>
+                      <td className="px-4 py-3 text-accent font-semibold text-center">{b.urlaubstage}</td>
+                      <td className="px-4 py-3 text-text-primary font-semibold text-center">{b.freieTage}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          ) : (
+            <div className="bg-surface-secondary border border-border rounded-xl p-4 text-sm text-text-secondary">
+              Rund um Ostern {year} ergeben sich keine zus&auml;tzlichen Br&uuml;ckentage
+              bei den Folge-Feiertagen. Das Oster-Wochenende selbst bringt aber immer 4 freie Tage.
             </div>
           )}
         </div>
 
-        {/* ── SEO-Erklärtext Placeholder ──────────────────────── */}
+        {/* ── Warum ändert sich Ostern? ───────────────────────── */}
         <div className="mt-14">
           <h2 className="text-2xl font-semibold mb-4">
             Warum f&auml;llt Ostern jedes Jahr auf ein anderes Datum?
           </h2>
           <div className="text-text-secondary text-sm leading-relaxed space-y-3">
             {/* [PLACEHOLDER: SEO-Erklärtext „Warum ändert sich Ostern?"] – 100–150 Wörter
-                Keywords: osterdatum berechnung, bewegliche feiertage, frühlingsvollmond
-                Inhalt: Erklärung Computus, Konzil von Nicäa, Frühlingsvollmond-Regel,
-                frühestes/spätestes Osterdatum, Bezug zu kirchlichen Feiertagen */}
+                Keywords: osterdatum berechnung, bewegliche feiertage, frühlingsvollmond, computus
+                Inhalt: Erklärung Computus, Konzil von Nicäa 325, Frühlingsvollmond-Regel,
+                frühestes/spätestes Osterdatum (22. März – 25. April),
+                Bezug zu kirchlichen Feiertagen, Gauß'sche Osterformel */}
             <p>
               Ostern ist ein <strong className="text-text-primary">beweglicher Feiertag</strong>,
               dessen Datum sich nach dem Mondkalender richtet. Die Regel lautet:
@@ -671,51 +669,28 @@ export default async function OsternPage({
             <table className="w-full text-sm">
               <thead>
                 <tr className="border-b border-border bg-surface-secondary">
-                  <th className="text-left px-4 py-3 font-medium text-text-secondary">
-                    Jahr
-                  </th>
-                  <th className="text-left px-4 py-3 font-medium text-text-secondary">
-                    Ostersonntag
-                  </th>
-                  <th className="text-left px-4 py-3 font-medium text-text-secondary">
-                    Wochentag
-                  </th>
-                  <th className="text-left px-4 py-3 font-medium text-text-secondary">
-                    KW
-                  </th>
+                  <th className="text-left px-4 py-3 font-medium text-text-secondary">Jahr</th>
+                  <th className="text-left px-4 py-3 font-medium text-text-secondary">Ostersonntag</th>
+                  <th className="text-left px-4 py-3 font-medium text-text-secondary">Wochentag</th>
+                  <th className="text-left px-4 py-3 font-medium text-text-secondary">KW</th>
                 </tr>
               </thead>
               <tbody>
                 {osterVergleich.map((entry) => (
                   <tr
                     key={entry.year}
-                    className={`border-b border-border last:border-b-0 ${
-                      entry.isCurrent ? "bg-accent/10 font-semibold" : ""
-                    }`}
+                    className={`border-b border-border last:border-b-0 ${entry.isCurrent ? "bg-accent/10 font-semibold" : ""}`}
                   >
                     <td className="px-4 py-3 text-text-primary">
                       {entry.isCurrent ? (
                         <span className="text-accent">{entry.year}</span>
                       ) : OSTERN_YEARS.includes(entry.year) ? (
-                        <Link
-                          href={`/ostern/${entry.year}`}
-                          className="text-accent hover:underline"
-                        >
-                          {entry.year}
-                        </Link>
-                      ) : (
-                        entry.year
-                      )}
+                        <Link href={`/ostern/${entry.year}`} className="text-accent hover:underline">{entry.year}</Link>
+                      ) : entry.year}
                     </td>
-                    <td className="px-4 py-3 text-text-secondary">
-                      {formatDateDE(entry.date)}
-                    </td>
-                    <td className="px-4 py-3 text-text-secondary">
-                      {getDayNameDE(entry.date)}
-                    </td>
-                    <td className="px-4 py-3 text-text-secondary">
-                      KW&nbsp;{entry.kw}
-                    </td>
+                    <td className="px-4 py-3 text-text-secondary">{formatDateDE(entry.date)}</td>
+                    <td className="px-4 py-3 text-text-secondary">{getDayNameDE(entry.date)}</td>
+                    <td className="px-4 py-3 text-text-secondary">KW&nbsp;{entry.kw}</td>
                   </tr>
                 ))}
               </tbody>
@@ -723,13 +698,70 @@ export default async function OsternPage({
           </div>
         </div>
 
+        {/* ── Orthodoxes Ostern ────────────────────────────────── */}
+        <div className="mt-14">
+          <h2 className="text-2xl font-semibold mb-4">
+            Orthodoxes Ostern {year}
+          </h2>
+          <div className="text-text-secondary text-sm leading-relaxed space-y-3">
+            <p>
+              <strong className="text-text-primary">Orthodoxes Ostern {year}</strong>{" "}
+              f&auml;llt auf den{" "}
+              <strong className="text-text-primary">{formatDateDE(orthodoxEaster)}</strong>{" "}
+              ({getDayNameDE(orthodoxEaster)}, KW&nbsp;{getISOWeekNumber(orthodoxEaster)}).
+              {sameDate ? (
+                <> In {year} fallen westliches und orthodoxes Ostern auf dasselbe Datum.</>
+              ) : (
+                <>
+                  {" "}Das sind{" "}
+                  <strong className="text-text-primary">
+                    {Math.round((orthodoxEaster.getTime() - easter.getTime()) / 86400000)} Tage
+                  </strong>{" "}
+                  nach dem westlichen Ostersonntag ({easterDateStr}).
+                </>
+              )}
+            </p>
+            <p>
+              Der Unterschied entsteht, weil die orthodoxen Kirchen das Osterdatum
+              nach dem julianischen Kalender berechnen, w&auml;hrend die westlichen
+              Kirchen den gregorianischen Kalender verwenden. Im 21.&nbsp;Jahrhundert
+              betr&auml;gt die Differenz 13&nbsp;Tage.
+            </p>
+          </div>
+        </div>
+
+        {/* ══════════════════════════════════════════════════════
+            CLUSTER 5: Tradition & Bräuche (12.890 SV/Mo)
+            ══════════════════════════════════════════════════════ */}
+        <div className="mt-14">
+          <h2 className="text-2xl font-semibold mb-4">
+            Osterbr&auml;uche &amp; Traditionen in Deutschland
+          </h2>
+          <div className="text-text-secondary text-sm leading-relaxed space-y-3">
+            {/* [PLACEHOLDER: SEO-Text „Osterbräuche & Traditionen"] – 150–200 Wörter
+                Keywords: osterbräuche deutschland, ostereier bemalen, ostertraditionen
+                Inhalt: Ostereier suchen & bemalen, Osterfeuer, Osterlamm, Osterhase-Brauch,
+                regionale Besonderheiten (Osterreiten in der Lausitz, Eierlaufen etc.),
+                kirchliche Traditionen (Karfreitags-Prozessionen, Osternacht),
+                Verlinkung zu weiterführenden Inhalten */}
+            <p>
+              Ostern ist nach Weihnachten das zweitwichtigste Fest in Deutschland
+              und wird mit vielf&auml;ltigen Br&auml;uchen gefeiert. Vom{" "}
+              <strong className="text-text-primary">Ostereier bemalen</strong> und
+              Verstecken &uuml;ber Osterlammessen bis hin zu regionalen Besonderheiten
+              wie dem Osterfeuer &ndash; die Traditionen variieren je nach Region und
+              Konfession.
+            </p>
+          </div>
+        </div>
+
         {/* ── FAQ ──────────────────────────────────────────────── */}
         <div className="mt-14">
           <h2 className="text-2xl font-semibold mb-5">
-            H&auml;ufige Fragen zu Ostern
+            H&auml;ufige Fragen zu Ostern {year}
           </h2>
           <div className="space-y-2.5">
-            {OSTERN_FAQS.map((faq, i) => (
+            {osternFAQs.map((faq, i) => (
               <details
                 key={i}
                 className="group border border-border rounded-xl overflow-hidden"
@@ -752,52 +784,33 @@ export default async function OsternPage({
         <div className="mt-14">
           <div className="text-text-secondary text-sm leading-relaxed space-y-3">
             {/* [PLACEHOLDER: SEO-Abschlusstext] – 60–80 Wörter
-                Keywords: ostern {year} deutschland, osterfeiertage, osterferien
-                Inhalt: Zusammenfassung, Verweis auf Feiertage-Übersicht & KW-Seiten */}
+                Keywords: ostern {year} deutschland, osterfeiertage, osterferien {year}
+                Inhalt: Zusammenfassung, Verweis auf Feiertage-Übersicht, KW-Seiten & Schulferien */}
           </div>
         </div>
 
         {/* ── Year Navigation (bottom) ─────────────────────────── */}
         <div className="mt-10 flex items-center justify-between border-t border-border pt-6">
           {hasPrev ? (
-            <Link
-              href={`/ostern/${prevYear}`}
-              className="text-sm text-accent hover:underline"
-            >
+            <Link href={`/ostern/${prevYear}`} className="text-sm text-accent hover:underline">
               &larr; Ostern {prevYear}
             </Link>
-          ) : (
-            <span />
-          )}
+          ) : <span />}
           {hasNext ? (
-            <Link
-              href={`/ostern/${nextYear}`}
-              className="text-sm text-accent hover:underline"
-            >
+            <Link href={`/ostern/${nextYear}`} className="text-sm text-accent hover:underline">
               Ostern {nextYear} &rarr;
             </Link>
-          ) : (
-            <span />
-          )}
+          ) : <span />}
         </div>
 
         {/* ── Abschluss-Links ──────────────────────────────────── */}
         <div className="mt-6 flex flex-wrap gap-4 text-sm">
-          <Link href="/" className="text-accent hover:underline">
-            &larr; Aktuelle KW
-          </Link>
-          <Link href="/feiertage" className="text-accent hover:underline">
-            Feiertage &Uuml;bersicht &rarr;
-          </Link>
-          <Link href={`/feiertage/${year}`} className="text-accent hover:underline">
-            Feiertage {year} &rarr;
-          </Link>
-          <Link href="/faq" className="text-accent hover:underline">
-            FAQ &rarr;
-          </Link>
-          <Link href="/kalenderwoche" className="text-accent hover:underline">
-            Kalenderwochen {year} &rarr;
-          </Link>
+          <Link href="/" className="text-accent hover:underline">&larr; Aktuelle KW</Link>
+          <Link href="/feiertage" className="text-accent hover:underline">Feiertage &Uuml;bersicht &rarr;</Link>
+          <Link href={`/feiertage/${year}`} className="text-accent hover:underline">Feiertage {year} &rarr;</Link>
+          <Link href={`/schulferien/${year}`} className="text-accent hover:underline">Schulferien {year} &rarr;</Link>
+          <Link href="/faq" className="text-accent hover:underline">FAQ &rarr;</Link>
+          <Link href="/kalenderwoche" className="text-accent hover:underline">Kalenderwochen {year} &rarr;</Link>
         </div>
       </section>
     </>
