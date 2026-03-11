@@ -65,6 +65,9 @@ export default function Footer() {
               <Link href="/feiertage/2027" className="text-sm text-text-secondary hover:text-text-primary transition-colors">
                 Feiertage 2027
               </Link>
+              <Link href={`/ostern/${year}`} className="text-sm text-text-secondary hover:text-text-primary transition-colors">
+                Ostern {year}
+              </Link>
               <Link href="/schulferien/2025" className="text-sm text-text-secondary hover:text-text-primary transition-colors">
                 Schulferien 2025
               </Link>
