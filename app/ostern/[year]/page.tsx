@@ -57,7 +57,7 @@ const getOsternFAQs = (year: number, easterDateStr: string) => [
   },
   {
     question: "Ist Ostersonntag ein gesetzlicher Feiertag?",
-    answer: "Nein, Ostersonntag ist in Deutschland kein gesetzlicher Feiertag. Gesetzliche Feiertage rund um Ostern sind nur Karfreitag und Ostermontag. Da Ostersonntag aber auf einen Sonntag f\u00e4llt, ist er in der Regel ohnehin arbeitsfrei.",
+    answer: `Ostersonntag ist in Deutschland grunds\u00e4tzlich kein gesetzlicher Feiertag. Eine Ausnahme ist Brandenburg: Dort ist Ostersonntag ein gesetzlicher Feiertag. F\u00fcr die meisten Bundesl\u00e4nder sind rund um Ostern nur Karfreitag und Ostermontag gesetzlich gesch\u00fctzt. Da Ostersonntag aber auf einen Sonntag f\u00e4llt, ist er ohnehin arbeitsfrei.`,
   },
   {
     question: "Warum \u00e4ndert sich das Osterdatum jedes Jahr?",
@@ -74,6 +74,18 @@ const getOsternFAQs = (year: number, easterDateStr: string) => [
   {
     question: "Wie viele freie Tage gibt es an Ostern?",
     answer: "Durch Karfreitag (Freitag) und Ostermontag (Montag) ergibt sich jedes Jahr automatisch ein langes Wochenende mit 4 freien Tagen \u2013 ganz ohne Urlaubstage. Mit geschickter Br\u00fcckentag-Planung lassen sich bis zu 10 zusammenh\u00e4ngende freie Tage erzielen.",
+  },
+  {
+    question: `Wann ist Karfreitag ${year}?`,
+    answer: `Karfreitag ${year} ist am ${formatDateDE(addDays(getEasterDate(year), -2))}. In Deutschland ist Karfreitag ein gesetzlicher Feiertag in allen Bundesl\u00e4ndern. Als stiller Feiertag gelten besondere Regeln, z.\u00a0B. bei Veranstaltungen und \u00d6ffnungszeiten.`,
+  },
+  {
+    question: `Wann ist Pfingsten ${year}?`,
+    answer: `Pfingstsonntag ${year} ist am ${formatDateDE(addDays(getEasterDate(year), 49))}, Pfingstmontag am ${formatDateDE(addDays(getEasterDate(year), 50))}. Pfingstmontag ist in Deutschland ein gesetzlicher Feiertag. Die Pfingsttage liegen 49/50 Tage nach Ostersonntag.`,
+  },
+  {
+    question: `Wann ist Christi Himmelfahrt ${year}?`,
+    answer: `Christi Himmelfahrt ${year} ist am ${formatDateDE(addDays(getEasterDate(year), 39))} (Donnerstag). Es ist ein bundesweiter gesetzlicher Feiertag, 39 Tage nach Ostersonntag. Mit einem Br\u00fcckentag am Freitag ergibt sich ein langes Wochenende.`,
   },
 ];
 
@@ -195,7 +207,7 @@ export default async function OsternPage({
       name: "Ostersonntag",
       date: easter,
       gesetzlich: false,
-      info: "kein gesetzlicher Feiertag",
+      info: "nur in Brandenburg gesetzl. Feiertag",
     },
     {
       name: "Ostermontag",
@@ -339,10 +351,35 @@ export default async function OsternPage({
             <strong className="text-text-primary">langes Wochenende mit 4 freien Tagen</strong>.
           </p>
 
-          {/* [PLACEHOLDER: SEO-Einleitungstext „Ostern {year}"] – 150–200 Wörter
-              Keywords: ostern {year}, wann ist ostern, ostersonntag {year}, ostern {year} datum, osterferien
-              Inhalt: Kulturelle Bedeutung von Ostern, Ostertraditionen in Deutschland,
-              Überleitung zu Feiertagen, Osterferien & Brückentagen */}
+          <p>
+            Ostern ist das wichtigste Fest der Christenheit und nach Weihnachten
+            das bedeutendste Familienfest in Deutschland. Damit du nicht lange
+            suchen musst, bekommst du hier{" "}
+            <strong className="text-text-primary">alles auf einer Seite</strong>:
+            einen schnellen Datums-&Uuml;berblick zu Gr&uuml;ndonnerstag, Karfreitag,
+            Karsamstag, Ostersonntag und{" "}
+            <Link href={`/ostermontag/${year}`} className="text-accent hover:underline">
+              Ostermontag
+            </Link>{" "}
+            plus eine &Uuml;bersicht der{" "}
+            <Link href={`/osterferien/${year}`} className="text-accent hover:underline">
+              Osterferien {year} nach Bundesland
+            </Link>
+            . Au&szlig;erdem findest du die wichtigsten{" "}
+            <Link href={`/feiertage/${year}`} className="text-accent hover:underline">
+              beweglichen Feiertage
+            </Link>{" "}
+            nach Ostern f&uuml;r deine Urlaubsplanung: Christi Himmelfahrt,
+            Pfingsten und Fronleichnam &ndash; inklusive Br&uuml;ckentage-Tipps.
+          </p>
+          <p>
+            Wichtig zu wissen: <strong className="text-text-primary">Ostersonntag</strong> ist
+            nur in <strong className="text-text-primary">Brandenburg</strong> ein
+            gesetzlicher Feiertag &ndash; in allen anderen Bundesl&auml;ndern sind
+            nur Karfreitag und Ostermontag gesetzlich gesch&uuml;tzt. Der Ostersamstag
+            (Karsamstag) hat eine besondere Bedeutung, ist aber normalerweise
+            kein gesetzlicher Feiertag.
+          </p>
         </div>
 
         {/* ── Hero-Box: Ostersonntag ──────────────────────────── */}
@@ -519,12 +556,18 @@ export default async function OsternPage({
             ══════════════════════════════════════════════════════ */}
         <div className="mt-14">
           <h2 className="text-2xl font-semibold mb-4">
-            Osterferien {year} &ndash; alle Bundesl&auml;nder im &Uuml;berblick
+            <Link href={`/osterferien/${year}`} className="hover:text-accent transition-colors">
+              Osterferien {year} &ndash; alle Bundesl&auml;nder im &Uuml;berblick
+            </Link>
           </h2>
           <p className="text-text-secondary text-sm leading-relaxed mb-4">
             <strong className="text-text-primary">Wann sind Osterferien {year}?</strong>{" "}
             Die Schulferien rund um Ostern variieren je nach Bundesland.
-            Hier die Termine f&uuml;r alle 16 Bundesl&auml;nder:
+            Hier die Termine f&uuml;r alle 16 Bundesl&auml;nder (ausf&uuml;hrliche
+            Infos zu NRW, Bayern &amp; mehr auf der{" "}
+            <Link href={`/osterferien/${year}`} className="text-accent hover:underline">
+              Osterferien-Seite
+            </Link>):
           </p>
 
           {osterferienData.length > 0 ? (
@@ -641,18 +684,28 @@ export default async function OsternPage({
             Warum f&auml;llt Ostern jedes Jahr auf ein anderes Datum?
           </h2>
           <div className="text-text-secondary text-sm leading-relaxed space-y-3">
-            {/* [PLACEHOLDER: SEO-Erklärtext „Warum ändert sich Ostern?"] – 100–150 Wörter
-                Keywords: osterdatum berechnung, bewegliche feiertage, frühlingsvollmond, computus
-                Inhalt: Erklärung Computus, Konzil von Nicäa 325, Frühlingsvollmond-Regel,
-                frühestes/spätestes Osterdatum (22. März – 25. April),
-                Bezug zu kirchlichen Feiertagen, Gauß'sche Osterformel */}
             <p>
               Ostern ist ein <strong className="text-text-primary">beweglicher Feiertag</strong>,
               dessen Datum sich nach dem Mondkalender richtet. Die Regel lautet:
               Ostersonntag ist der erste Sonntag nach dem ersten Vollmond im
               Fr&uuml;hling (nach dem 21.&nbsp;M&auml;rz). Dadurch kann Ostern
               fr&uuml;hestens am 22.&nbsp;M&auml;rz und sp&auml;testens am
-              25.&nbsp;April liegen.
+              25.&nbsp;April liegen. Diese Regel wurde 325&nbsp;n.&nbsp;Chr.
+              auf dem <strong className="text-text-primary">Konzil von Nic&auml;a</strong> festgelegt.
+            </p>
+            <p>
+              Wenn du das Osterdatum selbst berechnen willst, gehst du in drei
+              Schritten vor: 1.&nbsp;Den 21.&nbsp;M&auml;rz als kirchlichen
+              Fr&uuml;hlingsanfang merken. 2.&nbsp;Den n&auml;chsten Vollmond
+              danach bestimmen. 3.&nbsp;Den darauffolgenden Sonntag nehmen &ndash;
+              das ist Ostersonntag. Von diesem Datum h&auml;ngen sechs weitere
+              Feiertage ab: Karfreitag (&minus;2), Ostermontag (+1),
+              Christi Himmelfahrt (+39), Pfingstsonntag (+49), Pfingstmontag (+50)
+              und Fronleichnam (+60). Damit bestimmt das Osterdatum fast die
+              H&auml;lfte aller deutschen{" "}
+              <Link href={`/feiertage/${year}`} className="text-accent hover:underline">
+                Feiertage
+              </Link>.
             </p>
           </div>
         </div>
@@ -738,19 +791,33 @@ export default async function OsternPage({
             Osterbr&auml;uche &amp; Traditionen in Deutschland
           </h2>
           <div className="text-text-secondary text-sm leading-relaxed space-y-3">
-            {/* [PLACEHOLDER: SEO-Text „Osterbräuche & Traditionen"] – 150–200 Wörter
-                Keywords: osterbräuche deutschland, ostereier bemalen, ostertraditionen
-                Inhalt: Ostereier suchen & bemalen, Osterfeuer, Osterlamm, Osterhase-Brauch,
-                regionale Besonderheiten (Osterreiten in der Lausitz, Eierlaufen etc.),
-                kirchliche Traditionen (Karfreitags-Prozessionen, Osternacht),
-                Verlinkung zu weiterführenden Inhalten */}
             <p>
               Ostern ist nach Weihnachten das zweitwichtigste Fest in Deutschland
               und wird mit vielf&auml;ltigen Br&auml;uchen gefeiert. Vom{" "}
               <strong className="text-text-primary">Ostereier bemalen</strong> und
-              Verstecken &uuml;ber Osterlammessen bis hin zu regionalen Besonderheiten
+              Verstecken &uuml;ber das Osterlamm bis hin zu regionalen Besonderheiten
               wie dem Osterfeuer &ndash; die Traditionen variieren je nach Region und
               Konfession.
+            </p>
+            <p>
+              Ein Klassiker ist der <strong className="text-text-primary">Osterspaziergang</strong>:
+              Viele Familien nutzen den{" "}
+              <Link href={`/ostermontag/${year}`} className="text-accent hover:underline">
+                Ostermontag
+              </Link>{" "}
+              f&uuml;r eine Runde im Park, im Wald oder am Fluss. Ebenfalls verbreitet
+              sind Eierspiele wie <strong className="text-text-primary">Eierrollen</strong> am
+              Hang oder <strong className="text-text-primary">Eierpecken</strong> am Tisch.
+              In einigen Gegenden geh&ouml;rt auch ein Osterfeuer dazu &ndash; mal am
+              Ostersonntag, mal am Ostermontag.
+            </p>
+            <p>
+              Kirchlich pr&auml;gen <strong className="text-text-primary">Karfreitags-Prozessionen</strong>,
+              die <strong className="text-text-primary">Osternacht</strong> mit Tauffeier und
+              der <strong className="text-text-primary">Emmausgang</strong> am Ostermontag
+              die Osterzeit. Regionale Besonderheiten wie das{" "}
+              <strong className="text-text-primary">Osterreiten</strong> in der Lausitz
+              oder das Eierlaufen zeigen die kulturelle Vielfalt der deutschen Ostertraditionen.
             </p>
           </div>
         </div>
@@ -780,12 +847,80 @@ export default async function OsternPage({
           </div>
         </div>
 
-        {/* ── SEO-Abschlusstext Placeholder ───────────────────── */}
+        {/* ── Karwoche (Palmsonntag bis Weißer Sonntag) ─────── */}
+        <div className="mt-14">
+          <h2 className="text-2xl font-semibold mb-4">
+            Karwoche {year}: Palmsonntag bis Wei&szlig;er Sonntag
+          </h2>
+          <p className="text-text-secondary text-sm leading-relaxed mb-4">
+            Die Karwoche beginnt am Palmsonntag und endet mit dem Osterfest.
+            Nicht jeder Termin ist ein gesetzlicher Feiertag &ndash; viele Daten
+            sind vor allem f&uuml;r Gottesdienste, Prozessionen und regionale
+            Br&auml;uche wichtig.
+          </p>
+          <div className="overflow-x-auto rounded-xl border border-border">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="border-b border-border bg-surface-secondary">
+                  <th className="text-left px-4 py-3 font-medium text-text-secondary">Anlass</th>
+                  <th className="text-left px-4 py-3 font-medium text-text-secondary">Datum</th>
+                  <th className="text-left px-4 py-3 font-medium text-text-secondary">Bedeutung</th>
+                  <th className="text-left px-4 py-3 font-medium text-text-secondary">Feiertag?</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[
+                  { name: "Palmsonntag", date: addDays(easter, -7), meaning: "Beginn der Karwoche", feiertag: false },
+                  { name: "Gründonnerstag", date: gruendonnerstag, meaning: "Letztes Abendmahl", feiertag: false },
+                  { name: "Karfreitag", date: karfreitag, meaning: "Kreuzigung, stiller Feiertag", feiertag: true },
+                  { name: "Karsamstag", date: ostersamstag, meaning: "Tag der Grabesruhe", feiertag: false },
+                  { name: "Ostersonntag", date: easter, meaning: "Auferstehung", feiertag: false },
+                  { name: "Ostermontag", date: ostermontag, meaning: "Emmausgang, Familienbesuche", feiertag: true },
+                  { name: "Weißer Sonntag", date: addDays(easter, 7), meaning: "Erstkommunion, regional wichtig", feiertag: false },
+                ].map((row, i) => (
+                  <tr key={i} className="border-b border-border last:border-b-0">
+                    <td className="px-4 py-3 font-medium text-text-primary whitespace-nowrap">{row.name}</td>
+                    <td className="px-4 py-3 text-text-secondary whitespace-nowrap">{formatDateDE(row.date)}</td>
+                    <td className="px-4 py-3 text-text-secondary">{row.meaning}</td>
+                    <td className="px-4 py-3 text-text-secondary text-xs">
+                      {row.feiertag ? (
+                        <span className="text-green-500 font-medium">&#10003; ja</span>
+                      ) : (
+                        <span>nein</span>
+                      )}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        {/* ── SEO-Abschlusstext ───────────────────────────────── */}
         <div className="mt-14">
           <div className="text-text-secondary text-sm leading-relaxed space-y-3">
-            {/* [PLACEHOLDER: SEO-Abschlusstext] – 60–80 Wörter
-                Keywords: ostern {year} deutschland, osterfeiertage, osterferien {year}
-                Inhalt: Zusammenfassung, Verweis auf Feiertage-Übersicht, KW-Seiten & Schulferien */}
+            <p>
+              Damit hast du <strong className="text-text-primary">Ostern {year}</strong> kompakt
+              im Blick: Karfreitag, Ostersonntag und{" "}
+              <Link href={`/ostermontag/${year}`} className="text-accent hover:underline">
+                Ostermontag
+              </Link>{" "}
+              sind die zentralen Daten &ndash; wobei Ostersonntag nur in Brandenburg
+              ein gesetzlicher Feiertag ist. Die{" "}
+              <Link href={`/osterferien/${year}`} className="text-accent hover:underline">
+                Osterferien {year}
+              </Link>{" "}
+              und einzelne Feiertagsregelungen h&auml;ngen vom Bundesland ab.
+              F&uuml;r die weitere Planung findest du alle{" "}
+              <Link href={`/feiertage/${year}`} className="text-accent hover:underline">
+                Feiertage {year}
+              </Link>{" "}
+              und{" "}
+              <Link href={`/kalenderwochen/${year}`} className="text-accent hover:underline">
+                Kalenderwochen {year}
+              </Link>{" "}
+              in der &Uuml;bersicht.
+            </p>
           </div>
         </div>
 
@@ -806,11 +941,13 @@ export default async function OsternPage({
         {/* ── Abschluss-Links ──────────────────────────────────── */}
         <div className="mt-6 flex flex-wrap gap-4 text-sm">
           <Link href="/" className="text-accent hover:underline">&larr; Aktuelle KW</Link>
+          <Link href={`/ostermontag/${year}`} className="text-accent hover:underline">Ostermontag {year} &rarr;</Link>
+          <Link href={`/osterferien/${year}`} className="text-accent hover:underline">Osterferien {year} &rarr;</Link>
           <Link href="/feiertage" className="text-accent hover:underline">Feiertage &Uuml;bersicht &rarr;</Link>
           <Link href={`/feiertage/${year}`} className="text-accent hover:underline">Feiertage {year} &rarr;</Link>
           <Link href={`/schulferien/${year}`} className="text-accent hover:underline">Schulferien {year} &rarr;</Link>
           <Link href="/faq" className="text-accent hover:underline">FAQ &rarr;</Link>
-          <Link href="/kalenderwoche" className="text-accent hover:underline">Kalenderwochen {year} &rarr;</Link>
+          <Link href={`/kalenderwochen/${year}`} className="text-accent hover:underline">Kalenderwochen {year} &rarr;</Link>
         </div>
       </section>
     </>

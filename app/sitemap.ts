@@ -161,6 +161,26 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })
   );
 
+  // ── Ostermontag-Seiten (/ostermontag/[year]) ────────────
+  const ostermontagPages: MetadataRoute.Sitemap = CONTENT_YEARS.map(
+    (year) => ({
+      url: `https://aktuellekw.de/ostermontag/${year}`,
+      lastModified: year === currentYear ? now : new Date(`${year}-01-01`),
+      changeFrequency: "yearly" as const,
+      priority: year === currentYear ? 0.7 : 0.5,
+    })
+  );
+
+  // ── Osterferien-Seiten (/osterferien/[year]) ────────────
+  const osterferienPages: MetadataRoute.Sitemap = CONTENT_YEARS.map(
+    (year) => ({
+      url: `https://aktuellekw.de/osterferien/${year}`,
+      lastModified: year === currentYear ? now : new Date(`${year}-01-01`),
+      changeFrequency: "yearly" as const,
+      priority: year === currentYear ? 0.75 : 0.55,
+    })
+  );
+
   // ── Schulferien Hub-Seiten (/schulferien-[jahr]) ─────────
   const schulferienHubPages: MetadataRoute.Sitemap = CONTENT_YEARS.map(
     (year) => ({
@@ -186,6 +206,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...corePages,
     ...feiertageYearPages,
     ...osternPages,
+    ...ostermontagPages,
+    ...osterferienPages,
     ...yearPages,
     ...kwPages,
     ...schulferienHubPages,

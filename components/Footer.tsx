@@ -68,6 +68,12 @@ export default function Footer() {
               <Link href={`/ostern/${year}`} className="text-sm text-text-secondary hover:text-text-primary transition-colors">
                 Ostern {year}
               </Link>
+              <Link href={`/ostermontag/${year}`} className="text-sm text-text-secondary hover:text-text-primary transition-colors">
+                Ostermontag {year}
+              </Link>
+              <Link href={`/osterferien/${year}`} className="text-sm text-text-secondary hover:text-text-primary transition-colors">
+                Osterferien {year}
+              </Link>
               <Link href="/schulferien/2025" className="text-sm text-text-secondary hover:text-text-primary transition-colors">
                 Schulferien 2025
               </Link>
