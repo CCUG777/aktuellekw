@@ -31,6 +31,7 @@ export default function Header() {
           <ActiveNavLink href="/kalenderwoche" label="Kalenderwochen" />
           <ActiveNavLink href="/feiertage/2026" label="Feiertage 2026" />
           <ActiveNavLink href="/schulferien/2026" label="Schulferien 2026" />
+          <ActiveNavLink href="/datum-heute" label="Datum heute" />
           <ActiveNavLink href="/faq" label="FAQ" />
           <ThemeToggle />
         </div>

@@ -14,6 +14,7 @@ const navLinks = [
 ];
 
 const moreLinks = [
+  { href: "/datum-heute", label: "Datum heute" },
   { href: "/feiertage/2026", label: "Feiertage 2026" },
   { href: "/welche-kalenderwoche-haben-wir", label: "Welche KW haben wir?" },
   { href: "/wie-viele-wochen-hat-ein-jahr", label: "Wochen im Jahr" },

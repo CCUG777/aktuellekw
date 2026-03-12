@@ -47,6 +47,9 @@ export default function Footer() {
               <Link href="/faq" className="text-sm text-text-secondary hover:text-text-primary transition-colors">
                 FAQ
               </Link>
+              <Link href="/datum-heute" className="text-sm text-text-secondary hover:text-text-primary transition-colors">
+                Datum heute
+              </Link>
               <Link href="/welche-kalenderwoche-haben-wir" className="text-sm text-text-secondary hover:text-text-primary transition-colors">
                 Welche KW haben wir?
               </Link>

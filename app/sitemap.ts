@@ -79,6 +79,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "yearly",
       priority: 0.75,
     },
+    // Datum heute
+    {
+      url: "https://aktuellekw.de/datum-heute",
+      lastModified: now,
+      changeFrequency: "daily",
+      priority: 0.85,
+    },
     // Feiertage Deutschland
     {
       url: "https://aktuellekw.de/feiertage",
