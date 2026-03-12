@@ -7,9 +7,12 @@ import {
   getHolidaysPerState,
   getBrueckentage,
   getNextFeiertag,
+  getEasterDate,
+  addDays,
   getISOWeekNumber,
   formatDateDE,
   getDayNameDE,
+  BUNDESLAND_NAMES,
   FEIERTAGE_FAQS,
 } from "@/lib/feiertage";
 
@@ -17,6 +20,41 @@ export const revalidate = 3600;
 
 /* ── Valid years ───────────────────────────────────────────────── */
 const FEIERTAGE_YEARS = CONTENT_YEARS;
+
+/* ── Weekday helpers ──────────────────────────────────────────── */
+const WOCHENTAG_KURZ = ["So", "Mo", "Di", "Mi", "Do", "Fr", "Sa"];
+
+/* ── State-specific additional holidays for detail table ──────── */
+const STATE_EXTRAS: Record<
+  string,
+  { extras: string[]; hinweis?: string }
+> = {
+  BW: { extras: ["Heilige Drei Könige", "Fronleichnam", "Allerheiligen"] },
+  BY: {
+    extras: [
+      "Heilige Drei Könige",
+      "Fronleichnam",
+      "Mariä Himmelfahrt",
+      "Allerheiligen",
+      "Buß- und Bettag",
+    ],
+    hinweis: "Mariä Himmelfahrt teils kommunal; Buß- und Bettag nur BY/SN",
+  },
+  BE: { extras: ["Internationaler Frauentag"] },
+  BB: { extras: ["Reformationstag"] },
+  HB: { extras: ["Reformationstag"] },
+  HH: { extras: ["Reformationstag"] },
+  HE: { extras: ["Fronleichnam"] },
+  MV: { extras: ["Internationaler Frauentag", "Reformationstag"] },
+  NI: { extras: ["Reformationstag"] },
+  NW: { extras: ["Fronleichnam", "Allerheiligen"] },
+  RP: { extras: ["Fronleichnam", "Allerheiligen"] },
+  SL: { extras: ["Fronleichnam", "Mariä Himmelfahrt", "Allerheiligen"] },
+  SN: { extras: ["Reformationstag", "Buß- und Bettag"] },
+  ST: { extras: ["Heilige Drei Könige", "Reformationstag"] },
+  SH: { extras: ["Reformationstag"] },
+  TH: { extras: ["Weltkindertag", "Reformationstag"] },
+};
 
 /* ── Static Params ─────────────────────────────────────────────── */
 export function generateStaticParams() {
@@ -41,7 +79,7 @@ export async function generateMetadata({
   const regional = holidays.filter((h) => !h.isNationwide).length;
 
   const title = `Feiertage ${year} Deutschland – Alle ${nationwide + regional} Feiertage`;
-  const description = `Gesetzliche Feiertage ${year} in Deutschland: ${nationwide} bundesweite + ${regional} regionale Feiertage. Datum, KW & Bundesland. Br\u00fcckentage ${year} clever planen.`;
+  const description = `Gesetzliche Feiertage ${year} in Deutschland: ${nationwide} bundesweite + ${regional} regionale Feiertage mit Datum, Wochentag & KW. Brückentage ${year} clever planen – inkl. Bundesland-Übersicht.`;
   const url = `https://aktuellekw.de/feiertage/${year}`;
 
   return {
@@ -64,6 +102,70 @@ export async function generateMetadata({
   };
 }
 
+/* ── Helper: year-specific dynamic FAQs ─────────────────────────── */
+function getYearFAQs(
+  year: number,
+  nationwideCount: number,
+  regionalCount: number,
+  easter: Date,
+  weekendNationwide: number,
+  workdayNationwide: number
+) {
+  const fronleichnam = addDays(easter, 60);
+  const himmelfahrt = addDays(easter, 39);
+  const pfingstsonntag = addDays(easter, 49);
+  const pfingstmontag = addDays(easter, 50);
+  const karfreitag = addDays(easter, -2);
+  const ostermontag = addDays(easter, 1);
+
+  return [
+    {
+      question: `Wie viele gesetzliche Feiertage gibt es ${year} in Deutschland?`,
+      answer: `Bundesweit gibt es ${year} in Deutschland ${nationwideCount} gesetzliche Feiertage, die in allen Bundesländern gelten. Zusätzlich kommen je nach Bundesland weitere Feiertage dazu (z.\u00a0B. Fronleichnam oder Reformationstag). Insgesamt gibt es ${nationwideCount + regionalCount} verschiedene gesetzliche Feiertage – wie viele davon für Sie gelten, hängt von Ihrem Bundesland ab.`,
+    },
+    {
+      question: `Welche Feiertage ${year} sind bundesweit (in allen Bundesländern)?`,
+      answer: `Bundesweite Feiertage ${year}: Neujahr (01.01.), Karfreitag (${formatDateDE(karfreitag)}), Ostermontag (${formatDateDE(ostermontag)}), Tag der Arbeit (01.05.), Christi Himmelfahrt (${formatDateDE(himmelfahrt)}), Pfingstmontag (${formatDateDE(pfingstmontag)}), Tag der Deutschen Einheit (03.10.), 1.\u00a0Weihnachtstag (25.12.) und 2.\u00a0Weihnachtstag (26.12.).`,
+    },
+    {
+      question: `Auf welche Tage fallen die Feiertage ${year}?`,
+      answer: `${year} fallen ${workdayNationwide} der ${nationwideCount} bundesweiten Feiertage auf Werktage (Montag bis Freitag) und ${weekendNationwide} auf ein Wochenende (Samstag/Sonntag). Feiertage am Donnerstag oder Dienstag bieten besonders gute Brückentage-Chancen.`,
+    },
+    {
+      question: `Wann ist Ostern ${year} in Deutschland?`,
+      answer: `Ostersonntag ist ${year} am ${formatDateDE(easter)}. Die gesetzlichen Feiertage rund um Ostern ${year} sind Karfreitag (${formatDateDE(karfreitag)}) und Ostermontag (${formatDateDE(ostermontag)}). Diese Termine gelten bundesweit.`,
+    },
+    {
+      question: `Wann ist Christi Himmelfahrt ${year}?`,
+      answer: `Christi Himmelfahrt ist ${year} am ${formatDateDE(himmelfahrt)} (${getDayNameDE(himmelfahrt)}). Der Feiertag gehört zu den bundesweiten gesetzlichen Feiertagen ${year} und gilt in allen Bundesländern. Er fällt immer auf einen Donnerstag – ideal für einen Brückentag am Freitag.`,
+    },
+    {
+      question: `Wann ist Pfingsten ${year}?`,
+      answer: `Pfingstsonntag ist ${year} am ${formatDateDE(pfingstsonntag)}, Pfingstmontag am ${formatDateDE(pfingstmontag)}. Gesetzlicher Feiertag ist Pfingstmontag, und der gilt bundesweit.`,
+    },
+    {
+      question: `Wann ist Fronleichnam ${year} und wo ist es ein Feiertag?`,
+      answer: `Fronleichnam ist ${year} am ${formatDateDE(fronleichnam)} (${getDayNameDE(fronleichnam)}). Gesetzlicher Feiertag ist Fronleichnam in Baden-Württemberg, Bayern, Hessen, Nordrhein-Westfalen, Rheinland-Pfalz und Saarland sowie in Teilen von Sachsen und Thüringen.`,
+    },
+    {
+      question: `Fällt ein Feiertag ${year} auf ein Wochenende – gibt es dann einen Ersatz-Feiertag?`,
+      answer: `Nein, in Deutschland gibt es in der Regel keinen Ersatz-Feiertag, wenn ein gesetzlicher Feiertag ${year} auf ein Wochenende fällt. Der Feiertag bleibt am Datum, auch wenn er auf Samstag oder Sonntag liegt. Ausnahmen ergeben sich nur durch landesrechtliche Sonderregelungen.`,
+    },
+    {
+      question: `Wo ist Reformationstag ${year} ein gesetzlicher Feiertag?`,
+      answer: `Reformationstag (31.10.${year}) ist ein gesetzlicher Feiertag in Brandenburg, Bremen, Hamburg, Mecklenburg-Vorpommern, Niedersachsen, Sachsen, Sachsen-Anhalt, Schleswig-Holstein und Thüringen.`,
+    },
+    {
+      question: `Wo gilt Mariä Himmelfahrt ${year} als gesetzlicher Feiertag?`,
+      answer: `Mariä Himmelfahrt am 15.08.${year} ist nur regional gesetzlicher Feiertag: im Saarland und in Bayern in Gemeinden mit überwiegend katholischer Bevölkerung. Ob Sie arbeitsfrei haben, hängt von Ihrem konkreten Wohnort ab.`,
+    },
+    {
+      question: `Was ist der Buß- und Bettag ${year} und wo ist er arbeitsfrei?`,
+      answer: `Der Buß- und Bettag ist ein evangelischer Gedenk- und Feiertag. Gesetzlich arbeitsfrei ist er nur in Sachsen. In anderen Bundesländern gelten teils besondere Regelungen (z.\u00a0B. für Schulen und Kitas).`,
+    },
+  ];
+}
+
 /* ── Page Component ────────────────────────────────────────────── */
 export default async function FeiertageYearPage({
   params,
@@ -83,16 +185,57 @@ export default async function FeiertageYearPage({
   const isCurrentYear = year === currentYear;
 
   const holidays = getFeiertageFuerJahr(year);
-  const nationwideCount = holidays.filter((h) => h.isNationwide).length;
+  const nationwideHolidays = holidays.filter((h) => h.isNationwide);
+  const nationwideCount = nationwideHolidays.length;
   const regionalCount = holidays.filter((h) => !h.isNationwide).length;
   const stateHolidayCounts = getHolidaysPerState(holidays);
   const brueckentage = getBrueckentage(year);
   const nextHoliday = getNextFeiertag();
 
+  /* ── Weekday distribution ─────────────────────────────────── */
+  const weekdayCounts = [0, 0, 0, 0, 0, 0, 0]; // So Mo Di Mi Do Fr Sa
+  nationwideHolidays.forEach((h) => {
+    weekdayCounts[h.date.getUTCDay()]++;
+  });
+  const weekendNationwide = weekdayCounts[0] + weekdayCounts[6];
+  const workdayNationwide = nationwideCount - weekendNationwide;
+
+  /* ── Easter & movable holidays ─────────────────────────────── */
+  const easter = getEasterDate(year);
+  const movableHolidays = [
+    { name: "Karfreitag", offset: -2, date: addDays(easter, -2), regional: false },
+    { name: "Ostersonntag", offset: 0, date: easter, regional: false },
+    { name: "Ostermontag", offset: +1, date: addDays(easter, 1), regional: false },
+    { name: "Christi Himmelfahrt", offset: +39, date: addDays(easter, 39), regional: false },
+    { name: "Pfingstsonntag", offset: +49, date: addDays(easter, 49), regional: false },
+    { name: "Pfingstmontag", offset: +50, date: addDays(easter, 50), regional: false },
+    { name: "Fronleichnam", offset: +60, date: addDays(easter, 60), regional: true },
+  ];
+
   const prevYear = year - 1;
   const nextYear = year + 1;
   const hasPrev = FEIERTAGE_YEARS.includes(prevYear);
   const hasNext = FEIERTAGE_YEARS.includes(nextYear);
+
+  /* ── Year-specific FAQs ───────────────────────────────────── */
+  const yearFAQs = getYearFAQs(
+    year,
+    nationwideCount,
+    regionalCount,
+    easter,
+    weekendNationwide,
+    workdayNationwide
+  );
+  const allFAQs = [...yearFAQs, ...FEIERTAGE_FAQS];
+
+  /* ── Holiday date lookups for state sections ─────────────── */
+  const findHoliday = (name: string) =>
+    holidays.find((h) => h.name === name);
+  const dreiKoenige = findHoliday("Heilige Drei Könige");
+  const fronleichnam = findHoliday("Fronleichnam");
+  const allerheiligen = findHoliday("Allerheiligen");
+  const frauentag = findHoliday("Internationaler Frauentag");
+  const mariaeHimmelfahrt = findHoliday("Mariä Himmelfahrt");
 
   /* ── JSON-LD ───────────────────────────────────────────────── */
   const jsonLd = [
@@ -137,7 +280,7 @@ export default async function FeiertageYearPage({
     {
       "@context": "https://schema.org",
       "@type": "FAQPage",
-      mainEntity: FEIERTAGE_FAQS.map((faq) => ({
+      mainEntity: allFAQs.map((faq) => ({
         "@type": "Question",
         name: faq.question,
         acceptedAnswer: {
@@ -204,13 +347,24 @@ export default async function FeiertageYearPage({
 
         <div className="text-text-secondary leading-relaxed mb-6 space-y-3">
           <p>
-            Alle <strong className="text-text-primary">{nationwideCount + regionalCount} gesetzlichen Feiertage {year}</strong> in
-            Deutschland auf einen Blick: {nationwideCount} bundesweite und {regionalCount} regionale
-            Feiertage mit Datum, Wochentag und{" "}
+            Feiertage {year}: Wann haben Sie frei – inklusive Datum und Wochentag?
+            Hier finden Sie den Schnell-&Uuml;berblick mit allen{" "}
+            <strong className="text-text-primary">
+              {nationwideCount + regionalCount} gesetzlichen Feiertagen {year}
+            </strong>{" "}
+            in Deutschland auf einen Blick: {nationwideCount} bundesweite und{" "}
+            {regionalCount} regionale Feiertage mit Datum, Wochentag und{" "}
             <strong className="text-text-primary">Kalenderwoche</strong>.
+          </p>
+          <p>
+            Danach sehen Sie alle gesetzlichen Feiertage {year} nach Bundesland
+            in einer einzigen, kompakten &Uuml;bersicht &ndash; ideal, wenn Sie
+            zwischen Wohnort, Job und Familie planen. Dazu gibt es einen{" "}
+            <strong className="text-text-primary">Br&uuml;ckentage-Block</strong>{" "}
+            mit den besten Urlaubs-Kombis f&uuml;r extra lange Wochenenden
             {brueckentage.length > 0 && (
-              <> Nutzen Sie {brueckentage.length} Br&uuml;ckentage f&uuml;r maximale Freizeit.</>
-            )}
+              <> &ndash; {brueckentage.length} Br&uuml;ckentage warten auf Sie</>
+            )}.
           </p>
 
           {/* Schnell-Info box – nur im aktuellen Jahr */}
@@ -252,11 +406,21 @@ export default async function FeiertageYearPage({
           ))}
         </div>
 
-        {/* ── Feiertage table ─────────────────────────────────── */}
+        {/* ═════════════════════════════════════════════════════════
+            SECTION 1: Bundesweite Feiertage-Tabelle
+            ═════════════════════════════════════════════════════════ */}
         <div>
-          <h2 className="text-2xl font-semibold mb-4">
-            Alle gesetzlichen Feiertage {year}
+          <h2 className="text-2xl font-semibold mb-2">
+            Feiertage {year} in Deutschland (bundesweit): Termine und Wochentage
           </h2>
+          <p className="text-text-secondary text-sm leading-relaxed mb-4">
+            <strong className="text-text-primary">Feste Feiertage</strong> haben
+            jedes Jahr dasselbe Datum,{" "}
+            <strong className="text-text-primary">bewegliche Feiertage</strong>{" "}
+            richten sich nach Ostern. In dieser Tabelle finden Sie alle{" "}
+            {nationwideCount + regionalCount} gesetzlichen Feiertage {year} mit
+            Datum, Wochentag, Kalenderwoche und G&uuml;ltigkeitsbereich.
+          </p>
           <div className="overflow-x-auto rounded-xl border border-border">
             <table className="w-full text-sm">
               <thead>
@@ -337,19 +501,148 @@ export default async function FeiertageYearPage({
           </div>
           <p className="text-text-secondary text-xs mt-2">
             {nationwideCount} bundesweite + {regionalCount} regionale
-            Feiertage = {nationwideCount + regionalCount} gesamt
+            Feiertage = {nationwideCount + regionalCount} gesamt.{" "}
+            F&uuml;r regionale Feiertage und eine komplette Jahres&uuml;bersicht nutzen
+            Sie die{" "}
+            <Link href="/feiertage" className="text-accent hover:underline">
+              Feiertage-&Uuml;bersicht
+            </Link>.
           </p>
         </div>
 
-        {/* ── Feiertage nach Bundesland ────────────────────────── */}
+        {/* ═════════════════════════════════════════════════════════
+            SECTION 2: Auf welche Tage fallen die Feiertage?
+            ═════════════════════════════════════════════════════════ */}
         <div className="mt-14">
           <h2 className="text-2xl font-semibold mb-4">
-            Feiertage {year} nach Bundesland
+            Auf welche Tage fallen die Feiertage {year}?
+          </h2>
+          <div className="text-text-secondary text-sm leading-relaxed space-y-3 mb-4">
+            <p>
+              F&uuml;r Ihre Planung z&auml;hlt vor allem, welche Termine auf das Wochenende
+              fallen. {year} liegen{" "}
+              <strong className="text-text-primary">{workdayNationwide}</strong> der{" "}
+              {nationwideCount} bundesweiten Feiertage auf <strong className="text-text-primary">Werktagen</strong> (Montag
+              bis Freitag) und{" "}
+              <strong className="text-text-primary">{weekendNationwide}</strong> auf
+              einem <strong className="text-text-primary">Wochenende</strong> (Samstag/Sonntag).
+            </p>
+            <p>
+              Besonders <strong className="text-text-primary">br&uuml;ckentagefreundlich</strong>{" "}
+              sind Feiertage, die auf Donnerstag oder Freitag liegen: So reicht oft ein
+              zus&auml;tzlicher Urlaubstag f&uuml;r ein langes Wochenende.
+            </p>
+          </div>
+
+          {/* Weekday distribution */}
+          <div className="bg-surface-secondary border border-border rounded-xl p-4 mb-4">
+            <p className="text-xs font-semibold uppercase tracking-wider text-text-secondary mb-3">
+              Bundesweite Feiertage {year} nach Wochentag
+            </p>
+            <div className="grid grid-cols-7 gap-2 text-center">
+              {WOCHENTAG_KURZ.map((tag, i) => (
+                <div key={tag}>
+                  <div className="text-xs text-text-secondary mb-1">{tag}</div>
+                  <div
+                    className={`text-lg font-bold ${
+                      weekdayCounts[i] > 0
+                        ? i === 0 || i === 6
+                          ? "text-text-secondary"
+                          : "text-accent"
+                        : "text-text-secondary/40"
+                    }`}
+                  >
+                    {weekdayCounts[i]}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* InfoBox */}
+          <div className="bg-accent/10 border border-accent/20 rounded-xl p-4 text-sm">
+            <p className="text-text-primary">
+              <strong>Kurzfazit:</strong> Bundeseinheitliche Feiertage am{" "}
+              <strong>Wochenende</strong>: {weekendNationwide} (Sa/So) &middot;{" "}
+              Bundeseinheitliche Feiertage am <strong>Werktag</strong>: {workdayNationwide} (Mo&ndash;Fr)
+            </p>
+          </div>
+        </div>
+
+        {/* ═════════════════════════════════════════════════════════
+            SECTION 3: Feiertage nach Bundesland (enhanced)
+            ═════════════════════════════════════════════════════════ */}
+        <div className="mt-14">
+          <h2 className="text-2xl font-semibold mb-4">
+            Gesetzliche Feiertage {year} nach Bundesland
           </h2>
           <p className="text-text-secondary text-sm leading-relaxed mb-4">
-            Die Anzahl der gesetzlichen Feiertage variiert je nach Bundesland
-            zwischen 10 und 13 Tagen. Hier die &Uuml;bersicht f&uuml;r {year}:
+            Das Feiertagsrecht ist in Deutschland L&auml;ndersache. Neben den
+            bundesweit einheitlichen Terminen gibt es je nach Region weitere
+            gesetzliche Feiertage {year}. F&uuml;r Ihre Urlaubs- und
+            Projektplanung lohnt sich deshalb ein kurzer Check im eigenen
+            Bundesland.
           </p>
+
+          {/* Detailed state table */}
+          <div className="overflow-x-auto rounded-xl border border-border mb-6">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="border-b border-border bg-surface-secondary">
+                  <th className="text-left px-4 py-3 font-medium text-text-secondary">
+                    Bundesland
+                  </th>
+                  <th className="text-left px-4 py-3 font-medium text-text-secondary">
+                    Zus&auml;tzliche Feiertage
+                  </th>
+                  <th className="text-left px-4 py-3 font-medium text-text-secondary">
+                    Gesamt
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {stateHolidayCounts.map((s) => {
+                  const info = STATE_EXTRAS[s.code];
+                  const slug = s.name
+                    .toLowerCase()
+                    .replace(/ä/g, "ae")
+                    .replace(/ö/g, "oe")
+                    .replace(/ü/g, "ue")
+                    .replace(/ß/g, "ss")
+                    .replace(/\s+/g, "-");
+                  return (
+                    <tr
+                      key={s.code}
+                      className="border-b border-border last:border-b-0"
+                    >
+                      <td className="px-4 py-3 font-medium text-text-primary whitespace-nowrap">
+                        <Link
+                          href={`/feiertage/${year}/${slug}`}
+                          className="text-accent hover:underline"
+                        >
+                          {s.name}
+                        </Link>{" "}
+                        <span className="text-text-secondary text-xs">({s.code})</span>
+                      </td>
+                      <td className="px-4 py-3 text-text-secondary">
+                        {info ? info.extras.join("; ") : "–"}
+                        {info?.hinweis && (
+                          <span className="block text-xs text-text-secondary/70 mt-0.5">
+                            {info.hinweis}
+                          </span>
+                        )}
+                      </td>
+                      <td className="px-4 py-3 text-center">
+                        <span className="text-accent font-semibold">{s.count}</span>
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+
+          {/* State-specific quick-access grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
             {stateHolidayCounts.map((s) => {
               const slug = s.name
@@ -370,24 +663,197 @@ export default async function FeiertageYearPage({
                   </span>
                   <span className="text-text-secondary">
                     <span className="text-accent font-semibold">{s.count}</span>{" "}
-                    Feiertage →
+                    Feiertage &rarr;
                   </span>
                 </Link>
               );
             })}
           </div>
+
+          {/* ── State subsections: BW, NRW, Bayern, Berlin ─── */}
+          <div className="mt-8 space-y-6">
+
+            {/* BW */}
+            <div>
+              <h3 className="text-lg font-semibold mb-2">
+                Feiertage {year} in Baden-W&uuml;rttemberg
+              </h3>
+              <p className="text-text-secondary text-sm leading-relaxed mb-2">
+                F&uuml;r die Feiertage {year} in BW gelten neben den bundesweiten
+                Terminen drei zus&auml;tzliche gesetzliche Feiertage: zwei davon sind
+                fest, einer ist beweglich &ndash; das hilft bei der Urlaubsplanung rund
+                um die gesetzlichen Feiertage Baden-W&uuml;rttemberg {year}.
+              </p>
+              <ul className="text-text-secondary text-sm list-disc list-inside space-y-1">
+                <li>
+                  <strong className="text-text-primary">Heilige Drei K&ouml;nige</strong>{" "}
+                  (fest: {dreiKoenige ? formatDateDE(dreiKoenige.date) : "06.01."})
+                </li>
+                <li>
+                  <strong className="text-text-primary">Fronleichnam</strong>{" "}
+                  (beweglich: {fronleichnam ? formatDateDE(fronleichnam.date) : "Juni"})
+                </li>
+                <li>
+                  <strong className="text-text-primary">Allerheiligen</strong>{" "}
+                  (fest: {allerheiligen ? formatDateDE(allerheiligen.date) : "01.11."})
+                </li>
+              </ul>
+              <p className="text-text-secondary text-xs mt-2">
+                <Link
+                  href={`/feiertage/${year}/baden-wuerttemberg`}
+                  className="text-accent hover:underline"
+                >
+                  Alle Feiertage BW {year} im Detail &rarr;
+                </Link>
+              </p>
+            </div>
+
+            {/* NRW */}
+            <div>
+              <h3 className="text-lg font-semibold mb-2">
+                Feiertage {year} in Nordrhein-Westfalen (NRW)
+              </h3>
+              <p className="text-text-secondary text-sm leading-relaxed mb-2">
+                In Nordrhein-Westfalen gibt es {year} zus&auml;tzlich zu den
+                bundesweiten Terminen zwei landesspezifische Feiertage:{" "}
+                <strong className="text-text-primary">Fronleichnam</strong> ({fronleichnam ? formatDateDE(fronleichnam.date) : ""})
+                und{" "}
+                <strong className="text-text-primary">Allerheiligen</strong> ({allerheiligen ? formatDateDE(allerheiligen.date) : "01.11."}).
+                Diese Tage sind besonders relevant, wenn Sie Br&uuml;ckentage
+                oder Urlaub planen.
+              </p>
+              <div className="bg-accent/10 border border-accent/20 rounded-xl p-3 text-sm">
+                <strong className="text-text-primary">Gesetzliche Feiertage NRW {year}
+                insgesamt:</strong>{" "}
+                {holidays.filter((h) => h.states.includes("NW")).length}{" "}
+                ({nationwideCount} bundesweit + {holidays.filter((h) => h.states.includes("NW")).length - nationwideCount} in NRW)
+              </div>
+              <p className="text-text-secondary text-xs mt-2">
+                <Link
+                  href={`/feiertage/${year}/nordrhein-westfalen`}
+                  className="text-accent hover:underline"
+                >
+                  Alle Feiertage NRW {year} im Detail &rarr;
+                </Link>
+              </p>
+            </div>
+
+            {/* Bayern */}
+            <div>
+              <h3 className="text-lg font-semibold mb-2">
+                Feiertage {year} in Bayern
+              </h3>
+              <p className="text-text-secondary text-sm leading-relaxed mb-2">
+                Bei den Feiertagen {year} in Bayern sind viele Termine im ganzen
+                Bundesland gesetzlich geregelt. Einige{" "}
+                <strong className="text-text-primary">regionale Feiertage</strong>{" "}
+                gelten jedoch nur in bestimmten Gemeinden oder St&auml;dten. So f&auml;llt{" "}
+                <strong className="text-text-primary">Mari&auml; Himmelfahrt</strong> nur dann
+                als Feiertag an, wenn die Gemeinde dazu z&auml;hlt. Das{" "}
+                <strong className="text-text-primary">Augsburger Friedensfest</strong>{" "}
+                (8. August) gilt ausschlie&szlig;lich in Augsburg.
+              </p>
+              <div className="overflow-x-auto rounded-xl border border-border">
+                <table className="w-full text-sm">
+                  <thead>
+                    <tr className="border-b border-border bg-surface-secondary">
+                      <th className="text-left px-4 py-2.5 font-medium text-text-secondary">Feiertag</th>
+                      <th className="text-left px-4 py-2.5 font-medium text-text-secondary">Landesweit?</th>
+                      <th className="text-left px-4 py-2.5 font-medium text-text-secondary">Hinweis</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr className="border-b border-border">
+                      <td className="px-4 py-2.5 text-text-primary font-medium">Fronleichnam</td>
+                      <td className="px-4 py-2.5 text-accent">Ja</td>
+                      <td className="px-4 py-2.5 text-text-secondary text-xs">Gesetzlicher Feiertag Bayern {year}</td>
+                    </tr>
+                    <tr className="border-b border-border">
+                      <td className="px-4 py-2.5 text-text-primary font-medium">Mari&auml; Himmelfahrt</td>
+                      <td className="px-4 py-2.5 text-text-secondary">Nein (Gemeinde)</td>
+                      <td className="px-4 py-2.5 text-text-secondary text-xs">Abh&auml;ngig vom Gemeinde-Status</td>
+                    </tr>
+                    <tr className="border-b border-border last:border-b-0">
+                      <td className="px-4 py-2.5 text-text-primary font-medium">Augsburger Friedensfest</td>
+                      <td className="px-4 py-2.5 text-text-secondary">Nein (Stadt)</td>
+                      <td className="px-4 py-2.5 text-text-secondary text-xs">Nur Stadt Augsburg</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <p className="text-text-secondary text-xs mt-2">
+                <Link
+                  href={`/feiertage/${year}/bayern`}
+                  className="text-accent hover:underline"
+                >
+                  Alle Feiertage Bayern {year} im Detail &rarr;
+                </Link>
+              </p>
+            </div>
+
+            {/* Berlin */}
+            <div>
+              <h3 className="text-lg font-semibold mb-2">
+                Feiertage {year} in Berlin
+              </h3>
+              <p className="text-text-secondary text-sm leading-relaxed mb-2">
+                Die Feiertage {year} in Berlin umfassen neben den bundesweiten
+                gesetzlichen Feiertagen einen zus&auml;tzlichen Termin: den{" "}
+                <strong className="text-text-primary">
+                  Internationalen Frauentag
+                </strong>{" "}
+                ({frauentag ? `${formatDateDE(frauentag.date)}, ${getDayNameDE(frauentag.date)}` : "8. M\u00e4rz"}).
+                Wenn Sie die gesetzlichen Feiertage Berlin {year} planen, lohnt
+                sich ein Blick auf die Wochentage: F&auml;llt ein Feiertag auf
+                Samstag oder Sonntag, gibt es keinen automatischen Ausgleichstag.
+              </p>
+              <p className="text-text-secondary text-xs">
+                <Link
+                  href={`/feiertage/${year}/berlin`}
+                  className="text-accent hover:underline"
+                >
+                  Alle Feiertage Berlin {year} im Detail &rarr;
+                </Link>
+              </p>
+            </div>
+
+            {/* Weitere Bundesländer */}
+            <div>
+              <h3 className="text-lg font-semibold mb-2">
+                Weitere Bundesl&auml;nder: Feiertage {year} als &Uuml;bersicht
+              </h3>
+              <p className="text-text-secondary text-sm leading-relaxed">
+                F&uuml;r die Feiertage {year} in Niedersachsen, Mecklenburg-Vorpommern,
+                Hessen, Sachsen, Th&uuml;ringen und den weiteren Bundesl&auml;ndern nutzen
+                Sie die Tabelle oben oder w&auml;hlen Sie Ihr Bundesland direkt aus
+                der &Uuml;bersicht. Wichtig: Es gibt regionale Sonderregeln &ndash;
+                den Bu&szlig;- und Bettag gibt es nur in Sachsen, in Th&uuml;ringen
+                kommt der Weltkindertag dazu, und in Brandenburg gelten zus&auml;tzlich
+                Ostersonntag und Pfingstsonntag als Feiertage.
+              </p>
+            </div>
+          </div>
         </div>
 
-        {/* ── Brückentage ──────────────────────────────────────── */}
+        {/* ═════════════════════════════════════════════════════════
+            SECTION 4: Brückentage
+            ═════════════════════════════════════════════════════════ */}
         <div className="mt-14">
           <h2 className="text-2xl font-semibold mb-4">
-            Br&uuml;ckentage {year}
+            Br&uuml;ckentage {year}: So holen Sie mit wenig Urlaubstagen mehr
+            freie Tage heraus
           </h2>
           <p className="text-text-secondary text-sm leading-relaxed mb-4">
-            Mit <strong className="text-text-primary">Br&uuml;ckentagen</strong>{" "}
-            holen Sie das Maximum aus Ihrem Urlaub heraus. Wenn ein Feiertag auf
-            Donnerstag oder Dienstag f&auml;llt, gen&uuml;gt oft ein einziger
-            Urlaubstag f&uuml;r ein verl&auml;ngertes Wochenende.
+            Wenn Sie{" "}
+            <strong className="text-text-primary">Br&uuml;ckentage {year}</strong>{" "}
+            clever planen, starten Sie mit Feiertagen am Donnerstag oder
+            Dienstag. Dann gen&uuml;gen oft{" "}
+            <strong className="text-text-primary">1&ndash;2 Urlaubstage</strong>{" "}
+            f&uuml;r ein langes Wochenende. F&uuml;r den schnellen &Uuml;berblick hilft Ihnen ein{" "}
+            <Link href="/kalender-mit-kalenderwochen" className="text-accent hover:underline">
+              Kalender mit Kalenderwochen
+            </Link>
+            , damit Sie sofort sehen, wie die Wochen liegen.
           </p>
           {brueckentage.length > 0 ? (
             <div className="overflow-x-auto rounded-xl border border-border">
@@ -452,9 +918,106 @@ export default async function FeiertageYearPage({
               M&ouml;glichkeiten.
             </div>
           )}
+          <p className="text-text-secondary text-sm mt-3">
+            Zus&auml;tzliche Br&uuml;ckentage {year} nach Bundesland lohnen sich rund
+            um <strong className="text-text-primary">Fronleichnam</strong> (Donnerstag),{" "}
+            <strong className="text-text-primary">Reformationstag</strong> und{" "}
+            <strong className="text-text-primary">Allerheiligen</strong>. So k&ouml;nnen
+            Sie Ihre Urlaubsplanung {year} gezielt ausrichten.
+          </p>
         </div>
 
-        {/* ── SEO Erklärtext ──────────────────────────────────── */}
+        {/* ═════════════════════════════════════════════════════════
+            SECTION 5: Bewegliche Feiertage
+            ═════════════════════════════════════════════════════════ */}
+        <div className="mt-14">
+          <h2 className="text-2xl font-semibold mb-4">
+            Welche Feiertage sind {year} beweglich?
+          </h2>
+          <p className="text-text-secondary text-sm leading-relaxed mb-4">
+            Die{" "}
+            <strong className="text-text-primary">beweglichen Feiertage {year}</strong>{" "}
+            fallen jedes Jahr auf andere Daten, weil sie sich am Ostertermin
+            orientieren.{" "}
+            <strong className="text-text-primary">Ostern {year}</strong> ist am{" "}
+            <strong className="text-text-primary">
+              {getDayNameDE(easter)}, {formatDateDE(easter)}
+            </strong>
+            . Von diesem Datum leiten sich weitere wichtige Feiertage ab:
+          </p>
+
+          <div className="overflow-x-auto rounded-xl border border-border mb-4">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="border-b border-border bg-surface-secondary">
+                  <th className="text-left px-4 py-3 font-medium text-text-secondary">
+                    Feiertag
+                  </th>
+                  <th className="text-left px-4 py-3 font-medium text-text-secondary">
+                    Datum
+                  </th>
+                  <th className="text-left px-4 py-3 font-medium text-text-secondary">
+                    Wochentag
+                  </th>
+                  <th className="text-left px-4 py-3 font-medium text-text-secondary">
+                    Offset zu Ostern
+                  </th>
+                  <th className="text-left px-4 py-3 font-medium text-text-secondary">
+                    Geltung
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {movableHolidays.map((m, i) => (
+                  <tr
+                    key={i}
+                    className="border-b border-border last:border-b-0"
+                  >
+                    <td className="px-4 py-3 font-medium text-text-primary whitespace-nowrap">
+                      {m.name}
+                    </td>
+                    <td className="px-4 py-3 text-text-secondary whitespace-nowrap">
+                      {formatDateDE(m.date)}
+                    </td>
+                    <td className="px-4 py-3 text-text-secondary whitespace-nowrap">
+                      {getDayNameDE(m.date)}
+                    </td>
+                    <td className="px-4 py-3 text-text-secondary">
+                      {m.offset === 0
+                        ? "Ostersonntag"
+                        : m.offset > 0
+                        ? `+${m.offset} Tage`
+                        : `${m.offset} Tage`}
+                    </td>
+                    <td className="px-4 py-3 text-text-secondary text-xs">
+                      {m.regional ? "regional" : "bundesweit"}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          <div className="bg-surface-secondary border border-border rounded-xl p-4 text-sm space-y-2">
+            <p className="text-text-primary font-medium">
+              Merksatz: Von Ostersonntag abgeleitete Feiertage
+            </p>
+            <p className="text-text-secondary">
+              <strong className="text-text-primary">+1 Tag</strong> (Ostermontag) &middot;{" "}
+              <strong className="text-text-primary">+39 Tage</strong> (Christi Himmelfahrt) &middot;{" "}
+              <strong className="text-text-primary">+50 Tage</strong> (Pfingstmontag) &middot;{" "}
+              <strong className="text-text-primary">+60 Tage</strong> (Fronleichnam)
+            </p>
+            <p className="text-text-secondary text-xs">
+              Mini-Regel: Ostern ist der erste Sonntag nach dem ersten Vollmond
+              im Fr&uuml;hling.
+            </p>
+          </div>
+        </div>
+
+        {/* ═════════════════════════════════════════════════════════
+            SECTION 6: SEO Erklärtext
+            ═════════════════════════════════════════════════════════ */}
         <div className="mt-14">
           <h2 className="text-2xl font-semibold mb-4">
             Gesetzliche Feiertage {year} erkl&auml;rt
@@ -490,13 +1053,15 @@ export default async function FeiertageYearPage({
           </div>
         </div>
 
-        {/* ── FAQ ──────────────────────────────────────────────── */}
+        {/* ═════════════════════════════════════════════════════════
+            SECTION 7: FAQ (expanded with year-specific)
+            ═════════════════════════════════════════════════════════ */}
         <div className="mt-14">
           <h2 className="text-2xl font-semibold mb-5">
-            H&auml;ufige Fragen zu Feiertagen
+            H&auml;ufige Fragen zu Feiertagen {year}
           </h2>
           <div className="space-y-2.5">
-            {FEIERTAGE_FAQS.map((faq, i) => (
+            {allFAQs.map((faq, i) => (
               <details
                 key={i}
                 className="group border border-border rounded-xl overflow-hidden"
@@ -513,6 +1078,75 @@ export default async function FeiertageYearPage({
               </details>
             ))}
           </div>
+        </div>
+
+        {/* ═════════════════════════════════════════════════════════
+            SECTION 8: Nächste Schritte (CTA)
+            ═════════════════════════════════════════════════════════ */}
+        <div className="mt-14">
+          <h2 className="text-2xl font-semibold mb-4">
+            Feiertage {year}: N&auml;chste Schritte
+          </h2>
+          <p className="text-text-secondary text-sm leading-relaxed mb-4">
+            F&uuml;r die schnelle Orientierung k&ouml;nnen Sie parallel die{" "}
+            <Link href="/welche-kalenderwoche-haben-wir" className="text-accent hover:underline">
+              aktuelle Kalenderwoche pr&uuml;fen
+            </Link>
+            , um Wochenplanung und Feiertage sauber abzugleichen. Achten Sie besonders
+            auf Feiertage am <strong className="text-text-primary">Dienstag</strong>{" "}
+            oder <strong className="text-text-primary">Donnerstag</strong>: Hier holen
+            Sie mit einem einzelnen Urlaubstag oft das Maximum heraus.
+          </p>
+
+          {/* Mini-Checkliste */}
+          <div className="bg-surface-secondary border border-border rounded-xl p-5">
+            <p className="text-text-primary font-semibold text-sm mb-3">
+              In 2 Minuten geplant &ndash; Mini-Checkliste:
+            </p>
+            <ol className="text-text-secondary text-sm space-y-2 list-decimal list-inside">
+              <li>
+                <strong className="text-text-primary">Bundesland</strong> in der
+                Tabelle oben w&auml;hlen &ndash; regionale Feiertage pr&uuml;fen
+              </li>
+              <li>
+                <strong className="text-text-primary">Br&uuml;ckentage</strong>{" "}
+                markieren und Zeitfenster notieren
+              </li>
+              <li>
+                <strong className="text-text-primary">Urlaub</strong> beantragen
+                und im Kalender blocken
+              </li>
+              <li>
+                <Link href={`/kalenderwochen/${year}`} className="text-accent hover:underline">
+                  Kalenderwochen {year}
+                </Link>{" "}
+                f&uuml;r die &Uuml;bersicht nutzen
+              </li>
+            </ol>
+          </div>
+
+          {hasPrev || hasNext ? (
+            <p className="text-text-secondary text-sm mt-3">
+              Wenn Sie weiter vorausplanen:{" "}
+              {hasNext && (
+                <Link
+                  href={`/feiertage/${nextYear}`}
+                  className="text-accent hover:underline"
+                >
+                  Feiertage {nextYear} ansehen
+                </Link>
+              )}
+              {hasNext && hasPrev && " | "}
+              {hasPrev && (
+                <Link
+                  href={`/feiertage/${prevYear}`}
+                  className="text-accent hover:underline"
+                >
+                  Feiertage {prevYear} zum Vergleich
+                </Link>
+              )}
+            </p>
+          ) : null}
         </div>
 
         {/* ── Year Navigation (bottom) ─────────────────────────── */}
@@ -552,6 +1186,12 @@ export default async function FeiertageYearPage({
           </Link>
           <Link href="/kalenderwoche" className="text-accent hover:underline">
             Kalenderwochen {year} &rarr;
+          </Link>
+          <Link href={`/ostern/${year}`} className="text-accent hover:underline">
+            Ostern {year} &rarr;
+          </Link>
+          <Link href={`/kalenderwochen/${year}`} className="text-accent hover:underline">
+            KW-&Uuml;bersicht {year} &rarr;
           </Link>
         </div>
       </section>
