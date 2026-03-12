@@ -226,7 +226,10 @@ export default async function FeiertageYearPage({
     weekendNationwide,
     workdayNationwide
   );
-  const allFAQs = [...yearFAQs, ...FEIERTAGE_FAQS];
+  // Generic FAQs only on current year to avoid duplicate content across year pages
+  const allFAQs = isCurrentYear
+    ? [...yearFAQs, ...FEIERTAGE_FAQS]
+    : yearFAQs;
 
   /* ── Holiday date lookups for state sections ─────────────── */
   const findHoliday = (name: string) =>
@@ -356,6 +359,7 @@ export default async function FeiertageYearPage({
             {regionalCount} regionale Feiertage mit Datum, Wochentag und{" "}
             <strong className="text-text-primary">Kalenderwoche</strong>.
           </p>
+          {isCurrentYear && (
           <p>
             Danach sehen Sie alle gesetzlichen Feiertage {year} nach Bundesland
             in einer einzigen, kompakten &Uuml;bersicht &ndash; ideal, wenn Sie
@@ -366,6 +370,7 @@ export default async function FeiertageYearPage({
               <> &ndash; {brueckentage.length} Br&uuml;ckentage warten auf Sie</>
             )}.
           </p>
+          )}
 
           {/* Schnell-Info box – nur im aktuellen Jahr */}
           {isCurrentYear && (
@@ -670,7 +675,8 @@ export default async function FeiertageYearPage({
             })}
           </div>
 
-          {/* ── State subsections: BW, NRW, Bayern, Berlin ─── */}
+          {/* ── State subsections: BW, NRW, Bayern, Berlin (current year only) ─── */}
+          {isCurrentYear && (
           <div className="mt-8 space-y-6">
 
             {/* BW */}
@@ -833,6 +839,7 @@ export default async function FeiertageYearPage({
               </p>
             </div>
           </div>
+          )}
         </div>
 
         {/* ═════════════════════════════════════════════════════════
@@ -1016,8 +1023,9 @@ export default async function FeiertageYearPage({
         </div>
 
         {/* ═════════════════════════════════════════════════════════
-            SECTION 6: SEO Erklärtext
+            SECTION 6: SEO Erklärtext (current year only – avoid duplicate content)
             ═════════════════════════════════════════════════════════ */}
+        {isCurrentYear && (
         <div className="mt-14">
           <h2 className="text-2xl font-semibold mb-4">
             Gesetzliche Feiertage {year} erkl&auml;rt
@@ -1052,6 +1060,7 @@ export default async function FeiertageYearPage({
             </p>
           </div>
         </div>
+        )}
 
         {/* ═════════════════════════════════════════════════════════
             SECTION 7: FAQ (expanded with year-specific)
@@ -1081,8 +1090,9 @@ export default async function FeiertageYearPage({
         </div>
 
         {/* ═════════════════════════════════════════════════════════
-            SECTION 8: Nächste Schritte (CTA)
+            SECTION 8: Nächste Schritte (CTA – current year only)
             ═════════════════════════════════════════════════════════ */}
+        {isCurrentYear && (
         <div className="mt-14">
           <h2 className="text-2xl font-semibold mb-4">
             Feiertage {year}: N&auml;chste Schritte
@@ -1148,6 +1158,7 @@ export default async function FeiertageYearPage({
             </p>
           ) : null}
         </div>
+        )}
 
         {/* ── Year Navigation (bottom) ─────────────────────────── */}
         <div className="mt-10 flex items-center justify-between border-t border-border pt-6">
