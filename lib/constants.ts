@@ -35,6 +35,16 @@ export const BUNDESLAENDER: Bundesland[] = [
   { id: 17, code: "TH", name: "Thüringen", slug: "thueringen" },
 ];
 
+/** Bundesland by 2-letter code lookup */
+export function getBundeslandByCode(code: string): Bundesland | undefined {
+  return BUNDESLAENDER.find((bl) => bl.code === code);
+}
+
+/** Bundesland by URL slug lookup */
+export function getBundeslandBySlug(slug: string): Bundesland | undefined {
+  return BUNDESLAENDER.find((bl) => bl.slug === slug);
+}
+
 /**
  * Ferienarten-Mapping (holiday_or_vacation_type_id → deutscher Name)
  */

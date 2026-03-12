@@ -351,20 +351,30 @@ export default async function FeiertageYearPage({
             zwischen 10 und 13 Tagen. Hier die &Uuml;bersicht f&uuml;r {year}:
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-            {stateHolidayCounts.map((s) => (
-              <div
-                key={s.code}
-                className="flex items-center justify-between bg-surface-secondary border border-border rounded-xl px-4 py-2.5 text-sm"
-              >
-                <span className="text-text-primary font-medium">
-                  {s.name}
-                </span>
-                <span className="text-text-secondary">
-                  <span className="text-accent font-semibold">{s.count}</span>{" "}
-                  Feiertage
-                </span>
-              </div>
-            ))}
+            {stateHolidayCounts.map((s) => {
+              const slug = s.name
+                .toLowerCase()
+                .replace(/ä/g, "ae")
+                .replace(/ö/g, "oe")
+                .replace(/ü/g, "ue")
+                .replace(/ß/g, "ss")
+                .replace(/\s+/g, "-");
+              return (
+                <Link
+                  key={s.code}
+                  href={`/feiertage/${year}/${slug}`}
+                  className="flex items-center justify-between bg-surface-secondary border border-border rounded-xl px-4 py-2.5 text-sm hover:border-accent/50 hover:bg-surface-secondary/80 transition-colors"
+                >
+                  <span className="text-text-primary font-medium">
+                    {s.name}
+                  </span>
+                  <span className="text-text-secondary">
+                    <span className="text-accent font-semibold">{s.count}</span>{" "}
+                    Feiertage →
+                  </span>
+                </Link>
+              );
+            })}
           </div>
         </div>
 

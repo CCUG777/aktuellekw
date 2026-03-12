@@ -74,6 +74,18 @@ export default function Footer() {
               <Link href={`/osterferien/${year}`} className="text-sm text-text-secondary hover:text-text-primary transition-colors">
                 Osterferien {year}
               </Link>
+              <Link href={`/feiertage/${year}/nordrhein-westfalen`} className="text-sm text-text-secondary hover:text-text-primary transition-colors">
+                Feiertage NRW {year}
+              </Link>
+              <Link href={`/feiertage/${year}/bayern`} className="text-sm text-text-secondary hover:text-text-primary transition-colors">
+                Feiertage Bayern {year}
+              </Link>
+              <Link href={`/feiertage/${year}/baden-wuerttemberg`} className="text-sm text-text-secondary hover:text-text-primary transition-colors">
+                Feiertage BW {year}
+              </Link>
+              <Link href={`/feiertage/${year}/hessen`} className="text-sm text-text-secondary hover:text-text-primary transition-colors">
+                Feiertage Hessen {year}
+              </Link>
               <Link href="/schulferien/2025" className="text-sm text-text-secondary hover:text-text-primary transition-colors">
                 Schulferien 2025
               </Link>

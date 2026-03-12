@@ -191,6 +191,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })
   );
 
+  // ── Feiertage Bundesland-Seiten (/feiertage/[year]/[bl]) ─────
+  const feiertageBundeslandPages: MetadataRoute.Sitemap = CONTENT_YEARS.flatMap(
+    (year) =>
+      BUNDESLAENDER.map((bl) => ({
+        url: `https://aktuellekw.de/feiertage/${year}/${bl.slug}`,
+        lastModified: year === currentYear ? now : new Date(`${year}-01-01`),
+        changeFrequency: "yearly" as const,
+        priority: year === currentYear ? 0.75 : 0.45,
+      }))
+  );
+
   // ── Schulferien Bundesland-Seiten (/schulferien-[jahr]/[bl]) ─
   const schulferienBlPages: MetadataRoute.Sitemap = CONTENT_YEARS.flatMap(
     (year) =>
@@ -205,6 +216,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     ...corePages,
     ...feiertageYearPages,
+    ...feiertageBundeslandPages,
     ...osternPages,
     ...ostermontagPages,
     ...osterferienPages,

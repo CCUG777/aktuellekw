@@ -220,5 +220,91 @@ export const FEIERTAGE_FAQS = [
   },
 ];
 
+/* ── State-specific holiday helpers ─────────────────────────────── */
+
+/** Get all holidays valid for a specific Bundesland */
+export function getFeiertageFuerBundesland(
+  year: number,
+  stateCode: string
+): Feiertag[] {
+  return getFeiertageFuerJahr(year).filter((h) =>
+    h.states.includes(stateCode)
+  );
+}
+
+/** Brückentage INCLUDING regional holidays (state-specific) */
+export function getBrueckentageForState(
+  year: number,
+  stateCode: string
+): Brueckentag[] {
+  const holidays = getFeiertageFuerJahr(year).filter((h) =>
+    h.states.includes(stateCode)
+  );
+  const tipps: Brueckentag[] = [];
+
+  for (const h of holidays) {
+    const day = h.date.getUTCDay();
+    const wochentag = getDayNameDE(h.date);
+
+    if (day === 4) {
+      tipps.push({
+        feiertag: h.name,
+        feiertagDate: h.date,
+        wochentag,
+        tipp: `Freitag (${formatDateDE(addDays(h.date, 1))}) freinehmen = 4 Tage frei`,
+        urlaubstage: 1,
+        freieTage: 4,
+      });
+    } else if (day === 2) {
+      tipps.push({
+        feiertag: h.name,
+        feiertagDate: h.date,
+        wochentag,
+        tipp: `Montag (${formatDateDE(addDays(h.date, -1))}) freinehmen = 4 Tage frei`,
+        urlaubstage: 1,
+        freieTage: 4,
+      });
+    } else if (day === 3) {
+      tipps.push({
+        feiertag: h.name,
+        feiertagDate: h.date,
+        wochentag,
+        tipp: `Mo + Di freinehmen = 5 Tage frei (oder Do + Fr = 5 Tage frei)`,
+        urlaubstage: 2,
+        freieTage: 5,
+      });
+    }
+  }
+
+  return tipps;
+}
+
+/** Next upcoming holiday for a specific Bundesland */
+export function getNextFeiertagForState(
+  stateCode: string
+): { feiertag: Feiertag; daysUntil: number } {
+  const today = new Date();
+  const todayUTC = new Date(
+    Date.UTC(today.getFullYear(), today.getMonth(), today.getDate())
+  );
+  const currentYear = todayUTC.getUTCFullYear();
+
+  const allHolidays = [
+    ...getFeiertageFuerJahr(currentYear),
+    ...getFeiertageFuerJahr(currentYear + 1),
+  ].filter((h) => h.states.includes(stateCode));
+
+  for (const h of allHolidays) {
+    const diff = Math.ceil(
+      (h.date.getTime() - todayUTC.getTime()) / 86400000
+    );
+    if (diff >= 0) {
+      return { feiertag: h, daysUntil: diff };
+    }
+  }
+
+  return { feiertag: allHolidays[0], daysUntil: 0 };
+}
+
 /* Re-export for convenience */
 export { getISOWeekNumber, formatDateDE, getDayNameDE };
