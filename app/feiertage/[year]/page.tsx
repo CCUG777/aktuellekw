@@ -163,6 +163,18 @@ function getYearFAQs(
       question: `Was ist der Buß- und Bettag ${year} und wo ist er arbeitsfrei?`,
       answer: `Der Buß- und Bettag ist ein evangelischer Gedenk- und Feiertag. Gesetzlich arbeitsfrei ist er nur in Sachsen. In anderen Bundesländern gelten teils besondere Regelungen (z.\u00a0B. für Schulen und Kitas).`,
     },
+    {
+      question: `Welche Feiertage ${year} gelten in Baden-Württemberg?`,
+      answer: `In Baden-Württemberg gelten ${year} alle bundesweiten Feiertage plus: Heilige Drei Könige (06.01.), Fronleichnam (${formatDateDE(fronleichnam)}) und Allerheiligen (01.11.). Damit gehören die Feiertage ${year} in Baden-Württemberg zu den umfangreicheren.`,
+    },
+    {
+      question: `Welche Feiertage ${year} gelten in NRW?`,
+      answer: `In NRW gelten ${year} alle bundesweiten Feiertage plus: Fronleichnam (${formatDateDE(fronleichnam)}) und Allerheiligen (01.11.). Damit haben Sie in Nordrhein-Westfalen ${nationwideCount + 2} gesetzliche Feiertage ${year}.`,
+    },
+    {
+      question: `Was ändert sich bei den Feiertagen ${year} gegenüber ${year - 1}?`,
+      answer: `Die Anzahl der gesetzlichen Feiertage bleibt gleich, aber die Wochentage verschieben sich. Dadurch ändern sich die möglichen Brückentage und Ihre Urlaubsplanung. Prüfen Sie die Brückentage-Tabelle oben für die optimale Planung ${year}.`,
+    },
   ];
 }
 
