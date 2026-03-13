@@ -93,6 +93,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "daily",
       priority: 0.85,
     },
+    // Schaltjahr
+    {
+      url: "https://aktuellekw.de/schaltjahr",
+      lastModified: now,
+      changeFrequency: "yearly",
+      priority: 0.75,
+    },
     // Feiertage Deutschland
     {
       url: "https://aktuellekw.de/feiertage",

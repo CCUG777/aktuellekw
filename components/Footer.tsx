@@ -59,6 +59,9 @@ export default function Footer() {
               <Link href="/wie-viele-wochen-hat-ein-jahr" className="text-sm text-text-secondary hover:text-text-primary transition-colors">
                 Wochen im Jahr
               </Link>
+              <Link href="/schaltjahr" className="text-sm text-text-secondary hover:text-text-primary transition-colors">
+                Schaltjahr
+              </Link>
               <Link href="/feiertage" className="text-sm text-text-secondary hover:text-text-primary transition-colors">
                 Feiertage Deutschland
               </Link>
