@@ -69,42 +69,90 @@ function getMonatsTage(month: number, year: number): number {
   return MONATSTAGE[month];
 }
 
+/* ── Calendar helper ───────────────────────────────────────────── */
+function getMonthCalendar(year: number, month: number) {
+  const firstDay = new Date(Date.UTC(year, month, 1));
+  const daysInMonth = getMonatsTage(month, year);
+  // ISO weekday: Mon=1 ... Sun=7
+  const jsDay = firstDay.getUTCDay();
+  const startOffset = jsDay === 0 ? 6 : jsDay - 1; // slots before day 1
+
+  const weeks: (number | null)[][] = [];
+  let current: (number | null)[] = [];
+  for (let i = 0; i < startOffset; i++) current.push(null);
+  for (let d = 1; d <= daysInMonth; d++) {
+    current.push(d);
+    if (current.length === 7) {
+      weeks.push(current);
+      current = [];
+    }
+  }
+  if (current.length > 0) {
+    while (current.length < 7) current.push(null);
+    weeks.push(current);
+  }
+  return weeks;
+}
+
+/* ── Timezone data ─────────────────────────────────────────────── */
+const WORLD_TIMEZONES = [
+  { city: "Berlin", country: "Deutschland", offset: "UTC+1 / UTC+2" },
+  { city: "London", country: "Vereinigtes K\u00f6nigreich", offset: "UTC+0 / UTC+1" },
+  { city: "New York", country: "USA", offset: "UTC\u22125 / UTC\u22124" },
+  { city: "Los Angeles", country: "USA", offset: "UTC\u22128 / UTC\u22127" },
+  { city: "Tokio", country: "Japan", offset: "UTC+9" },
+  { city: "Sydney", country: "Australien", offset: "UTC+10 / UTC+11" },
+];
+
 /* ── FAQ data ──────────────────────────────────────────────────── */
 function getPageFAQs(
   dateStr: string,
   dayName: string,
   kw: number,
   year: number,
-  monthName: string
+  monthName: string,
+  isoDate: string
 ) {
   return [
     {
-      question: "Welches Datum haben wir heute?",
-      answer: `Heute ist ${dayName}, der ${dateStr}. Wir befinden uns in Kalenderwoche ${kw} des Jahres ${year}.`,
-    },
-    {
-      question: "Welcher Tag ist heute?",
-      answer: `Heute ist ${dayName}. Das heutige Datum lautet ${dateStr}, und wir befinden uns im Monat ${monthName} ${year}.`,
+      question: "Welches Datum ist heute?",
+      answer: `Heute ist der ${dateStr}. Achte darauf, dass dein Ger\u00e4t die richtige Zeitzone nutzt, sonst kann das Datum abweichen. In Deutschland, \u00d6sterreich und der Schweiz ist es bei korrekter Zeitzone identisch.`,
     },
     {
       question: "Welcher Wochentag ist heute?",
-      answer: `Heute ist ${dayName}. Die Kalenderwoche ist KW\u00a0${kw}, und die Woche beginnt nach ISO\u00a08601 am Montag.`,
+      answer: `Heute ist ${dayName}. Wenn dir ein anderer Wochentag angezeigt wird, stimmt meist die Zeitzone oder die automatische Uhrzeit/Datum-Einstellung nicht. Pr\u00fcfe daf\u00fcr die Systemzeit auf deinem Handy oder Computer.`,
     },
     {
-      question: "Wie lautet das heutige Datum in verschiedenen Formaten?",
-      answer: `Das deutsche Format ist ${dateStr}. International (ISO 8601) lautet es ${year}-${String(new Date().getMonth() + 1).padStart(2, "0")}-${String(new Date().getDate()).padStart(2, "0")}. Das US-Format w\u00e4re ${String(new Date().getMonth() + 1).padStart(2, "0")}/${String(new Date().getDate()).padStart(2, "0")}/${year}.`,
+      question: "Welchen Tag haben wir heute und wie sp\u00e4t ist es?",
+      answer: `Heute ist ${dayName}, der ${dateStr}. Die aktuelle Uhrzeit h\u00e4ngt von deinem Standort (Zeitzone) ab und kann je nach Ger\u00e4t unterschiedlich angezeigt werden. Aktiviere am besten die automatische Zeit- und Zeitzonen-Einstellung.`,
     },
     {
-      question: "In welcher Kalenderwoche befinden wir uns heute?",
-      answer: `Heute befinden wir uns in KW\u00a0${kw} ${year}. Die Kalenderwoche wird nach ISO\u00a08601 berechnet \u2013 die erste KW des Jahres enth\u00e4lt immer den ersten Donnerstag im Januar.`,
+      question: "Welcher Tag ist heute wirklich (Deutschland/\u00d6sterreich/Schweiz)?",
+      answer: `In Deutschland, \u00d6sterreich und der Schweiz ist heute ${dayName}, der ${dateStr} (bei korrekt eingestellter Zeitzone). Wenn dein Datum abweicht, ist fast immer die Zeitzone falsch oder die automatische Zeit deaktiviert.`,
     },
     {
-      question: "Welcher Monat ist heute?",
-      answer: `Wir befinden uns aktuell im ${monthName} ${year}. Der ${monthName} hat ${getMonatsTage(new Date().getMonth(), year)} Tage.`,
+      question: "Warum zeigt mein Handy das falsche Datum an?",
+      answer: 'Meist ist die automatische Uhrzeit/Zeitzone deaktiviert oder falsch eingestellt. Auch ein manueller Kalender- oder Region-Fehler kann das Datum verschieben. Aktiviere \u201eDatum & Uhrzeit automatisch\u201c und pr\u00fcfe die Zeitzone sowie die Regionseinstellungen.',
     },
     {
-      question: "Der wievielte Tag im Jahr ist heute?",
-      answer: `Heute ist Tag ${getDayOfYear(new Date(Date.UTC(new Date().getFullYear(), new Date().getMonth(), new Date().getDate())))} von ${isLeapYear(year) ? 366 : 365} Tagen im Jahr ${year}.`,
+      question: "Wie bringe ich das Datum auf den Startbildschirm (Android/iPhone)?",
+      answer: 'Auf Android f\u00fcgst du das Datum \u00fcber ein Widget hinzu: Startbildschirm lange dr\u00fccken \u2192 \u201eWidgets\u201c \u2192 Uhr/Datum-Widget ausw\u00e4hlen. Auf dem iPhone: Startbildschirm lange dr\u00fccken \u2192 \u201e+\u201c \u2192 \u201eKalender\u201c oder \u201eUhr\u201c hinzuf\u00fcgen.',
+    },
+    {
+      question: "Welches Datum ist morgen?",
+      answer: `Morgen ist der ${(() => { const t = new Date(Date.UTC(year, new Date().getMonth(), new Date().getDate() + 1)); return formatDateDE(t); })()}. Wenn das heutige Datum bei dir nicht stimmt, kann auch das morgige Datum falsch wirken. Stelle Datum/Uhrzeit und Zeitzone auf automatisch.`,
+    },
+    {
+      question: "Welche Kalenderwoche ist heute?",
+      answer: `Heute ist Kalenderwoche ${kw} (KW\u00a0${kw}). Die Anzeige kann je nach Kalender-App variieren, wenn die Wochenz\u00e4hlung oder Regionseinstellung anders konfiguriert ist. Nutze eine Kalenderansicht, die ISO-Kalenderwochen unterst\u00fctzt.`,
+    },
+    {
+      question: "Wie schreibe ich das heutige Datum richtig (TT.MM.JJJJ vs. ISO 8601)?",
+      answer: `Im DACH-Raum ist \u00fcblich: ${dateStr} (TT.MM.JJJJ). Im ISO-Format nach ISO\u00a08601 schreibst du: ${isoDate} (JJJJ-MM-TT). In technischen Kontexten ist ISO\u00a08601 die sicherste Schreibweise.`,
+    },
+    {
+      question: "Welche Excel-Formel zeigt das heutige Datum an?",
+      answer: "In Excel zeigt =HEUTE() das heutige Datum an, ohne Uhrzeit. Wenn du zus\u00e4tzlich die aktuelle Uhrzeit brauchst, nutze =JETZT(). Das Anzeigeformat (z.\u00a0B. TT.MM.JJJJ oder ISO) stellst du \u00fcber die Zellformatierung ein.",
     },
   ];
 }
@@ -140,7 +188,6 @@ export default function DatumHeutePage() {
   const daysUntilWeekend = isoDay <= 5 ? 5 - isoDay : 0;
 
   // Quarter
-  const quarter = Math.ceil((month + 1) / 4 * (4 / 3));
   const quarterNum = Math.ceil((month + 1) / 3);
 
   // Tomorrow and yesterday
@@ -149,8 +196,15 @@ export default function DatumHeutePage() {
   const yesterday = new Date(todayUTC);
   yesterday.setUTCDate(yesterday.getUTCDate() - 1);
 
+  // Overmorgen
+  const overmorgen = new Date(todayUTC);
+  overmorgen.setUTCDate(overmorgen.getUTCDate() + 2);
+
+  // Month calendar
+  const calendarWeeks = getMonthCalendar(year, month);
+
   // FAQs
-  const pageFAQs = getPageFAQs(dateStr, dayName, kw.weekNumber, year, monthName);
+  const pageFAQs = getPageFAQs(dateStr, dayName, kw.weekNumber, year, monthName, isoDate);
 
   // JSON-LD
   const jsonLd = [
@@ -206,30 +260,40 @@ export default function DatumHeutePage() {
           <span className="text-text-primary">Datum heute</span>
         </nav>
 
-        {/* ── H1 + Intro ──────────────────────────────────────── */}
+        {/* ── H1 + Intro (from MD) ──────────────────────────── */}
         <h1 className="text-3xl md:text-4xl font-bold mb-4">
-          Datum heute &ndash; Heutiges Datum &amp; Wochentag
+          Datum heute: heutiges Datum, Wochentag, Kalenderwoche &amp; Uhrzeit
         </h1>
 
         <div className="text-text-secondary leading-relaxed mb-6 space-y-3">
           <p>
-            <strong className="text-text-primary">Datum heute:</strong> Heute ist{" "}
-            <strong className="text-text-primary">{dayName}</strong>, der{" "}
-            <strong className="text-text-primary">{dateStr}</strong>. Wir befinden
-            uns in der{" "}
+            <strong className="text-text-primary">Datum heute:</strong>{" "}
+            <strong className="text-text-primary">{dayName}</strong>, {dateStr} &ndash;{" "}
             <Link
               href={`/kw/${kw.weekNumber}-${kw.year}`}
               className="text-accent hover:underline font-semibold"
             >
-              Kalenderwoche&nbsp;{kw.weekNumber}
-            </Link>{" "}
-            im Monat{" "}
-            <strong className="text-text-primary">{monthName}&nbsp;{year}</strong>.
+              KW&nbsp;{kw.weekNumber}
+            </Link>
+            , <strong className="text-text-primary">{year}</strong> (MEZ, DE/AT/CH).
+            Hier bekommst du alles auf einen Blick: Datum, Wochentag, Kalenderwoche
+            und die aktuelle Uhrzeit &ndash; zus&auml;tzlich in Kurzform,
+            ausgeschrieben und im{" "}
+            <strong className="text-text-primary">ISO-Format ({isoDate})</strong>.
           </p>
           <p>
-            Welcher Tag ist heute? Welcher Wochentag? Hier finden Sie das heutige
-            Datum mit allen Details: Wochentag, Kalenderwoche, Tag im Jahr,
-            Monats&uuml;bersicht und Jahresfortschritt &ndash; tagesaktuell.
+            Datum und Uhrzeit k&ouml;nnen je nach Land, Zeitzone oder Sommerzeit-Regel
+            abweichen &ndash; besonders, wenn du mit internationalen Teams arbeitest
+            oder Reisen planst.
+          </p>
+          <p>
+            Und damit du nicht st&auml;ndig suchen musst, findest du direkt praktische
+            Kurz-Anleitungen f&uuml;r{" "}
+            <strong className="text-text-primary">Startbildschirm/Widgets</strong>{" "}
+            (Android, iPhone, Windows, Mac), eine kompakte{" "}
+            <strong className="text-text-primary">Weltzeit-&Uuml;bersicht</strong>{" "}
+            sowie den schnellen Check zu{" "}
+            <strong className="text-text-primary">Datum morgen</strong>.
           </p>
         </div>
 
@@ -252,7 +316,7 @@ export default function DatumHeutePage() {
             <p className="text-xl md:text-2xl text-text-secondary font-medium">
               {year}
             </p>
-            <div className="mt-4 flex items-center justify-center gap-3 text-sm text-text-secondary">
+            <div className="mt-4 flex items-center justify-center gap-3 text-sm text-text-secondary flex-wrap">
               <span className="bg-accent/10 border border-accent/20 rounded-full px-3 py-1 font-medium">
                 KW&nbsp;{kw.weekNumber}
               </span>
@@ -261,6 +325,9 @@ export default function DatumHeutePage() {
               </span>
               <span className="bg-surface border border-border rounded-full px-3 py-1">
                 Q{quarterNum}
+              </span>
+              <span className="bg-surface border border-border rounded-full px-3 py-1">
+                MEZ/MESZ
               </span>
             </div>
           </div>
@@ -325,6 +392,7 @@ export default function DatumHeutePage() {
                     value: isLeapYear(year)
                       ? `Ja \u2013 ${year} hat 366 Tage`
                       : `Nein \u2013 ${year} hat 365 Tage`,
+                    link: "/schaltjahr",
                   },
                   {
                     label: "Kalenderwochen im Jahr",
@@ -359,7 +427,115 @@ export default function DatumHeutePage() {
         </div>
 
         {/* ═════════════════════════════════════════════════════════
-            SECTION 2: Fortschrittsbalken
+            SECTION 2: DACH – Welches Datum ist heute wirklich?
+            ═════════════════════════════════════════════════════════ */}
+        <div className="mt-14">
+          <h2 className="text-2xl font-semibold mb-4">
+            Welches Datum ist heute wirklich? (Deutschland, &Ouml;sterreich, Schweiz)
+          </h2>
+          <div className="text-text-secondary text-sm leading-relaxed space-y-3 mb-5">
+            <p>
+              Wenn du wissen willst,{" "}
+              <strong className="text-text-primary">welcher Tag heute wirklich</strong>{" "}
+              ist, kannst du dich im DACH-Raum fast immer auf dasselbe Datum verlassen.
+              In <strong className="text-text-primary">Deutschland</strong>,{" "}
+              <strong className="text-text-primary">&Ouml;sterreich</strong> und der{" "}
+              <strong className="text-text-primary">Schweiz</strong> gilt in der Regel
+              das gleiche Tagesdatum, weil diese L&auml;nder in{" "}
+              <strong className="text-text-primary">CET/CEST</strong> liegen.
+              Unterschiede entstehen vor allem, wenn du reist, eine andere Zeitzone
+              nutzt oder dich an einem Grenzfall rund um Mitternacht orientierst.
+            </p>
+          </div>
+          <div className="overflow-x-auto rounded-xl border border-border">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="border-b border-border bg-surface-secondary">
+                  <th className="text-left px-5 py-3 font-medium text-text-secondary">Land</th>
+                  <th className="text-left px-5 py-3 font-medium text-text-secondary">Datum</th>
+                  <th className="text-left px-5 py-3 font-medium text-text-secondary">Zeitzone</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[
+                  { land: "Deutschland (DE)", tz: "CET (UTC+1)" },
+                  { land: "\u00d6sterreich (AT)", tz: "CET (UTC+1)" },
+                  { land: "Schweiz (CH)", tz: "CET (UTC+1)" },
+                ].map((row, i) => (
+                  <tr key={i} className="border-b border-border last:border-b-0">
+                    <td className="px-5 py-3 font-medium text-text-primary">{row.land}</td>
+                    <td className="px-5 py-3 text-text-primary">{dateStr}</td>
+                    <td className="px-5 py-3 text-text-secondary">{row.tz}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        {/* ═════════════════════════════════════════════════════════
+            SECTION 3: Datumsformate
+            ═════════════════════════════════════════════════════════ */}
+        <div className="mt-14">
+          <h2 className="text-2xl font-semibold mb-4">
+            Datum heute in verschiedenen Formaten (kurz, ausgeschrieben, ISO&nbsp;8601)
+          </h2>
+          <div className="text-text-secondary text-sm leading-relaxed space-y-3 mb-5">
+            <p>
+              Wenn du das heutige Datum notieren willst, nutzt du im Deutschen meist
+              das Kurzformat{" "}
+              <strong className="text-text-primary">TT.MM.JJJJ</strong>. F&uuml;r den{" "}
+              {dateStr} lautet es:{" "}
+              <code className="bg-surface-secondary border border-border rounded px-1.5 py-0.5 text-xs text-accent font-mono">
+                {dateStr}
+              </code>
+              . Dieses Format eignet sich f&uuml;r Formulare, Notizen und viele Schreiben.
+            </p>
+            <p>
+              Ausgeschrieben wirkt das Datum offizieller und l&auml;sst sich schneller
+              erfassen:{" "}
+              <strong className="text-text-primary">{dayName}, {dayOfMonth}. {monthName} {year}</strong>.
+              Das passt gut zu Einladungen, Briefen und Dokumenten, in denen der Monat
+              sofort ins Auge fallen soll.
+            </p>
+            <p>
+              F&uuml;r IT, Exporte und internationale Kommunikation ist ISO&nbsp;8601
+              die sicherste Wahl:{" "}
+              <code className="bg-surface-secondary border border-border rounded px-1.5 py-0.5 text-xs text-accent font-mono">
+                {isoDate}
+              </code>
+              . So bleibt das Datum eindeutig, auch wenn andere L&auml;nder andere
+              Reihenfolgen verwenden.
+            </p>
+          </div>
+
+          {/* Checkliste: Welches Datumsformat? */}
+          <div className="bg-surface-secondary border border-border rounded-xl p-5">
+            <h3 className="text-sm font-semibold text-text-primary mb-3">
+              Checkliste: Welches Datumsformat brauche ich?
+            </h3>
+            <ul className="space-y-2 text-sm text-text-secondary">
+              {[
+                { context: "Beh\u00f6rde oder Vertrag", format: "TT.MM.JJJJ" },
+                { context: "Rechnung oder Angebot", format: "TT.MM.JJJJ (im Flie\u00dftext ggf. ausgeschrieben)" },
+                { context: "Einladung oder Briefkopf", format: "Wochentag, Tag. Monat Jahr" },
+                { context: "Programmierung/Dateinamen/Export", format: "JJJJ-MM-TT" },
+                { context: 'Internationale E-Mail', format: 'ISO 8601 statt TT/MM/JJJJ' },
+              ].map((item, i) => (
+                <li key={i} className="flex items-start gap-2">
+                  <span className="text-accent mt-0.5">&bull;</span>
+                  <span>
+                    <strong className="text-text-primary">{item.context}:</strong>{" "}
+                    {item.format}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        {/* ═════════════════════════════════════════════════════════
+            SECTION 4: Fortschrittsbalken
             ═════════════════════════════════════════════════════════ */}
         <div className="mt-14">
           <h2 className="text-2xl font-semibold mb-4">
@@ -408,7 +584,7 @@ export default function DatumHeutePage() {
         </div>
 
         {/* ═════════════════════════════════════════════════════════
-            SECTION 3: Wochenübersicht
+            SECTION 5: Wochenübersicht
             ═════════════════════════════════════════════════════════ */}
         <div className="mt-14">
           <h2 className="text-2xl font-semibold mb-4">
@@ -466,12 +642,42 @@ export default function DatumHeutePage() {
         </div>
 
         {/* ═════════════════════════════════════════════════════════
-            SECTION 4: Gestern & Morgen
+            SECTION 6: Gestern & Morgen (enhanced)
             ═════════════════════════════════════════════════════════ */}
         <div className="mt-14">
           <h2 className="text-2xl font-semibold mb-4">
-            Gestern &amp; Morgen
+            Datum morgen: Welches Datum ist morgen?
           </h2>
+
+          {/* InfoBox Morgen/Übermorgen */}
+          <div className="bg-accent/5 border border-accent/20 rounded-xl p-5 mb-5">
+            <p className="text-sm text-text-primary font-medium">
+              Morgen ist der{" "}
+              <strong>{formatDateDE(tomorrow)} ({getDayNameDE(tomorrow)})</strong>.
+              &Uuml;bermorgen ist der{" "}
+              <strong>{formatDateDE(overmorgen)} ({getDayNameDE(overmorgen)})</strong>.
+            </p>
+          </div>
+
+          <div className="text-text-secondary text-sm leading-relaxed space-y-3 mb-5">
+            <p>
+              Wenn du nach dem morgigen Datum suchst, z&auml;hlt immer dein aktueller
+              Standort. Das angezeigte Ergebnis richtet sich nach deiner{" "}
+              <strong className="text-text-primary">Zeitzone</strong> und den
+              Datum-/Uhrzeit-Einstellungen deines Ger&auml;ts. Reist du gerade,
+              wechselst die Zeitzone oder nutzt ein VPN, kann das morgige Datum
+              abweichen &ndash; besonders rund um Mitternacht.
+            </p>
+            <p>
+              Wenn du wissen willst, wie viele Tage zwischen heute und einem Termin
+              liegen, nutze den{" "}
+              <Link href="/tagerechner" className="text-accent hover:underline">
+                Tagerechner
+              </Link>
+              . So planst du Fristen und Deadlines schnell und ohne Kopfrechnen.
+            </p>
+          </div>
+
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div className="bg-surface-secondary border border-border rounded-xl p-4">
               <p className="text-xs font-semibold uppercase tracking-wider text-text-secondary mb-1">
@@ -499,105 +705,505 @@ export default function DatumHeutePage() {
         </div>
 
         {/* ═════════════════════════════════════════════════════════
-            SECTION 5: SEO-Text Placeholder
+            SECTION 7: Datum und Uhrzeit / Zeitzonen
             ═════════════════════════════════════════════════════════ */}
         <div className="mt-14">
           <h2 className="text-2xl font-semibold mb-4">
-            Datum heute: Hintergr&uuml;nde &amp; Wissenswertes
+            Datum heute und Uhrzeit: Warum Datum und Zeit abweichen k&ouml;nnen
           </h2>
-          {/* [PLACEHOLDER: SEO-Text "Datum heute" – 150–200 Wörter.
-              Keywords: datum heute, heutiges datum, datum von heute,
-              heute datum, welcher tag ist heute, datum heute monat.
-              Themen: Datumsformate (DE vs. ISO 8601 vs. US),
-              warum Deutschland TT.MM.JJJJ nutzt, Geschichte der
-              Datumsschreibweise, DIN 5008 Briefnorm.] */}
-          <div className="text-text-secondary text-sm leading-relaxed space-y-3">
+          <div className="text-text-secondary text-sm leading-relaxed space-y-3 mb-5">
             <p>
-              Das <strong className="text-text-primary">Datum heute</strong> lautet{" "}
-              <strong className="text-text-primary">{dateStr}</strong> &ndash; ein{" "}
-              {dayName} im {monthName} {year}. Wir befinden uns in der{" "}
-              <strong className="text-text-primary">Kalenderwoche {kw.weekNumber}</strong>,
-              was f&uuml;r die Planung in Beruf und Alltag besonders n&uuml;tzlich ist.
+              Wenn du das heutige Datum und die Uhrzeit pr&uuml;fst, kann das Ergebnis
+              je nach Standort unterschiedlich ausfallen. Der Hauptgrund sind{" "}
+              <strong className="text-text-primary">Zeitzonen</strong>: W&auml;hrend bei
+              dir noch Abend ist, hat in anderen L&auml;ndern bereits ein neuer Tag
+              begonnen.
             </p>
             <p>
-              In Deutschland wird das Datum im Format{" "}
-              <strong className="text-text-primary">TT.MM.JJJJ</strong> geschrieben &ndash;
-              also Tag.Monat.Jahr. International hat sich das{" "}
-              <strong className="text-text-primary">ISO-8601-Format</strong>{" "}
-              (<code className="bg-surface-secondary border border-border rounded px-1.5 py-0.5 text-xs text-accent font-mono">{isoDate}</code>)
-              durchgesetzt, da es eine eindeutige Sortierung erm&ouml;glicht.
+              Ein Sonderfall ist die{" "}
+              <strong className="text-text-primary">Internationale Datumsgrenze</strong>{" "}
+              im Pazifik. Dort wechselt das Datum je nach Seite der Grenze. Wenn du dich
+              fragst, welchen Tag wir haben und wie sp&auml;t es ist, bestimmt immer
+              dein aktueller Standort die richtige Antwort.
             </p>
+            <p>
+              Zus&auml;tzlich kann die{" "}
+              <strong className="text-text-primary">Sommerzeit (MEZ/MESZ)</strong> die
+              Uhrzeit um eine Stunde verschieben. Das Datum bleibt meist gleich,
+              f&auml;llt aber bei Reisen oder bei Umstellungen rund um Mitternacht
+              eher auf. Stelle deshalb sicher, dass deine Ger&auml;te automatische
+              Uhrzeit und Zeitzone aktiviert haben.
+            </p>
+          </div>
+
+          {/* InfoBox: Typische Ursachen */}
+          <div className="bg-amber-500/5 border border-amber-500/20 rounded-xl p-5 mb-5">
+            <h3 className="text-sm font-semibold text-text-primary mb-3">
+              Typische Ursachen f&uuml;r falsches Datum
+            </h3>
+            <ul className="space-y-1.5 text-sm text-text-secondary">
+              <li className="flex items-start gap-2">
+                <span className="text-amber-500 mt-0.5">&bull;</span>
+                <span><strong className="text-text-primary">Falsche Zeitzone</strong> ausgew&auml;hlt</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-amber-500 mt-0.5">&bull;</span>
+                <span><strong className="text-text-primary">Uhrzeit manuell</strong> ge&auml;ndert</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-amber-500 mt-0.5">&bull;</span>
+                <span><strong className="text-text-primary">Sommerzeit</strong> nicht korrekt &uuml;bernommen</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-amber-500 mt-0.5">&bull;</span>
+                <span><strong className="text-text-primary">Reise, VPN oder Standortwechsel</strong> ohne Zeitzonen-Update</span>
+              </li>
+            </ul>
+          </div>
+
+          {/* Automatische Uhrzeit einstellen */}
+          <h3 className="text-lg font-semibold mb-3">
+            So stellst du automatische Uhrzeit und Zeitzone ein
+          </h3>
+          <div className="text-text-secondary text-sm leading-relaxed space-y-2 mb-3">
+            <p>
+              Wenn Datum und Uhrzeit nicht stimmen, aktiviere die Netzwerkzeit:
+            </p>
+          </div>
+          <ul className="space-y-2 text-sm text-text-secondary mb-3">
+            <li className="flex items-start gap-2">
+              <span className="text-accent mt-0.5">&bull;</span>
+              <span>
+                <strong className="text-text-primary">Android:</strong>{" "}
+                Einstellungen &rarr; System/Allgemeine Verwaltung &rarr;
+                Datum &amp; Uhrzeit &rarr; &bdquo;Automatisch&ldquo;/&bdquo;Netzwerkzeit&ldquo; aktivieren.
+              </span>
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="text-accent mt-0.5">&bull;</span>
+              <span>
+                <strong className="text-text-primary">iPhone (iOS):</strong>{" "}
+                Einstellungen &rarr; Allgemein &rarr; Datum &amp; Uhrzeit &rarr;
+                &bdquo;Automatisch einstellen&ldquo; aktivieren.
+              </span>
+            </li>
+          </ul>
+          <p className="text-text-secondary text-xs">
+            Men&uuml;namen variieren je Version. Wenn es weiterhin abweicht, starte
+            neu und pr&uuml;fe Mobilfunk/WLAN sowie den Flugmodus.
+          </p>
+        </div>
+
+        {/* ═════════════════════════════════════════════════════════
+            SECTION 8: Datum weltweit
+            ═════════════════════════════════════════════════════════ */}
+        <div className="mt-14">
+          <h2 className="text-2xl font-semibold mb-4">
+            Datum heute weltweit: aktuelles Datum in wichtigen Zeitzonen
+          </h2>
+          <div className="text-text-secondary text-sm leading-relaxed space-y-3 mb-5">
+            <p>
+              Das <strong className="text-text-primary">Datum</strong> ist nicht
+              &uuml;berall gleich. Grund daf&uuml;r sind die{" "}
+              <strong className="text-text-primary">Zeitzonen</strong>. In Berlin ist
+              es am sp&auml;ten Abend, in Tokio beginnt oft schon der n&auml;chste
+              Tag. Wenn du wissen willst, welcher Tag heute ist, pr&uuml;fe Datum
+              und Uhrzeit direkt in der Region, die dich interessiert.
+            </p>
+          </div>
+          <div className="overflow-x-auto rounded-xl border border-border">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="border-b border-border bg-surface-secondary">
+                  <th className="text-left px-5 py-3 font-medium text-text-secondary">Stadt</th>
+                  <th className="text-left px-5 py-3 font-medium text-text-secondary">Land</th>
+                  <th className="text-left px-5 py-3 font-medium text-text-secondary">UTC-Offset</th>
+                </tr>
+              </thead>
+              <tbody>
+                {WORLD_TIMEZONES.map((tz, i) => (
+                  <tr key={i} className="border-b border-border last:border-b-0">
+                    <td className="px-5 py-3 font-medium text-text-primary">{tz.city}</td>
+                    <td className="px-5 py-3 text-text-secondary">{tz.country}</td>
+                    <td className="px-5 py-3 text-text-secondary font-mono text-xs">{tz.offset}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         </div>
 
         {/* ═════════════════════════════════════════════════════════
-            SECTION 6: SEO-Text Placeholder – Wochentag
+            SECTION 9: Monatskalender
             ═════════════════════════════════════════════════════════ */}
         <div className="mt-14">
           <h2 className="text-2xl font-semibold mb-4">
-            Welcher Tag ist heute? &ndash; Wochentag &amp; Bedeutung
+            Kalender zum heutigen Datum: {monthName} {year}
           </h2>
-          {/* [PLACEHOLDER: SEO-Text "Welcher Tag ist heute" – 100–150 Wörter.
-              Keywords: welcher tag ist heute, welcher wochentag ist heute,
-              heutiges datum, datum heute und uhrzeit.
-              Themen: Herkunft der Wochentagsnamen (germanisch/römisch),
-              Montag als Wochenstart nach ISO 8601, Bedeutung
-              der Wochentage in verschiedenen Kulturen.] */}
+          <div className="text-text-secondary text-sm leading-relaxed space-y-3 mb-5">
+            <p>
+              Du willst wissen, <strong className="text-text-primary">welcher Tag ist heute</strong>?
+              Mit dem Monatskalender erkennst du das Datum sofort. So ordnest du
+              Termine schnell ein &ndash; auch f&uuml;r den{" "}
+              <Link href="/kalender-mit-kalenderwochen" className="text-accent hover:underline">
+                Kalender mit Kalenderwochen
+              </Link>.
+            </p>
+          </div>
+
+          {/* Dynamic month calendar */}
+          <div className="overflow-x-auto rounded-xl border border-border mb-5">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="border-b border-border bg-surface-secondary">
+                  {["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"].map((d) => (
+                    <th
+                      key={d}
+                      className={`px-2 py-3 text-center font-medium ${
+                        d === "Sa" || d === "So" ? "text-text-secondary/60" : "text-text-secondary"
+                      }`}
+                    >
+                      {d}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {calendarWeeks.map((week, wi) => (
+                  <tr key={wi} className="border-b border-border last:border-b-0">
+                    {week.map((day, di) => {
+                      const isToday = day === dayOfMonth;
+                      return (
+                        <td
+                          key={di}
+                          className={`px-2 py-2.5 text-center ${
+                            day === null
+                              ? ""
+                              : isToday
+                              ? "bg-accent/15 font-bold text-accent"
+                              : di >= 5
+                              ? "text-text-secondary/60"
+                              : "text-text-primary"
+                          }`}
+                        >
+                          {day ?? ""}
+                        </td>
+                      );
+                    })}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
           <div className="text-text-secondary text-sm leading-relaxed space-y-3">
             <p>
-              <strong className="text-text-primary">Welcher Tag ist heute?</strong>{" "}
-              Heute ist <strong className="text-text-primary">{dayName}</strong>,
-              der {dayOfMonth}. {monthName} {year}. Nach dem internationalen
-              Standard ISO&nbsp;8601 ist {dayName} der {isoDay}. Tag der Woche
-              (Montag&nbsp;= 1, Sonntag&nbsp;= 7).
+              Die{" "}
+              <strong className="text-text-primary">Kalenderwoche (KW)</strong> zeigt
+              dir, die wievielte Woche im Jahr gerade l&auml;uft. Heute ist{" "}
+              <Link
+                href={`/kw/${kw.weekNumber}-${kw.year}`}
+                className="text-accent hover:underline font-semibold"
+              >
+                KW&nbsp;{kw.weekNumber}
+              </Link>
+              . Mehr Infos findest du unter{" "}
+              <Link href={`/feiertage/${year}`} className="text-accent hover:underline">
+                n&auml;chste Feiertage im &Uuml;berblick
+              </Link>
+              .
             </p>
-            <p>
-              {daysUntilWeekend > 0 ? (
-                <>
-                  Bis zum Wochenende {daysUntilWeekend === 1
-                    ? "ist es noch 1 Tag"
-                    : `sind es noch ${daysUntilWeekend} Tage`}.
-                </>
-              ) : (
-                <>Heute ist Wochenende!</>
-              )}
+          </div>
+
+          {/* Feiertage & Gedenktage */}
+          <div className="mt-5 bg-surface-secondary border border-border rounded-xl p-5">
+            <h3 className="text-sm font-semibold text-text-primary mb-3">
+              Ist das heutige Datum ein besonderer Tag?
+            </h3>
+            <p className="text-sm text-text-secondary leading-relaxed mb-3">
+              Ob das heutige Datum besonders ist, h&auml;ngt davon ab, ob ein{" "}
+              <strong className="text-text-primary">Feiertag</strong>,{" "}
+              <strong className="text-text-primary">Gedenktag</strong> oder{" "}
+              <strong className="text-text-primary">Aktionstag</strong> ansteht. Solche
+              Anl&auml;sse haben je nach Land, Bundesland oder Region eine
+              unterschiedliche Bedeutung.
             </p>
+            <div className="text-xs text-text-secondary space-y-1">
+              <p>
+                <strong className="text-text-primary">Tipp:</strong> Pr&uuml;fe immer
+                dein Bundesland oder deine Region, wenn du unsicher bist. &rarr;{" "}
+                <Link href={`/feiertage/${year}`} className="text-accent hover:underline">
+                  Feiertage {year} pr&uuml;fen
+                </Link>
+              </p>
+            </div>
           </div>
         </div>
 
         {/* ═════════════════════════════════════════════════════════
-            SECTION 7: Monatsinformationen Placeholder
+            SECTION 10: Startbildschirm
             ═════════════════════════════════════════════════════════ */}
         <div className="mt-14">
           <h2 className="text-2xl font-semibold mb-4">
-            Datum heute: Monat {monthName} {year}
+            Datum auf den Startbildschirm bringen: Android, iPhone, Windows &amp; Mac
           </h2>
-          {/* [PLACEHOLDER: SEO-Text "Datum heute Monat" – 80–120 Wörter.
-              Keywords: datum heute monat, heutiges datum,
-              datum von heute.
-              Themen: Aktuelle Monatsinformationen, wie viele Tage
-              hat der Monat, besondere Tage/Feiertage im aktuellen
-              Monat, saisonale Besonderheiten.] */}
-          <div className="text-text-secondary text-sm leading-relaxed space-y-3">
+          <div className="text-text-secondary text-sm leading-relaxed space-y-3 mb-5">
             <p>
-              Der <strong className="text-text-primary">{monthName} {year}</strong>{" "}
-              hat <strong className="text-text-primary">{daysInMonth} Tage</strong>.
-              Wir befinden uns am {dayOfMonth}. Tag des Monats &ndash; das entspricht
-              einem Monatsfortschritt von{" "}
-              <strong className="text-text-primary">{monthProgress}&nbsp;%</strong>.
-              {remainingInMonth === 0 ? (
-                <> Heute ist der letzte Tag des Monats.</>
-              ) : remainingInMonth === 1 ? (
-                <> Morgen beginnt ein neuer Monat.</>
-              ) : (
-                <> Es verbleiben noch {remainingInMonth} Tage in diesem Monat.</>
-              )}
+              Wenn du dich fragst, wie du das Datum auf den Startbildschirm bringst,
+              hast du drei schnelle Optionen: Du nutzt ein{" "}
+              <strong className="text-text-primary">Widget</strong>, aktivierst die
+              Anzeige am <strong className="text-text-primary">Sperrbildschirm</strong>{" "}
+              oder legst eine{" "}
+              <strong className="text-text-primary">Browser-Verkn&uuml;pfung</strong>{" "}
+              an. So siehst du Datum und Uhrzeit dauerhaft, ohne jedes Mal eine App
+              zu &ouml;ffnen.
             </p>
+          </div>
+
+          {/* Checkliste nach Betriebssystem */}
+          <div className="space-y-3 mb-5">
+            {[
+              {
+                os: "Android",
+                steps: 'Tippe lange auf den Startbildschirm \u2192 Widgets \u2192 Uhr-/Datum-Widget ausw\u00e4hlen \u2192 platzieren. Wenn dir Widgets fehlen, pr\u00fcfe deinen Launcher.',
+              },
+              {
+                os: "iPhone",
+                steps: 'Tippe lange auf den Startbildschirm \u2192 \u201e+\u201c \u2192 Widgets \u2192 \u201eKalender\u201c oder \u201eUhr\u201c hinzuf\u00fcgen. F\u00fcr den Sperrbildschirm: Sperrbildschirm anpassen \u2192 Widgets ausw\u00e4hlen.',
+              },
+              {
+                os: "Windows",
+                steps: 'Pr\u00fcfe rechts unten in der Taskleiste Datum und Uhrzeit. Wenn sie fehlen: Taskleisten-Einstellungen \u00f6ffnen und die Anzeige aktivieren. Den Kalender \u00f6ffnest du per Klick auf die Uhr.',
+              },
+              {
+                os: "Mac",
+                steps: 'Systemeinstellungen \u2192 Kontrollzentrum oder Men\u00fcleiste \u2192 Uhr \u2192 Datum anzeigen und Format festlegen.',
+              },
+            ].map((item) => (
+              <div
+                key={item.os}
+                className="bg-surface-secondary border border-border rounded-xl p-4"
+              >
+                <p className="text-sm">
+                  <strong className="text-text-primary">{item.os}:</strong>{" "}
+                  <span className="text-text-secondary">{item.steps}</span>
+                </p>
+              </div>
+            ))}
+          </div>
+
+          <p className="text-text-secondary text-xs mb-5">
+            <strong className="text-text-primary">Troubleshooting:</strong>{" "}
+            Findest du kein passendes Widget, suche in der Widget-Liste nach
+            &bdquo;Uhr&ldquo; oder &bdquo;Kalender&ldquo; und aktualisiere bei
+            Bedarf System oder Launcher.
+          </p>
+
+          {/* Verknüpfung speichern */}
+          <h3 className="text-lg font-semibold mb-3">
+            Datum heute als Verkn&uuml;pfung speichern (Browser/Startbildschirm)
+          </h3>
+          <p className="text-text-secondary text-sm leading-relaxed mb-4">
+            Speichere diese Seite als Verkn&uuml;pfung auf deinem Startbildschirm.
+            So &ouml;ffnest du das aktuelle Datum mit nur einem Tap &ndash; praktisch
+            f&uuml;r unterwegs oder im Alltag.
+          </p>
+          <div className="overflow-x-auto rounded-xl border border-border">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="border-b border-border bg-surface-secondary">
+                  <th className="text-left px-5 py-3 font-medium text-text-secondary">Android (Chrome)</th>
+                  <th className="text-left px-5 py-3 font-medium text-text-secondary">iPhone (Safari)</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[
+                  ["Seite \u00f6ffnen", "Seite \u00f6ffnen"],
+                  ["Men\u00fc (\u22ee) antippen", "Teilen-Symbol antippen"],
+                  ['\u201eZum Startbildschirm hinzuf\u00fcgen\u201c w\u00e4hlen', '\u201eZum Home-Bildschirm\u201c w\u00e4hlen'],
+                  ["Hinzuf\u00fcgen best\u00e4tigen", "Hinzuf\u00fcgen best\u00e4tigen"],
+                ].map((row, i) => (
+                  <tr key={i} className="border-b border-border last:border-b-0">
+                    <td className="px-5 py-3 text-text-secondary">
+                      <span className="text-accent mr-2">&#9744;</span>{row[0]}
+                    </td>
+                    <td className="px-5 py-3 text-text-secondary">
+                      <span className="text-accent mr-2">&#9744;</span>{row[1]}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         </div>
 
         {/* ═════════════════════════════════════════════════════════
-            SECTION 8: FAQ
+            SECTION 11: Excel & Google Sheets
+            ═════════════════════════════════════════════════════════ */}
+        <div className="mt-14">
+          <h2 className="text-2xl font-semibold mb-4">
+            Datum heute in Excel und Google Sheets berechnen
+          </h2>
+          <div className="text-text-secondary text-sm leading-relaxed space-y-3 mb-5">
+            <p>
+              Wenn du das heutige Datum in Excel berechnen m&ouml;chtest, verwendest du{" "}
+              <code className="bg-surface-secondary border border-border rounded px-1.5 py-0.5 text-xs text-accent font-mono">
+                =HEUTE()
+              </code>
+              . F&uuml;r das aktuelle Datum inklusive Uhrzeit nimmst du{" "}
+              <code className="bg-surface-secondary border border-border rounded px-1.5 py-0.5 text-xs text-accent font-mono">
+                =JETZT()
+              </code>
+              . In Google Sheets hei&szlig;en die Funktionen{" "}
+              <code className="bg-surface-secondary border border-border rounded px-1.5 py-0.5 text-xs text-accent font-mono">
+                =TODAY()
+              </code>
+              {" "}und{" "}
+              <code className="bg-surface-secondary border border-border rounded px-1.5 py-0.5 text-xs text-accent font-mono">
+                =NOW()
+              </code>
+              . Beide Programme aktualisieren das Datum automatisch, sobald sie
+              neu berechnen.
+            </p>
+          </div>
+
+          <div className="overflow-x-auto rounded-xl border border-border mb-5">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="border-b border-border bg-surface-secondary">
+                  <th className="text-left px-5 py-3 font-medium text-text-secondary">Tool</th>
+                  <th className="text-left px-5 py-3 font-medium text-text-secondary">Formel</th>
+                  <th className="text-left px-5 py-3 font-medium text-text-secondary">Ergebnis</th>
+                  <th className="text-left px-5 py-3 font-medium text-text-secondary">Formatierung</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[
+                  {
+                    tool: "Excel",
+                    formel: "=HEUTE()",
+                    ergebnis: "Heutiges Datum",
+                    format: "TT.MM.JJJJ oder JJJJ-MM-TT",
+                  },
+                  {
+                    tool: "Excel",
+                    formel: "=JETZT()",
+                    ergebnis: "Datum + Uhrzeit",
+                    format: "TT.MM.JJJJ hh:mm",
+                  },
+                  {
+                    tool: "Google Sheets",
+                    formel: "=TODAY()",
+                    ergebnis: "Heutiges Datum",
+                    format: 'Format > Zahl > Datum',
+                  },
+                  {
+                    tool: "Google Sheets",
+                    formel: "=NOW()",
+                    ergebnis: "Datum + Uhrzeit",
+                    format: 'Datum und Uhrzeit oder ISO',
+                  },
+                ].map((row, i) => (
+                  <tr key={i} className="border-b border-border last:border-b-0">
+                    <td className="px-5 py-3 font-medium text-text-primary">{row.tool}</td>
+                    <td className="px-5 py-3">
+                      <code className="bg-surface-secondary border border-border rounded px-1.5 py-0.5 text-xs text-accent font-mono">
+                        {row.formel}
+                      </code>
+                    </td>
+                    <td className="px-5 py-3 text-text-secondary">{row.ergebnis}</td>
+                    <td className="px-5 py-3 text-text-secondary">{row.format}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          <div className="bg-amber-500/5 border border-amber-500/20 rounded-xl p-5">
+            <h3 className="text-sm font-semibold text-text-primary mb-2">
+              Typische Fehler in Excel &amp; Sheets
+            </h3>
+            <ul className="space-y-1.5 text-sm text-text-secondary">
+              <li className="flex items-start gap-2">
+                <span className="text-amber-500 mt-0.5">&bull;</span>
+                <span>
+                  Falsche <strong className="text-text-primary">Regionseinstellungen</strong>{" "}
+                  k&ouml;nnen Tag und Monat vertauschen.
+                </span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-amber-500 mt-0.5">&bull;</span>
+                <span>
+                  Steht ein Datum als Text in der Zelle, lassen sich Werte oft nicht
+                  korrekt sortieren. Stelle das Zellformat auf &bdquo;Datum&ldquo; um.
+                </span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        {/* ═════════════════════════════════════════════════════════
+            SECTION 12: CTA
+            ═════════════════════════════════════════════════════════ */}
+        <div className="mt-14">
+          <div className="bg-accent/5 border border-accent/20 rounded-2xl p-6 md:p-8">
+            <h2 className="text-xl font-bold text-text-primary mb-4">
+              Datum heute immer schnell finden
+            </h2>
+            <div className="text-text-secondary text-sm leading-relaxed space-y-3">
+              <p>
+                Speichere diese Seite als Lesezeichen oder f&uuml;ge sie direkt
+                zum Startbildschirm hinzu. So &ouml;ffnest du das heutige Datum
+                jederzeit mit einem Tipp.
+              </p>
+              <p>
+                Wirkt das heutige Datum falsch? Dann pr&uuml;fe kurz Standort und
+                Zeitzone &ndash; besonders nach Reisen oder bei VPN-Nutzung.
+              </p>
+              <p>
+                F&uuml;r Reiseplanung und Remote-Arbeit nutze die Weltzeit-Tabelle.
+                Damit vergleichst du Datum und Uhrzeit in anderen L&auml;ndern auf
+                einen Blick und vermeidest Missverst&auml;ndnisse bei Terminen.
+              </p>
+            </div>
+            <div className="mt-5 flex flex-wrap gap-3 text-sm">
+              <Link
+                href="/faq"
+                className="bg-accent text-white rounded-lg px-4 py-2 font-medium hover:bg-accent/90 transition-colors"
+              >
+                H&auml;ufige Fragen &rarr;
+              </Link>
+              <Link
+                href="/tagerechner"
+                className="bg-surface border border-border rounded-lg px-4 py-2 font-medium text-text-primary hover:bg-surface-secondary transition-colors"
+              >
+                Tagerechner &ouml;ffnen &rarr;
+              </Link>
+            </div>
+          </div>
+        </div>
+
+        {/* ═════════════════════════════════════════════════════════
+            Fazit-Box
+            ═════════════════════════════════════════════════════════ */}
+        <div className="mt-10 bg-surface-secondary border border-border rounded-xl p-5">
+          <h3 className="text-sm font-semibold text-text-primary mb-2">
+            Fazit
+          </h3>
+          <p className="text-sm text-text-secondary leading-relaxed">
+            Mit dem heutigen Datum hast du alles auf einen Blick: Datum,
+            Wochentag, Kalenderwoche und Uhrzeit &ndash; plus praktische Formate
+            (kurz, ausgeschrieben, ISO&nbsp;8601) und eine schnelle Orientierung
+            f&uuml;r wichtige Zeitzonen. Wenn dir Uhrzeit oder Datum abweichen,
+            pr&uuml;fe als Erstes Zeitzone, automatische Uhrzeit und ggf.
+            Sommerzeit. Richte dir jetzt eine Startbildschirm-Verkn&uuml;pfung
+            oder ein Widget ein &ndash; so siehst du das Datum jederzeit ohne
+            Umwege.
+          </p>
+        </div>
+
+        {/* ═════════════════════════════════════════════════════════
+            SECTION 13: FAQ
             ═════════════════════════════════════════════════════════ */}
         <div className="mt-14">
           <h2 className="text-2xl font-semibold mb-5">
@@ -637,11 +1243,17 @@ export default function DatumHeutePage() {
           >
             Welche KW haben wir? &rarr;
           </Link>
-          <Link href="/faq" className="text-accent hover:underline">
-            FAQ zur Kalenderwoche &rarr;
+          <Link href="/tagerechner" className="text-accent hover:underline">
+            Tagerechner &rarr;
+          </Link>
+          <Link href="/schaltjahr" className="text-accent hover:underline">
+            Schaltjahr &rarr;
           </Link>
           <Link href={`/feiertage/${year}`} className="text-accent hover:underline">
             Feiertage {year} &rarr;
+          </Link>
+          <Link href="/faq" className="text-accent hover:underline">
+            FAQ &rarr;
           </Link>
         </div>
       </section>
@@ -656,20 +1268,21 @@ export default function DatumHeutePage() {
  * [x] Meta Description: dynamisch mit Datum, Wochentag, KW
  * [x] Canonical URL: https://aktuellekw.de/datum-heute
  * [x] OG-Title + OG-Description + OG-URL
- * [x] H1: "Datum heute – Heutiges Datum & Wochentag"
+ * [x] H1: "Datum heute: heutiges Datum, Wochentag, Kalenderwoche & Uhrzeit"
  * [x] Schema.org: BreadcrumbList (2 Ebenen)
- * [x] Schema.org: FAQPage (7 Fragen)
- * [x] Cluster Keywords: datum heute, heutiges datum, datum von heute,
- *     heute datum, welcher tag ist heute, welcher wochentag ist heute,
- *     datum heute und uhrzeit, datum heute monat
- * [x] Großes Datum-Display (Hero-Sektion)
- * [x] Detail-Tabelle (13 Zeilen)
- * [x] Jahres- & Monatsfortschritt (Balken)
- * [x] Wochenübersicht (7 Tage mit Heute-Highlight)
- * [x] Gestern & Morgen Quick-Cards
- * [x] SEO-Placeholder: 3 Sektionen für zukünftige Texte
- * [x] Cross-Links: Startseite, KW-Übersicht, Feiertage, FAQ
- * [x] revalidate = 3600 (stündliche ISR)
- * [ ] TODO: OG-Image erstellen (opengraph-image.tsx)
- * [ ] TODO: SEO-Texte für alle 3 Placeholders schreiben
+ * [x] Schema.org: FAQPage (10 Fragen)
+ * [x] DACH-Tabelle (DE/AT/CH Datum + Zeitzone)
+ * [x] Datumsformate (TT.MM.JJJJ, ausgeschrieben, ISO 8601) + Checkliste
+ * [x] Dynamischer Monatskalender mit Heute-Highlight
+ * [x] Datum und Uhrzeit / Zeitzonen-Erkl\u00e4rung + InfoBox
+ * [x] Automatische Uhrzeit einstellen (Android/iPhone)
+ * [x] Datum weltweit: 6-Zeitzonen-Tabelle
+ * [x] Datum morgen + Gestern/Morgen Cards
+ * [x] Feiertage & Gedenktage Hinweis-Box
+ * [x] Startbildschirm-Checkliste (Android/iPhone/Windows/Mac)
+ * [x] Browser-Verkn\u00fcpfung speichern (Schritt-Tabelle)
+ * [x] Excel/Google Sheets: HEUTE()/JETZT() Tabelle + Fehler-Box
+ * [x] CTA-Section + Fazit-Box
+ * [x] Cross-Links: Startseite, KW, Tagerechner, Schaltjahr, Feiertage, FAQ
+ * [x] revalidate = 3600 (st\u00fcndliche ISR)
  */
