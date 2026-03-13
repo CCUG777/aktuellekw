@@ -50,7 +50,7 @@ export default function Footer() {
               <Link href="/datum-heute" className="text-sm text-text-secondary hover:text-text-primary transition-colors">
                 Datum heute
               </Link>
-              <Link href="/tage-berechnen" className="text-sm text-text-secondary hover:text-text-primary transition-colors">
+              <Link href="/tagerechner" className="text-sm text-text-secondary hover:text-text-primary transition-colors">
                 Tagerechner
               </Link>
               <Link href="/welche-kalenderwoche-haben-wir" className="text-sm text-text-secondary hover:text-text-primary transition-colors">

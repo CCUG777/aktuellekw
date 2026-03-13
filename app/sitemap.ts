@@ -88,7 +88,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     // Tagerechner
     {
-      url: "https://aktuellekw.de/tage-berechnen",
+      url: "https://aktuellekw.de/tagerechner",
       lastModified: now,
       changeFrequency: "daily",
       priority: 0.85,

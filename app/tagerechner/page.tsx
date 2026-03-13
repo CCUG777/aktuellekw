@@ -15,7 +15,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const title = "Tagerechner \u25b7 Tage zwischen zwei Daten berechnen | Kostenlos";
   const description =
     "Tagerechner von aktuellekw.de: Tage zwischen 2 Daten inkl./exkl. Start/Ende, Werktage vs. Kalendertage, +/\u2212 Tage & Countdown. Mit Fehler-Check.";
-  const url = "https://aktuellekw.de/tage-berechnen";
+  const url = "https://aktuellekw.de/tagerechner";
 
   return {
     title,
@@ -122,7 +122,7 @@ export default function TageBerechnenPage() {
           "@type": "ListItem",
           position: 2,
           name: "Tagerechner",
-          item: "https://aktuellekw.de/tage-berechnen",
+          item: "https://aktuellekw.de/tagerechner",
         },
       ],
     },
@@ -130,7 +130,7 @@ export default function TageBerechnenPage() {
       "@context": "https://schema.org",
       "@type": "WebApplication",
       name: "Tagerechner \u2013 Tage zwischen zwei Daten berechnen",
-      url: "https://aktuellekw.de/tage-berechnen",
+      url: "https://aktuellekw.de/tagerechner",
       applicationCategory: "UtilityApplication",
       operatingSystem: "All",
       offers: {
@@ -858,11 +858,11 @@ export default function TageBerechnenPage() {
 }
 
 /*
- * SEO Audit Checklist – app/tage-berechnen/page.tsx
+ * SEO Audit Checklist – app/tagerechner/page.tsx
  * ──────────────────────────────────────────────────────────────
  * [x] generateMetadata: Title "Tagerechner ▷ Tage zwischen zwei Daten berechnen | Kostenlos"
  * [x] Meta Description: aus tagerechner.md übernommen
- * [x] Canonical URL: https://aktuellekw.de/tage-berechnen
+ * [x] Canonical URL: https://aktuellekw.de/tagerechner
  * [x] OG-Title + OG-Description + OG-URL
  * [x] H1: "Tagerechner online: Tage zwischen zwei Daten berechnen"
  * [x] Schema.org: BreadcrumbList (2 Ebenen)

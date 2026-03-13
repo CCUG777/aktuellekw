@@ -895,7 +895,7 @@ export default function SchaltjahrPage() {
           <p className="text-text-secondary text-sm mt-3">
             Wenn du anschlie&szlig;end Zeitr&auml;ume z&auml;hlen willst,
             hilft dir der{" "}
-            <Link href="/tage-berechnen" className="text-accent hover:underline">
+            <Link href="/tagerechner" className="text-accent hover:underline">
               Tagerechner &ndash; Tage zwischen zwei Daten berechnen
             </Link>.
           </p>
@@ -1034,7 +1034,7 @@ export default function SchaltjahrPage() {
           <Link href="/datum-heute" className="text-accent hover:underline">
             Datum heute &rarr;
           </Link>
-          <Link href="/tage-berechnen" className="text-accent hover:underline">
+          <Link href="/tagerechner" className="text-accent hover:underline">
             Tagerechner &rarr;
           </Link>
           <Link href="/kalender-mit-wochen" className="text-accent hover:underline">
@@ -1084,7 +1084,7 @@ export default function SchaltjahrPage() {
  * [x] Cross-Links: Datum heute, Tagerechner, Kalender mit Wochen,
  *     Wochen im Jahr, Feiertage, FAQ
  * [x] revalidate = 86400 (tägliche ISR)
- * [x] Interne Verlinkung: datum-heute, tage-berechnen,
+ * [x] Interne Verlinkung: datum-heute, tagerechner,
  *     wie-viele-wochen-hat-ein-jahr, kalender-mit-wochen, feiertage
  * [x] Content aus schaltjahr.md vollständig integriert
  */
