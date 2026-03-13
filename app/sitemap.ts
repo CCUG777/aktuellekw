@@ -86,6 +86,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "daily",
       priority: 0.85,
     },
+    // Tagerechner
+    {
+      url: "https://aktuellekw.de/tage-berechnen",
+      lastModified: now,
+      changeFrequency: "daily",
+      priority: 0.85,
+    },
     // Feiertage Deutschland
     {
       url: "https://aktuellekw.de/feiertage",
