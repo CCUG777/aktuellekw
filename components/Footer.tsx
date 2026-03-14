@@ -95,6 +95,12 @@ export default function Footer() {
               <Link href={`/feiertage/${year}/hessen`} className="text-sm text-text-secondary hover:text-text-primary transition-colors">
                 Feiertage Hessen {year}
               </Link>
+              <Link href="/arbeitstage-2026" className="text-sm text-text-secondary hover:text-text-primary transition-colors">
+                Arbeitstage 2026
+              </Link>
+              <Link href="/arbeitstage-rechner" className="text-sm text-text-secondary hover:text-text-primary transition-colors">
+                Arbeitstage-Rechner
+              </Link>
               <Link href="/schulferien/2025" className="text-sm text-text-secondary hover:text-text-primary transition-colors">
                 Schulferien 2025
               </Link>

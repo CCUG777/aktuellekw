@@ -100,6 +100,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "yearly",
       priority: 0.75,
     },
+    // Arbeitstage 2026
+    {
+      url: "https://aktuellekw.de/arbeitstage-2026",
+      lastModified: now,
+      changeFrequency: "yearly",
+      priority: 0.85,
+    },
+    // Arbeitstage-Rechner
+    {
+      url: "https://aktuellekw.de/arbeitstage-rechner",
+      lastModified: now,
+      changeFrequency: "daily",
+      priority: 0.85,
+    },
     // Feiertage Deutschland
     {
       url: "https://aktuellekw.de/feiertage",
