@@ -114,6 +114,27 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "daily",
       priority: 0.85,
     },
+    // Zeitumstellung 2026
+    {
+      url: "https://aktuellekw.de/zeitumstellung-2026",
+      lastModified: now,
+      changeFrequency: "yearly",
+      priority: 0.85,
+    },
+    // Sommerzeit 2026
+    {
+      url: "https://aktuellekw.de/sommerzeit-2026",
+      lastModified: now,
+      changeFrequency: "yearly",
+      priority: 0.8,
+    },
+    // Winterzeit 2026
+    {
+      url: "https://aktuellekw.de/winterzeit-2026",
+      lastModified: now,
+      changeFrequency: "yearly",
+      priority: 0.8,
+    },
     // Feiertage Deutschland
     {
       url: "https://aktuellekw.de/feiertage",
