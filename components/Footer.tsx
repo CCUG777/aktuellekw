@@ -104,7 +104,7 @@ export default function Footer() {
               <Link href="/zeitumstellung-2026" className="text-sm text-text-secondary hover:text-text-primary transition-colors">
                 Zeitumstellung 2026
               </Link>
-              <Link href="/sommerzeit-2026" className="text-sm text-text-secondary hover:text-text-primary transition-colors">
+              <Link href="/sommerzeit" className="text-sm text-text-secondary hover:text-text-primary transition-colors">
                 Sommerzeit 2026
               </Link>
               <Link href="/winterzeit-2026" className="text-sm text-text-secondary hover:text-text-primary transition-colors">

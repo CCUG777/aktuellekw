@@ -264,7 +264,7 @@ export default function ZeitumstellungPage() {
               Bei der <strong className="text-text-primary">Zeitumstellung im M&auml;rz 2026</strong> wechselst du am {sommerzeit.dateFormatted} auf die Sommerzeit (MESZ). In der Nacht springt die Uhr von {sommerzeit.timeBefore} auf {sommerzeit.timeAfter} Uhr &ndash; du stellst die Uhr also eine Stunde vor.
             </p>
             <p>
-              Dadurch ist die Nacht eine Stunde k&uuml;rzer. Kontrolliere Wecker, Uhren und Ger&auml;te ohne Funkabgleich und passe bei Bedarf deine Termin- und Schichtplanung an, damit nichts verrutscht. Mehr Hintergr&uuml;nde findest du unter <Link href="/sommerzeit-2026" className="text-accent hover:underline">alle Details zur Sommerzeit 2026</Link>.
+              Dadurch ist die Nacht eine Stunde k&uuml;rzer. Kontrolliere Wecker, Uhren und Ger&auml;te ohne Funkabgleich und passe bei Bedarf deine Termin- und Schichtplanung an, damit nichts verrutscht. Mehr Hintergr&uuml;nde findest du unter <Link href="/sommerzeit" className="text-accent hover:underline">alle Details zur Sommerzeit 2026</Link>.
             </p>
             <div className="bg-card-bg border border-border rounded-2xl px-5 py-4 mt-4">
               <p className="text-sm"><strong className="text-text-primary">Merke:</strong> Letzter Sonntag im M&auml;rz: {sommerzeit.timeBefore} wird {sommerzeit.timeAfter} (Uhr vorstellen).</p>
@@ -583,7 +583,7 @@ export default function ZeitumstellungPage() {
         <section className="mb-12">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <Link
-              href="/sommerzeit-2026"
+              href="/sommerzeit"
               className="block bg-card-bg border border-border rounded-2xl p-5 hover:border-accent transition-colors group"
             >
               <p className="text-xs uppercase tracking-widest text-accent mb-1">Sommerzeit</p>

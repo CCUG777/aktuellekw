@@ -8,6 +8,11 @@ const nextConfig: NextConfig = {
         destination: "/tagerechner",
         permanent: true, // 301 redirect
       },
+      {
+        source: "/sommerzeit-2026",
+        destination: "/sommerzeit",
+        permanent: true, // 301 redirect
+      },
     ];
   },
 };

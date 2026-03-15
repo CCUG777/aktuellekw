@@ -123,7 +123,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     // Sommerzeit 2026
     {
-      url: "https://aktuellekw.de/sommerzeit-2026",
+      url: "https://aktuellekw.de/sommerzeit",
       lastModified: now,
       changeFrequency: "yearly",
       priority: 0.8,

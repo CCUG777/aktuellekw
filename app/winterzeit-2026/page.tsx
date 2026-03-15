@@ -334,7 +334,7 @@ export default function WinterzeitPage() {
               </p>
             </Link>
             <Link
-              href="/sommerzeit-2026"
+              href="/sommerzeit"
               className="block bg-card-bg border border-border rounded-2xl p-5 hover:border-accent transition-colors group"
             >
               <p className="text-xs uppercase tracking-widest text-accent mb-1">Sommerzeit</p>
