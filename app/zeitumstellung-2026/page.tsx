@@ -80,36 +80,36 @@ export default function ZeitumstellungPage() {
 
   const faqItems = [
     {
-      q: "Wann ist die Zeitumstellung 2026?",
-      a: `Die Zeitumstellung auf Sommerzeit erfolgt am ${sommerzeit.dateFormatted} (Uhr von ${sommerzeit.timeBefore} auf ${sommerzeit.timeAfter} Uhr vor). Die Umstellung auf Winterzeit erfolgt am ${winterzeit.dateFormatted} (Uhr von ${winterzeit.timeBefore} auf ${winterzeit.timeAfter} Uhr zur\u00FCck).`,
+      q: "Wann werden die Uhren 2026 umgestellt?",
+      a: "Die Uhren werden zur Zeitumstellung 2026 in Deutschland zweimal umgestellt: im M\u00E4rz auf Sommerzeit und im Oktober zur\u00FCck auf Winterzeit (Normalzeit). Die Umstellung passiert jeweils in der Nacht von Samstag auf Sonntag.",
     },
     {
-      q: "Wann werden die Uhren 2026 vorgestellt?",
-      a: `Am ${formatDateLongDE(sommerzeit.date)} werden die Uhren um ${sommerzeit.timeBefore} Uhr auf ${sommerzeit.timeAfter} Uhr vorgestellt. Die Nacht ist eine Stunde k\u00FCrzer.`,
+      q: "Wann ist die Zeitumstellung 2026 in Deutschland genau (Datum und Uhrzeit)?",
+      a: `Die Zeitumstellung 2026 in Deutschland ist am Sonntag, ${sommerzeit.dateFormatted}: um ${sommerzeit.timeBefore} Uhr wird auf ${sommerzeit.timeAfter} Uhr vorgestellt (Sommerzeit). Zur\u00FCck geht es am Sonntag, ${winterzeit.dateFormatted}: um ${winterzeit.timeBefore} Uhr wird auf ${winterzeit.timeAfter} Uhr zur\u00FCckgestellt (Winterzeit/Normalzeit). Beide Termine liegen in der Nacht von Samstag auf Sonntag.`,
     },
     {
-      q: "Wann werden die Uhren 2026 zur\u00FCckgestellt?",
-      a: `Am ${formatDateLongDE(winterzeit.date)} werden die Uhren um ${winterzeit.timeBefore} Uhr auf ${winterzeit.timeAfter} Uhr zur\u00FCckgestellt. Die Nacht ist eine Stunde l\u00E4nger.`,
+      q: "Wird die Uhr im M\u00E4rz 2026 vor oder zur\u00FCck gestellt?",
+      a: `Im M\u00E4rz 2026 wird die Uhr in Deutschland vorgestellt, weil dann die Sommerzeit beginnt. Bei der Zeitumstellung 2026 springt die Uhr von ${sommerzeit.timeBefore} auf ${sommerzeit.timeAfter} Uhr. Du verlierst dadurch eine Stunde Schlaf.`,
     },
     {
-      q: "Wird die Zeitumstellung 2026 abgeschafft?",
-      a: "Nein. Das EU-Parlament hat 2019 die Abschaffung der Zeitumstellung beschlossen, jedoch konnten sich die Mitgliedsstaaten nicht auf eine einheitliche Zeit einigen. Stand M\u00E4rz 2026 ist die Abschaffung weiterhin nicht umgesetzt.",
+      q: "Wird die Uhr im Oktober 2026 vor oder zur\u00FCck gestellt?",
+      a: `Im Oktober 2026 wird die Uhr in Deutschland zur\u00FCckgestellt, weil dann die Winterzeit (Normalzeit) beginnt. Bei der Zeitumstellung 2026 geht es von ${winterzeit.timeBefore} auf ${winterzeit.timeAfter} Uhr zur\u00FCck. Du bekommst dadurch eine Stunde dazu.`,
     },
     {
-      q: "In welche Richtung wird die Uhr gestellt?",
-      a: "Im Fr\u00FChling wird die Uhr eine Stunde VOR gestellt (wir verlieren eine Stunde Schlaf). Im Herbst wird die Uhr eine Stunde ZUR\u00DCCK gestellt (wir gewinnen eine Stunde Schlaf).",
+      q: "Warum finde ich online auch den 8. M\u00E4rz 2026 als Termin?",
+      a: "Der 8. M\u00E4rz 2026 wird oft genannt, weil in den USA die Sommerzeit (Daylight Saving Time) an einem anderen Datum startet als in Deutschland. F\u00FCr die Zeitumstellung 2026 in Deutschland gilt der letzte Sonntag im M\u00E4rz, nicht der 8. M\u00E4rz. Viele Suchtreffer vermischen die US-Regel mit der EU-Regel.",
     },
     {
-      q: "Welche Eselsbr\u00FCcke gibt es f\u00FCr die Zeitumstellung?",
-      a: "\u201EIm Fr\u00FChling stellt man die Gartenm\u00F6bel VOR das Haus, im Herbst stellt man sie ZUR\u00DCCK.\u201C Alternativ: \u201ESpring forward, fall back\u201C (englisch).",
+      q: "Stellen Smartphones und Funkuhren die Zeitumstellung 2026 automatisch um?",
+      a: "Smartphones stellen die Zeitumstellung 2026 meist automatisch um, wenn \u201EDatum/Uhrzeit automatisch\u201C aktiviert ist und die richtige Zeitzone eingestellt ist. Funkuhren stellen sich ebenfalls automatisch um. Manuell pr\u00FCfen musst du oft Ger\u00E4te wie Auto-Uhren, Backofen/Mikrowelle und manche Smart-Home-Komponenten.",
     },
     {
-      q: "Gilt die Zeitumstellung in ganz Deutschland?",
-      a: "Ja. Die Zeitumstellung gilt einheitlich in ganz Deutschland sowie in allen EU-Mitgliedsstaaten nach der EU-Richtlinie 2000/84/EG. Deutschland wechselt zwischen MEZ (UTC+1) und MESZ (UTC+2).",
+      q: "Ist die Zeitumstellung 2026 abgeschafft oder gilt sie noch?",
+      a: "Die Zeitumstellung 2026 ist in Deutschland nicht abgeschafft und gilt weiterhin. Eine EU-weite Abschaffung wurde diskutiert, ist aber bisher nicht umgesetzt. Deshalb werden die Uhren auch 2026 wie gewohnt im M\u00E4rz und Oktober umgestellt.",
     },
     {
-      q: "Warum gibt es die Zeitumstellung?",
-      a: "Die Zeitumstellung wurde eingef\u00FChrt, um das Tageslicht besser zu nutzen und Energie zu sparen. In Deutschland gilt sie seit 1980, EU-weit einheitlich seit 1996. Der tats\u00E4chliche Energiespareffekt ist laut Studien gering.",
+      q: "Welche Zeit gilt in Deutschland dauerhaft: Sommerzeit oder Winterzeit?",
+      a: "In Deutschland gilt keine Zeit dauerhaft: Es gibt weiterhin Sommerzeit und Winterzeit (Normalzeit) im Wechsel. Welche Zeit dauerhaft gelten soll, ist politisch noch nicht entschieden. Bis dahin bleibt es auch zur Zeitumstellung 2026 beim bisherigen System.",
     },
   ];
 
@@ -212,9 +212,15 @@ export default function ZeitumstellungPage() {
           )}
         </header>
 
-        {/* ── [PLACEHOLDER: Einleitungstext Zeitumstellung] ── */}
-        {/* SEO-Text ~150-200 Wörter: zeitumstellung 2026, wann ist zeitumstellung 2026,
-            uhren umstellen 2026, zeitumstellung 2026 deutschland */}
+        {/* ── Einleitungstext ── */}
+        <section className="mb-12 text-sm text-text-secondary leading-relaxed space-y-4 max-w-3xl mx-auto">
+          <p>
+            Die <strong className="text-text-primary">Zeitumstellung 2026</strong> in Deutschland passiert an zwei Sonntagen: Am <strong className="text-text-primary">{formatDateLongDE(sommerzeit.date)}</strong> beginnt die Sommerzeit &ndash; um {sommerzeit.timeBefore} Uhr springt die Uhr auf {sommerzeit.timeAfter} Uhr (eine Stunde weniger Schlaf). Am <strong className="text-text-primary">{formatDateLongDE(winterzeit.date)}</strong> endet die Sommerzeit &ndash; um {winterzeit.timeBefore} Uhr geht&apos;s zur&uuml;ck auf {winterzeit.timeAfter} Uhr (eine Stunde mehr). Damit wechselst du zwischen <strong className="text-text-primary">MEZ</strong> (Winterzeit/Normalzeit) und <strong className="text-text-primary">MESZ</strong> (Sommerzeit) &ndash; und wei&szlig;t sofort, ob die Uhr vor oder zur&uuml;ck muss.
+          </p>
+          <p>
+            Viele Ger&auml;te machen das automatisch, aber bei Auto-Uhr, Backofen, Mikrowelle oder Smart-Home-Hubs musst du oft nachhelfen &ndash; weiter unten kommt ein schneller Ger&auml;te-Check. Falls du &bdquo;8.&nbsp;M&auml;rz&nbsp;2026&ldquo; gelesen hast: Das ist die <strong className="text-text-primary">US-Umstellung</strong>, nicht Deutschland. Die EU-Debatte zur Abschaffung l&auml;uft zwar weiter, umgesetzt ist sie f&uuml;r 2026 aber nicht.
+          </p>
+        </section>
 
         {/* ── Termine 2026 Detail ── */}
         <section className="mb-12">
@@ -250,13 +256,46 @@ export default function ZeitumstellungPage() {
           </div>
         </section>
 
-        {/* ── [PLACEHOLDER: Erkl\u00E4rtext Was passiert bei der Zeitumstellung] ── */}
-        {/* SEO-Text ~100-150 Wörter: zeitumstellung 2026 datum, uhren umstellen 2026,
-            zeitumstellung märz 2026, zeitumstellung oktober 2026 */}
+        {/* ── Zeitumstellung März 2026 ── */}
+        <section className="mb-12">
+          <h2 className="text-2xl font-bold mb-4">Zeitumstellung M&auml;rz 2026: Uhr vorstellen am {sommerzeit.dateFormatted}</h2>
+          <div className="text-sm text-text-secondary leading-relaxed space-y-3 max-w-3xl">
+            <p>
+              Bei der <strong className="text-text-primary">Zeitumstellung im M&auml;rz 2026</strong> wechselst du am {sommerzeit.dateFormatted} auf die Sommerzeit (MESZ). In der Nacht springt die Uhr von {sommerzeit.timeBefore} auf {sommerzeit.timeAfter} Uhr &ndash; du stellst die Uhr also eine Stunde vor.
+            </p>
+            <p>
+              Dadurch ist die Nacht eine Stunde k&uuml;rzer. Kontrolliere Wecker, Uhren und Ger&auml;te ohne Funkabgleich und passe bei Bedarf deine Termin- und Schichtplanung an, damit nichts verrutscht. Mehr Hintergr&uuml;nde findest du unter <Link href="/sommerzeit-2026" className="text-accent hover:underline">alle Details zur Sommerzeit 2026</Link>.
+            </p>
+            <div className="bg-card-bg border border-border rounded-2xl px-5 py-4 mt-4">
+              <p className="text-sm"><strong className="text-text-primary">Merke:</strong> Letzter Sonntag im M&auml;rz: {sommerzeit.timeBefore} wird {sommerzeit.timeAfter} (Uhr vorstellen).</p>
+            </div>
+          </div>
+        </section>
+
+        {/* ── Zeitumstellung Oktober 2026 ── */}
+        <section className="mb-12">
+          <h2 className="text-2xl font-bold mb-4">Zeitumstellung Oktober 2026: Uhr zur&uuml;ckstellen am {winterzeit.dateFormatted}</h2>
+          <div className="text-sm text-text-secondary leading-relaxed space-y-3 max-w-3xl">
+            <p>
+              Die <strong className="text-text-primary">Zeitumstellung Oktober 2026</strong> f&auml;llt auf den {winterzeit.dateFormatted}. In dieser Nacht beginnt die Normalzeit: Um {winterzeit.timeBefore} Uhr wird die Uhr auf {winterzeit.timeAfter} Uhr gestellt. Du musst also die <strong className="text-text-primary">Uhr zur&uuml;ckstellen</strong> &ndash; und gewinnst eine Stunde Schlaf.
+            </p>
+            <p>
+              Praktisch hei&szlig;t das: Die Stunde zwischen {winterzeit.timeAfter} und {winterzeit.timeBefore} Uhr passiert zweimal. Das ist wichtig, wenn du Nachtschicht hast oder Termine in der Nacht planst. Alle Details findest du unter <Link href="/winterzeit-2026" className="text-accent hover:underline">Infos zur Winterzeit 2026</Link>.
+            </p>
+            <div className="bg-card-bg border border-border rounded-2xl px-5 py-4 mt-4">
+              <p className="text-sm"><strong className="text-text-primary">Merke:</strong> Am letzten Sonntag im Oktober wird auf Normalzeit (MEZ) umgestellt: {winterzeit.timeBefore} Uhr wird {winterzeit.timeAfter} Uhr (zur&uuml;ckstellen).</p>
+            </div>
+          </div>
+        </section>
 
         {/* ── Eselsbrücken ── */}
         <section className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Eselsbr&uuml;cken zur Zeitumstellung</h2>
+          <h2 className="text-2xl font-bold mb-4">Zeitumstellung 2026: vor oder zur&uuml;ck?</h2>
+          <div className="text-sm text-text-secondary leading-relaxed space-y-3 max-w-3xl mb-6">
+            <p>
+              Im <strong className="text-text-primary">M&auml;rz</strong> stellst du die Uhr <strong className="text-text-primary">vor</strong>, im <strong className="text-text-primary">Oktober</strong> stellst du sie <strong className="text-text-primary">zur&uuml;ck</strong>. Im M&auml;rz springt die Uhr nachts von {sommerzeit.timeBefore} auf {sommerzeit.timeAfter}. Du verlierst eine Stunde Schlaf, daf&uuml;r bleibt es abends l&auml;nger hell. Im Oktober l&auml;uft es umgekehrt: von {winterzeit.timeBefore} auf {winterzeit.timeAfter}. Du bekommst eine Stunde zur&uuml;ck und der Morgen wirkt fr&uuml;her hell.
+            </p>
+          </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="bg-card-bg border border-border rounded-2xl p-5">
               <p className="text-sm text-accent font-medium mb-2">Gartenm&ouml;bel-Regel</p>
@@ -282,6 +321,16 @@ export default function ZeitumstellungPage() {
                 <strong className="text-text-primary">MEZ</strong> = Mitteleurop&auml;ische Zeit (Winter, UTC+1). <strong className="text-text-primary">MESZ</strong> = Mitteleurop&auml;ische <em>Sommer</em>zeit (UTC+2).
               </p>
             </div>
+          </div>
+          {/* Schnell-merken Checkliste */}
+          <div className="bg-card-bg border border-border rounded-2xl p-5 mt-4">
+            <p className="text-sm font-semibold mb-2">Checkliste (schnell merken)</p>
+            <ul className="text-sm text-text-secondary space-y-1.5 list-none">
+              <li>&#10003; M&auml;rz: Uhr <strong className="text-text-primary">vor</strong> ({sommerzeit.timeBefore} &rarr; {sommerzeit.timeAfter})</li>
+              <li>&#10003; Oktober: Uhr <strong className="text-text-primary">zur&uuml;ck</strong> ({winterzeit.timeBefore} &rarr; {winterzeit.timeAfter})</li>
+              <li>&#10003; Merksatz: Gartenm&ouml;bel VOR / ZUR&Uuml;CK</li>
+              <li>&#10003; Merkhilfe: Sommerzeit = abends l&auml;nger hell &rarr; vorstellen</li>
+            </ul>
           </div>
         </section>
 
@@ -321,34 +370,115 @@ export default function ZeitumstellungPage() {
           </div>
         </section>
 
-        {/* ── [PLACEHOLDER: Zeitumstellung Deutschland / EU-Kontext] ── */}
-        {/* SEO-Text ~100-150 Wörter: zeitumstellung 2026 deutschland,
-            zeitumstellung abschaffen, EU-Richtlinie 2000/84/EG */}
-
-        {/* ── Abschaffung der Zeitumstellung ── */}
+        {/* ── Geräte-Check ── */}
         <section className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Wird die Zeitumstellung abgeschafft?</h2>
-          <div className="bg-card-bg border border-border rounded-2xl p-6">
-            <div className="flex items-start gap-3">
-              <span className="text-2xl flex-shrink-0" role="img" aria-label="Info">&#9432;</span>
-              <div>
-                <p className="text-text-secondary text-sm mb-3">
-                  Das <strong className="text-text-primary">EU-Parlament</strong> hat im M&auml;rz 2019 mit gro&szlig;er Mehrheit f&uuml;r die Abschaffung der Zeitumstellung gestimmt. Urspr&uuml;nglich sollte die letzte Umstellung 2021 stattfinden.
-                </p>
-                <p className="text-text-secondary text-sm mb-3">
-                  Allerdings konnten sich die <strong className="text-text-primary">EU-Mitgliedsstaaten im Rat</strong> nicht einigen, ob dauerhaft Sommer- oder Winterzeit gelten soll. Eine l&auml;nder&uuml;bergreifende Koordination ist n&ouml;tig, um einen Flickenteppich unterschiedlicher Zeitzonen zu vermeiden.
-                </p>
-                <p className="text-text-secondary text-sm">
-                  <strong className="text-text-primary">Stand M&auml;rz 2026:</strong> Die Abschaffung ist weiterhin nicht umgesetzt. Die Zeitumstellung findet 2026 wie gewohnt zweimal statt.
-                </p>
-              </div>
+          <h2 className="text-2xl font-bold mb-4">Welche Ger&auml;te stellen die Zeitumstellung 2026 automatisch um?</h2>
+          <div className="text-sm text-text-secondary leading-relaxed space-y-3 max-w-3xl mb-6">
+            <p>
+              Die meisten Ger&auml;te stellen sich bei der <strong className="text-text-primary">Zeitumstellung 2026 in Deutschland</strong> automatisch um &ndash; vorausgesetzt, die automatische Uhrzeit ist aktiviert. Das gilt f&uuml;r Smartphones, Tablets und Computer. Auch Smartwatches und viele Funkuhren &uuml;bernehmen die neue Zeit selbstst&auml;ndig. Trotzdem lohnt sich ein kurzer Check, besonders bei Arbeitsger&auml;ten, Zweitprofilen oder Ger&auml;ten, die selten online sind.
+            </p>
+            <p>
+              Manuell wird es h&auml;ufig bei <strong className="text-text-primary">Backofen</strong> und <strong className="text-text-primary">Mikrowelle</strong>. Auch einige <strong className="text-text-primary">Auto-Uhren</strong> und Infotainment-Systeme brauchen eine kurze Anpassung. Klassische Armbanduhren ohne Funk sowie viele Wanduhren stellst du ebenfalls selbst um.
+            </p>
+            <p>
+              Wenn nach der Zeitumstellung eine Uhr eine Stunde danebenliegt, hilft meist: <strong className="text-text-primary">Automatik aktivieren</strong>, Ger&auml;t <strong className="text-text-primary">neu starten</strong> und die Zeitzone auf <strong className="text-text-primary">Europa/Berlin</strong> setzen.
+            </p>
+          </div>
+          {/* Checkliste */}
+          <div className="bg-card-bg border border-border rounded-2xl p-5">
+            <p className="text-sm font-semibold mb-3">Checkliste: Vor der Zeitumstellung 2026</p>
+            <ul className="text-sm text-text-secondary space-y-2 list-none">
+              <li>&#10003; <strong className="text-text-primary">Automatische Uhrzeit</strong> am Smartphone aktivieren</li>
+              <li>&#10003; <strong className="text-text-primary">Zeitzone Europa/Berlin</strong> pr&uuml;fen</li>
+              <li>&#10003; <strong className="text-text-primary">Wecker</strong> und Kalender-Termine kontrollieren</li>
+              <li>&#10003; Smartwatch-Synchronisation kurz ansto&szlig;en</li>
+              <li>&#10003; <strong className="text-text-primary">Auto-Uhr</strong> und Bordcomputer checken</li>
+              <li>&#10003; <strong className="text-text-primary">Backofen</strong> und <strong className="text-text-primary">Mikrowelle</strong> manuell anpassen</li>
+              <li>&#10003; <strong className="text-text-primary">Smart-Home-Zeitpl&auml;ne</strong> und Routinen pr&uuml;fen</li>
+            </ul>
+          </div>
+        </section>
+
+        {/* ── Probleme nach der Zeitumstellung ── */}
+        <section className="mb-12">
+          <h2 className="text-2xl font-bold mb-4">Probleme nach der Zeitumstellung: Wecker, Kalender und Smart Home</h2>
+          <div className="text-sm text-text-secondary leading-relaxed space-y-3 max-w-3xl mb-4">
+            <p>
+              Nach der Zeitumstellung 2026 lohnt sich am Abend davor ein kurzer Check. Pr&uuml;fe Wecker und Schichtzeiten, damit am n&auml;chsten Morgen alles stimmt. In Kalendern mit Zeitzonen (z.&nbsp;B. Teams oder Zoom) bleiben Termine korrekt, wenn in deinem Profil die richtige Zeitzone hinterlegt ist.
+            </p>
+            <p>
+              Auch Smart-Home-Ger&auml;te und Heizungen k&ouml;nnen Zeitpl&auml;ne verschieben, wenn sie l&auml;nger offline waren. Verbinde die Ger&auml;te wieder mit dem Internet und synchronisiere sie manuell oder starte sie neu.
+            </p>
+          </div>
+          <div className="bg-card-bg border border-border rounded-2xl p-5">
+            <p className="text-sm font-semibold mb-3">Schnellhilfe</p>
+            <div className="text-sm text-text-secondary space-y-2">
+              <p><strong className="text-text-primary">Zeitzone falsch:</strong> W&auml;hle die richtige Region, dann passen Termine und Uhrzeit.</p>
+              <p><strong className="text-text-primary">Sommerzeit deaktiviert:</strong> Aktiviere die automatische Sommerzeit, damit die Umstellung greift.</p>
+              <p><strong className="text-text-primary">Ger&auml;t lange offline:</strong> Stelle die Internetverbindung her und starte das Ger&auml;t neu, damit es synchronisiert.</p>
             </div>
           </div>
         </section>
 
-        {/* ── [PLACEHOLDER: Auswirkungen der Zeitumstellung] ── */}
-        {/* SEO-Text ~80-120 Wörter: Gesundheit, Schlafrhythmus, Biorhythmus,
-            Energieeinsparung, Mini-Jetlag */}
+        {/* ── Abschaffung der Zeitumstellung ── */}
+        <section className="mb-12">
+          <h2 className="text-2xl font-bold mb-4">Zeitumstellung 2026 abgeschafft? Aktueller Stand in der EU</h2>
+          <div className="text-sm text-text-secondary leading-relaxed space-y-3 max-w-3xl mb-4">
+            <p>
+              Stand heute ist die Frage &bdquo;Zeitumstellung 2026 abgeschafft?&ldquo; klar zu beantworten: <strong className="text-text-primary">Nein</strong>. In Deutschland wird 2026 weiterhin wie gewohnt zwischen Sommerzeit und Normalzeit umgestellt. Es gibt keine beschlossene Regel&auml;nderung, die das Ende verbindlich festlegt.
+            </p>
+            <p>
+              Der Hauptgrund ist die <strong className="text-text-primary">fehlende EU-Einigung</strong>. Es muss EU-weit abgestimmt werden, ob dauerhaft Sommerzeit oder Normalzeit gelten soll. Staaten wollen keine Zeitinseln nebenan. 2019 hat das EU-Parlament zwar grunds&auml;tzlich f&uuml;r ein Ende der Umstellung gestimmt. Die Umsetzung blieb aber aus, weil es keine einheitliche Entscheidung der Mitgliedstaaten gab.
+            </p>
+          </div>
+          <div className="bg-card-bg border border-border rounded-2xl p-6">
+            <div className="flex items-start gap-3">
+              <span className="text-2xl flex-shrink-0" role="img" aria-label="Info">&#9432;</span>
+              <div className="text-sm text-text-secondary">
+                <p className="font-semibold text-text-primary mb-2">Faktenbox</p>
+                <p>Kein festes Enddatum beschlossen. EU-weite Koordination n&ouml;tig. Termine gelten weiterhin. Bis eine formale Regel&auml;nderung beschlossen ist, gelten die bekannten Umstellungstermine.</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Wer blockiert */}
+          <h3 className="text-xl font-bold mt-8 mb-3">Wer &bdquo;blockiert&ldquo; die Abschaffung der Zeitumstellung?</h3>
+          <div className="text-sm text-text-secondary leading-relaxed space-y-3 max-w-3xl">
+            <p>
+              Der Engpass ist die fehlende Einigung der EU-Mitgliedstaaten, welche Zeit dauerhaft gelten soll. Strittig sind Folgen f&uuml;r <strong className="text-text-primary">Handel und Verkehr</strong>, die geografische Lage (Ost/West) und die Abstimmung mit Nachbarl&auml;ndern. Ohne gemeinsame Linie droht ein Flickenteppich aus unterschiedlichen Regeln &ndash; selbst wenn die Abschaffung politisch grunds&auml;tzlich m&ouml;glich w&auml;re.
+            </p>
+            <div className="bg-card-bg border border-border rounded-2xl px-5 py-4 mt-3">
+              <p className="text-sm"><strong className="text-text-primary">Kurz erkl&auml;rt:</strong> In der EU macht die Kommission einen Vorschlag und koordiniert. Entscheidend ist aber die Einigung der Mitgliedstaaten auf eine dauerhaft g&uuml;ltige Zeit.</p>
+            </div>
+          </div>
+        </section>
+
+        {/* ── Auswirkungen ── */}
+        <section className="mb-12">
+          <h2 className="text-2xl font-bold mb-4">Auswirkungen der Zeitumstellung: Schlaf, Gesundheit und Alltag</h2>
+          <div className="text-sm text-text-secondary leading-relaxed space-y-3 max-w-3xl mb-6">
+            <p>
+              Die <strong className="text-text-primary">Auswirkungen auf den K&ouml;rper</strong> sp&uuml;rst du oft sofort: Nach der Umstellung im M&auml;rz fehlt vielen eine Stunde Schlaf. Du bist m&uuml;de, unkonzentriert und wirst abends sp&auml;ter richtig schl&auml;frig. Im Oktober f&auml;llt die Anpassung h&auml;ufig leichter, weil du eine Stunde dazugewinnst.
+            </p>
+            <p>
+              F&uuml;r die Gesundheit hilft ein klarer Plan: Behandle die Umstellung wie einen kleinen Jetlag. Verschiebe deine Schlafenszeit 2&ndash;3 Tage vorher jeden Abend um 15&ndash;20 Minuten nach vorn. Geh morgens direkt ins Tageslicht und beweg dich kurz, damit dein K&ouml;rper schneller auf Tag schaltet. Lass Koffein am sp&auml;ten Nachmittag weg.
+            </p>
+            <p>
+              Bei Kindern und Schichtarbeit zahlt sich Vorbereitung besonders aus. Stell Wecker, Essenszeiten und Abl&auml;ufe Schritt f&uuml;r Schritt um.
+            </p>
+          </div>
+          <div className="bg-card-bg border border-border rounded-2xl p-5">
+            <p className="text-sm font-semibold mb-3">So kommst du besser durch die Zeitumstellung</p>
+            <ul className="text-sm text-text-secondary space-y-2 list-none">
+              <li>&#10003; Schlaf schrittweise anpassen (2&ndash;3 Tage vorher)</li>
+              <li>&#10003; Morgens <strong className="text-text-primary">Tageslicht</strong> nutzen</li>
+              <li>&#10003; Tags&uuml;ber <strong className="text-text-primary">Bewegung</strong> einbauen</li>
+              <li>&#10003; Abendroutine fr&uuml;her starten, Screens reduzieren</li>
+              <li>&#10003; Wecker doppelt pr&uuml;fen</li>
+              <li>&#10003; Termine am Montag nach der Umstellung bewusst <strong className="text-text-primary">lockerer planen</strong></li>
+            </ul>
+          </div>
+        </section>
 
         {/* ── MEZ vs MESZ ── */}
         <section className="mb-12">
@@ -393,9 +523,61 @@ export default function ZeitumstellungPage() {
           </div>
         </section>
 
-        {/* ── [PLACEHOLDER: Zeitumstellung in Europa & weltweit] ── */}
-        {/* SEO-Text ~80-100 Wörter: EU-Länder, Schweiz, Türkei, USA,
-            Länder ohne Zeitumstellung */}
+        {/* ── USA vs. Deutschland: "8. März" ── */}
+        <section className="mb-12">
+          <h2 className="text-2xl font-bold mb-4">Warum suchen viele nach &bdquo;Zeitumstellung 2026 am 8. M&auml;rz&ldquo;?</h2>
+          <div className="text-sm text-text-secondary leading-relaxed space-y-3 max-w-3xl mb-6">
+            <p>
+              Viele suchen nach &bdquo;Zeitumstellung 2026 8.&nbsp;M&auml;rz&ldquo;, weil sich Termine aus den USA und Europa im Netz vermischen. In <strong className="text-text-primary">Deutschland</strong> und der <strong className="text-text-primary">EU</strong> findet die Umstellung im Fr&uuml;hjahr jedoch <strong className="text-text-primary">nicht</strong> am 8.&nbsp;M&auml;rz statt. Hier gilt weiterhin die Regel: <strong className="text-text-primary">letzter Sonntag im M&auml;rz</strong>.
+            </p>
+            <p>
+              In den <strong className="text-text-primary">USA</strong> startet die Sommerzeit meist fr&uuml;her. Dort beginnt die Daylight Saving Time am <strong className="text-text-primary">zweiten Sonntag im M&auml;rz</strong>. Deshalb taucht der 8. M&auml;rz 2026 h&auml;ufig als Datum auf. Planst du internationale Calls, Reisen oder Livestreams, pr&uuml;fe immer Region und Zeitzone.
+            </p>
+          </div>
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm border-collapse">
+              <thead>
+                <tr className="border-b border-border text-left">
+                  <th className="py-3 pr-4 font-semibold">Region</th>
+                  <th className="py-3 pr-4 font-semibold">Regel im Fr&uuml;hjahr</th>
+                  <th className="py-3 font-semibold">Regel im Herbst</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr className="border-b border-border/50">
+                  <td className="py-3 pr-4 font-medium">Deutschland / EU</td>
+                  <td className="py-3 pr-4">Letzter Sonntag im M&auml;rz (2026: <strong className="text-accent">{sommerzeit.dateFormatted}</strong>)</td>
+                  <td className="py-3">Letzter Sonntag im Oktober</td>
+                </tr>
+                <tr className="border-b border-border/50">
+                  <td className="py-3 pr-4 font-medium">USA</td>
+                  <td className="py-3 pr-4">Zweiter Sonntag im M&auml;rz (2026: <strong>08.03.2026</strong>)</td>
+                  <td className="py-3">Erster Sonntag im November</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        {/* ── Kalender-Reminder ── */}
+        <section className="mb-12">
+          <h2 className="text-2xl font-bold mb-4">Kalender-Reminder: Termine speichern und nichts verpassen</h2>
+          <div className="text-sm text-text-secondary leading-relaxed space-y-3 max-w-3xl">
+            <p>
+              Am einfachsten merkst du dir das Datum der Zeitumstellung 2026, wenn du dir zwei j&auml;hrliche Erinnerungen im Kalender speicherst. Lege je einen Termin Ende M&auml;rz und Ende Oktober an. Nenne die Termine direkt &bdquo;Uhr vor&ldquo; und &bdquo;Uhr zur&uuml;ck&ldquo;. So siehst du sofort, wann die Uhren umgestellt werden.
+            </p>
+            <p>
+              Wenn deine Kalender-App es unterst&uuml;tzt, nutze eine ICS-Datei. Das spart Tipparbeit und verhindert typische Fehler beim Eintragen.
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-3 mt-4 text-sm">
+            <Link href="/datum-heute" className="text-accent hover:underline">Heutiges Datum pr&uuml;fen &rarr;</Link>
+            <span className="text-border">&middot;</span>
+            <Link href="/kalender-mit-wochen" className="text-accent hover:underline">Kalender 2026 in Wochenansicht &rarr;</Link>
+            <span className="text-border">&middot;</span>
+            <Link href="/tagerechner" className="text-accent hover:underline">Tage bis zur Umstellung z&auml;hlen &rarr;</Link>
+          </div>
+        </section>
 
         {/* ── Cross-links ── */}
         <section className="mb-12">
@@ -450,9 +632,15 @@ export default function ZeitumstellungPage() {
           </div>
         </section>
 
-        {/* ── [PLACEHOLDER: Abschlusstext / Zusammenfassung] ── */}
-        {/* SEO-Text ~60-80 Wörter: zeitumstellung 2026, uhren umstellen 2026,
-            wann ist zeitumstellung 2026, CTA zu Sommerzeit/Winterzeit */}
+        {/* ── Abschlusstext ── */}
+        <section className="mb-12 text-sm text-text-secondary leading-relaxed space-y-3 max-w-3xl mx-auto">
+          <p>
+            Merke dir f&uuml;r die <strong className="text-text-primary">Zeitumstellung 2026</strong> in Deutschland: Am <strong className="text-text-primary">{sommerzeit.dateFormatted}</strong> springt die Uhr von {sommerzeit.timeBefore} auf {sommerzeit.timeAfter} (Sommerzeit), am <strong className="text-text-primary">{winterzeit.dateFormatted}</strong> geht&apos;s von {winterzeit.timeBefore} auf {winterzeit.timeAfter} zur&uuml;ck (Winterzeit). Die oft gesuchte Angabe &bdquo;8.&nbsp;M&auml;rz&nbsp;2026&ldquo; bezieht sich auf die Umstellung in den USA, nicht auf Deutschland &ndash; und eine Abschaffung in der EU ist weiterhin nicht umgesetzt.
+          </p>
+          <p>
+            Mach jetzt den Praxis-Check: Smartphone &amp; Computer stellen meist automatisch um, aber <strong className="text-text-primary">Auto, Backofen, Mikrowelle und manche Smart-Home-Setups</strong> brauchen oft Handarbeit. Trag dir die Termine direkt in den Kalender ein.
+          </p>
+        </section>
 
         {/* ── Weitere Links ── */}
         <nav className="flex flex-wrap gap-3 text-sm mb-8">
