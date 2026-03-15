@@ -130,7 +130,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     // Winterzeit 2026
     {
-      url: "https://aktuellekw.de/winterzeit-2026",
+      url: "https://aktuellekw.de/winterzeit",
       lastModified: now,
       changeFrequency: "yearly",
       priority: 0.8,

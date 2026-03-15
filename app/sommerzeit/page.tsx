@@ -294,7 +294,7 @@ export default function SommerzeitPage() {
               zwischen 2:00 und 3:00&nbsp;Uhr zweimal vor &ndash; wichtig, wenn du Termine planst
               oder Tickets mit genauer Uhrzeit hast.
               Mehr Details findest du auf der Seite{" "}
-              <Link href="/winterzeit-2026" className="text-accent hover:underline">Winterzeit 2026</Link>.
+              <Link href="/winterzeit" className="text-accent hover:underline">Winterzeit 2026</Link>.
             </p>
           </div>
 
@@ -882,7 +882,7 @@ export default function SommerzeitPage() {
               </p>
             </Link>
             <Link
-              href="/winterzeit-2026"
+              href="/winterzeit"
               className="block bg-card-bg border border-border rounded-2xl p-5 hover:border-accent transition-colors group"
             >
               <p className="text-xs uppercase tracking-widest text-accent mb-1">Winterzeit</p>

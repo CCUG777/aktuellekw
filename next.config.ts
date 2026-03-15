@@ -13,6 +13,11 @@ const nextConfig: NextConfig = {
         destination: "/sommerzeit",
         permanent: true, // 301 redirect
       },
+      {
+        source: "/winterzeit-2026",
+        destination: "/winterzeit",
+        permanent: true, // 301 redirect
+      },
     ];
   },
 };

@@ -280,7 +280,7 @@ export default function ZeitumstellungPage() {
               Die <strong className="text-text-primary">Zeitumstellung Oktober 2026</strong> f&auml;llt auf den {winterzeit.dateFormatted}. In dieser Nacht beginnt die Normalzeit: Um {winterzeit.timeBefore} Uhr wird die Uhr auf {winterzeit.timeAfter} Uhr gestellt. Du musst also die <strong className="text-text-primary">Uhr zur&uuml;ckstellen</strong> &ndash; und gewinnst eine Stunde Schlaf.
             </p>
             <p>
-              Praktisch hei&szlig;t das: Die Stunde zwischen {winterzeit.timeAfter} und {winterzeit.timeBefore} Uhr passiert zweimal. Das ist wichtig, wenn du Nachtschicht hast oder Termine in der Nacht planst. Alle Details findest du unter <Link href="/winterzeit-2026" className="text-accent hover:underline">Infos zur Winterzeit 2026</Link>.
+              Praktisch hei&szlig;t das: Die Stunde zwischen {winterzeit.timeAfter} und {winterzeit.timeBefore} Uhr passiert zweimal. Das ist wichtig, wenn du Nachtschicht hast oder Termine in der Nacht planst. Alle Details findest du unter <Link href="/winterzeit" className="text-accent hover:underline">Infos zur Winterzeit 2026</Link>.
             </p>
             <div className="bg-card-bg border border-border rounded-2xl px-5 py-4 mt-4">
               <p className="text-sm"><strong className="text-text-primary">Merke:</strong> Am letzten Sonntag im Oktober wird auf Normalzeit (MEZ) umgestellt: {winterzeit.timeBefore} Uhr wird {winterzeit.timeAfter} Uhr (zur&uuml;ckstellen).</p>
@@ -595,7 +595,7 @@ export default function ZeitumstellungPage() {
               </p>
             </Link>
             <Link
-              href="/winterzeit-2026"
+              href="/winterzeit"
               className="block bg-card-bg border border-border rounded-2xl p-5 hover:border-accent transition-colors group"
             >
               <p className="text-xs uppercase tracking-widest text-accent mb-1">Winterzeit</p>
