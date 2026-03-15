@@ -107,9 +107,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "yearly",
       priority: 0.85,
     },
-    // Arbeitstage-Rechner
+    // Arbeitstage berechnen
     {
-      url: "https://aktuellekw.de/arbeitstage-rechner",
+      url: "https://aktuellekw.de/arbeitstage-berechnen",
       lastModified: now,
       changeFrequency: "daily",
       priority: 0.85,

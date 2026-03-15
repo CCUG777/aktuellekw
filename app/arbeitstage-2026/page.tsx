@@ -395,7 +395,7 @@ export default function Arbeitstage2026Page() {
             Beispiel: Nordrhein-Westfalen ({nrw.feiertageGesamt} Feiertage, davon{" "}
             {nrw.feiertageWerktag} an Werktagen). Andere Bundesl&auml;nder k&ouml;nnen
             abweichen &ndash;{" "}
-            <Link href="/arbeitstage-rechner" className="text-accent hover:underline">
+            <Link href="/arbeitstage-berechnen" className="text-accent hover:underline">
               berechne deine Arbeitstage individuell
             </Link>
             .
@@ -515,7 +515,7 @@ export default function Arbeitstage2026Page() {
               und Pendlerpauschale.
             </p>
             <Link
-              href="/arbeitstage-rechner"
+              href="/arbeitstage-berechnen"
               className="inline-flex items-center gap-2 bg-accent text-white rounded-lg px-6 py-3 font-medium hover:bg-accent/90 transition-colors"
             >
               Zum Arbeitstage-Rechner &rarr;
@@ -779,7 +779,7 @@ export default function Arbeitstage2026Page() {
           </p>
           <p>
             Lade dir jetzt die Tabelle herunter oder nutze
-            den <Link href="/arbeitstage-rechner" className="text-accent hover:underline">Rechner</Link>, um
+            den <Link href="/arbeitstage-berechnen" className="text-accent hover:underline">Rechner</Link>, um
             deine Jahresarbeitszeit sauber zu planen.
           </p>
         </div>
@@ -789,7 +789,7 @@ export default function Arbeitstage2026Page() {
           <Link href="/" className="text-accent hover:underline">
             &larr; Aktuelle KW
           </Link>
-          <Link href="/arbeitstage-rechner" className="text-accent hover:underline">
+          <Link href="/arbeitstage-berechnen" className="text-accent hover:underline">
             Arbeitstage-Rechner &rarr;
           </Link>
           <Link href={`/feiertage/${YEAR}`} className="text-accent hover:underline">

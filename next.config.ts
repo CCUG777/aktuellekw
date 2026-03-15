@@ -18,6 +18,11 @@ const nextConfig: NextConfig = {
         destination: "/winterzeit",
         permanent: true, // 301 redirect
       },
+      {
+        source: "/arbeitstage-rechner",
+        destination: "/arbeitstage-berechnen",
+        permanent: true, // 301 redirect
+      },
     ];
   },
 };

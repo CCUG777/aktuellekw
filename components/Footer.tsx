@@ -98,8 +98,8 @@ export default function Footer() {
               <Link href="/arbeitstage-2026" className="text-sm text-text-secondary hover:text-text-primary transition-colors">
                 Arbeitstage 2026
               </Link>
-              <Link href="/arbeitstage-rechner" className="text-sm text-text-secondary hover:text-text-primary transition-colors">
-                Arbeitstage-Rechner
+              <Link href="/arbeitstage-berechnen" className="text-sm text-text-secondary hover:text-text-primary transition-colors">
+                Arbeitstage berechnen
               </Link>
               <Link href="/zeitumstellung-2026" className="text-sm text-text-secondary hover:text-text-primary transition-colors">
                 Zeitumstellung 2026
