@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { isLeapYear, getCurrentKW } from "@/lib/kw";
+import LastUpdated from "@/components/LastUpdated";
 
 export const revalidate = 86400; // daily ISR (content changes only yearly)
 
@@ -1026,6 +1027,7 @@ export default function SchaltjahrPage() {
           </p>
         </div>
 
+        <LastUpdated date="2026-01-01" />
         {/* ── Abschluss-Links ──────────────────────────────────── */}
         <div className="mt-10 pt-8 border-t border-border flex flex-wrap gap-4 text-sm">
           <Link href="/" className="text-accent hover:underline">

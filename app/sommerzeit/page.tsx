@@ -8,6 +8,7 @@ import {
   daysUntil,
 } from "@/lib/zeitumstellung";
 import { getISOWeekNumber } from "@/lib/kw";
+import LastUpdated from "@/components/LastUpdated";
 
 export const revalidate = 86400;
 
@@ -935,6 +936,7 @@ export default function SommerzeitPage() {
           </p>
         </section>
 
+        <LastUpdated date="2026-01-01" />
         {/* ── Weitere Links ── */}
         <nav className="flex flex-wrap gap-3 text-sm mb-8">
           <Link href="/" className="text-accent hover:underline">Aktuelle KW</Link>

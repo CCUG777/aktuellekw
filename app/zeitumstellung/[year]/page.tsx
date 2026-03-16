@@ -9,6 +9,7 @@ import {
 } from "@/lib/zeitumstellung";
 import { getISOWeekNumber } from "@/lib/kw";
 import { CONTENT_YEARS } from "@/lib/constants";
+import LastUpdated from "@/components/LastUpdated";
 
 export const revalidate = 86400;
 
@@ -666,6 +667,7 @@ export default async function ZeitumstellungYearPage({
           </p>
         </section>
 
+        <LastUpdated date={year === new Date().getFullYear() ? new Date() : new Date(`${year}-01-01`)} />
         {/* ── Weitere Links ── */}
         <nav className="flex flex-wrap gap-3 text-sm mb-8">
           <Link href="/" className="text-accent hover:underline">Aktuelle KW</Link>

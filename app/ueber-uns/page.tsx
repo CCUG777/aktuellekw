@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import LastUpdated from "@/components/LastUpdated";
 
 export const metadata: Metadata = {
   title: "Über uns – Dein Zeit-Kompass im Alltag",
@@ -232,6 +233,7 @@ export default function UeberUnsPage() {
           </p>
         </div>
 
+        <LastUpdated date="2026-03-16" />
         {/* ── Querlinks ───────────────────────────────────────── */}
         <div className="flex flex-wrap items-center gap-x-6 gap-y-3 pt-8 border-t border-border text-sm">
           <Link

@@ -7,6 +7,7 @@ import {
   formatDateDE,
 } from "@/lib/kw";
 import KWTable from "@/components/KWTable";
+import LastUpdated from "@/components/LastUpdated";
 
 export const revalidate = 86400; // daily – year data changes rarely
 
@@ -239,6 +240,7 @@ export default async function KalenderwochenYearPage({
           </div>
         </section>
 
+        <LastUpdated date={year === currentKW.year ? new Date() : new Date(`${year}-01-01`)} />
         {/* ── Footer links ─────────────────────────────────────── */}
         <div className="border-t border-border pt-6 flex flex-wrap gap-x-6 gap-y-2 text-sm fade-in-delay-2">
           <a href="/" className="text-accent hover:underline">

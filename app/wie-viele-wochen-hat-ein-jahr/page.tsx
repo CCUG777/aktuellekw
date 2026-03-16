@@ -4,6 +4,7 @@ import {
   getWeeksInYear,
   isLeapYear,
 } from "@/lib/kw";
+import LastUpdated from "@/components/LastUpdated";
 
 export const revalidate = 3600;
 
@@ -374,6 +375,7 @@ export default function WieVieleWochenPage() {
           </div>
         </div>
 
+        <LastUpdated date="2026-02-27" />
         {/* ── Abschluss-Links ─────────────────────────────────────── */}
         <div className="mt-10 pt-8 border-t border-border flex flex-wrap gap-4 text-sm">
           <a href="/" className="text-accent hover:underline">

@@ -15,6 +15,7 @@ import {
   BUNDESLAND_NAMES,
   FEIERTAGE_FAQS,
 } from "@/lib/feiertage";
+import LastUpdated from "@/components/LastUpdated";
 
 export const revalidate = 3600;
 
@@ -1197,6 +1198,7 @@ export default async function FeiertageYearPage({
           )}
         </div>
 
+        <LastUpdated date={year === new Date().getFullYear() ? new Date() : new Date(`${year}-01-01`)} />
         {/* ── Abschluss-Links ──────────────────────────────────── */}
         <div className="mt-6 flex flex-wrap gap-4 text-sm">
           <Link href="/" className="text-accent hover:underline">

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import LastUpdated from "@/components/LastUpdated";
 
 export const metadata: Metadata = {
   title: "FAQ – Häufige Fragen zur Kalenderwoche (KW)",
@@ -181,6 +182,7 @@ export default function FaqPage() {
           ))}
         </div>
 
+        <LastUpdated date="2026-02-01" />
         <div className="mt-10 pt-8 border-t border-border">
           <p className="text-text-secondary text-sm flex flex-wrap gap-x-6 gap-y-2">
             <a href="/" className="text-accent hover:underline">
