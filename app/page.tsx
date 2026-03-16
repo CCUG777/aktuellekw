@@ -501,9 +501,10 @@ export default function Home() {
             <span className="text-accent mt-0.5 shrink-0">•</span>
             <span>
               <strong className="text-text-primary">Anzahl der Wochen:</strong>{" "}
-              Ein Kalenderjahr hat in der Regel 52&nbsp;Wochen. In sogenannten
-              Gemeinjahren mit 53&nbsp;Wochen spricht man von einem
-              „Saturationsjahr".
+              Ein Kalenderjahr hat in der Regel 52&nbsp;Wochen. Jahre mit
+              53&nbsp;Kalenderwochen werden als{" "}
+              <strong className="text-text-primary">„langes Jahr"</strong>{" "}
+              bezeichnet – sie kommen im Schnitt alle 5 bis 6 Jahre vor.
             </span>
           </li>
           <li className="flex gap-2.5">
