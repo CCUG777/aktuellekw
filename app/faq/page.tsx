@@ -78,42 +78,45 @@ const faqs = [
 ];
 
 function FaqJsonLd() {
-  const jsonLd = [
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      mainEntity: faqs.map((faq) => ({
-        "@type": "Question",
-        name: faq.question,
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: faq.answer,
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "FAQPage",
+        "@id": "https://aktuellekw.de/faq#faqpage",
+        mainEntity: faqs.map((faq) => ({
+          "@type": "Question",
+          name: faq.question,
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: faq.answer,
+          },
+        })),
+        speakable: {
+          "@type": "SpeakableSpecification",
+          cssSelector: ["h1", ".text-text-secondary.mb-8"],
         },
-      })),
-      speakable: {
-        "@type": "SpeakableSpecification",
-        cssSelector: ["h1", ".text-text-secondary.mb-8"],
       },
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      itemListElement: [
-        {
-          "@type": "ListItem",
-          position: 1,
-          name: "Startseite",
-          item: "https://aktuellekw.de",
-        },
-        {
-          "@type": "ListItem",
-          position: 2,
-          name: "FAQ",
-          item: "https://aktuellekw.de/faq",
-        },
-      ],
-    },
-  ];
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://aktuellekw.de/faq#breadcrumb",
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Startseite",
+            item: "https://aktuellekw.de",
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "FAQ",
+            item: "https://aktuellekw.de/faq",
+          },
+        ],
+      },
+    ],
+  };
 
   return (
     <script

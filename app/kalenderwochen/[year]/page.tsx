@@ -82,40 +82,44 @@ export default async function KalenderwochenYearPage({
   const prevWeeksInYear = getWeeksInYear(prevYear);
   const nextWeeksInYear = getWeeksInYear(nextYear);
 
-  const jsonLd = [
-    {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      itemListElement: [
-        {
-          "@type": "ListItem",
-          position: 1,
-          name: "Startseite",
-          item: "https://aktuellekw.de",
-        },
-        {
-          "@type": "ListItem",
-          position: 2,
-          name: `Kalenderwochen ${year}`,
-          item: `https://aktuellekw.de/kalenderwochen/${year}`,
-        },
-      ],
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "Dataset",
-      name: `Kalenderwochen ${year}`,
-      description: `Alle ${weeksInYear} Kalenderwochen des Jahres ${year} nach ISO 8601 mit Start- und Enddatum.`,
-      url: `https://aktuellekw.de/kalenderwochen/${year}`,
-      inLanguage: "de-DE",
-      temporalCoverage: String(year),
-      creator: {
-        "@type": "Organization",
-        name: "aktuellekw.de",
-        url: "https://aktuellekw.de",
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "@id": `https://aktuellekw.de/kalenderwochen/${year}#breadcrumb`,
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Startseite",
+            item: "https://aktuellekw.de",
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: `Kalenderwochen ${year}`,
+            item: `https://aktuellekw.de/kalenderwochen/${year}`,
+          },
+        ],
       },
-    },
-  ];
+      {
+        "@type": "Dataset",
+        "@id": `https://aktuellekw.de/kalenderwochen/${year}#dataset`,
+        name: `Kalenderwochen ${year}`,
+        description: `Alle ${weeksInYear} Kalenderwochen des Jahres ${year} nach ISO 8601 mit Start- und Enddatum.`,
+        url: `https://aktuellekw.de/kalenderwochen/${year}`,
+        inLanguage: "de-DE",
+        temporalCoverage: String(year),
+        creator: {
+          "@type": "Organization",
+          "@id": "https://aktuellekw.de/#organization",
+          name: "aktuellekw.de",
+          url: "https://aktuellekw.de",
+        },
+      },
+    ],
+  };
 
   return (
     <>

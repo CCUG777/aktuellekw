@@ -130,50 +130,49 @@ export default async function KWDetailPage({
     kwInfo.weekNumber === currentKW.weekNumber &&
     kwInfo.year === currentKW.year;
 
-  const jsonLd = [
-    {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      itemListElement: [
-        {
-          "@type": "ListItem",
-          position: 1,
-          name: "Startseite",
-          item: "https://aktuellekw.de",
-        },
-        {
-          "@type": "ListItem",
-          position: 2,
-          name: `Kalenderwochen ${kwInfo.year}`,
-          item: `https://aktuellekw.de/kalenderwochen/${kwInfo.year}`,
-        },
-        {
-          "@type": "ListItem",
-          position: 3,
-          name: `KW ${kwInfo.weekNumber} ${kwInfo.year}`,
-          item: `https://aktuellekw.de/kw/${kwInfo.weekNumber}-${kwInfo.year}`,
-        },
-      ],
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "WebPage",
-      name: `Kalenderwoche ${kwInfo.weekNumber} ${kwInfo.year}`,
-      description: `KW ${kwInfo.weekNumber} ${kwInfo.year} nach ISO 8601: ${formatDateDE(kwInfo.startDate)} bis ${formatDateDE(kwInfo.endDate)}.`,
-      url: `https://aktuellekw.de/kw/${kwInfo.weekNumber}-${kwInfo.year}`,
-      inLanguage: "de-DE",
-      isPartOf: {
-        "@type": "WebSite",
-        name: "aktuellekw.de",
-        url: "https://aktuellekw.de",
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "@id": `https://aktuellekw.de/kw/${kwInfo.weekNumber}-${kwInfo.year}#breadcrumb`,
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Startseite",
+            item: "https://aktuellekw.de",
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: `Kalenderwochen ${kwInfo.year}`,
+            item: `https://aktuellekw.de/kalenderwochen/${kwInfo.year}`,
+          },
+          {
+            "@type": "ListItem",
+            position: 3,
+            name: `KW ${kwInfo.weekNumber} ${kwInfo.year}`,
+            item: `https://aktuellekw.de/kw/${kwInfo.weekNumber}-${kwInfo.year}`,
+          },
+        ],
       },
-      temporalCoverage: `${kwInfo.startDate.toISOString().split("T")[0]}/${kwInfo.endDate.toISOString().split("T")[0]}`,
-      speakable: {
-        "@type": "SpeakableSpecification",
-        cssSelector: ["h1", "h2"],
+      {
+        "@type": "WebPage",
+        "@id": `https://aktuellekw.de/kw/${kwInfo.weekNumber}-${kwInfo.year}#webpage`,
+        name: `Kalenderwoche ${kwInfo.weekNumber} ${kwInfo.year}`,
+        description: `KW ${kwInfo.weekNumber} ${kwInfo.year} nach ISO 8601: ${formatDateDE(kwInfo.startDate)} bis ${formatDateDE(kwInfo.endDate)}.`,
+        url: `https://aktuellekw.de/kw/${kwInfo.weekNumber}-${kwInfo.year}`,
+        inLanguage: "de-DE",
+        isPartOf: { "@id": "https://aktuellekw.de/#website" },
+        temporalCoverage: `${kwInfo.startDate.toISOString().split("T")[0]}/${kwInfo.endDate.toISOString().split("T")[0]}`,
+        speakable: {
+          "@type": "SpeakableSpecification",
+          cssSelector: ["h1", "h2"],
+        },
       },
-    },
-  ];
+    ],
+  };
 
   return (
     <>

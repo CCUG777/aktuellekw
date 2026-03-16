@@ -74,18 +74,24 @@ export const metadata: Metadata = {
 function WebSiteJsonLd() {
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "WebSite",
-    name: "aktuellekw.de",
-    alternateName: ["Aktuelle KW", "Aktuelle Kalenderwoche"],
-    url: "https://aktuellekw.de",
-    description:
-      "Aktuelle KW nach ISO 8601. Welche KW haben wir heute? Alle Kalenderwochen 2026 im Überblick.",
-    inLanguage: "de-DE",
-    publisher: {
-      "@type": "Organization",
-      name: "aktuellekw.de",
-      url: "https://aktuellekw.de",
-    },
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://aktuellekw.de/#website",
+        name: "aktuellekw.de",
+        alternateName: ["Aktuelle KW", "Aktuelle Kalenderwoche"],
+        url: "https://aktuellekw.de",
+        description:
+          "Aktuelle KW nach ISO 8601. Welche KW haben wir heute? Alle Kalenderwochen 2026 im Überblick.",
+        inLanguage: "de-DE",
+        publisher: {
+          "@type": "Organization",
+          "@id": "https://aktuellekw.de/#organization",
+          name: "aktuellekw.de",
+          url: "https://aktuellekw.de",
+        },
+      },
+    ],
   };
 
   return (

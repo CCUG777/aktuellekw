@@ -99,49 +99,53 @@ export default function KalenderwochePage() {
   ];
 
   // JSON-LD: include FAQPage schema
-  const pageJsonLd = [
-    {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      itemListElement: [
-        {
-          "@type": "ListItem",
-          position: 1,
-          name: "Startseite",
-          item: "https://aktuellekw.de",
-        },
-        {
-          "@type": "ListItem",
-          position: 2,
-          name: `Kalenderwochen ${currentKW.year}`,
-          item: "https://aktuellekw.de/kalenderwoche",
-        },
-      ],
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "Dataset",
-      name: `Kalenderwochen ${currentKW.year}`,
-      description: `Alle ${weeksInYear} Kalenderwochen des Jahres ${currentKW.year} nach ISO 8601 mit Start- und Enddatum. Aktuelle Woche: KW ${currentKW.weekNumber}.`,
-      url: "https://aktuellekw.de/kalenderwoche",
-      inLanguage: "de-DE",
-      temporalCoverage: `${currentKW.year}`,
-      creator: {
-        "@type": "Organization",
-        name: "aktuellekw.de",
-        url: "https://aktuellekw.de",
+  const pageJsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://aktuellekw.de/kalenderwoche#breadcrumb",
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Startseite",
+            item: "https://aktuellekw.de",
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: `Kalenderwochen ${currentKW.year}`,
+            item: "https://aktuellekw.de/kalenderwoche",
+          },
+        ],
       },
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      mainEntity: kwFaqs.map((f) => ({
-        "@type": "Question",
-        name: f.question,
-        acceptedAnswer: { "@type": "Answer", text: f.answer },
-      })),
-    },
-  ];
+      {
+        "@type": "Dataset",
+        "@id": "https://aktuellekw.de/kalenderwoche#dataset",
+        name: `Kalenderwochen ${currentKW.year}`,
+        description: `Alle ${weeksInYear} Kalenderwochen des Jahres ${currentKW.year} nach ISO 8601 mit Start- und Enddatum. Aktuelle Woche: KW ${currentKW.weekNumber}.`,
+        url: "https://aktuellekw.de/kalenderwoche",
+        inLanguage: "de-DE",
+        temporalCoverage: `${currentKW.year}`,
+        creator: {
+          "@type": "Organization",
+          "@id": "https://aktuellekw.de/#organization",
+          name: "aktuellekw.de",
+          url: "https://aktuellekw.de",
+        },
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://aktuellekw.de/kalenderwoche#faqpage",
+        mainEntity: kwFaqs.map((f) => ({
+          "@type": "Question",
+          name: f.question,
+          acceptedAnswer: { "@type": "Answer", text: f.answer },
+        })),
+      },
+    ],
+  };
 
   return (
     <>
