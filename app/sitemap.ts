@@ -47,14 +47,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // Cluster 2: Kalender mit Kalenderwochen
     {
       url: "https://aktuellekw.de/kalender-mit-kalenderwochen",
-      lastModified: now,
+      lastModified: new Date("2026-01-01"),
       changeFrequency: "yearly",
       priority: 0.85,
     },
     // Cluster 3: Kalenderwochen-Übersicht
     {
       url: "https://aktuellekw.de/kalenderwochen-uebersicht",
-      lastModified: now,
+      lastModified: new Date("2026-01-01"),
       changeFrequency: "yearly",
       priority: 0.8,
     },
@@ -68,14 +68,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // Cluster 2+6: Kalender mit Wochen
     {
       url: "https://aktuellekw.de/kalender-mit-wochen",
-      lastModified: now,
+      lastModified: new Date("2026-01-01"),
       changeFrequency: "yearly",
       priority: 0.75,
     },
     // Cluster 6: Kalender Wochenübersicht
     {
       url: "https://aktuellekw.de/kalender-wochenuebersicht",
-      lastModified: now,
+      lastModified: new Date("2026-01-01"),
       changeFrequency: "yearly",
       priority: 0.75,
     },
@@ -96,14 +96,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // Schaltjahr
     {
       url: "https://aktuellekw.de/schaltjahr",
-      lastModified: now,
+      lastModified: new Date("2026-01-01"),
       changeFrequency: "yearly",
       priority: 0.75,
     },
     // Arbeitstage 2026
     {
       url: "https://aktuellekw.de/arbeitstage-2026",
-      lastModified: now,
+      lastModified: new Date("2026-01-01"),
       changeFrequency: "yearly",
       priority: 0.85,
     },
@@ -117,21 +117,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // Zeitumstellung 2026
     {
       url: "https://aktuellekw.de/zeitumstellung-2026",
-      lastModified: now,
+      lastModified: new Date("2026-01-01"),
       changeFrequency: "yearly",
       priority: 0.85,
     },
     // Sommerzeit 2026
     {
       url: "https://aktuellekw.de/sommerzeit",
-      lastModified: now,
+      lastModified: new Date("2026-01-01"),
       changeFrequency: "yearly",
       priority: 0.8,
     },
     // Winterzeit 2026
     {
       url: "https://aktuellekw.de/winterzeit",
-      lastModified: now,
+      lastModified: new Date("2026-01-01"),
       changeFrequency: "yearly",
       priority: 0.8,
     },
