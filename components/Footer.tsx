@@ -98,14 +98,14 @@ export default function Footer() {
               <Link href={`/feiertage/${year}/hessen`} className="text-sm text-text-secondary hover:text-text-primary transition-colors">
                 Feiertage Hessen {year}
               </Link>
-              <Link href="/arbeitstage-2026" className="text-sm text-text-secondary hover:text-text-primary transition-colors">
-                Arbeitstage 2026
+              <Link href={`/arbeitstage/${year}`} className="text-sm text-text-secondary hover:text-text-primary transition-colors">
+                Arbeitstage {year}
               </Link>
               <Link href="/arbeitstage-berechnen" className="text-sm text-text-secondary hover:text-text-primary transition-colors">
                 Arbeitstage berechnen
               </Link>
-              <Link href="/zeitumstellung-2026" className="text-sm text-text-secondary hover:text-text-primary transition-colors">
-                Zeitumstellung 2026
+              <Link href={`/zeitumstellung/${year}`} className="text-sm text-text-secondary hover:text-text-primary transition-colors">
+                Zeitumstellung {year}
               </Link>
               <Link href="/sommerzeit" className="text-sm text-text-secondary hover:text-text-primary transition-colors">
                 Sommerzeit 2026

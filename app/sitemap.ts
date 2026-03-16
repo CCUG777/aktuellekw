@@ -100,25 +100,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "yearly",
       priority: 0.75,
     },
-    // Arbeitstage 2026
-    {
-      url: "https://aktuellekw.de/arbeitstage-2026",
-      lastModified: new Date("2026-01-01"),
-      changeFrequency: "yearly",
-      priority: 0.85,
-    },
     // Arbeitstage berechnen
     {
       url: "https://aktuellekw.de/arbeitstage-berechnen",
       lastModified: now,
       changeFrequency: "daily",
-      priority: 0.85,
-    },
-    // Zeitumstellung 2026
-    {
-      url: "https://aktuellekw.de/zeitumstellung-2026",
-      lastModified: new Date("2026-01-01"),
-      changeFrequency: "yearly",
       priority: 0.85,
     },
     // Sommerzeit 2026
@@ -253,6 +239,22 @@ export default function sitemap(): MetadataRoute.Sitemap {
       }))
   );
 
+  // ── Arbeitstage-Jahresseiten (/arbeitstage/[year]) ───────────
+  const arbeitstagePages: MetadataRoute.Sitemap = CONTENT_YEARS.map((year) => ({
+    url: `https://aktuellekw.de/arbeitstage/${year}`,
+    lastModified: year === currentYear ? now : new Date(`${year}-01-01`),
+    changeFrequency: "yearly" as const,
+    priority: year === currentYear ? 0.85 : 0.6,
+  }));
+
+  // ── Zeitumstellung-Jahresseiten (/zeitumstellung/[year]) ──────
+  const zeitumstellungPages: MetadataRoute.Sitemap = CONTENT_YEARS.map((year) => ({
+    url: `https://aktuellekw.de/zeitumstellung/${year}`,
+    lastModified: year === currentYear ? now : new Date(`${year}-01-01`),
+    changeFrequency: "yearly" as const,
+    priority: year === currentYear ? 0.85 : 0.6,
+  }));
+
   // ── Schulferien Bundesland-Seiten (/schulferien-[jahr]/[bl]) ─
   const schulferienBlPages: MetadataRoute.Sitemap = CONTENT_YEARS.flatMap(
     (year) =>
@@ -275,6 +277,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...kwPages,
     ...schulferienHubPages,
     ...schulferienBlPages,
+    ...arbeitstagePages,
+    ...zeitumstellungPages,
   ];
 }
 

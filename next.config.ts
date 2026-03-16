@@ -68,6 +68,16 @@ const nextConfig: NextConfig = {
         destination: "/arbeitstage-berechnen",
         permanent: true, // 301 redirect
       },
+      {
+        source: "/arbeitstage-2026",
+        destination: "/arbeitstage/2026",
+        permanent: true, // 301 redirect
+      },
+      {
+        source: "/zeitumstellung-2026",
+        destination: "/zeitumstellung/2026",
+        permanent: true, // 301 redirect
+      },
     ];
   },
 };

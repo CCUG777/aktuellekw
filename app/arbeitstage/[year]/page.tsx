@@ -1,21 +1,32 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import {
   getAllBundeslaenderArbeitstage,
   getWerktageImJahr,
   getArbeitstageForBundesland,
 } from "@/lib/arbeitstage";
+import { CONTENT_YEARS } from "@/lib/constants";
 
 export const revalidate = 86400;
 
-const YEAR = 2026;
+export function generateStaticParams() {
+  return CONTENT_YEARS.map((year) => ({ year: String(year) }));
+}
 
 /* ── Metadata ──────────────────────────────────────────────────── */
-export async function generateMetadata(): Promise<Metadata> {
-  const title = "Arbeitstage 2026: Gesamtzahl + Tabellen je Bundesland";
-  const description =
-    "Arbeitstage 2026 sofort: Gesamtzahl (5-Tage-Woche) plus Tabellen nach Monat & Bundesland. Mit Rechenanleitung, Stunden-Umrechnung & Steuer-Kontext.";
-  const url = "https://aktuellekw.de/arbeitstage-2026";
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ year: string }>;
+}): Promise<Metadata> {
+  const { year: yearStr } = await params;
+  const year = parseInt(yearStr, 10);
+  if (isNaN(year)) notFound();
+
+  const title = `Arbeitstage ${year}: Gesamtzahl + Tabellen je Bundesland`;
+  const description = `Arbeitstage ${year} sofort: Gesamtzahl (5-Tage-Woche) plus Tabellen nach Monat & Bundesland. Mit Rechenanleitung, Stunden-Umrechnung & Steuer-Kontext.`;
+  const url = `https://aktuellekw.de/arbeitstage/${year}`;
 
   return {
     title,
@@ -38,101 +49,115 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 /* ── FAQ data ──────────────────────────────────────────────────── */
-function getPageFAQs(werktageGesamt: number) {
+function getPageFAQs(werktageGesamt: number, year: number) {
   return [
     {
-      question: "Wie viele Arbeitstage gibt es im Jahr 2026?",
-      answer: `Bei einer 5-Tage-Woche hat das Jahr 2026 in Deutschland ${werktageGesamt} Werktage (Mo\u2013Fr, ohne Feiertage). Die genaue Zahl der Arbeitstage kann je Bundesland abweichen, weil gesetzliche Feiertage regional unterschiedlich sind. In den Tabellen nach Monat und Bundesland siehst du die Abweichungen auf einen Blick.`,
+      question: `Wie viele Arbeitstage gibt es im Jahr ${year}?`,
+      answer: `Bei einer 5-Tage-Woche hat das Jahr ${year} in Deutschland ${werktageGesamt} Werktage (Mo\u2013Fr, ohne Feiertage). Die genaue Zahl der Arbeitstage kann je Bundesland abweichen, weil gesetzliche Feiertage regional unterschiedlich sind. In den Tabellen nach Monat und Bundesland siehst du die Abweichungen auf einen Blick.`,
     },
     {
-      question: "Wie viele Arbeitstage sind bei der 5-Tage-Woche 2026?",
-      answer: `Bei der 5-Tage-Woche (Montag bis Freitag) kommst du 2026 auf ${werktageGesamt} Werktage, bevor du regionale Feiertage abziehst. Je nach Bundesland sinkt die Zahl, wenn zus\u00E4tzliche Feiertage auf Werktage fallen. F\u00FCr eine exakte Zahl nutze die Tabelle nach Bundesland und Monat.`,
+      question: `Wie viele Arbeitstage sind bei der 5-Tage-Woche ${year}?`,
+      answer: `Bei der 5-Tage-Woche (Montag bis Freitag) kommst du ${year} auf ${werktageGesamt} Werktage, bevor du regionale Feiertage abziehst. Je nach Bundesland sinkt die Zahl, wenn zus\u00E4tzliche Feiertage auf Werktage fallen. F\u00FCr eine exakte Zahl nutze die Tabelle nach Bundesland und Monat.`,
     },
     {
-      question: "Warum unterscheiden sich die Arbeitstage 2026 je Bundesland?",
-      answer: "Die Arbeitstage 2026 unterscheiden sich je Bundesland, weil nicht alle gesetzlichen Feiertage bundesweit gelten. Au\u00DFerdem f\u00E4llt ein Feiertag je nach Wochentag mal auf einen Arbeitstag und mal aufs Wochenende, was die Zahl der Arbeitstage ver\u00E4ndert. Deshalb sind Monats- und Bundesland-Tabellen wichtig f\u00FCr die genaue Planung.",
+      question: `Warum unterscheiden sich die Arbeitstage ${year} je Bundesland?`,
+      answer: `Die Arbeitstage ${year} unterscheiden sich je Bundesland, weil nicht alle gesetzlichen Feiertage bundesweit gelten. Au\u00DFerdem f\u00E4llt ein Feiertag je nach Wochentag mal auf einen Arbeitstag und mal aufs Wochenende, was die Zahl der Arbeitstage ver\u00E4ndert. Deshalb sind Monats- und Bundesland-Tabellen wichtig f\u00FCr die genaue Planung.`,
     },
     {
-      question: "Wie berechne ich Arbeitstage 2026 mit Urlaub und Krankheit?",
-      answer: "Du berechnest deine Arbeitstage 2026, indem du von den Werktagen (Mo\u2013Fr) zuerst die Feiertage in deinem Bundesland abziehst und danach deine Urlaubstage und Kranktage. Wichtig: Z\u00E4hle nur Tage, die sonst Arbeitstage w\u00E4ren. So bekommst du deine tats\u00E4chlichen Anwesenheitstage 2026.",
+      question: `Wie berechne ich Arbeitstage ${year} mit Urlaub und Krankheit?`,
+      answer: `Du berechnest deine Arbeitstage ${year}, indem du von den Werktagen (Mo\u2013Fr) zuerst die Feiertage in deinem Bundesland abziehst und danach deine Urlaubstage und Kranktage. Wichtig: Z\u00E4hle nur Tage, die sonst Arbeitstage w\u00E4ren. So bekommst du deine tats\u00E4chlichen Anwesenheitstage ${year}.`,
     },
     {
-      question: "Wie viele Arbeitstage pro Jahr hat man bei 100% (Vollzeit)?",
-      answer: `Bei 100% (Vollzeit) h\u00E4ngt die Zahl der Arbeitstage pro Jahr von deinem Arbeitsmodell ab, meist 5-Tage-Woche. F\u00FCr 2026 sind das als Basis ${werktageGesamt} Werktage (Mo\u2013Fr), von denen du dann Feiertage (Bundesland), Urlaub und ggf. Krankheit abziehst.`,
+      question: `Wie viele Arbeitstage pro Jahr hat man bei 100% (Vollzeit)?`,
+      answer: `Bei 100% (Vollzeit) h\u00E4ngt die Zahl der Arbeitstage pro Jahr von deinem Arbeitsmodell ab, meist 5-Tage-Woche. F\u00FCr ${year} sind das als Basis ${werktageGesamt} Werktage (Mo\u2013Fr), von denen du dann Feiertage (Bundesland), Urlaub und ggf. Krankheit abziehst.`,
     },
     {
-      question: "Wie viele Arbeitstage setzt man bei der Steuererkl\u00E4rung an?",
-      answer: "F\u00FCr die Steuererkl\u00E4rung setzt du die Arbeitstage an, an denen du tats\u00E4chlich zur Arbeit gefahren bist (Pendeltage). Zieh also Homeoffice-Tage, Urlaub, Krankheit und Feiertage ab. Viele Finanz\u00E4mter akzeptieren bei Vollzeit h\u00E4ufig rund 230 Tage als plausiblen Richtwert.",
+      question: `Wie viele Arbeitstage setzt man bei der Steuererkl\u00E4rung an?`,
+      answer: `F\u00FCr die Steuererkl\u00E4rung setzt du die Arbeitstage an, an denen du tats\u00E4chlich zur Arbeit gefahren bist (Pendeltage). Zieh also Homeoffice-Tage, Urlaub, Krankheit und Feiertage ab. Viele Finanz\u00E4mter akzeptieren bei Vollzeit h\u00E4ufig rund 230 Tage als plausiblen Richtwert.`,
     },
     {
       question: "Wie rechne ich Stunden in Arbeitstage um?",
       answer: "Um Stunden in Arbeitstage umzurechnen, teilst du die Stunden durch deine t\u00E4gliche Arbeitszeit laut Vertrag (z.\u00A0B. 8 Stunden = 1 Arbeitstag). Bei Teilzeit nimmst du deine individuelle Tagesarbeitszeit, nicht einen Standardwert.",
     },
     {
-      question: "Wo finde ich eine Arbeitstage-2026-Tabelle zum Ausdrucken (PDF/Excel)?",
-      answer: "Eine Arbeitstage-2026-Tabelle zum Ausdrucken findest du auf dieser Seite als Monats- und Bundesland-\u00DCbersicht. Nutze die Druckfunktion deines Browsers oder exportiere die Daten. Achte darauf, dass die Tabelle Arbeitstage nach Monat und Bundesland ausweist, damit Feiertage korrekt ber\u00FCcksichtigt sind.",
+      question: `Wo finde ich eine Arbeitstage-${year}-Tabelle zum Ausdrucken (PDF/Excel)?`,
+      answer: `Eine Arbeitstage-${year}-Tabelle zum Ausdrucken findest du auf dieser Seite als Monats- und Bundesland-\u00DCbersicht. Nutze die Druckfunktion deines Browsers oder exportiere die Daten. Achte darauf, dass die Tabelle Arbeitstage nach Monat und Bundesland ausweist, damit Feiertage korrekt ber\u00FCcksichtigt sind.`,
     },
   ];
 }
 
 /* ── Page Component ────────────────────────────────────────────── */
-export default function Arbeitstage2026Page() {
-  const allBL = getAllBundeslaenderArbeitstage(YEAR);
-  const werktageGesamt = getWerktageImJahr(YEAR);
-  const pageFAQs = getPageFAQs(werktageGesamt);
+export default async function ArbeitstageYearPage({
+  params,
+}: {
+  params: Promise<{ year: string }>;
+}) {
+  const { year: yearStr } = await params;
+  const year = parseInt(yearStr, 10);
+  if (isNaN(year) || year < 2020 || year > 2035) notFound();
 
-  // Example: NRW for monthly breakdown (most populous state)
-  const nrw = getArbeitstageForBundesland(YEAR, "NW");
+  const allBL = getAllBundeslaenderArbeitstage(year);
+  const werktageGesamt = getWerktageImJahr(year);
+  const pageFAQs = getPageFAQs(werktageGesamt, year);
+
+  // NRW monthly example (most populous state)
+  const nrw = getArbeitstageForBundesland(year, "NW");
+  // Hamburg ≈ bundesweit (only nationwide public holidays)
+  const hh = getArbeitstageForBundesland(year, "HH");
 
   // Min/Max Arbeitstage across all BL
   const minAT = allBL[allBL.length - 1];
   const maxAT = allBL[0];
 
-  // JSON-LD
-  const jsonLd = [
-    {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      itemListElement: [
-        {
-          "@type": "ListItem",
-          position: 1,
-          name: "Startseite",
-          item: "https://aktuellekw.de",
-        },
-        {
-          "@type": "ListItem",
-          position: 2,
-          name: `Arbeitstage ${YEAR}`,
-          item: `https://aktuellekw.de/arbeitstage-${YEAR}`,
-        },
-      ],
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      mainEntity: pageFAQs.map((faq) => ({
-        "@type": "Question",
-        name: faq.question,
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: faq.answer,
-        },
-      })),
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "Dataset",
-      name: `Arbeitstage ${YEAR} Deutschland`,
-      description: `Arbeitstage ${YEAR} f\u00fcr alle 16 Bundesl\u00e4nder mit monatlicher Aufschl\u00fcsselung`,
-      temporalCoverage: `${YEAR}`,
-      creator: {
-        "@type": "Organization",
-        name: "aktuellekw.de",
-        url: "https://aktuellekw.de",
+  // JSON-LD @graph
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "@id": `https://aktuellekw.de/arbeitstage/${year}#breadcrumb`,
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Startseite",
+            item: "https://aktuellekw.de",
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: `Arbeitstage ${year}`,
+            item: `https://aktuellekw.de/arbeitstage/${year}`,
+          },
+        ],
       },
-    },
-  ];
+      {
+        "@type": "FAQPage",
+        "@id": `https://aktuellekw.de/arbeitstage/${year}#faqpage`,
+        mainEntity: pageFAQs.map((faq) => ({
+          "@type": "Question",
+          name: faq.question,
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: faq.answer,
+          },
+        })),
+      },
+      {
+        "@type": "Dataset",
+        "@id": `https://aktuellekw.de/arbeitstage/${year}#dataset`,
+        name: `Arbeitstage ${year} Deutschland`,
+        description: `Arbeitstage ${year} f\u00fcr alle 16 Bundesl\u00e4nder mit monatlicher Aufschl\u00fcsselung`,
+        temporalCoverage: `${year}`,
+        creator: {
+          "@type": "Organization",
+          "@id": "https://aktuellekw.de/#organization",
+          name: "aktuellekw.de",
+          url: "https://aktuellekw.de",
+        },
+      },
+    ],
+  };
 
   return (
     <>
@@ -151,17 +176,17 @@ export default function Arbeitstage2026Page() {
             Startseite
           </Link>
           <span aria-hidden="true">&rsaquo;</span>
-          <span className="text-text-primary">Arbeitstage {YEAR}</span>
+          <span className="text-text-primary">Arbeitstage {year}</span>
         </nav>
 
         {/* ── H1 + Intro ────────────────────────────────────── */}
         <h1 className="text-3xl md:text-4xl font-bold mb-4">
-          Arbeitstage {YEAR}: Anzahl pro Bundesland und Monat + Rechner &amp; Steuer-Hinweise
+          Arbeitstage {year}: Anzahl pro Bundesland und Monat + Rechner &amp; Steuer-Hinweise
         </h1>
 
         <div className="text-sm text-text-secondary leading-relaxed mb-6 space-y-3">
           <p>
-            Die <strong className="text-text-primary">Arbeitstage {YEAR}</strong> liegen in Deutschland
+            Die <strong className="text-text-primary">Arbeitstage {year}</strong> liegen in Deutschland
             (bei der typischen 5-Tage-Woche) je nach Bundesland bei{" "}
             <strong className="text-text-primary">rund {minAT.arbeitstageJahr} bis {maxAT.arbeitstageJahr} Arbeitstagen</strong> &ndash;
             denn gesetzliche Feiertage fallen nicht &uuml;berall gleich und wirken sich direkt auf deine
@@ -202,7 +227,7 @@ export default function Arbeitstage2026Page() {
         <div className="bg-accent/5 border border-accent/20 rounded-2xl p-5 mb-10">
           <p className="text-xs uppercase tracking-widest text-accent font-semibold mb-2">Kurzantwort</p>
           <p className="text-sm text-text-secondary leading-relaxed">
-            Die <strong className="text-text-primary">Arbeitstage {YEAR}</strong> in Deutschland (bei einer 5-Tage-Woche)
+            Die <strong className="text-text-primary">Arbeitstage {year}</strong> in Deutschland (bei einer 5-Tage-Woche)
             unterscheiden sich je nach Bundesland, weil gesetzliche Feiertage regional variieren.
             Werktage umfassen Montag bis Samstag &ndash; deshalb sind sie nicht identisch mit der 5-Tage-Woche.
           </p>
@@ -211,11 +236,11 @@ export default function Arbeitstage2026Page() {
         {/* ═══ SECTION: Warum je Bundesland unterschiedlich ═══ */}
         <div className="mb-10">
           <h2 className="text-2xl font-semibold mb-4">
-            Warum die Arbeitstage {YEAR} je Bundesland unterschiedlich sind
+            Warum die Arbeitstage {year} je Bundesland unterschiedlich sind
           </h2>
           <div className="text-sm text-text-secondary leading-relaxed space-y-3 mb-4">
             <p>
-              Die <strong className="text-text-primary">Arbeitstage {YEAR} je Bundesland</strong> unterscheiden sich,
+              Die <strong className="text-text-primary">Arbeitstage {year} je Bundesland</strong> unterscheiden sich,
               weil nicht jeder Feiertag &uuml;berall gilt. Einige Termine sind bundesweit, andere nur in einzelnen
               L&auml;ndern. Dazu kommt: Fallen Feiertage auf Samstag oder Sonntag, sinkt ihr Einfluss auf die
               Arbeitstage. Beispiele f&uuml;r landesspezifische Feiertage sind Fronleichnam oder Reformationstag.
@@ -239,7 +264,7 @@ export default function Arbeitstage2026Page() {
         {/* ═══ SECTION 1: Arbeitstage nach Bundesland ═══ */}
         <div className="mb-14">
           <h2 className="text-2xl font-semibold mb-4">
-            Arbeitstage {YEAR} nach Bundesland
+            Arbeitstage {year} nach Bundesland
           </h2>
           <p className="text-sm text-text-secondary leading-relaxed mb-4">
             Die Zahl der Arbeitstage unterscheidet sich je Bundesland vor allem
@@ -248,9 +273,9 @@ export default function Arbeitstage2026Page() {
             <strong className="text-text-primary">Allerheiligen</strong> (u.&nbsp;a. Bayern, BW) oder
             der <strong className="text-text-primary">Reformationstag</strong> (u.&nbsp;a. Niedersachsen, MV).
             Alle Details findest du auf den jeweiligen Feiertage-Seiten, z.&nbsp;B.:{" "}
-            <Link href="/feiertage/2026/nordrhein-westfalen" className="text-accent hover:underline">Feiertage NRW</Link>,{" "}
-            <Link href="/feiertage/2026/bayern" className="text-accent hover:underline">Feiertage Bayern</Link>,{" "}
-            <Link href="/feiertage/2026/baden-wuerttemberg" className="text-accent hover:underline">Feiertage BW</Link>.
+            <Link href={`/feiertage/${year}/nordrhein-westfalen`} className="text-accent hover:underline">Feiertage NRW</Link>,{" "}
+            <Link href={`/feiertage/${year}/bayern`} className="text-accent hover:underline">Feiertage Bayern</Link>,{" "}
+            <Link href={`/feiertage/${year}/baden-wuerttemberg`} className="text-accent hover:underline">Feiertage BW</Link>.
           </p>
           <div className="overflow-x-auto rounded-xl border border-border">
             <table className="w-full text-sm">
@@ -270,7 +295,7 @@ export default function Arbeitstage2026Page() {
                   >
                     <td className="px-5 py-3 font-medium text-text-primary">
                       <Link
-                        href={`/feiertage/${YEAR}/${bl.name.toLowerCase().replace(/\u00e4/g, "ae").replace(/\u00f6/g, "oe").replace(/\u00fc/g, "ue").replace(/\u00df/g, "ss").replace(/\s+/g, "-")}`}
+                        href={`/feiertage/${year}/${bl.name.toLowerCase().replace(/\u00e4/g, "ae").replace(/\u00f6/g, "oe").replace(/\u00fc/g, "ue").replace(/\u00df/g, "ss").replace(/\s+/g, "-")}`}
                         className="hover:text-accent transition-colors"
                       >
                         {bl.name}
@@ -299,10 +324,10 @@ export default function Arbeitstage2026Page() {
         {/* ═══ SECTION 2: Arbeitstage pro Monat (bundesweit) ═══ */}
         <div className="mb-14">
           <h2 className="text-2xl font-semibold mb-4">
-            Arbeitstage {YEAR} pro Monat (Deutschland, 5-Tage-Woche)
+            Arbeitstage {year} pro Monat (Deutschland, 5-Tage-Woche)
           </h2>
           <p className="text-sm text-text-secondary leading-relaxed mb-4">
-            Diese Monats&uuml;bersicht zeigt dir die <strong className="text-text-primary">Arbeitstage {YEAR} pro
+            Diese Monats&uuml;bersicht zeigt dir die <strong className="text-text-primary">Arbeitstage {year} pro
             Monat</strong> in Deutschland. Sie basiert auf einer 5-Tage-Woche (Montag bis Freitag). Die Werte
             gelten bundesweit und ber&uuml;cksichtigen nur bundesweite gesetzliche Feiertage. Unterschiede nach
             Bundesland sind nicht eingerechnet. Nutze die Tabelle f&uuml;r <strong className="text-text-primary">Personalplanung</strong>,{" "}
@@ -321,28 +346,19 @@ export default function Arbeitstage2026Page() {
                 </tr>
               </thead>
               <tbody>
-                {[
-                  { monat: "Januar", kt: 31, we: 9, ft: 1, at: 21 },
-                  { monat: "Februar", kt: 28, we: 8, ft: 0, at: 20 },
-                  { monat: "M\u00E4rz", kt: 31, we: 9, ft: 0, at: 22 },
-                  { monat: "April", kt: 30, we: 8, ft: 1, at: 21 },
-                  { monat: "Mai", kt: 31, we: 10, ft: 2, at: 19 },
-                  { monat: "Juni", kt: 30, we: 8, ft: 0, at: 22 },
-                  { monat: "Juli", kt: 31, we: 8, ft: 0, at: 23 },
-                  { monat: "August", kt: 31, we: 10, ft: 0, at: 21 },
-                  { monat: "September", kt: 30, we: 8, ft: 0, at: 22 },
-                  { monat: "Oktober", kt: 31, we: 9, ft: 1, at: 21 },
-                  { monat: "November", kt: 30, we: 9, ft: 0, at: 21 },
-                  { monat: "Dezember", kt: 31, we: 8, ft: 2, at: 21 },
-                ].map((m) => (
-                  <tr key={m.monat} className="border-b border-border last:border-b-0">
-                    <td className="px-5 py-3 font-medium text-text-primary">{m.monat}</td>
-                    <td className="px-5 py-3 text-right text-text-secondary">{m.kt}</td>
-                    <td className="px-5 py-3 text-right text-text-secondary">{m.we}</td>
-                    <td className="px-5 py-3 text-right text-text-secondary">{m.ft}</td>
-                    <td className="px-5 py-3 text-right font-semibold text-accent">{m.at}</td>
-                  </tr>
-                ))}
+                {hh.monate.map((m, i) => {
+                  const kt = new Date(year, i + 1, 0).getDate();
+                  const we = kt - m.werktage;
+                  return (
+                    <tr key={m.monat} className="border-b border-border last:border-b-0">
+                      <td className="px-5 py-3 font-medium text-text-primary">{m.monat}</td>
+                      <td className="px-5 py-3 text-right text-text-secondary">{kt}</td>
+                      <td className="px-5 py-3 text-right text-text-secondary">{we}</td>
+                      <td className="px-5 py-3 text-right text-text-secondary">{m.feiertageAnzahl}</td>
+                      <td className="px-5 py-3 text-right font-semibold text-accent">{m.arbeitstage}</td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           </div>
@@ -351,7 +367,7 @@ export default function Arbeitstage2026Page() {
         {/* ═══ SECTION 3: Arbeitstage pro Monat (NRW Beispiel) ═══ */}
         <div className="mb-14">
           <h2 className="text-2xl font-semibold mb-4">
-            Arbeitstage {YEAR} nach Bundesland und Monat (Beispiel: NRW)
+            Arbeitstage {year} nach Bundesland und Monat (Beispiel: NRW)
           </h2>
           <div className="overflow-x-auto rounded-xl border border-border">
             <table className="w-full text-sm">
@@ -377,7 +393,7 @@ export default function Arbeitstage2026Page() {
                 ))}
                 {/* Summe */}
                 <tr className="bg-surface-secondary font-semibold">
-                  <td className="px-5 py-3 text-text-primary">Gesamt {YEAR}</td>
+                  <td className="px-5 py-3 text-text-primary">Gesamt {year}</td>
                   <td className="px-5 py-3 text-right text-text-secondary">
                     {nrw.monate.reduce((s, m) => s + m.werktage, 0)}
                   </td>
@@ -405,7 +421,7 @@ export default function Arbeitstage2026Page() {
         {/* ═══ SECTION: Arbeitstage berechnen ═══ */}
         <div className="mb-14">
           <h2 className="text-2xl font-semibold mb-4">
-            Arbeitstage {YEAR} berechnen: Formel, Beispiele und typische Sonderf&auml;lle
+            Arbeitstage {year} berechnen: Formel, Beispiele und typische Sonderf&auml;lle
           </h2>
 
           <div className="text-sm text-text-secondary leading-relaxed space-y-3 mb-6">
@@ -445,14 +461,14 @@ export default function Arbeitstage2026Page() {
               F&uuml;r die <strong className="text-text-primary">Jahresplanung</strong> nutzt du h&auml;ufig
               Soll-Werte. F&uuml;r Abrechnung oder Steuer z&auml;hlen dagegen die tats&auml;chlichen Arbeitstage
               im konkreten Zeitraum. Pr&uuml;fe dazu die Feiertage unter{" "}
-              <Link href="/feiertage/2026" className="text-accent hover:underline">Feiertage 2026</Link> und
+              <Link href={`/feiertage/${year}`} className="text-accent hover:underline">Feiertage {year}</Link> und
               kontrolliere Zeitr&auml;ume direkt mit dem{" "}
               <Link href="/tagerechner" className="text-accent hover:underline">Tagerechner</Link>.
             </p>
           </div>
 
           {/* 5-Tage-Woche Checkliste */}
-          <h3 className="text-lg font-semibold mb-3">5-Tage-Woche {YEAR}: So berechnest du deine pers&ouml;nlichen Arbeitstage</h3>
+          <h3 className="text-lg font-semibold mb-3">5-Tage-Woche {year}: So berechnest du deine pers&ouml;nlichen Arbeitstage</h3>
           <div className="bg-card-bg border border-border rounded-2xl p-5 mb-6">
             <ol className="text-sm text-text-secondary space-y-2 list-decimal list-inside">
               <li>W&auml;hle dein <strong className="text-text-primary">Bundesland</strong>, denn die Feiertage unterscheiden sich je nach Region.</li>
@@ -463,17 +479,17 @@ export default function Arbeitstage2026Page() {
           </div>
 
           {/* Teilzeit & Schicht */}
-          <h3 className="text-lg font-semibold mb-3">Teilzeit und Schicht: Arbeitstage {YEAR} bei 3- oder 4-Tage-Woche</h3>
+          <h3 className="text-lg font-semibold mb-3">Teilzeit und Schicht: Arbeitstage {year} bei 3- oder 4-Tage-Woche</h3>
           <div className="text-sm text-text-secondary leading-relaxed space-y-3">
             <p>
-              Bei Teilzeit gilt: Deine Arbeitstage {YEAR} richten sich nach deinen{" "}
+              Bei Teilzeit gilt: Deine Arbeitstage {year} richten sich nach deinen{" "}
               <strong className="text-text-primary">regelm&auml;&szlig;igen Arbeitstagen</strong>, nicht nach
               &bdquo;Werktagen&ldquo;. Grundlage ist die 5-Tage-Woche als 100%-Basis. Daraus leitest du dein
               Teilzeitmodell ab.
             </p>
             <p>
               <strong className="text-text-primary">Beispiel 4-Tage-Woche (Mo&ndash;Do):</strong> Z&auml;hle alle Montage
-              bis Donnerstage in 2026 und ziehe nur die Feiertage ab, die auf Mo&ndash;Do fallen.
+              bis Donnerstage in {year} und ziehe nur die Feiertage ab, die auf Mo&ndash;Do fallen.
               Bei wechselnden Schichten z&auml;hlt die tats&auml;chliche Einsatzplanung im Kalender oder in der Zeiterfassung.
             </p>
           </div>
@@ -482,11 +498,11 @@ export default function Arbeitstage2026Page() {
         {/* ═══ SECTION: Rechner ═══ */}
         <div className="mb-14">
           <h2 className="text-2xl font-semibold mb-4">
-            Arbeitstage {YEAR} Rechner: Jahresarbeitszeit, Urlaub und Feiertage einbeziehen
+            Arbeitstage {year} Rechner: Jahresarbeitszeit, Urlaub und Feiertage einbeziehen
           </h2>
           <div className="text-sm text-text-secondary leading-relaxed space-y-3 mb-6">
             <p>
-              Ein <strong className="text-text-primary">Arbeitstage {YEAR} Rechner</strong> spart dir Zeit, wenn du
+              Ein <strong className="text-text-primary">Arbeitstage {year} Rechner</strong> spart dir Zeit, wenn du
               mehr brauchst als reine Tabellenwerte. F&uuml;r ein realistisches Ergebnis gibst du dein{" "}
               <strong className="text-text-primary">Bundesland</strong>, deine{" "}
               <strong className="text-text-primary">Arbeitstage pro Woche</strong>,{" "}
@@ -523,10 +539,10 @@ export default function Arbeitstage2026Page() {
           </div>
 
           {/* Jahresarbeitszeit */}
-          <h3 className="text-lg font-semibold mb-3">Jahresarbeitszeit {YEAR} berechnen (Stunden pro Jahr)</h3>
+          <h3 className="text-lg font-semibold mb-3">Jahresarbeitszeit {year} berechnen (Stunden pro Jahr)</h3>
           <div className="text-sm text-text-secondary leading-relaxed space-y-3 mb-4">
             <p>
-              Die <strong className="text-text-primary">Jahresarbeitszeit {YEAR}</strong> berechnest du schnell
+              Die <strong className="text-text-primary">Jahresarbeitszeit {year}</strong> berechnest du schnell
               mit einem Jahresarbeitszeitrechner: <strong className="text-text-primary">Arbeitstage &times; Stunden
               pro Arbeitstag</strong>.
             </p>
@@ -607,7 +623,7 @@ export default function Arbeitstage2026Page() {
         {/* ═══ SECTION: Steuererklärung ═══ */}
         <div className="mb-14">
           <h2 className="text-2xl font-semibold mb-4">
-            Arbeitstage {YEAR} f&uuml;r die Steuererkl&auml;rung (Pendlerpauschale): Was z&auml;hlt?
+            Arbeitstage {year} f&uuml;r die Steuererkl&auml;rung (Pendlerpauschale): Was z&auml;hlt?
           </h2>
           <div className="text-sm text-text-secondary leading-relaxed space-y-3 mb-6">
             <p>
@@ -694,7 +710,7 @@ export default function Arbeitstage2026Page() {
         {/* ═══ SECTION: Häufige Fehler ═══ */}
         <div className="mb-14">
           <h2 className="text-2xl font-semibold mb-4">
-            H&auml;ufige Fehler bei der Ermittlung der Arbeitstage {YEAR}
+            H&auml;ufige Fehler bei der Ermittlung der Arbeitstage {year}
           </h2>
 
           <div className="text-sm text-text-secondary leading-relaxed space-y-3 mb-6">
@@ -745,7 +761,7 @@ export default function Arbeitstage2026Page() {
         {/* ═══ FAQ ═══ */}
         <div className="mb-14">
           <h2 className="text-2xl font-semibold mb-5">
-            H&auml;ufig gestellte Fragen zu Arbeitstagen {YEAR}
+            H&auml;ufig gestellte Fragen zu Arbeitstagen {year}
           </h2>
           <div className="space-y-2.5">
             {pageFAQs.map((faq, i) => (
@@ -770,7 +786,7 @@ export default function Arbeitstage2026Page() {
         {/* ═══ Abschlusstext ═══ */}
         <div className="mb-10 text-sm text-text-secondary leading-relaxed space-y-3">
           <p>
-            Wie viele <strong className="text-text-primary">Arbeitstage {YEAR}</strong> du tats&auml;chlich hast,
+            Wie viele <strong className="text-text-primary">Arbeitstage {year}</strong> du tats&auml;chlich hast,
             h&auml;ngt vor allem von deinem Bundesland, deinen Feiertagen und deinem Arbeitsmodell ab. Nutze
             daf&uuml;r die Tabellen nach Monat und Bundesland sowie den Abschnitt zum Berechnen (inkl. Urlaub,
             Krankheit und Umrechnung Stunden&nbsp;&harr;&nbsp;Arbeitstage), damit du schnell zu deiner realen Zahl
@@ -792,8 +808,8 @@ export default function Arbeitstage2026Page() {
           <Link href="/arbeitstage-berechnen" className="text-accent hover:underline">
             Arbeitstage-Rechner &rarr;
           </Link>
-          <Link href={`/feiertage/${YEAR}`} className="text-accent hover:underline">
-            Feiertage {YEAR} &rarr;
+          <Link href={`/feiertage/${year}`} className="text-accent hover:underline">
+            Feiertage {year} &rarr;
           </Link>
           <Link href="/tagerechner" className="text-accent hover:underline">
             Tagerechner &rarr;

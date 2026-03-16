@@ -187,14 +187,14 @@ export default function UeberUnsPage() {
               <p className="text-text-secondary text-sm leading-relaxed">
                 Von der Berechnung von{" "}
                 <Link
-                  href="/arbeitstage-2026"
+                  href="/arbeitstage/2026"
                   className="text-accent hover:underline"
                 >
                   Arbeitstagen
                 </Link>{" "}
                 bis hin zu Infos über die{" "}
                 <Link
-                  href="/zeitumstellung-2026"
+                  href="/zeitumstellung/2026"
                   className="text-accent hover:underline"
                 >
                   Zeitumstellung
