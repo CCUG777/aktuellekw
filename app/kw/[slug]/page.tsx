@@ -293,9 +293,9 @@ export default async function KWDetailPage({
                 ? `KW ${kwInfo.weekNumber} ist die aktuelle Kalenderwoche. `
                 : ""}
               Insgesamt hat das Jahr&nbsp;{kwInfo.year}{" "}
-              {weeksInYear}&nbsp;Kalenderwochen. Über die Navigation können Sie
+              {weeksInYear}&nbsp;Kalenderwochen. Über die Navigation kannst du
               schnell zur vorherigen oder nächsten KW wechseln. Für eine
-              Gesamtübersicht aller Wochen besuchen Sie die{" "}
+              Gesamtübersicht aller Wochen findest du die{" "}
               <a
                 href={`/kalenderwochen/${kwInfo.year}`}
                 className="text-accent hover:underline"
