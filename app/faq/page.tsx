@@ -29,7 +29,7 @@ const faqs = [
   {
     question: "Welche Kalenderwoche haben wir heute?",
     answer:
-      "Die aktuelle Kalenderwoche wird auf unserer Startseite live angezeigt – mit KW-Nummer, Jahr sowie exaktem Start- und Enddatum (Montag bis Sonntag nach ISO 8601). Die Seite aktualisiert sich stündlich. Als schnelle Faustregel: Suchen Sie den nächsten Donnerstag und zählen Sie, die wievielte Woche des Jahres das ist.",
+      "Die aktuelle Kalenderwoche wird auf unserer Startseite live angezeigt – mit KW-Nummer, Jahr sowie exaktem Start- und Enddatum (Montag bis Sonntag nach ISO 8601). Die Seite aktualisiert sich stündlich. Als schnelle Faustregel: Such den nächsten Donnerstag und zähl, die wievielte Woche des Jahres das ist.",
   },
   // Cluster 1: Was ist eine KW
   {
@@ -150,13 +150,13 @@ export default function FaqPage() {
           berechnet? Und wie viele Wochen hat ein Jahr eigentlich? Auf dieser
           Seite beantworten wir die häufigsten Fragen rund um die
           Kalenderwoche (KW) nach dem internationalen Standard ISO&nbsp;8601.
-          Erfahren Sie, wann KW&nbsp;1 beginnt, warum manche Jahre
-          53&nbsp;Kalenderwochen haben und wie Sie jedes beliebige Datum einer
-          KW zuordnen. Die{" "}
+          Hier erfährst du, wann KW&nbsp;1 beginnt, warum manche Jahre
+          53&nbsp;Kalenderwochen haben und wie du jedes beliebige Datum einer
+          KW zuordnest. Die{" "}
           <a href="/" className="text-accent hover:underline">
             aktuelle KW
           </a>{" "}
-          finden Sie jederzeit auf unserer Startseite.
+          findest du jederzeit auf unserer Startseite.
         </p>
 
         <div className="space-y-2.5">
