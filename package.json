@@ -8,7 +8,9 @@
     "start": "next start",
     "lint": "eslint",
     "import:schulferien": "node scripts/import-schulferien-api.js",
-    "generate:all": "node scripts/import-schulferien-api.js"
+    "generate:all": "node scripts/import-schulferien-api.js",
+    "indexnow": "node scripts/submit-indexnow.mjs",
+    "indexnow:dry": "node scripts/submit-indexnow.mjs --dry-run"
   },
   "dependencies": {
     "next": "16.1.6",
