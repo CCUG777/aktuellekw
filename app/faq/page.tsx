@@ -25,75 +25,55 @@ export const metadata: Metadata = {
 };
 
 const faqs = [
-  // Cluster 3: welche KW haben wir, welche Kalenderwoche
+  // Cluster 3: welche KW haben wir (konsolidiert aus 3 Near-Duplicates)
   {
-    question: "Welche Kalenderwoche haben wir aktuell?",
+    question: "Welche Kalenderwoche haben wir heute?",
     answer:
-      "Die aktuelle KW wird auf unserer Startseite live angezeigt – mit genauer KW-Nummer, Jahr sowie Start- und Enddatum (Montag bis Sonntag nach ISO 8601). Die Seite aktualisiert sich stündlich automatisch.",
-  },
-  {
-    question: "Welche KW ist heute?",
-    answer:
-      "Die heutige Kalenderwoche finden Sie direkt auf aktuellekw.de. Die Anzeige zeigt KW-Nummer, Jahr sowie exakte Datumsgrenzen der laufenden Woche nach ISO 8601.",
-  },
-  {
-    question: "Welche KW haben wir heute?",
-    answer:
-      "Die aktuelle KW können Sie jederzeit auf unserer Startseite ablesen. Alternativ gilt die Faustregel: Suchen Sie den nächsten Donnerstag und zählen Sie, die wievielte Woche des Jahres das ist.",
+      "Die aktuelle Kalenderwoche wird auf unserer Startseite live angezeigt – mit KW-Nummer, Jahr sowie exaktem Start- und Enddatum (Montag bis Sonntag nach ISO 8601). Die Seite aktualisiert sich stündlich. Als schnelle Faustregel: Suchen Sie den nächsten Donnerstag und zählen Sie, die wievielte Woche des Jahres das ist.",
   },
   // Cluster 1: Was ist eine KW
   {
     question: "Was ist eine Kalenderwoche?",
     answer:
-      "Eine Kalenderwoche (KW) ist ein Zeitraum von sieben Tagen, der nach ISO 8601 am Montag beginnt und am Sonntag endet. In Deutschland, Österreich und der Schweiz ist der ISO-8601-Standard verbindlich.",
+      "Eine Kalenderwoche (KW) ist ein Zeitraum von sieben Tagen, der nach ISO 8601 am Montag beginnt und am Sonntag endet. In Deutschland, Österreich und der Schweiz ist der ISO-8601-Standard verbindlich. Die Nummerierung beginnt mit KW 1 und endet mit KW 52 oder 53.",
   },
   {
     question: "Wann beginnt die Kalenderwoche 1?",
     answer:
-      "Die KW 1 ist die Woche, die den ersten Donnerstag des Jahres enthält. Das bedeutet: Der 4. Januar liegt immer in KW 1. Dadurch kann KW 1 bereits Ende Dezember des Vorjahres beginnen.",
+      "Die KW 1 ist die Woche, die den ersten Donnerstag des Jahres enthält – der 4. Januar liegt daher immer in KW 1. Dadurch kann KW 1 bereits Ende Dezember des Vorjahres beginnen, und die ersten Tage im Januar können noch zur letzten KW des Vorjahres gehören.",
   },
-  // Cluster 4: wie viele Wochen hat ein Jahr
+  // Cluster 4: wie viele Wochen hat ein Jahr (konsolidiert aus 4 Near-Duplicates)
   {
     question: "Wie viele Wochen hat ein Jahr?",
     answer:
-      "Die meisten Jahre haben 52 Kalenderwochen. Manche Jahre haben jedoch 53 Kalenderwochen – das tritt auf, wenn der 1. Januar auf einen Donnerstag fällt oder in Schaltjahren auf einen Mittwoch.",
-  },
-  {
-    question: "Wie viel Wochen hat ein Jahr?",
-    answer:
-      "Ein Jahr hat entweder 52 oder 53 Kalenderwochen nach ISO 8601. Die meisten Jahre bestehen aus 52 KW. In seltenen Jahren (ca. alle 5–6 Jahre) gibt es eine 53. Kalenderwoche.",
-  },
-  {
-    question: "Wie viele Kalenderwochen hat ein Jahr genau?",
-    answer:
-      "Nach ISO 8601 hat ein Jahr exakt 52 oder 53 Kalenderwochen. Ein Jahr mit 53 Wochen bezeichnet man auch als langes Jahr. In einem 400-Jahres-Zyklus gibt es genau 71 lange Jahre.",
+      "Nach ISO 8601 hat ein Kalenderjahr entweder 52 oder 53 Kalenderwochen. Die meisten Jahre haben 52 KW. In einem 400-Jahres-Zyklus gibt es genau 71 sogenannte lange Jahre mit 53 Wochen – das entspricht etwa jedem 5. bis 6. Jahr.",
   },
   {
     question: "Hat ein Jahr immer 52 Kalenderwochen?",
     answer:
-      "Nein. Die meisten Jahre haben 52 Kalenderwochen, aber manche Jahre haben 53 KWs. Das passiert, wenn der 1. Januar auf einen Donnerstag fällt – oder auf einen Mittwoch in Schaltjahren.",
+      "Nein. Ein Jahr hat 53 Kalenderwochen, wenn der 1. Januar auf einen Donnerstag fällt – oder in Schaltjahren auf einen Mittwoch. Das Jahr 2026 ist ein solches langes Jahr mit 53 Kalenderwochen (KW 1 bis KW 53).",
   },
   // Cluster 5: spezifische KW
   {
     question: "Wann beginnt KW 1 2026?",
     answer:
-      "Kalenderwoche 1 des Jahres 2026 beginnt am Montag, dem 29. Dezember 2025, und endet am Sonntag, dem 4. Januar 2026. Der 1. Januar 2026 (Donnerstag) liegt damit in KW 1.",
+      "Kalenderwoche 1 des Jahres 2026 beginnt am Montag, dem 29. Dezember 2025, und endet am Sonntag, dem 4. Januar 2026. Der 1. Januar 2026 fällt auf einen Donnerstag und liegt damit in KW 1.",
   },
   {
     question: "Wie viele Kalenderwochen hat 2026?",
     answer:
-      "Das Jahr 2026 hat 53 Kalenderwochen (KW 1 bis KW 53). Da der 1. Januar 2026 auf einen Donnerstag fällt, gilt ISO-8601-Regel für lange Jahre.",
+      "Das Jahr 2026 hat 53 Kalenderwochen (KW 1 bis KW 53). Da der 1. Januar 2026 auf einen Donnerstag fällt, ist 2026 ein langes Jahr nach ISO 8601.",
   },
   // Wissen & Erklärung
   {
     question: "Was bedeutet ISO 8601?",
     answer:
-      "ISO 8601 ist ein internationaler Standard zur Darstellung von Datum und Uhrzeit. Er legt fest, dass Wochen am Montag beginnen und KW 1 den ersten Donnerstag des Jahres enthält. In Deutschland gilt dieser Standard verbindlich.",
+      "ISO 8601 ist ein internationaler Standard zur Darstellung von Datum und Uhrzeit. Er legt fest, dass Wochen am Montag beginnen und KW 1 den ersten Donnerstag des Jahres enthält. In Deutschland ist dieser Standard nach DIN 1355 verbindlich – er weicht vom US-amerikanischen System ab, das Wochen am Sonntag beginnt.",
   },
   {
     question: "Wie wird die aktuelle KW berechnet?",
     answer:
-      "Die KW wird nach ISO 8601 berechnet: Man sucht den nächsten Donnerstag zum aktuellen Datum und bestimmt, die wievielte Woche des Jahres dieser Donnerstag angehört. Jede Woche beginnt am Montag.",
+      "Die KW wird nach ISO 8601 berechnet: Man bestimmt den Donnerstag der betreffenden Woche und zählt, die wievielte Woche des Jahres das ist. Jede Woche beginnt am Montag. Unser KW-Rechner auf der Startseite wandelt jedes beliebige Datum sofort in die zugehörige Kalenderwoche um.",
   },
 ];
 
@@ -221,17 +201,15 @@ export default function FaqPage() {
  * [x] Canonical URL: https://aktuellekw.de/faq
  * [x] OG-Title + OG-Description + OG-URL
  * [x] H1: „Häufige Fragen zur Kalenderwoche" (Cluster 3 Hauptkeyword)
- * [x] Schema.org: FAQPage mit 13 Fragen (Cluster 1, 3, 4, 5 abgedeckt)
+ * [x] Schema.org: FAQPage mit 9 Fragen (Cluster 1, 3, 4, 5 abgedeckt)
  * [x] Schema.org: BreadcrumbList (2 Ebenen: Startseite → FAQ)
- * [x] Cluster 3 Keywords: welche KW haben wir, welche Kalenderwoche haben wir aktuell,
- *     welche KW ist heute, welche KW haben wir heute (3 Varianten)
- * [x] Cluster 4 Keywords: wie viele Wochen hat ein Jahr (3 Varianten),
- *     wie viel Wochen hat ein Jahr, wie viele Kalenderwochen hat ein Jahr
+ * [x] Cluster 3 Keywords: „Welche Kalenderwoche haben wir heute?" (konsolidiert aus 3 Varianten)
+ * [x] Cluster 4 Keywords: „Wie viele Wochen hat ein Jahr?" + „Hat ein Jahr immer 52 KW?"
+ *     (konsolidiert aus 4 Near-Duplicates – eindeutige Fragen, keine Duplicate-Content-Gefahr)
  * [x] Cluster 5: wann beginnt KW 1 2026, wie viele Kalenderwochen hat 2026
  * [x] Einleitungstext mit Keywords (kurz, informativ)
  * [x] Einleitungstext (60–80 Wörter) ✅ befüllt
  * [x] Interne Links zurück zur Startseite und Jahresübersicht
- * [ ] TODO: „Wann ist KW X 2026?" Fragen dynamisch pro aktuelle KW generieren
  * [x] Speakable Schema für KI-Sprachsuche
- * [ ] TODO: Verlinkung zur Kalenderwochen-Übersicht über Frage #11 einbauen
+ * [ ] TODO: „Wann ist KW X 2026?" Fragen dynamisch pro aktuelle KW generieren
  */
