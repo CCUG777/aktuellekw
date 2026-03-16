@@ -68,6 +68,8 @@ export default function KalenderwochenUebersichtPage() {
       "@type": "Dataset",
       "@id": "https://aktuellekw.de/kalenderwochen-uebersicht#dataset",
       isPartOf: { "@id": "https://aktuellekw.de/#website" },
+      datePublished: "2026-01-01",
+      dateModified: new Date().toISOString().split("T")[0],
       name: `Kalenderwochen im Überblick ${currentKW.year}`,
       description: `Überblick aller ${weeksInYear} Kalenderwochen des Jahres ${currentKW.year}. Aktuelle KW: ${currentKW.weekNumber}.`,
       url: "https://aktuellekw.de/kalenderwochen-uebersicht",

@@ -167,6 +167,8 @@ export default function WocheJahrPage() {
       "@type": "FAQPage",
       "@id": "https://aktuellekw.de/woche-jahr#faqpage",
       isPartOf: { "@id": "https://aktuellekw.de/#website" },
+      datePublished: "2026-01-01",
+      dateModified: "2026-02-01",
       mainEntity: pageFaqs.map((f) => ({
         "@type": "Question",
         name: f.question,

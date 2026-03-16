@@ -106,6 +106,8 @@ export default function WinterzeitPage() {
     "@type": "FAQPage",
     "@id": "https://aktuellekw.de/winterzeit#faqpage",
     isPartOf: { "@id": "https://aktuellekw.de/#website" },
+    datePublished: "2026-01-01",
+    dateModified: "2026-01-01",
     mainEntity: faqItems.map((f) => ({
       "@type": "Question",
       name: f.q,

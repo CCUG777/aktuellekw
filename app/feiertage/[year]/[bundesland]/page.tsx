@@ -246,6 +246,8 @@ export default async function FeiertageBundeslandPage({
       "@type": "Dataset",
       "@id": `https://aktuellekw.de/feiertage/${year}/${slug}#dataset`,
       isPartOf: { "@id": "https://aktuellekw.de/#website" },
+      datePublished: `${year}-01-01`,
+      dateModified: year === new Date().getFullYear() ? new Date().toISOString().split("T")[0] : `${year}-01-01`,
       name: `Gesetzliche Feiertage ${year} in ${bl.name}`,
       description: `Alle ${totalCount} gesetzlichen Feiertage ${year} in ${bl.name} mit Datum und Kalenderwoche.`,
       temporalCoverage: `${year}`,

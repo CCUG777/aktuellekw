@@ -39,6 +39,8 @@ function PageJsonLd() {
         url: "https://aktuellekw.de/ueber-uns",
         inLanguage: "de-DE",
         isPartOf: { "@id": "https://aktuellekw.de/#website" },
+        datePublished: "2026-03-16",
+        dateModified: "2026-03-16",
       },
       {
         "@type": "BreadcrumbList",

@@ -124,6 +124,8 @@ export default function KalenderwochePage() {
         "@type": "Dataset",
         "@id": "https://aktuellekw.de/kalenderwoche#dataset",
         isPartOf: { "@id": "https://aktuellekw.de/#website" },
+        datePublished: "2026-01-01",
+        dateModified: new Date().toISOString().split("T")[0],
         name: `Kalenderwochen ${currentKW.year}`,
         description: `Alle ${weeksInYear} Kalenderwochen des Jahres ${currentKW.year} nach ISO 8601 mit Start- und Enddatum. Aktuelle Woche: KW ${currentKW.weekNumber}.`,
         url: "https://aktuellekw.de/kalenderwoche",

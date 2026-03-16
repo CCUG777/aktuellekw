@@ -296,6 +296,8 @@ export default async function OsternPage({
       "@type": "FAQPage",
       "@id": `https://aktuellekw.de/ostern/${year}#faqpage`,
       isPartOf: { "@id": "https://aktuellekw.de/#website" },
+      datePublished: `${year}-01-01`,
+      dateModified: year === new Date().getFullYear() ? new Date().toISOString().split("T")[0] : `${year}-01-01`,
       mainEntity: osternFAQs.map((faq) => ({
         "@type": "Question",
         name: faq.question,

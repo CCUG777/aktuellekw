@@ -113,6 +113,8 @@ export default function WelcheKalenderwochePage() {
       "@type": "FAQPage",
       "@id": "https://aktuellekw.de/welche-kalenderwoche-haben-wir#faqpage",
       isPartOf: { "@id": "https://aktuellekw.de/#website" },
+      datePublished: "2026-01-01",
+      dateModified: new Date().toISOString().split("T")[0],
       mainEntity: pageFaqs.map((f) => ({
         "@type": "Question",
         name: f.question,

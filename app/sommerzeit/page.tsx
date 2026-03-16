@@ -108,6 +108,8 @@ export default function SommerzeitPage() {
     "@type": "FAQPage",
     "@id": "https://aktuellekw.de/sommerzeit#faqpage",
     isPartOf: { "@id": "https://aktuellekw.de/#website" },
+    datePublished: "2026-01-01",
+    dateModified: "2026-01-01",
     mainEntity: faqItems.map((f) => ({
       "@type": "Question",
       name: f.q,

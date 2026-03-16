@@ -115,6 +115,8 @@ const jsonLd = [
     "@id": "https://aktuellekw.de/arbeitstage-berechnen#webapp",
     isPartOf: { "@id": "https://aktuellekw.de/#website" },
     publisher: { "@id": "https://aktuellekw.de/#organization" },
+    datePublished: "2026-01-01",
+    dateModified: new Date().toISOString().split("T")[0],
     name: "Arbeitstage-Rechner",
     url: "https://aktuellekw.de/arbeitstage-berechnen",
     description:

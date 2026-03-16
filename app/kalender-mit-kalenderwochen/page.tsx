@@ -68,6 +68,8 @@ export default function KalenderMitKalenderwochenPage() {
       "@type": "Dataset",
       "@id": "https://aktuellekw.de/kalender-mit-kalenderwochen#dataset",
       isPartOf: { "@id": "https://aktuellekw.de/#website" },
+      datePublished: "2026-01-01",
+      dateModified: new Date().toISOString().split("T")[0],
       name: `Kalender mit Kalenderwochen ${currentKW.year}`,
       description: `Kalender mit allen ${weeksInYear} Kalenderwochen des Jahres ${currentKW.year} nach ISO 8601. Aktuelle Woche: KW ${currentKW.weekNumber}.`,
       url: "https://aktuellekw.de/kalender-mit-kalenderwochen",

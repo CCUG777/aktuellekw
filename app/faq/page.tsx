@@ -86,6 +86,8 @@ function FaqJsonLd() {
         "@type": "FAQPage",
         "@id": "https://aktuellekw.de/faq#faqpage",
         isPartOf: { "@id": "https://aktuellekw.de/#website" },
+        datePublished: "2026-01-01",
+        dateModified: "2026-02-01",
         mainEntity: faqs.map((faq) => ({
           "@type": "Question",
           name: faq.question,

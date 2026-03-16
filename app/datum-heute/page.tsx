@@ -232,6 +232,8 @@ export default function DatumHeutePage() {
       "@type": "FAQPage",
       "@id": "https://aktuellekw.de/datum-heute#faqpage",
       isPartOf: { "@id": "https://aktuellekw.de/#website" },
+      datePublished: "2026-01-01",
+      dateModified: new Date().toISOString().split("T")[0],
       mainEntity: pageFAQs.map((faq) => ({
         "@type": "Question",
         name: faq.question,

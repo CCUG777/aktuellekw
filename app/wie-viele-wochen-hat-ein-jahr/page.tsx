@@ -99,6 +99,8 @@ export default function WieVieleWochenPage() {
       "@type": "FAQPage",
       "@id": "https://aktuellekw.de/wie-viele-wochen-hat-ein-jahr#faqpage",
       isPartOf: { "@id": "https://aktuellekw.de/#website" },
+      datePublished: "2026-01-01",
+      dateModified: "2026-02-27",
       mainEntity: pageFaqs.map((f) => ({
         "@type": "Question",
         name: f.question,

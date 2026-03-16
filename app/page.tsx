@@ -161,6 +161,8 @@ export default function Home() {
         "@id": "https://aktuellekw.de/#webapp",
         isPartOf: { "@id": "https://aktuellekw.de/#website" },
         publisher: { "@id": "https://aktuellekw.de/#organization" },
+        datePublished: "2026-01-01",
+        dateModified: new Date().toISOString().split("T")[0],
         name: "Aktuelle KW – aktuellekw.de",
         url: "https://aktuellekw.de",
         description: `Die aktuelle KW ist KW ${kw.weekNumber} ${kw.year} (${formatDateDE(kw.startDate)} – ${formatDateDE(kw.endDate)}).`,

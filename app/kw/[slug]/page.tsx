@@ -165,6 +165,8 @@ export default async function KWDetailPage({
         url: `https://aktuellekw.de/kw/${kwInfo.weekNumber}-${kwInfo.year}`,
         inLanguage: "de-DE",
         isPartOf: { "@id": "https://aktuellekw.de/#website" },
+        datePublished: kwInfo.startDate.toISOString().split("T")[0],
+        dateModified: kwInfo.endDate < todayUTC ? kwInfo.endDate.toISOString().split("T")[0] : new Date().toISOString().split("T")[0],
         temporalCoverage: `${kwInfo.startDate.toISOString().split("T")[0]}/${kwInfo.endDate.toISOString().split("T")[0]}`,
         speakable: {
           "@type": "SpeakableSpecification",

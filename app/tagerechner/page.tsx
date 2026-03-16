@@ -133,6 +133,8 @@ export default function TageBerechnenPage() {
       "@id": "https://aktuellekw.de/tagerechner#webapp",
       isPartOf: { "@id": "https://aktuellekw.de/#website" },
       publisher: { "@id": "https://aktuellekw.de/#organization" },
+      datePublished: "2026-01-01",
+      dateModified: new Date().toISOString().split("T")[0],
       name: "Tagerechner \u2013 Tage zwischen zwei Daten berechnen",
       url: "https://aktuellekw.de/tagerechner",
       applicationCategory: "UtilityApplication",

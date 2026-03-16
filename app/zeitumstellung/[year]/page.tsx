@@ -149,6 +149,8 @@ export default async function ZeitumstellungYearPage({
         "@type": "FAQPage",
         "@id": `https://aktuellekw.de/zeitumstellung/${year}#faqpage`,
         isPartOf: { "@id": "https://aktuellekw.de/#website" },
+        datePublished: `${year}-01-01`,
+        dateModified: year === new Date().getFullYear() ? new Date().toISOString().split("T")[0] : `${year}-01-01`,
         mainEntity: faqItems.map((f) => ({
           "@type": "Question",
           name: f.q,
