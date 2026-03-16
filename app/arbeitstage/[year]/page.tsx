@@ -155,6 +155,7 @@ export default async function ArbeitstageYearPage({
           name: "aktuellekw.de",
           url: "https://aktuellekw.de",
         },
+        license: "https://creativecommons.org/licenses/by/4.0/",
       },
     ],
   };

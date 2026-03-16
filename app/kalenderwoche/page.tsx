@@ -134,6 +134,7 @@ export default function KalenderwochePage() {
           name: "aktuellekw.de",
           url: "https://aktuellekw.de",
         },
+        license: "https://creativecommons.org/licenses/by/4.0/",
       },
       {
         "@type": "FAQPage",

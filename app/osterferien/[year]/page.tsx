@@ -172,6 +172,7 @@ export default async function OsterferienPage({
       description: `Schulferien rund um Ostern ${year} für alle 16 Bundesländer in Deutschland.`,
       temporalCoverage: `${year}`,
       creator: { "@type": "Organization", name: "aktuellekw.de", url: "https://aktuellekw.de" },
+      license: "https://creativecommons.org/licenses/by/4.0/",
     },
     {
       "@context": "https://schema.org",
