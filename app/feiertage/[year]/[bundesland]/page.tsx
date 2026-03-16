@@ -213,6 +213,7 @@ export default async function FeiertageBundeslandPage({
     {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
+      "@id": `https://aktuellekw.de/feiertage/${year}/${slug}#breadcrumb`,
       itemListElement: [
         {
           "@type": "ListItem",
@@ -243,6 +244,8 @@ export default async function FeiertageBundeslandPage({
     {
       "@context": "https://schema.org",
       "@type": "Dataset",
+      "@id": `https://aktuellekw.de/feiertage/${year}/${slug}#dataset`,
+      isPartOf: { "@id": "https://aktuellekw.de/#website" },
       name: `Gesetzliche Feiertage ${year} in ${bl.name}`,
       description: `Alle ${totalCount} gesetzlichen Feiertage ${year} in ${bl.name} mit Datum und Kalenderwoche.`,
       temporalCoverage: `${year}`,
@@ -255,16 +258,14 @@ export default async function FeiertageBundeslandPage({
           addressCountry: "DE",
         },
       },
-      creator: {
-        "@type": "Organization",
-        name: "aktuellekw.de",
-        url: "https://aktuellekw.de",
-      },
+      creator: { "@id": "https://aktuellekw.de/#organization" },
       license: "https://creativecommons.org/licenses/by/4.0/",
     },
     {
       "@context": "https://schema.org",
       "@type": "FAQPage",
+      "@id": `https://aktuellekw.de/feiertage/${year}/${slug}#faqpage`,
+      isPartOf: { "@id": "https://aktuellekw.de/#website" },
       mainEntity: faqs.map((f) => ({
         "@type": "Question",
         name: f.question,

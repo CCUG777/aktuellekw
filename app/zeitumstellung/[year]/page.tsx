@@ -148,6 +148,7 @@ export default async function ZeitumstellungYearPage({
       {
         "@type": "FAQPage",
         "@id": `https://aktuellekw.de/zeitumstellung/${year}#faqpage`,
+        isPartOf: { "@id": "https://aktuellekw.de/#website" },
         mainEntity: faqItems.map((f) => ({
           "@type": "Question",
           name: f.q,
@@ -157,6 +158,7 @@ export default async function ZeitumstellungYearPage({
       {
         "@type": "Event",
         "@id": `https://aktuellekw.de/zeitumstellung/${year}#event`,
+        isPartOf: { "@id": "https://aktuellekw.de/#website" },
         name: `Zeitumstellung ${year} \u2013 Sommerzeit`,
         startDate: `${sommerzeit.dateISO}T02:00:00+01:00`,
         endDate: `${sommerzeit.dateISO}T03:00:00+02:00`,

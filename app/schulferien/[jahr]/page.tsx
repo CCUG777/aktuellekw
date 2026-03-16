@@ -105,6 +105,7 @@ export default async function SchulferienJahrPage({
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "BreadcrumbList",
+            "@id": `https://aktuellekw.de/schulferien/${year}#breadcrumb`,
             itemListElement: [
               {
                 "@type": "ListItem",

@@ -132,6 +132,7 @@ export default async function SchulferienBundeslandPage({
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "BreadcrumbList",
+            "@id": `https://aktuellekw.de/schulferien/${year}/${slug}#breadcrumb`,
             itemListElement: [
               {
                 "@type": "ListItem",

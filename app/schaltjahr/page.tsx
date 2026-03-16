@@ -148,6 +148,7 @@ export default function SchaltjahrPage() {
     {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
+      "@id": "https://aktuellekw.de/schaltjahr#breadcrumb",
       itemListElement: [
         {
           "@type": "ListItem",
@@ -166,6 +167,8 @@ export default function SchaltjahrPage() {
     {
       "@context": "https://schema.org",
       "@type": "FAQPage",
+      "@id": "https://aktuellekw.de/schaltjahr#faqpage",
+      isPartOf: { "@id": "https://aktuellekw.de/#website" },
       mainEntity: pageFAQs.map((faq) => ({
         "@type": "Question",
         name: faq.question,

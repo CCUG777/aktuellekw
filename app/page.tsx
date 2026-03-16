@@ -158,6 +158,9 @@ export default function Home() {
     "@graph": [
       {
         "@type": "WebApplication",
+        "@id": "https://aktuellekw.de/#webapp",
+        isPartOf: { "@id": "https://aktuellekw.de/#website" },
+        publisher: { "@id": "https://aktuellekw.de/#organization" },
         name: "Aktuelle KW – aktuellekw.de",
         url: "https://aktuellekw.de",
         description: `Die aktuelle KW ist KW ${kw.weekNumber} ${kw.year} (${formatDateDE(kw.startDate)} – ${formatDateDE(kw.endDate)}).`,
@@ -176,6 +179,7 @@ export default function Home() {
       },
       {
         "@type": "BreadcrumbList",
+        "@id": "https://aktuellekw.de/#breadcrumb",
         itemListElement: [
           {
             "@type": "ListItem",
@@ -187,6 +191,7 @@ export default function Home() {
       },
       {
         "@type": "FAQPage",
+        "@id": "https://aktuellekw.de/#faqpage",
         mainEntity: homeFaqs.map((f) => ({
           "@type": "Question",
           name: f.question,

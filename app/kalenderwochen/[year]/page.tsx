@@ -107,6 +107,7 @@ export default async function KalenderwochenYearPage({
       {
         "@type": "Dataset",
         "@id": `https://aktuellekw.de/kalenderwochen/${year}#dataset`,
+        isPartOf: { "@id": "https://aktuellekw.de/#website" },
         name: `Kalenderwochen ${year}`,
         description: `Alle ${weeksInYear} Kalenderwochen des Jahres ${year} nach ISO 8601 mit Start- und Enddatum.`,
         url: `https://aktuellekw.de/kalenderwochen/${year}`,

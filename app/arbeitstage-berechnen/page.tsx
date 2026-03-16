@@ -93,6 +93,7 @@ const jsonLd = [
   {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
+    "@id": "https://aktuellekw.de/arbeitstage-berechnen#breadcrumb",
     itemListElement: [
       {
         "@type": "ListItem",
@@ -111,6 +112,9 @@ const jsonLd = [
   {
     "@context": "https://schema.org",
     "@type": "WebApplication",
+    "@id": "https://aktuellekw.de/arbeitstage-berechnen#webapp",
+    isPartOf: { "@id": "https://aktuellekw.de/#website" },
+    publisher: { "@id": "https://aktuellekw.de/#organization" },
     name: "Arbeitstage-Rechner",
     url: "https://aktuellekw.de/arbeitstage-berechnen",
     description:
@@ -123,6 +127,8 @@ const jsonLd = [
   {
     "@context": "https://schema.org",
     "@type": "FAQPage",
+    "@id": "https://aktuellekw.de/arbeitstage-berechnen#faqpage",
+    isPartOf: { "@id": "https://aktuellekw.de/#website" },
     mainEntity: pageFAQs.map((faq) => ({
       "@type": "Question",
       name: faq.question,

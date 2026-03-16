@@ -123,6 +123,7 @@ export default function KalenderwochePage() {
       {
         "@type": "Dataset",
         "@id": "https://aktuellekw.de/kalenderwoche#dataset",
+        isPartOf: { "@id": "https://aktuellekw.de/#website" },
         name: `Kalenderwochen ${currentKW.year}`,
         description: `Alle ${weeksInYear} Kalenderwochen des Jahres ${currentKW.year} nach ISO 8601 mit Start- und Enddatum. Aktuelle Woche: KW ${currentKW.weekNumber}.`,
         url: "https://aktuellekw.de/kalenderwoche",
@@ -139,6 +140,7 @@ export default function KalenderwochePage() {
       {
         "@type": "FAQPage",
         "@id": "https://aktuellekw.de/kalenderwoche#faqpage",
+        isPartOf: { "@id": "https://aktuellekw.de/#website" },
         mainEntity: kwFaqs.map((f) => ({
           "@type": "Question",
           name: f.question,

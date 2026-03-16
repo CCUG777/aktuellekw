@@ -58,6 +58,7 @@ export default function WinterzeitPage() {
   const breadcrumbLD = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
+    "@id": "https://aktuellekw.de/winterzeit#breadcrumb",
     itemListElement: [
       { "@type": "ListItem", position: 1, name: "Startseite", item: "https://aktuellekw.de" },
       { "@type": "ListItem", position: 2, name: "Zeitumstellung 2026", item: "https://aktuellekw.de/zeitumstellung-2026" },
@@ -103,6 +104,8 @@ export default function WinterzeitPage() {
   const faqLD = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
+    "@id": "https://aktuellekw.de/winterzeit#faqpage",
+    isPartOf: { "@id": "https://aktuellekw.de/#website" },
     mainEntity: faqItems.map((f) => ({
       "@type": "Question",
       name: f.q,
@@ -113,6 +116,8 @@ export default function WinterzeitPage() {
   const eventLD = {
     "@context": "https://schema.org",
     "@type": "Event",
+    "@id": "https://aktuellekw.de/winterzeit#event",
+    isPartOf: { "@id": "https://aktuellekw.de/#website" },
     name: "Winterzeit 2026 \u2013 Uhren zur\u00FCckstellen",
     startDate: `${wz.dateISO}T03:00:00+02:00`,
     endDate: `${wz.dateISO}T02:00:00+01:00`,

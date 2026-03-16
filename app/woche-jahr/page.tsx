@@ -146,6 +146,7 @@ export default function WocheJahrPage() {
     {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
+      "@id": "https://aktuellekw.de/woche-jahr#breadcrumb",
       itemListElement: [
         {
           "@type": "ListItem",
@@ -164,6 +165,8 @@ export default function WocheJahrPage() {
     {
       "@context": "https://schema.org",
       "@type": "FAQPage",
+      "@id": "https://aktuellekw.de/woche-jahr#faqpage",
+      isPartOf: { "@id": "https://aktuellekw.de/#website" },
       mainEntity: pageFaqs.map((f) => ({
         "@type": "Question",
         name: f.question,

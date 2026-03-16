@@ -211,6 +211,7 @@ export default function DatumHeutePage() {
     {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
+      "@id": "https://aktuellekw.de/datum-heute#breadcrumb",
       itemListElement: [
         {
           "@type": "ListItem",
@@ -229,6 +230,8 @@ export default function DatumHeutePage() {
     {
       "@context": "https://schema.org",
       "@type": "FAQPage",
+      "@id": "https://aktuellekw.de/datum-heute#faqpage",
+      isPartOf: { "@id": "https://aktuellekw.de/#website" },
       mainEntity: pageFAQs.map((faq) => ({
         "@type": "Question",
         name: faq.question,

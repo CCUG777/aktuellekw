@@ -267,6 +267,7 @@ export default async function OsternPage({
     {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
+      "@id": `https://aktuellekw.de/ostern/${year}#breadcrumb`,
       itemListElement: [
         { "@type": "ListItem", position: 1, name: "Startseite", item: "https://aktuellekw.de" },
         { "@type": "ListItem", position: 2, name: "Feiertage", item: "https://aktuellekw.de/feiertage" },
@@ -276,6 +277,8 @@ export default async function OsternPage({
     {
       "@context": "https://schema.org",
       "@type": "Event",
+      "@id": `https://aktuellekw.de/ostern/${year}#event`,
+      isPartOf: { "@id": "https://aktuellekw.de/#website" },
       name: `Ostern ${year}`,
       description: `Ostern ${year} in Deutschland: Karfreitag ${formatDateDE(karfreitag)} bis Ostermontag ${formatDateDE(ostermontag)}.`,
       startDate: karfreitag.toISOString().split("T")[0],
@@ -286,11 +289,13 @@ export default async function OsternPage({
         name: "Deutschland",
         address: { "@type": "PostalAddress", addressCountry: "DE" },
       },
-      organizer: { "@type": "Organization", name: "aktuellekw.de", url: "https://aktuellekw.de" },
+      organizer: { "@id": "https://aktuellekw.de/#organization" },
     },
     {
       "@context": "https://schema.org",
       "@type": "FAQPage",
+      "@id": `https://aktuellekw.de/ostern/${year}#faqpage`,
+      isPartOf: { "@id": "https://aktuellekw.de/#website" },
       mainEntity: osternFAQs.map((faq) => ({
         "@type": "Question",
         name: faq.question,

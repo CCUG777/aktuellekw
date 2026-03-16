@@ -47,6 +47,7 @@ export default function KalenderMitKalenderwochenPage() {
     {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
+      "@id": "https://aktuellekw.de/kalender-mit-kalenderwochen#breadcrumb",
       itemListElement: [
         {
           "@type": "ListItem",
@@ -65,16 +66,14 @@ export default function KalenderMitKalenderwochenPage() {
     {
       "@context": "https://schema.org",
       "@type": "Dataset",
+      "@id": "https://aktuellekw.de/kalender-mit-kalenderwochen#dataset",
+      isPartOf: { "@id": "https://aktuellekw.de/#website" },
       name: `Kalender mit Kalenderwochen ${currentKW.year}`,
       description: `Kalender mit allen ${weeksInYear} Kalenderwochen des Jahres ${currentKW.year} nach ISO 8601. Aktuelle Woche: KW ${currentKW.weekNumber}.`,
       url: "https://aktuellekw.de/kalender-mit-kalenderwochen",
       inLanguage: "de-DE",
       temporalCoverage: `${currentKW.year}`,
-      creator: {
-        "@type": "Organization",
-        name: "aktuellekw.de",
-        url: "https://aktuellekw.de",
-      },
+      creator: { "@id": "https://aktuellekw.de/#organization" },
       license: "https://creativecommons.org/licenses/by/4.0/",
     },
   ];

@@ -135,6 +135,7 @@ export default async function ArbeitstageYearPage({
       {
         "@type": "FAQPage",
         "@id": `https://aktuellekw.de/arbeitstage/${year}#faqpage`,
+        isPartOf: { "@id": "https://aktuellekw.de/#website" },
         mainEntity: pageFAQs.map((faq) => ({
           "@type": "Question",
           name: faq.question,
@@ -147,6 +148,7 @@ export default async function ArbeitstageYearPage({
       {
         "@type": "Dataset",
         "@id": `https://aktuellekw.de/arbeitstage/${year}#dataset`,
+        isPartOf: { "@id": "https://aktuellekw.de/#website" },
         name: `Arbeitstage ${year} Deutschland`,
         description: `Arbeitstage ${year} f\u00fcr alle 16 Bundesl\u00e4nder mit monatlicher Aufschl\u00fcsselung`,
         temporalCoverage: `${year}`,

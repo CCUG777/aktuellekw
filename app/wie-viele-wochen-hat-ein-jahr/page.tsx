@@ -78,6 +78,7 @@ export default function WieVieleWochenPage() {
     {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
+      "@id": "https://aktuellekw.de/wie-viele-wochen-hat-ein-jahr#breadcrumb",
       itemListElement: [
         {
           "@type": "ListItem",
@@ -96,6 +97,8 @@ export default function WieVieleWochenPage() {
     {
       "@context": "https://schema.org",
       "@type": "FAQPage",
+      "@id": "https://aktuellekw.de/wie-viele-wochen-hat-ein-jahr#faqpage",
+      isPartOf: { "@id": "https://aktuellekw.de/#website" },
       mainEntity: pageFaqs.map((f) => ({
         "@type": "Question",
         name: f.question,

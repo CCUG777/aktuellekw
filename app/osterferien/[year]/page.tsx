@@ -159,6 +159,7 @@ export default async function OsterferienPage({
     {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
+      "@id": `https://aktuellekw.de/osterferien/${year}#breadcrumb`,
       itemListElement: [
         { "@type": "ListItem", position: 1, name: "Startseite", item: "https://aktuellekw.de" },
         { "@type": "ListItem", position: 2, name: `Schulferien ${year}`, item: `https://aktuellekw.de/schulferien/${year}` },
@@ -168,15 +169,19 @@ export default async function OsterferienPage({
     {
       "@context": "https://schema.org",
       "@type": "Dataset",
+      "@id": `https://aktuellekw.de/osterferien/${year}#dataset`,
+      isPartOf: { "@id": "https://aktuellekw.de/#website" },
       name: `Osterferien ${year} – Termine nach Bundesland`,
       description: `Schulferien rund um Ostern ${year} für alle 16 Bundesländer in Deutschland.`,
       temporalCoverage: `${year}`,
-      creator: { "@type": "Organization", name: "aktuellekw.de", url: "https://aktuellekw.de" },
+      creator: { "@id": "https://aktuellekw.de/#organization" },
       license: "https://creativecommons.org/licenses/by/4.0/",
     },
     {
       "@context": "https://schema.org",
       "@type": "FAQPage",
+      "@id": `https://aktuellekw.de/osterferien/${year}#faqpage`,
+      isPartOf: { "@id": "https://aktuellekw.de/#website" },
       mainEntity: faqs.map((f) => ({
         "@type": "Question",
         name: f.question,

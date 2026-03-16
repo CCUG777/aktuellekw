@@ -47,6 +47,7 @@ export default function KalenderwochenUebersichtPage() {
     {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
+      "@id": "https://aktuellekw.de/kalenderwochen-uebersicht#breadcrumb",
       itemListElement: [
         {
           "@type": "ListItem",
@@ -65,16 +66,14 @@ export default function KalenderwochenUebersichtPage() {
     {
       "@context": "https://schema.org",
       "@type": "Dataset",
+      "@id": "https://aktuellekw.de/kalenderwochen-uebersicht#dataset",
+      isPartOf: { "@id": "https://aktuellekw.de/#website" },
       name: `Kalenderwochen im Überblick ${currentKW.year}`,
       description: `Überblick aller ${weeksInYear} Kalenderwochen des Jahres ${currentKW.year}. Aktuelle KW: ${currentKW.weekNumber}.`,
       url: "https://aktuellekw.de/kalenderwochen-uebersicht",
       inLanguage: "de-DE",
       temporalCoverage: `${currentKW.year}`,
-      creator: {
-        "@type": "Organization",
-        name: "aktuellekw.de",
-        url: "https://aktuellekw.de",
-      },
+      creator: { "@id": "https://aktuellekw.de/#organization" },
       license: "https://creativecommons.org/licenses/by/4.0/",
     },
   ];

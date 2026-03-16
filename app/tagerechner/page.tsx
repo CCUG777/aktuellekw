@@ -111,6 +111,7 @@ export default function TageBerechnenPage() {
     {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
+      "@id": "https://aktuellekw.de/tagerechner#breadcrumb",
       itemListElement: [
         {
           "@type": "ListItem",
@@ -129,6 +130,9 @@ export default function TageBerechnenPage() {
     {
       "@context": "https://schema.org",
       "@type": "WebApplication",
+      "@id": "https://aktuellekw.de/tagerechner#webapp",
+      isPartOf: { "@id": "https://aktuellekw.de/#website" },
+      publisher: { "@id": "https://aktuellekw.de/#organization" },
       name: "Tagerechner \u2013 Tage zwischen zwei Daten berechnen",
       url: "https://aktuellekw.de/tagerechner",
       applicationCategory: "UtilityApplication",
@@ -139,15 +143,12 @@ export default function TageBerechnenPage() {
         priceCurrency: "EUR",
       },
       inLanguage: "de-DE",
-      publisher: {
-        "@type": "Organization",
-        name: "aktuellekw.de",
-        url: "https://aktuellekw.de",
-      },
     },
     {
       "@context": "https://schema.org",
       "@type": "FAQPage",
+      "@id": "https://aktuellekw.de/tagerechner#faqpage",
+      isPartOf: { "@id": "https://aktuellekw.de/#website" },
       mainEntity: pageFAQs.map((faq) => ({
         "@type": "Question",
         name: faq.question,
