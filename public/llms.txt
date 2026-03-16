@@ -10,6 +10,7 @@ aktuellekw.de berechnet Kalenderwochen nach dem internationalen Standard ISO 860
 - [Kalenderwochen Jahresübersicht](https://aktuellekw.de/kalenderwoche): Alle KW des aktuellen Jahres mit Start- und Enddatum, Jahresnavigation und KW-Rechner
 - [FAQ zur Kalenderwoche](https://aktuellekw.de/faq): 9 häufig gestellte Fragen zur Kalenderwoche, ISO 8601, KW 53 und Berechnung
 - [Wie viele Wochen hat ein Jahr?](https://aktuellekw.de/wie-viele-wochen-hat-ein-jahr): Ratgeber zu 52 vs. 53 Kalenderwochen, Schaltjahren und ISO 8601
+- [Über uns](https://aktuellekw.de/ueber-uns): Informationen über aktuellekw.de – Mission, Team und angebotene Tools
 
 ## Dynamische Seiten
 

@@ -47,6 +47,9 @@ export default function Footer() {
               <Link href="/faq" className="text-sm text-text-secondary hover:text-text-primary transition-colors">
                 FAQ
               </Link>
+              <Link href="/ueber-uns" className="text-sm text-text-secondary hover:text-text-primary transition-colors">
+                Über uns
+              </Link>
               <Link href="/datum-heute" className="text-sm text-text-secondary hover:text-text-primary transition-colors">
                 Datum heute
               </Link>

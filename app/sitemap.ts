@@ -142,6 +142,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "daily",
       priority: 0.85,
     },
+    // Über uns (E-E-A-T)
+    {
+      url: "https://aktuellekw.de/ueber-uns",
+      lastModified: new Date("2026-03-16"),
+      changeFrequency: "monthly",
+      priority: 0.5,
+    },
     // Rechtliches: robots: { index: false } → absichtlich nicht im Sitemap
   ];
 
