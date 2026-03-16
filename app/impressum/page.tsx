@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   description:
     "Impressum der Webseite aktuellekw.de – Angaben gemäß § 5 TMG. Betreiber: Common Consulting UG, Neumünster.",
   alternates: { canonical: "https://aktuellekw.de/impressum" },
-  robots: { index: false, follow: false },
+  robots: { index: false, follow: true },
   openGraph: {
     title: "Impressum | aktuellekw.de",
     description: "Impressum und rechtliche Angaben zu aktuellekw.de.",

@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   description:
     "Datenschutzerklärung von aktuellekw.de – Informationen zur Verarbeitung personenbezogener Daten gemäß DSGVO.",
   alternates: { canonical: "https://aktuellekw.de/datenschutz" },
-  robots: { index: false, follow: false },
+  robots: { index: false, follow: true },
   openGraph: {
     title: "Datenschutzerklärung | aktuellekw.de",
     description: "Datenschutzerklärung und Informationen zur Datenverarbeitung auf aktuellekw.de.",
