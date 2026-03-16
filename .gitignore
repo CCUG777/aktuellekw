@@ -39,3 +39,34 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# planning / working files (root level)
+*.xlsx
+ACTION-PLAN.md
+FULL-AUDIT-REPORT.md
+JAHRESAKTUELLE-CONTENT-PAGES.md
+Kalender-*.md
+aktuelle-kw*.md
+arbeitstage*.md
+claude-code-prompt*.md
+datum-heute.md
+feiertage*.md
+keyword_cluster*.md
+ostern*.md
+ostermontag*.md
+osterferien*.md
+schaltjahr.md
+sommerzeit.md
+tagerechner.md
+winterzeit.md
+zeitumstellung*.md
+woche-jahr*.md
+Woche-Jahr.md
+Osterferien-2026.md
+Ostermontag.md
+Ostern-2026.md
+kalender-kw-uebersicht*.md
+kalender-wochenuebersicht*.md
+kalenderwoche-*.md
+aktuellekw_keyword_cluster.xlsx
+.python-version
