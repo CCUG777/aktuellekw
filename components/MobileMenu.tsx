@@ -5,6 +5,8 @@ import { createPortal } from "react-dom";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
+const currentYear = new Date().getFullYear();
+
 const navLinks = [
   { href: "/", label: "Startseite" },
   { href: "/kalenderwoche", label: "Kalenderwochen" },
@@ -16,15 +18,17 @@ const navLinks = [
 const moreLinks = [
   { href: "/datum-heute", label: "Datum heute" },
   { href: "/tagerechner", label: "Tagerechner" },
-  { href: "/feiertage/2026", label: "Feiertage 2026" },
+  { href: `/feiertage/${currentYear}`, label: `Feiertage ${currentYear}` },
   { href: "/welche-kalenderwoche-haben-wir", label: "Welche KW haben wir?" },
   { href: "/wie-viele-wochen-hat-ein-jahr", label: "Wochen im Jahr" },
-  { href: `/schulferien/${new Date().getFullYear()}`, label: `Schulferien ${new Date().getFullYear()}` },
+  { href: `/schulferien/${currentYear}`, label: `Schulferien ${currentYear}` },
 ];
 
 export default function MobileMenu() {
   const [open, setOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
+  // rendered stays true during the close animation so the transition plays out
+  const [rendered, setRendered] = useState(false);
   const pathname = usePathname();
 
   // Ensure portal only renders on client
@@ -36,6 +40,17 @@ export default function MobileMenu() {
   useEffect(() => {
     setOpen(false);
   }, [pathname]);
+
+  // Conditional rendering: mount immediately on open,
+  // unmount after close animation completes (matches duration-300)
+  useEffect(() => {
+    if (open) {
+      setRendered(true);
+      return;
+    }
+    const timer = setTimeout(() => setRendered(false), 300);
+    return () => clearTimeout(timer);
+  }, [open]);
 
   // Lock body scroll when open
   useEffect(() => {
@@ -129,7 +144,7 @@ export default function MobileMenu() {
           })}
         </div>
 
-        {/* Weitere Seiten */}
+        {/* Ratgeber-Links */}
         <div className="mx-3 border-t border-border/30" />
         <div className="px-3 pt-4 pb-3 flex flex-col gap-0.5">
           <span className="px-3 pb-1 text-xs font-semibold uppercase tracking-wider text-text-secondary">
@@ -189,9 +204,8 @@ export default function MobileMenu() {
         </svg>
       </button>
 
-      {/* Portal: Overlay + Drawer rendern außerhalb des Headers,
-          damit backdrop-filter des Headers den fixed-Drawer nicht einschränkt */}
-      {mounted && createPortal(drawer, document.body)}
+      {/* Portal: only mount overlay + drawer while open or animating closed */}
+      {mounted && rendered && createPortal(drawer, document.body)}
     </>
   );
 }
