@@ -8,7 +8,6 @@ import { usePathname } from "next/navigation";
 const currentYear = new Date().getFullYear();
 
 const navLinks = [
-  { href: "/", label: "Startseite" },
   { href: "/kalenderwoche", label: "Kalenderwochen" },
   { href: "/kalender-mit-kalenderwochen", label: "KW-Kalender" },
   { href: "/kalenderwochen-uebersicht", label: "KW-Übersicht" },
