@@ -11,14 +11,16 @@ const inter = Inter({
   variable: "--font-inter",
 });
 
+const currentYear = new Date().getFullYear();
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://aktuellekw.de"),
   title: {
-    default: "Aktuelle KW 2026 – Welche Kalenderwoche haben wir heute?",
+    default: `Aktuelle KW ${currentYear} – Welche Kalenderwoche haben wir heute?`,
     template: "%s | aktuellekw.de",
   },
   description:
-    "Aktuelle KW sofort ablesen. Welche KW haben wir heute? Kalenderwochen 2026 nach ISO 8601 mit Start- und Enddatum. Schnell & kostenlos.",
+    `Aktuelle KW sofort ablesen. Welche KW haben wir heute? Kalenderwochen ${currentYear} nach ISO 8601 mit Start- und Enddatum. Schnell & kostenlos.`,
   alternates: {
     canonical: "https://aktuellekw.de",
   },
@@ -27,13 +29,13 @@ export const metadata: Metadata = {
     locale: "de_DE",
     url: "https://aktuellekw.de",
     siteName: "aktuellekw.de",
-    title: "Aktuelle KW 2026 – Welche Kalenderwoche haben wir heute?",
+    title: `Aktuelle KW ${currentYear} – Welche Kalenderwoche haben wir heute?`,
     description:
       "Aktuelle KW sofort ablesen. Welche KW haben wir heute? KW nach ISO 8601 – schnell und kostenlos.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Aktuelle KW 2026 – Welche Kalenderwoche haben wir heute?",
+    title: `Aktuelle KW ${currentYear} – Welche Kalenderwoche haben wir heute?`,
     description:
       "Aktuelle KW sofort ablesen. Welche KW haben wir heute? KW nach ISO 8601 mit Start- und Enddatum.",
   },
@@ -64,7 +66,7 @@ function WebSiteJsonLd() {
         alternateName: ["Aktuelle KW", "Aktuelle Kalenderwoche"],
         url: "https://aktuellekw.de",
         description:
-          "Aktuelle KW nach ISO 8601. Welche KW haben wir heute? Alle Kalenderwochen 2026 im Überblick.",
+          `Aktuelle KW nach ISO 8601. Welche KW haben wir heute? Alle Kalenderwochen ${currentYear} im Überblick.`,
         inLanguage: "de-DE",
         publisher: {
           "@type": "Organization",
@@ -124,7 +126,7 @@ export default function RootLayout({
  * SEO Audit Checklist – app/layout.tsx
  * ──────────────────────────────────────────────────────────────
  * [x] metadataBase: https://aktuellekw.de
- * [x] Default Title: Aktuelle KW 2026 + Hauptkeyword (Cluster 1)
+ * [x] Default Title: Aktuelle KW [Jahr dynamisch] + Hauptkeyword (Cluster 1)
  * [x] Title-Template für alle Unterseiten (%s | aktuellekw.de)
  * [x] Meta Description: 140–160 Zeichen, Hauptkeywords Cluster 1+2
  * [x] Keywords: Alle 6 Keyword-Cluster abgedeckt
