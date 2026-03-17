@@ -13,7 +13,7 @@ export default function Footer() {
             <h3 className="text-xs font-semibold uppercase tracking-wider text-text-secondary mb-3">
               Kalenderwochen
             </h3>
-            <nav aria-label="Kalenderwochen-Links" className="flex flex-col gap-2">
+            <nav aria-label="Kalenderwochen-Links" className="flex flex-col gap-3 sm:gap-2">
               <Link href="/" className="text-sm text-text-secondary hover:text-text-primary transition-colors">
                 Aktuelle KW
               </Link>
@@ -43,7 +43,7 @@ export default function Footer() {
             <h3 className="text-xs font-semibold uppercase tracking-wider text-text-secondary mb-3">
               Informationen
             </h3>
-            <nav aria-label="Informations-Links" className="flex flex-col gap-2">
+            <nav aria-label="Informations-Links" className="flex flex-col gap-3 sm:gap-2">
               <Link href="/faq" className="text-sm text-text-secondary hover:text-text-primary transition-colors">
                 FAQ
               </Link>
@@ -139,7 +139,7 @@ export default function Footer() {
             <h3 className="text-xs font-semibold uppercase tracking-wider text-text-secondary mb-3">
               Rechtliches
             </h3>
-            <nav aria-label="Rechtliche Links" className="flex flex-col gap-2">
+            <nav aria-label="Rechtliche Links" className="flex flex-col gap-3 sm:gap-2">
               <Link href="/impressum" className="text-sm text-text-secondary hover:text-text-primary transition-colors">
                 Impressum
               </Link>
