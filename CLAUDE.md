@@ -128,7 +128,7 @@ Dokumentation: `public/og/REPLACE_WITH_REAL_IMAGES.md`
 | `/` | `WebApplication`, `BreadcrumbList`, `FAQPage` (8 Fragen) |
 | `/faq` | `FAQPage` (13 Fragen), `BreadcrumbList` |
 | `/kalenderwoche` | `Dataset`, `BreadcrumbList` |
-| `/kw/[slug]` | `Event` (Wochenzeitraum), `BreadcrumbList` (3 Ebenen) |
+| `/kw/[slug]` | `WebPage` (Wochenzeitraum), `BreadcrumbList` (3 Ebenen) |
 | `/kalenderwochen/[year]` | `Dataset`, `BreadcrumbList` |
 
 #### robots.txt – KI-Crawler explizit erlaubt
@@ -171,7 +171,7 @@ From analysis of aktuelle-kalenderwoche.org, finanz-tools.de, kwheute.de:
 |---------|-----------|--------|---------------------------------|
 | 7-Tage Wochenansicht | `WeekdayTable` | `/`, `/kw/[slug]` | Heute-Highlight, Apple-Design |
 | Datum → KW Rechner | `KWRechner` | `/`, `/kalenderwoche` | ISO 8601, Link zu Detail-Seite |
-| KW-Einzelseiten | `/kw/[slug]` | — | Schema.org Event, prev/next Nav |
+| KW-Einzelseiten | `/kw/[slug]` | — | Schema.org WebPage, prev/next Nav |
 | Jahres-URLs | `/kalenderwochen/[year]` | — | Stats-Row, Jahresnavigation |
 | Prev/Next Navigation | inline in pages | `/`, `/kw/[slug]` | Jahr-Rollover, clean URL |
 
@@ -232,7 +232,7 @@ Jede Seite enthält einen `/* SEO Audit Checklist */`-Kommentar am Ende der Date
 | `/` | `WebApplication`, `BreadcrumbList` (1 Ebene), `FAQPage` (8 Fragen) | ✅ gültig |
 | `/faq` | `FAQPage` (13 Fragen), `BreadcrumbList` (2 Ebenen) | ✅ gültig |
 | `/kalenderwoche` | `Dataset`, `BreadcrumbList` (2 Ebenen) | ✅ gültig |
-| `/kw/[slug]` | `Event` (startDate/endDate ISO), `BreadcrumbList` (3 Ebenen) | ✅ gültig |
+| `/kw/[slug]` | `WebPage` (startDate/endDate ISO), `BreadcrumbList` (3 Ebenen) | ✅ gültig |
 | `/kalenderwochen/[year]` | `Dataset` (temporalCoverage), `BreadcrumbList` (2 Ebenen) | ✅ gültig |
 
 ### 4. Interne Verlinkung
