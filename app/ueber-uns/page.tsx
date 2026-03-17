@@ -3,14 +3,16 @@ import Link from "next/link";
 import LastUpdated from "@/components/LastUpdated";
 
 export const metadata: Metadata = {
-  title: "Über uns – Dein Zeit-Kompass im Alltag",
+  title: {
+    absolute: "Über uns | aktuellekw.de – Planung & Termine",
+  },
   description:
     "Erfahre mehr über aktuellekw.de: Deine Anlaufstelle für die aktuelle Kalenderwoche, Feiertage, Schulferien und nützliche Zeitplanungs-Tools nach ISO 8601.",
   alternates: {
     canonical: "https://aktuellekw.de/ueber-uns",
   },
   openGraph: {
-    title: "Über uns – Dein Zeit-Kompass im Alltag",
+    title: "Über uns | aktuellekw.de – Planung & Termine",
     description:
       "Erfahre mehr über aktuellekw.de: Deine Anlaufstelle für die aktuelle Kalenderwoche, Feiertage, Schulferien und nützliche Zeitplanungs-Tools.",
     url: "https://aktuellekw.de/ueber-uns",
@@ -20,7 +22,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Über uns – Dein Zeit-Kompass im Alltag",
+    title: "Über uns | aktuellekw.de – Planung & Termine",
     description:
       "Erfahre mehr über aktuellekw.de: Deine Anlaufstelle für die aktuelle Kalenderwoche, Feiertage, Schulferien und Zeitplanungs-Tools.",
   },
