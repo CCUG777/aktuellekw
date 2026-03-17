@@ -92,7 +92,8 @@ export default function Footer() {
                 key={category.title}
                 className="border-b border-border last:border-b-0 md:border-none"
               >
-                {/* Mobile: klickbarer Accordion-Header (auf Desktop ausgeblendet) */}
+                {/* Mobile: klickbarer Accordion-Header (auf Desktop ausgeblendet)
+                    Fix P1: text-sm font-medium statt text-xs uppercase tracking-wider */}
                 <button
                   type="button"
                   onClick={() => setOpenIndex(isOpen ? null : index)}
@@ -100,12 +101,12 @@ export default function Footer() {
                   aria-controls={`footer-section-${index}`}
                   className="w-full flex items-center justify-between py-3 md:hidden"
                 >
-                  <span className="text-xs font-semibold uppercase tracking-wider text-text-secondary">
+                  <span className="text-sm font-medium text-text-primary">
                     {category.title}
                   </span>
-                  {/* Chevron dreht sich 180° beim Öffnen */}
+                  {/* Chevron dreht sich 180° beim Öffnen – Fix P3: text-text-primary/60 */}
                   <svg
-                    className={`w-4 h-4 text-text-secondary transition-transform duration-300 ${
+                    className={`w-4 h-4 text-text-primary/60 transition-transform duration-300 ${
                       isOpen ? "rotate-180" : ""
                     }`}
                     fill="none"
@@ -122,29 +123,31 @@ export default function Footer() {
                   </svg>
                 </button>
 
-                {/* Desktop: statische Überschrift (auf Mobile ausgeblendet) */}
-                <h3 className="hidden md:block text-xs font-semibold uppercase tracking-wider text-text-secondary mb-3">
+                {/* Desktop: statische Überschrift (auf Mobile ausgeblendet)
+                    Fix P1: text-sm font-medium statt text-xs uppercase tracking-wider */}
+                <h3 className="hidden md:block text-sm font-medium text-text-primary mb-3">
                   {category.title}
                 </h3>
 
                 {/* Link-Liste:
-                    Mobile  → grid-rows Animation (0fr ↔ 1fr), overflow-hidden
-                    Desktop → md:block überschreibt grid, immer sichtbar        */}
+                    Fix P2: max-h-0/max-h-[800px] statt grid-rows – robuster für alle Browser
+                    Mobile  → max-h-0 (geschlossen) / max-h-[800px] (offen), overflow-hidden
+                    Desktop → md:max-h-none md:overflow-visible, immer sichtbar              */}
                 <div
                   id={`footer-section-${index}`}
-                  className={`grid transition-[grid-template-rows] duration-300 ease-in-out md:block ${
-                    isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+                  className={`overflow-hidden transition-[max-height] duration-300 ease-in-out md:max-h-none md:overflow-visible ${
+                    isOpen ? "max-h-[800px]" : "max-h-0"
                   }`}
                 >
                   <nav
                     aria-label={category.ariaLabel}
-                    className="overflow-hidden min-h-0 flex flex-col gap-3 sm:gap-2 pb-4 md:pb-0 md:overflow-visible"
+                    className="flex flex-col gap-3 sm:gap-2 pb-4 md:pb-0"
                   >
                     {category.links.map((link) => (
                       <Link
                         key={link.href}
                         href={link.href}
-                        className="text-sm text-text-secondary hover:text-text-primary transition-colors"
+                        className="text-sm text-text-primary/80 hover:text-accent transition-colors"
                       >
                         {link.label}
                       </Link>
@@ -156,8 +159,8 @@ export default function Footer() {
           })}
         </div>
 
-        {/* Trennlinie + Copyright */}
-        <div className="border-t border-border pt-6 flex flex-col sm:flex-row items-center justify-between gap-3">
+        {/* Trennlinie + Copyright – Fix P4: pb-16 md:pb-0 für BackToTop-Clearance */}
+        <div className="border-t border-border pt-6 pb-16 md:pb-0 flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-xs text-text-secondary">
             &copy; {year} aktuellekw.de &middot; Alle Angaben nach ISO 8601
           </p>

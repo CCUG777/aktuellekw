@@ -22,7 +22,7 @@ export default function BackToTop() {
       onClick={scrollToTop}
       aria-label="Nach oben scrollen"
       className={`
-        fixed bottom-6 right-6 z-40
+        fixed bottom-20 right-6 md:bottom-6 z-40
         w-11 h-11 rounded-full
         bg-surface-secondary/90 backdrop-blur-md
         border border-border
