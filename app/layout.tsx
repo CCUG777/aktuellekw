@@ -60,6 +60,19 @@ function WebSiteJsonLd() {
     "@context": "https://schema.org",
     "@graph": [
       {
+        "@type": "Organization",
+        "@id": "https://aktuellekw.de/#organization",
+        name: "aktuellekw.de",
+        url: "https://aktuellekw.de",
+        // TODO: Social-Profile-URLs eintragen sobald vorhanden, z.B.:
+        // "https://twitter.com/aktuellekw"
+        // "https://www.linkedin.com/company/aktuellekw"
+        // "https://www.facebook.com/aktuellekw"
+        sameAs: [
+          "https://github.com/CCUG777",
+        ],
+      },
+      {
         "@type": "WebSite",
         "@id": "https://aktuellekw.de/#website",
         name: "aktuellekw.de",
@@ -68,12 +81,7 @@ function WebSiteJsonLd() {
         description:
           `Aktuelle KW nach ISO 8601. Welche KW haben wir heute? Alle Kalenderwochen ${currentYear} im Überblick.`,
         inLanguage: "de-DE",
-        publisher: {
-          "@type": "Organization",
-          "@id": "https://aktuellekw.de/#organization",
-          name: "aktuellekw.de",
-          url: "https://aktuellekw.de",
-        },
+        publisher: { "@id": "https://aktuellekw.de/#organization" },
       },
     ],
   };
@@ -135,6 +143,7 @@ export default function RootLayout({
  * [x] Twitter Card: summary_large_image mit title + description
  * [x] robots: index/follow + erweiterte googleBot-Direktiven
  * [x] Schema.org WebSite JSON-LD (global, jede Seite)
+ * [x] Organization JSON-LD als eigener @graph-Knoten mit sameAs (GitHub; Social-Profile TODO)
  * [x] lang="de" am <html>-Tag (wichtig für hreflang & KI-Suchen)
  * [x] OG-Image: Dynamisch via opengraph-image.tsx (1200×630px) pro Route
  * [x] Twitter Card: nutzt automatisch das OG-Image
