@@ -82,6 +82,14 @@ function WebSiteJsonLd() {
           `Aktuelle KW nach ISO 8601. Welche KW haben wir heute? Alle Kalenderwochen ${currentYear} im Überblick.`,
         inLanguage: "de-DE",
         publisher: { "@id": "https://aktuellekw.de/#organization" },
+        potentialAction: {
+          "@type": "SearchAction",
+          target: {
+            "@type": "EntryPoint",
+            urlTemplate: "https://aktuellekw.de/kw/{search_term_string}",
+          },
+          "query-input": "required name=search_term_string",
+        },
       },
     ],
   };
