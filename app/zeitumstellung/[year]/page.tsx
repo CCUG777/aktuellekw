@@ -148,6 +148,7 @@ export default async function ZeitumstellungYearPage({
       {
         "@type": "FAQPage",
         "@id": `https://aktuellekw.de/zeitumstellung/${year}#faqpage`,
+        inLanguage: "de-DE",
         isPartOf: { "@id": "https://aktuellekw.de/#website" },
         datePublished: `${year}-01-01`,
         dateModified: year === new Date().getFullYear() ? new Date().toISOString().split("T")[0] : `${year}-01-01`,
@@ -160,6 +161,7 @@ export default async function ZeitumstellungYearPage({
       {
         "@type": "Event",
         "@id": `https://aktuellekw.de/zeitumstellung/${year}#event`,
+        inLanguage: "de-DE",
         isPartOf: { "@id": "https://aktuellekw.de/#website" },
         name: `Zeitumstellung ${year} \u2013 Sommerzeit`,
         startDate: `${sommerzeit.dateISO}T02:00:00+01:00`,

@@ -80,6 +80,7 @@ export default function FeiertagePage() {
     {
       "@context": "https://schema.org",
       "@type": "FAQPage",
+      inLanguage: "de-DE",
       mainEntity: FEIERTAGE_FAQS.map((faq) => ({
         "@type": "Question",
         name: faq.question,

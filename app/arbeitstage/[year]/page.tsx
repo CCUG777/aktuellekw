@@ -135,6 +135,7 @@ export default async function ArbeitstageYearPage({
       {
         "@type": "FAQPage",
         "@id": `https://aktuellekw.de/arbeitstage/${year}#faqpage`,
+        inLanguage: "de-DE",
         isPartOf: { "@id": "https://aktuellekw.de/#website" },
         mainEntity: pageFAQs.map((faq) => ({
           "@type": "Question",
@@ -148,6 +149,7 @@ export default async function ArbeitstageYearPage({
       {
         "@type": "Dataset",
         "@id": `https://aktuellekw.de/arbeitstage/${year}#dataset`,
+        inLanguage: "de-DE",
         isPartOf: { "@id": "https://aktuellekw.de/#website" },
         datePublished: `${year}-01-01`,
         dateModified: year === new Date().getFullYear() ? new Date().toISOString().split("T")[0] : `${year}-01-01`,

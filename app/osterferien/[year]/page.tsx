@@ -170,6 +170,7 @@ export default async function OsterferienPage({
       "@context": "https://schema.org",
       "@type": "Dataset",
       "@id": `https://aktuellekw.de/osterferien/${year}#dataset`,
+      inLanguage: "de-DE",
       isPartOf: { "@id": "https://aktuellekw.de/#website" },
       datePublished: `${year}-01-01`,
       dateModified: year === new Date().getFullYear() ? new Date().toISOString().split("T")[0] : `${year}-01-01`,
@@ -183,6 +184,7 @@ export default async function OsterferienPage({
       "@context": "https://schema.org",
       "@type": "FAQPage",
       "@id": `https://aktuellekw.de/osterferien/${year}#faqpage`,
+      inLanguage: "de-DE",
       isPartOf: { "@id": "https://aktuellekw.de/#website" },
       mainEntity: faqs.map((f) => ({
         "@type": "Question",

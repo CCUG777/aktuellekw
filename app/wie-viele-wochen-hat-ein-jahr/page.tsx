@@ -98,6 +98,7 @@ export default function WieVieleWochenPage() {
       "@context": "https://schema.org",
       "@type": "FAQPage",
       "@id": "https://aktuellekw.de/wie-viele-wochen-hat-ein-jahr#faqpage",
+      inLanguage: "de-DE",
       isPartOf: { "@id": "https://aktuellekw.de/#website" },
       datePublished: "2026-01-01",
       dateModified: "2026-02-27",

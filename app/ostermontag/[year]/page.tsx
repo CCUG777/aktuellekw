@@ -201,6 +201,7 @@ export default async function OstermontagPage({
     {
       "@context": "https://schema.org",
       "@type": "Event",
+      inLanguage: "de-DE",
       name: `Ostermontag ${year}`,
       description: `Ostermontag ${year} – gesetzlicher Feiertag am ${formatDateDE(ostermontag)} in Deutschland.`,
       startDate: ostermontag.toISOString().split("T")[0],
@@ -215,6 +216,7 @@ export default async function OstermontagPage({
     {
       "@context": "https://schema.org",
       "@type": "FAQPage",
+      inLanguage: "de-DE",
       mainEntity: faqs.map((f) => ({
         "@type": "Question",
         name: f.question,

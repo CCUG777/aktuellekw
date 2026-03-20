@@ -85,6 +85,7 @@ function FaqJsonLd() {
       {
         "@type": "FAQPage",
         "@id": "https://aktuellekw.de/faq#faqpage",
+        inLanguage: "de-DE",
         isPartOf: { "@id": "https://aktuellekw.de/#website" },
         datePublished: "2026-01-01",
         dateModified: "2026-02-01",

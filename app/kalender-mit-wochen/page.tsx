@@ -169,6 +169,7 @@ export default function KalenderMitWochenPage() {
     {
       "@context": "https://schema.org",
       "@type": "FAQPage",
+      inLanguage: "de-DE",
       mainEntity: pageFaqs.map((f) => ({
         "@type": "Question",
         name: f.question,

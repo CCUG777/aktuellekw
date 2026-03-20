@@ -81,6 +81,7 @@ export default async function SchulferienJahrPage({
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "Dataset",
+            inLanguage: "de-DE",
             name: `Schulferien ${year} Deutschland`,
             description: `Schulferien-Termine ${year} für alle 16 deutschen Bundesländer nach offiziellen Angaben der Kultusministerien.`,
             temporalCoverage: `${year}`,

@@ -231,6 +231,7 @@ export default function DatumHeutePage() {
       "@context": "https://schema.org",
       "@type": "FAQPage",
       "@id": "https://aktuellekw.de/datum-heute#faqpage",
+      inLanguage: "de-DE",
       isPartOf: { "@id": "https://aktuellekw.de/#website" },
       datePublished: "2026-01-01",
       dateModified: new Date().toISOString().split("T")[0],
