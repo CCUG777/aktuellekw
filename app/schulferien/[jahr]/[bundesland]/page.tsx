@@ -97,6 +97,25 @@ export default async function SchulferienBundeslandPage({
 
   return (
     <>
+      {/* JSON-LD: Dataset Schema mit Publikationsdaten */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Dataset",
+            inLanguage: "de-DE",
+            datePublished: `${year}-01-01`,
+            dateModified: `${year}-01-01`,
+            name: `Schulferien ${bl.name} ${year}`,
+            description: `Schulferien ${year} in ${bl.name}: alle Ferientermine nach offiziellen Angaben der Kultusministerien.`,
+            temporalCoverage: `${year}`,
+            spatial: { "@type": "Place", name: bl.name, address: { "@type": "PostalAddress", addressCountry: "DE", addressRegion: bl.code } },
+            creator: { "@type": "Organization", name: "aktuellekw.de", url: "https://aktuellekw.de" },
+          }),
+        }}
+      />
+
       {/* JSON-LD: Event Schema pro Ferienzeit */}
       <script
         type="application/ld+json"

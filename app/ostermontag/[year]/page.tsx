@@ -217,6 +217,8 @@ export default async function OstermontagPage({
       "@context": "https://schema.org",
       "@type": "FAQPage",
       inLanguage: "de-DE",
+      datePublished: `${year}-01-01`,
+      dateModified: `${year}-01-01`,
       mainEntity: faqs.map((f) => ({
         "@type": "Question",
         name: f.question,
