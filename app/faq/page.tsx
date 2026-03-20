@@ -30,51 +30,51 @@ const faqs = [
   {
     question: "Welche Kalenderwoche haben wir heute?",
     answer:
-      "Die aktuelle Kalenderwoche wird auf unserer Startseite live angezeigt – mit KW-Nummer, Jahr sowie exaktem Start- und Enddatum (Montag bis Sonntag nach ISO 8601). Die Seite aktualisiert sich stündlich. Als schnelle Faustregel: Such den nächsten Donnerstag und zähl, die wievielte Woche des Jahres das ist.",
+      "Die aktuelle Kalenderwoche siehst du auf unserer Startseite live – mit KW-Nummer, Jahr sowie exaktem Start- und Enddatum von Montag bis Sonntag nach ISO 8601. Die Seite aktualisiert sich stündlich automatisch, sodass du immer den richtigen Wert siehst, ohne selbst rechnen zu müssen. Als schnelle Faustregel: Suche den Donnerstag der aktuellen Woche und zähle, die wievielte Woche des Jahres das ist.\n\nNach ISO 8601 beginnt jede Woche am Montag und endet am Sonntag. Die KW-Nummer richtet sich nach dem Donnerstag der jeweiligen Woche – welchem Jahr dieser Donnerstag angehört, in dem Jahr wird die Woche gezählt. Das bedeutet: Die ersten Januartage können noch zur letzten KW des Vorjahres gehören, und KW 1 kann bereits Ende Dezember beginnen. Unser kostenloser KW-Rechner wandelt jedes beliebige Datum sofort in die zugehörige KW um.",
   },
   // Cluster 1: Was ist eine KW
   {
     question: "Was ist eine Kalenderwoche?",
     answer:
-      "Eine Kalenderwoche (KW) ist ein Zeitraum von sieben Tagen, der nach ISO 8601 am Montag beginnt und am Sonntag endet. In Deutschland, Österreich und der Schweiz ist der ISO-8601-Standard verbindlich. Die Nummerierung beginnt mit KW 1 und endet mit KW 52 oder 53.",
+      "Eine Kalenderwoche (KW) ist ein Zeitraum von sieben Tagen, der nach ISO 8601 stets am Montag beginnt und am Sonntag endet. In Deutschland, Österreich und der Schweiz ist dieser Standard verbindlich und bildet die Grundlage für Geschäftstermine, Lieferzeitfenster und Projektpläne.\n\nDie Nummerierung beginnt mit KW 1 und endet je nach Jahr mit KW 52 oder KW 53. KW 1 ist immer die Woche, die den ersten Donnerstag des Jahres enthält. Liegt Ende Dezember noch kein neuer Donnerstag im kommenden Jahr, gehört diese Woche noch zur letzten KW des laufenden Jahres.\n\nIm Alltag begegnen uns Kalenderwochen in Projektplänen, Redaktionsterminen, Schichtplänen und bei Lieferankündigungen. Das US-amerikanische System startet die Woche am Sonntag und definiert KW 1 anders – daher weichen internationale Kalenderanwendungen gelegentlich vom deutschen Standard ab.",
   },
   {
     question: "Wann beginnt die Kalenderwoche 1?",
     answer:
-      "Die KW 1 ist die Woche, die den ersten Donnerstag des Jahres enthält – der 4. Januar liegt daher immer in KW 1. Dadurch kann KW 1 bereits Ende Dezember des Vorjahres beginnen, und die ersten Tage im Januar können noch zur letzten KW des Vorjahres gehören.",
+      "Die KW 1 ist nach ISO 8601 immer die Woche, die den ersten Donnerstag des Jahres enthält. Daraus folgt: Der 4. Januar liegt stets in KW 1, egal auf welchen Wochentag er fällt. KW 1 kann daher bereits am letzten Montag des Dezembers des Vorjahres beginnen, und die ersten Januartage können noch zur letzten KW des Vorjahres gehören.\n\nDiese Regelung ist in Deutschland seit DIN EN 28601 verbindlich. Der Donnerstag wurde als Bezugstag gewählt, weil er genau in der Mitte einer Montag-bis-Sonntag-Woche liegt (Tag 4 von 7). Enthält eine Dezemberwoche noch keinen Donnerstag des neuen Jahres, zählt sie zum alten Jahr.\n\nPraktisches Beispiel: KW 1 des Jahres 2026 beginnt am Montag, dem 29. Dezember 2025, weil der erste Donnerstag 2026 auf den 1. Januar fällt.",
   },
   // Cluster 4: wie viele Wochen hat ein Jahr (konsolidiert aus 4 Near-Duplicates)
   {
     question: "Wie viele Wochen hat ein Jahr?",
     answer:
-      "Nach ISO 8601 hat ein Kalenderjahr entweder 52 oder 53 Kalenderwochen. Die meisten Jahre haben 52 KW. In einem 400-Jahres-Zyklus gibt es genau 71 sogenannte lange Jahre mit 53 Wochen – das entspricht etwa jedem 5. bis 6. Jahr.",
+      "Nach ISO 8601 hat ein Kalenderjahr entweder 52 oder 53 Kalenderwochen. Die meisten Jahre haben 52 KW. In einem 400-Jahres-Zyklus gibt es genau 71 sogenannte lange Jahre mit 53 Wochen – das entspricht ungefähr jedem fünften bis sechsten Jahr.\n\nEin Jahr erhält eine 53. Kalenderwoche, wenn der 1. Januar auf einen Donnerstag fällt oder – bei einem Schaltjahr – auf einen Mittwoch. Der Grund: Ein normales Jahr hat 365 Tage, also 52 vollständige Wochen und einen Überhang von einem Tag. Bei einem Schaltjahr entstehen zwei Überhang-Tage. Fallen diese Tage auf einen Donnerstag, entsteht eine 53. KW.\n\nAktuelle Beispiele für Jahre mit 53 KW sind 2015, 2020, 2026 und 2032. Das Jahr 2026 hat 53 Kalenderwochen, da der 1. Januar 2026 auf einen Donnerstag fällt – KW 53 läuft vom 28. Dezember 2026 bis zum 3. Januar 2027.",
   },
   {
     question: "Hat ein Jahr immer 52 Kalenderwochen?",
     answer:
-      "Nein. Ein Jahr hat 53 Kalenderwochen, wenn der 1. Januar auf einen Donnerstag fällt – oder in Schaltjahren auf einen Mittwoch. Das Jahr 2026 ist ein solches langes Jahr mit 53 Kalenderwochen (KW 1 bis KW 53).",
+      "Nein, ein Jahr hat nicht immer 52 Kalenderwochen. Ein Jahr erhält genau dann 53 Kalenderwochen, wenn der 1. Januar auf einen Donnerstag fällt – oder in einem Schaltjahr auf einen Mittwoch. Das Jahr 2026 ist ein solches langes Jahr mit 53 Kalenderwochen (KW 1 bis KW 53).\n\nDer Hintergrund liegt in der ISO-8601-Regel: Eine Woche wird dem Jahr zugeordnet, in dem ihr Donnerstag liegt. Ein reguläres Jahr umfasst 365 Tage, also 52 vollständige Wochen und einen Rest von einem Tag. Fällt dieser Resttag auf einen Donnerstag, entsteht eine zusätzliche 53. KW.\n\nIn einem 400-Jahres-Zyklus gibt es genau 71 lange Jahre – das sind etwa 17,75 % aller Jahre. Für Projektplaner bedeutet das: Ungefähr jedes fünfte bis sechste Jahr erscheint eine KW 53 im Jahreskalender. Die nächsten Jahre mit 53 KW nach 2026 sind 2032 und 2037.",
   },
   // Cluster 5: spezifische KW
   {
     question: "Wann beginnt KW 1 2026?",
     answer:
-      "Kalenderwoche 1 des Jahres 2026 beginnt am Montag, dem 29. Dezember 2025, und endet am Sonntag, dem 4. Januar 2026. Der 1. Januar 2026 fällt auf einen Donnerstag und liegt damit in KW 1.",
+      "Kalenderwoche 1 des Jahres 2026 beginnt am Montag, dem 29. Dezember 2025, und endet am Sonntag, dem 4. Januar 2026. Der 1. Januar 2026 fällt auf einen Donnerstag und liegt damit in KW 1 – denn nach ISO 8601 bestimmt stets der Donnerstag, welchem Jahr eine Woche zugeordnet wird.\n\nDer 29. Dezember 2025 gehört damit offiziell zum Kalenderjahr 2026, obwohl er ein Datum im Dezember 2025 trägt. Für Projektpläne, Rechnungen oder Liefertermine, die auf KW 1 2026 referenzieren, beginnt die Woche also bereits im Jahr 2025.\n\nDa 2026 insgesamt 53 Kalenderwochen hat, läuft die letzte Woche – KW 53 2026 – vom 28. Dezember 2026 bis zum 3. Januar 2027. Eine vollständige Übersicht aller 53 Kalenderwochen 2026 mit exakten Daten findest du in unserer Jahresübersicht.",
   },
   {
     question: "Wie viele Kalenderwochen hat 2026?",
     answer:
-      "Das Jahr 2026 hat 53 Kalenderwochen (KW 1 bis KW 53). Da der 1. Januar 2026 auf einen Donnerstag fällt, ist 2026 ein langes Jahr nach ISO 8601.",
+      "Das Jahr 2026 hat 53 Kalenderwochen – von KW 1 bis KW 53. Der Grund: Der 1. Januar 2026 fällt auf einen Donnerstag. Nach ISO 8601 ist KW 1 immer die Woche, die den ersten Donnerstag des Jahres enthält. Fällt Neujahr selbst auf einen Donnerstag, beginnt KW 1 bereits am 29. Dezember des Vorjahres und das Jahr erhält eine zusätzliche 53. Woche.\n\nKW 1 2026 läuft vom 29. Dezember 2025 bis zum 4. Januar 2026. KW 53 2026 läuft vom 28. Dezember 2026 bis zum 3. Januar 2027. Das bedeutet: Die letzten Tage des Jahres 2026 fallen bereits in KW 1 des Jahres 2027.\n\nFür Jahresplanung, Schichtpläne oder Projektmanagement ist es wichtig zu wissen, dass 2026 mit 53 KW ein selteneres langes Jahr ist – vergleichbar mit 2015 und 2020. Die nächsten langen Jahre folgen 2032 und 2037.",
   },
   // Wissen & Erklärung
   {
     question: "Was bedeutet ISO 8601?",
     answer:
-      "ISO 8601 ist ein internationaler Standard zur Darstellung von Datum und Uhrzeit. Er legt fest, dass Wochen am Montag beginnen und KW 1 den ersten Donnerstag des Jahres enthält. In Deutschland ist dieser Standard nach DIN 1355 verbindlich – er weicht vom US-amerikanischen System ab, das Wochen am Sonntag beginnt.",
+      "ISO 8601 ist ein internationaler Standard der Organisation ISO (International Organization for Standardization) zur einheitlichen Darstellung von Datum und Uhrzeit. Er legt fest, dass Wochen am Montag beginnen und KW 1 die Woche mit dem ersten Donnerstag des Jahres ist. In Deutschland ist dieser Standard nach DIN EN 28601 verbindlich.\n\nDas abweichende US-amerikanische System startet die Woche am Sonntag und definiert KW 1 als die Woche mit dem 1. Januar – unabhängig vom Wochentag. Das führt dazu, dass ein und dasselbe Datum in Europa und den USA unterschiedlichen KW-Nummern zugeordnet sein kann.\n\nDie wichtigsten ISO-8601-Regeln: Wochenbeginn ist Montag, Wochenende ist Sonntag, die KW-Nummer richtet sich nach dem Donnerstag der Woche. In Microsoft Outlook, Google Kalender und Apple Kalender lässt sich die KW-Anzeige auf den ISO-Standard umstellen, indem du die Region auf Deutschland oder Europa setzt.",
   },
   {
     question: "Wie wird die aktuelle KW berechnet?",
     answer:
-      "Die KW wird nach ISO 8601 berechnet: Man bestimmt den Donnerstag der betreffenden Woche und zählt, die wievielte Woche des Jahres das ist. Jede Woche beginnt am Montag. Unser KW-Rechner auf der Startseite wandelt jedes beliebige Datum sofort in die zugehörige Kalenderwoche um.",
+      "Die Kalenderwoche wird nach ISO 8601 berechnet: Man bestimmt den Donnerstag der betreffenden Woche und zählt, die wievielte Woche des Jahres dieser Donnerstag angehört. Jede Woche beginnt am Montag. Unser KW-Rechner auf der Startseite wandelt jedes beliebige Datum sofort in die zugehörige KW um.\n\nDie Berechnungslogik in drei Schritten: Erstens finde den Montag der gesuchten Woche. Zweitens finde den Donnerstag derselben Woche (Montag plus drei Tage). Drittens zähle, der wievielte Donnerstag des Jahres das ist – diese Zahl ist die KW-Nummer.\n\nAls einfache Faustregel: Suche im Kalender den Donnerstag der aktuellen Woche und zähle die Wochen seit Jahresbeginn. In Excel und Google Tabellen steht die Funktion ISOKALENDERWOCHE() bereit, die diese Berechnung automatisch nach ISO 8601 durchführt. Smartphone-Kalender und Apps nutzen dieselbe Logik, sofern die Region auf Deutschland eingestellt ist.",
   },
 ];
 

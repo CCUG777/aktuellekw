@@ -94,62 +94,62 @@ export default function Home() {
   const homeFaqs = [
     {
       question: "Welche Kalenderwoche haben wir gerade?",
-      answer: `Aktuell ist KW\u00a0${kw.weekNumber}\u00a0${kw.year}. Diese Woche läuft vom ${formatDateDE(kw.startDate)} (Montag) bis ${formatDateDE(kw.endDate)} (Sonntag) nach ISO\u00a08601.`,
+      answer: `Aktuell ist KW\u00a0${kw.weekNumber}\u00a0${kw.year}. Diese Woche läuft vom ${formatDateDE(kw.startDate)} (Montag) bis ${formatDateDE(kw.endDate)} (Sonntag) nach ISO\u00a08601. Die KW-Nummer richtet sich stets nach dem Donnerstag der jeweiligen Woche – welchem Jahr dieser Donnerstag angehört, in dem Jahr wird die Woche gezählt. Dadurch können die ersten Januartage noch zur letzten KW des Vorjahres gehören, und KW\u00a01 kann bereits Ende Dezember beginnen. Unsere Seite aktualisiert sich stündlich automatisch.`,
     },
     {
       question: "Was ist eine Kalenderwoche?",
       answer:
-        "Eine Kalenderwoche (KW) ist ein Zeitraum von sieben Tagen, der nach ISO\u00a08601 am Montag beginnt und am Sonntag endet. In Deutschland, Österreich und der Schweiz ist der ISO-8601-Standard verbindlich.",
+        "Eine Kalenderwoche (KW) ist ein Zeitraum von sieben Tagen, der nach ISO\u00a08601 am Montag beginnt und am Sonntag endet. In Deutschland, Österreich und der Schweiz ist der ISO-8601-Standard verbindlich und bildet die Grundlage für Geschäftstermine, Lieferzeiten und Projektpläne. Die Nummerierung beginnt mit KW\u00a01 und endet je nach Jahr mit KW\u00a052 oder KW\u00a053. KW\u00a01 ist immer die Woche mit dem ersten Donnerstag des Jahres. Das US-amerikanische System beginnt die Woche am Sonntag und definiert KW\u00a01 anders – internationale Kalenderanwendungen weichen daher gelegentlich vom deutschen Standard ab.",
     },
     {
       question: "Wann beginnt die Kalenderwoche 1?",
       answer:
-        "KW\u00a01 ist die Woche, die den ersten Donnerstag des Jahres enthält. Der 4.\u00a0Januar liegt immer in KW\u00a01. Dadurch kann KW\u00a01 bereits Ende Dezember des Vorjahres beginnen.",
+        "KW\u00a01 ist die Woche, die den ersten Donnerstag des Jahres enthält. Der 4.\u00a0Januar liegt immer in KW\u00a01, egal auf welchen Wochentag er fällt. Dadurch kann KW\u00a01 bereits am letzten Montag des Dezembers des Vorjahres beginnen, und die ersten Januartage können noch zur letzten KW des Vorjahres gehören. Diese Regelung ist in Deutschland nach DIN\u00a0EN\u00a028601 verbindlich. Der Donnerstag wurde als Bezugstag gewählt, weil er genau in der Mitte einer Montag-bis-Sonntag-Woche liegt (Tag\u00a04 von\u00a07). Praktisches Beispiel: KW\u00a01\u00a02026 beginnt bereits am 29.\u00a0Dezember\u00a02025.",
     },
     {
       question: "Wie viele Wochen hat ein Jahr?",
-      answer: `Die meisten Jahre haben 52 Kalenderwochen. ${kw.year} hat ${weeksInYear}\u00a0KW. Eine 53.\u00a0KW gibt es, wenn der 1.\u00a0Januar auf einen Donnerstag fällt – oder in Schaltjahren auf einen Mittwoch.`,
+      answer: `Die meisten Jahre haben 52 Kalenderwochen. ${kw.year} hat ${weeksInYear}\u00a0KW. Eine 53.\u00a0KW gibt es, wenn der 1.\u00a0Januar auf einen Donnerstag fällt – oder in Schaltjahren auf einen Mittwoch. Ein normales Jahr hat 365 Tage, also 52 vollständige Wochen und einen Resttag. Fällt dieser Resttag auf einen Donnerstag, entsteht eine zusätzliche 53.\u00a0KW. In einem 400-Jahres-Zyklus gibt es genau 71 lange Jahre mit 53\u00a0KW – das entspricht ungefähr jedem fünften bis sechsten Jahr. Aktuelle Beispiele: 2015, 2020, 2026 und 2032.`,
     },
     {
       question: "Wie wird die Kalenderwoche berechnet?",
       answer:
-        "Die KW wird nach ISO\u00a08601 berechnet: Man bestimmt den nächsten Donnerstag zum aktuellen Datum und zählt, die wievielte Woche des Jahres dieser Donnerstag angehört. Wochen beginnen stets am Montag.",
+        "Die KW wird nach ISO\u00a08601 berechnet: Man bestimmt den Donnerstag der betreffenden Woche und zählt, die wievielte Woche des Jahres dieser Donnerstag angehört. Wochen beginnen stets am Montag. Die Berechnungslogik in drei Schritten: Finde den Montag der Woche, finde den Donnerstag (Montag\u00a0+\u00a03\u00a0Tage), zähle den wievielten Donnerstag des Jahres das ist. In Excel steht ISOKALENDERWOCHE() bereit, Smartphone-Kalender nutzen dieselbe Logik, sofern die Region auf Deutschland eingestellt ist. Unser KW-Rechner auf der Startseite erledigt die Berechnung sofort für jedes beliebige Datum.",
     },
     {
       question: "Was bedeutet ISO 8601?",
       answer:
-        "ISO\u00a08601 ist ein internationaler Standard für Datum und Uhrzeit. Er definiert, dass Wochen am Montag beginnen und KW\u00a01 den ersten Donnerstag des Jahres enthält. Deutschland, Österreich und die Schweiz folgen diesem Standard.",
+        "ISO\u00a08601 ist ein internationaler Standard der ISO (International Organization for Standardization) zur einheitlichen Darstellung von Datum und Uhrzeit. Er legt fest, dass Wochen am Montag beginnen und KW\u00a01 den ersten Donnerstag des Jahres enthält. In Deutschland ist dieser Standard nach DIN\u00a0EN\u00a028601 verbindlich. Das abweichende US-amerikanische System startet die Woche am Sonntag – daher kann ein und dasselbe Datum in Europa und den USA unterschiedlichen KW-Nummern zugeordnet sein. In Outlook, Google Kalender und Apple Kalender lässt sich die KW-Anzeige auf den ISO-Standard umstellen, indem du die Region auf Deutschland setzt.",
     },
     {
       question: `Hat ${kw.year} eine KW\u00a053?`,
       answer:
         weeksInYear === 53
-          ? `Ja, ${kw.year} hat 53\u00a0Kalenderwochen. Das tritt auf, weil der 1.\u00a0Januar\u00a0${kw.year} auf einen Donnerstag fällt.`
-          : `Nein, ${kw.year} hat 52\u00a0Kalenderwochen. Eine KW\u00a053 gibt es, wenn der 1.\u00a0Januar auf einen Donnerstag fällt (oder Mittwoch in Schaltjahren).`,
+          ? `Ja, ${kw.year} hat 53\u00a0Kalenderwochen. Das tritt auf, weil der 1.\u00a0Januar\u00a0${kw.year} auf einen Donnerstag fällt. Nach ISO\u00a08601 wird eine Woche dem Jahr zugeordnet, in dem ihr Donnerstag liegt. Ein normales Jahr hat 365\u00a0Tage, also 52\u00a0volle Wochen plus einen Resttag. Fällt dieser Resttag auf einen Donnerstag, entsteht die zusätzliche 53.\u00a0KW. In einem 400-Jahres-Zyklus kommen genau 71 solche langen Jahre vor – ungefähr jedes fünfte bis sechste Jahr.`
+          : `Nein, ${kw.year} hat 52\u00a0Kalenderwochen. Eine KW\u00a053 gibt es, wenn der 1.\u00a0Januar auf einen Donnerstag fällt (oder in Schaltjahren auf einen Mittwoch). Das Jahr muss dann 53\u00a0Donnerstage enthalten. In einem 400-Jahres-Zyklus gibt es genau 71 solche langen Jahre – ungefähr jedes fünfte bis sechste Jahr. Die nächsten Jahre mit 53\u00a0KW sind 2026, 2032 und 2037.`,
     },
     {
       question: "Wie unterscheiden sich KW und Wochennummer?",
       answer:
-        "Die Begriffe Kalenderwoche (KW) und Wochennummer werden im deutschsprachigen Raum synonym verwendet. Beide beziehen sich auf den ISO-8601-Standard, der die Nummerierung nach dem Donnerstag-Prinzip definiert.",
+        "Die Begriffe Kalenderwoche (KW) und Wochennummer werden im deutschsprachigen Raum synonym verwendet. Beide beziehen sich auf den ISO-8601-Standard, der die Nummerierung nach dem Donnerstag-Prinzip definiert. Im internationalen Kontext kann der Begriff 'Wochennummer' auch nach anderen Standards berechnet sein, etwa dem US-System mit Sonntag als Wochenbeginn. Deshalb ist es wichtig, bei internationalen Terminen explizit auf ISO\u00a08601 zu verweisen. In Deutschland, Österreich und der Schweiz ist ISO\u00a08601 der verbindliche Standard für offizielle und geschäftliche Datumsangaben.",
     },
     {
       question: "Welche KW haben wir am nächsten Montag?",
-      answer: `Ab dem nächsten Montag befinden wir uns in der KW\u00a0${nextKW.weekNumber}\u00a0${nextKW.year}.`,
+      answer: `Ab dem nächsten Montag befinden wir uns in KW\u00a0${nextKW.weekNumber}\u00a0${nextKW.year}. Nach ISO\u00a08601 beginnt jede neue Kalenderwoche am Montag um 0:00\u00a0Uhr. Die KW-Nummer wechselt also nicht zur Wochenmitte, sondern immer zum Montag. Wenn der nächste Montag auf einen Termin in der Übergangsphase Ende Dezember / Anfang Januar fällt, kann sich dabei auch die Jahreszahl der KW ändern – die Woche gehört dann bereits zum neuen Kalenderjahr nach ISO\u00a08601.`,
     },
     {
       question: "Wie kann ich Kalenderwochen im iPhone- oder Android-Kalender anzeigen?",
       answer:
-        "Auf dem iPhone: Einstellungen → Kalender → Wochennummern aktivieren. Unter Android (Google Kalender): Einstellungen → Allgemein → Wochennummern anzeigen. Die KW wird dann direkt in der Wochenansicht eingeblendet.",
+        "Auf dem iPhone: Einstellungen → Kalender → Wochennummern aktivieren. Unter Android (Google\u00a0Kalender): Einstellungen → Allgemein → Wochennummern anzeigen. Die KW wird dann direkt in der Wochenansicht eingeblendet. In Microsoft Outlook aktivierst du die KW-Anzeige unter Datei → Optionen → Kalender → Kalenderoptionen → Wochennummern anzeigen. Achte in allen Anwendungen darauf, dass der Wochenstart auf Montag und die Region auf Deutschland eingestellt ist, damit die Berechnung dem ISO-8601-Standard entspricht.",
     },
     {
       question: "Wo finde ich einen Kalender mit Kalenderwochen?",
       answer:
-        "Auf aktuellekw.de findest Du alle Kalenderwochen im Überblick. Alternativ kannst Du in Outlook, Google Kalender oder Deinem Smartphone-Kalender die Wochennummern einblenden lassen.",
+        "Auf aktuellekw.de findest du alle Kalenderwochen im Überblick – mit KW-Nummer, exaktem Start- und Enddatum sowie einer Jahresübersicht für mehrere Jahre. Alternativ kannst du in Outlook, Google Kalender oder deinem Smartphone-Kalender die Wochennummern einblenden lassen. Für ausgedruckte Kalender mit KW-Angabe findest du auf dieser Seite eine Jahresübersicht, die du direkt im Browser aufrufen kannst. Unsere KW-Tabelle zeigt dir auf einen Blick vergangene, aktuelle und zukünftige Wochen inklusive Feiertagen.",
     },
     {
       question: "Warum zeigt mein Kalender eine andere KW an?",
       answer:
-        "Das liegt meist an einer falschen Einstellung des Wochenstarts. In den USA beginnt die Woche am Sonntag, nach ISO\u00a08601 am Montag. Prüfe in Deinen Kalender-Einstellungen, ob die Region auf Deutschland (oder Europa) und der Wochenstart auf Montag gesetzt ist.",
+        "Das liegt meist an einer falschen Einstellung des Wochenstarts. In den USA beginnt die Woche am Sonntag, nach ISO\u00a08601 am Montag. Prüfe in deinen Kalender-Einstellungen, ob die Region auf Deutschland (oder Europa) und der Wochenstart auf Montag gesetzt ist. Ein weiterer häufiger Grund: Einige ältere Kalenderversionen nutzen die veraltete DIN\u00a01355 (Wochennummer nach dem 1.\u00a0Januar-Prinzip) statt ISO\u00a08601. Microsoft Office und Apple-Produkte verwenden bei korrekter Regionseinstellung automatisch den ISO-Standard.",
     },
   ];
 
@@ -282,7 +282,7 @@ export default function Home() {
        *   welche KW haben wir, Kalenderwoche heute, KW aktuell
        * ──────────────────────────────────────────────────────────── */}
       <section className="max-w-2xl mx-auto px-4 pb-10 text-center fade-in">
-        <h2 className="text-xl font-semibold mb-3">
+        <h2 id="aktuelle-kalenderwoche-was-du-wissen-musst" className="text-xl font-semibold mb-3">
           Aktuelle Kalenderwoche – Was Du wissen musst
         </h2>
         <p className="text-text-secondary text-sm leading-relaxed">
@@ -300,7 +300,7 @@ export default function Home() {
 
       {/* ── 1b. WEEKDAY TABLE ───────────────────────────────────── */}
       <section className="max-w-3xl mx-auto px-4 pb-10 fade-in">
-        <h2 className="text-sm font-semibold text-text-secondary uppercase tracking-wider mb-3">
+        <h2 id="kw-alle-7-tage" className="text-sm font-semibold text-text-secondary uppercase tracking-wider mb-3">
           KW {kw.weekNumber} · Alle 7 Tage
         </h2>
         <WeekdayTable startDate={kw.startDate} today={todayUTC} />
@@ -309,7 +309,7 @@ export default function Home() {
 
       {/* ── 1c. KW MORGEN & NÄCHSTE KW ─────────────────────────── */}
       <section id="kw-morgen" className="max-w-2xl mx-auto px-4 pb-10 scroll-mt-20">
-        <h2 className="text-xl font-semibold mb-3">
+        <h2 id="welche-kalenderwoche-haben-wir-morgen" className="text-xl font-semibold mb-3">
           Welche Kalenderwoche haben wir morgen?
         </h2>
         <p className="text-text-secondary text-sm leading-relaxed mb-4">
@@ -467,7 +467,7 @@ export default function Home() {
 
       {/* ── 3c. HINTERGRÜNDE: Aktuelle KW ── Cluster 1 ─────────── */}
       <section id="hintergruende" className="max-w-2xl mx-auto px-4 pb-14 scroll-mt-20">
-        <h2 className="text-2xl font-semibold mb-4">
+        <h2 id="hintergruende-zu-aktuelle-kw" className="text-2xl font-semibold mb-4">
           Hintergründe zu Aktuelle KW
         </h2>
         <p className="text-text-secondary text-sm leading-relaxed mb-4">
@@ -531,7 +531,7 @@ export default function Home() {
 
       {/* ── 3d. ALLTAGS-TIPPS: Aktuelle KW ── Cluster 1 ──────────── */}
       <section id="alltag" className="max-w-2xl mx-auto px-4 pb-14 scroll-mt-20">
-        <h2 className="text-2xl font-semibold mb-4">
+        <h2 id="so-nutzt-du-die-aktuelle-kw-im-alltag" className="text-2xl font-semibold mb-4">
           So nutzt Du die aktuelle KW im Alltag
         </h2>
         <p className="text-text-secondary text-sm leading-relaxed mb-4">
@@ -572,7 +572,7 @@ export default function Home() {
 
       {/* ── 3d2. KALENDERWOCHEN IN DIGITALEN KALENDERN ─────────── */}
       <section id="kalender-apps" className="max-w-2xl mx-auto px-4 pb-14 scroll-mt-20">
-        <h2 className="text-2xl font-semibold mb-4">
+        <h2 id="kalenderwochen-im-smartphone-und-outlook-anzeigen" className="text-2xl font-semibold mb-4">
           Kalenderwochen im Smartphone &amp; Outlook anzeigen
         </h2>
         <p className="text-text-secondary text-sm leading-relaxed mb-4">
@@ -656,7 +656,7 @@ export default function Home() {
 
       {/* ── 3e2. HÄUFIGE FEHLER BEI DER KW ────────────────────────── */}
       <section id="kalender-fehler" className="max-w-2xl mx-auto px-4 pb-14 scroll-mt-20">
-        <h2 className="text-2xl font-semibold mb-4">
+        <h2 id="warum-zeigt-mein-kalender-eine-andere-kw-an" className="text-2xl font-semibold mb-4">
           Warum zeigt mein Kalender eine andere KW an?
         </h2>
         <p className="text-text-secondary text-sm leading-relaxed mb-4">
@@ -699,7 +699,7 @@ export default function Home() {
 
       {/* ── 3e3. KW SCHNELL BESTIMMEN ──────────────────────────────── */}
       <section className="max-w-2xl mx-auto px-4 pb-14">
-        <h2 className="text-2xl font-semibold mb-4">
+        <h2 id="kalenderwoche-schnell-bestimmen" className="text-2xl font-semibold mb-4">
           Kalenderwoche schnell bestimmen – 3 einfache Methoden
         </h2>
         <p className="text-text-secondary text-sm leading-relaxed mb-4">
@@ -748,7 +748,7 @@ export default function Home() {
 
       {/* ── 3f. ZUSAMMENFASSUNG ── Cluster 1 ─────────────────────── */}
       <section className="max-w-2xl mx-auto px-4 pb-16">
-        <h2 className="text-2xl font-semibold mb-3">
+        <h2 id="zusammenfassung-und-ausblick" className="text-2xl font-semibold mb-3">
           Zusammenfassung &amp; Ausblick
         </h2>
         <p className="text-text-secondary text-sm leading-relaxed">
@@ -773,7 +773,7 @@ export default function Home() {
        * ~180 Wörter | Keywords: aktuelle KW, Kalenderwoche heute, KW aktuell
        * ──────────────────────────────────────────────────────────── */}
       <section className="max-w-2xl mx-auto px-4 pb-14">
-        <h2 className="text-2xl font-semibold mb-4">
+        <h2 id="was-ist-die-aktuelle-kalenderwoche" className="text-2xl font-semibold mb-4">
           Was ist die aktuelle Kalenderwoche?
         </h2>
         <div className="text-text-secondary text-sm leading-relaxed space-y-3">
@@ -825,7 +825,7 @@ export default function Home() {
 
       {/* ── 3h. CLUSTER 4: Woche im Jahr ── Info-Section ──────────── */}
       <section className="max-w-2xl mx-auto px-4 pb-14">
-        <h2 className="text-2xl font-semibold mb-3">
+        <h2 id="die-wievielte-woche-im-jahr-ist-heute" className="text-2xl font-semibold mb-3">
           Die wievielte Woche im Jahr ist heute?
         </h2>
         <p className="text-text-secondary text-sm leading-relaxed mb-3">
@@ -870,7 +870,7 @@ export default function Home() {
        * Cluster 3: welche KW haben wir – SEO-Text ✅ befüllt
        * ──────────────────────────────────────────────────────────── */}
       <section id="faq" className="max-w-2xl mx-auto px-4 pb-16 scroll-mt-20">
-        <h2 className="text-2xl font-semibold mb-2">
+        <h2 id="haeufige-fragen-zur-kalenderwoche" className="text-2xl font-semibold mb-2">
           Häufige Fragen zur Kalenderwoche
         </h2>
         <p className="text-text-secondary text-sm mb-6 leading-relaxed">
@@ -921,7 +921,7 @@ export default function Home() {
        * ──────────────────────────────────────────────────────────── */}
       <section id="alle-kw" className="max-w-4xl mx-auto px-4 pb-16 scroll-mt-20">
         <div className="flex items-baseline justify-between mb-5">
-          <h2 className="text-2xl font-semibold">
+          <h2 id="alle-kalenderwochen" className="text-2xl font-semibold">
             Alle Kalenderwochen {kw.year}
           </h2>
           <a
