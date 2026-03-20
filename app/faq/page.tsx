@@ -101,6 +101,23 @@ function FaqJsonLd() {
           "@type": "SpeakableSpecification",
           cssSelector: ["h1", ".text-text-secondary.mb-8"],
         },
+        citation: [
+          {
+            "@type": "CreativeWork",
+            name: "ISO 8601:2004 – Date and time format",
+            url: "https://www.iso.org/iso-8601-date-and-time-format.html",
+          },
+          {
+            "@type": "CreativeWork",
+            name: "ISO 8601 – Wikipedia",
+            url: "https://de.wikipedia.org/wiki/ISO_8601",
+          },
+          {
+            "@type": "CreativeWork",
+            name: "Woche – Wikipedia",
+            url: "https://de.wikipedia.org/wiki/Woche",
+          },
+        ],
       },
       {
         "@type": "BreadcrumbList",
@@ -187,7 +204,50 @@ export default function FaqPage() {
         </div>
 
         <LastUpdated date="2026-02-01" />
+
+        {/* ── Quellen & Weiterführendes ─────────────────────────── */}
         <div className="mt-10 pt-8 border-t border-border">
+          <h2 id="quellen" className="text-sm font-semibold text-text-secondary uppercase tracking-wider mb-3">
+            Quellen &amp; Weiterführendes
+          </h2>
+          <ul className="text-sm text-text-secondary space-y-1.5">
+            <li>
+              <a
+                href="https://www.iso.org/iso-8601-date-and-time-format.html"
+                rel="nofollow noopener noreferrer"
+                target="_blank"
+                className="text-accent hover:underline"
+              >
+                ISO 8601 – Internationaler Standard für Datum und Uhrzeit
+              </a>{" "}
+              (iso.org)
+            </li>
+            <li>
+              <a
+                href="https://de.wikipedia.org/wiki/ISO_8601"
+                rel="nofollow noopener noreferrer"
+                target="_blank"
+                className="text-accent hover:underline"
+              >
+                ISO 8601 – Erklärung und Hintergrund
+              </a>{" "}
+              (Wikipedia)
+            </li>
+            <li>
+              <a
+                href="https://de.wikipedia.org/wiki/Woche"
+                rel="nofollow noopener noreferrer"
+                target="_blank"
+                className="text-accent hover:underline"
+              >
+                Woche – Definition und Kalenderwochen-System
+              </a>{" "}
+              (Wikipedia)
+            </li>
+          </ul>
+        </div>
+
+        <div className="mt-6 pt-6 border-t border-border">
           <p className="text-text-secondary text-sm flex flex-wrap gap-x-6 gap-y-2">
             <a href="/" className="text-accent hover:underline">
               ← Aktuelle KW

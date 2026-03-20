@@ -105,6 +105,18 @@ function WebSiteJsonLd() {
           `Aktuelle KW nach ISO 8601. Welche KW haben wir heute? Alle Kalenderwochen ${currentYear} im Überblick.`,
         inLanguage: "de-DE",
         publisher: { "@id": "https://aktuellekw.de/#organization" },
+        isBasedOn: [
+          {
+            "@type": "CreativeWork",
+            name: "ISO 8601:2004 – Date and time format",
+            url: "https://www.iso.org/iso-8601-date-and-time-format.html",
+          },
+          {
+            "@type": "CreativeWork",
+            name: "DIN EN 28601 – Darstellung von Datum und Uhrzeit",
+            url: "https://de.wikipedia.org/wiki/ISO_8601",
+          },
+        ],
         potentialAction: {
           "@type": "SearchAction",
           target: {

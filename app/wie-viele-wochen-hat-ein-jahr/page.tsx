@@ -107,6 +107,23 @@ export default function WieVieleWochenPage() {
         name: f.question,
         acceptedAnswer: { "@type": "Answer", text: f.answer },
       })),
+      citation: [
+        {
+          "@type": "CreativeWork",
+          name: "ISO 8601:2004 – Date and time format",
+          url: "https://www.iso.org/iso-8601-date-and-time-format.html",
+        },
+        {
+          "@type": "CreativeWork",
+          name: "ISO 8601 – Wikipedia",
+          url: "https://de.wikipedia.org/wiki/ISO_8601",
+        },
+        {
+          "@type": "CreativeWork",
+          name: "Woche – Wikipedia",
+          url: "https://de.wikipedia.org/wiki/Woche",
+        },
+      ],
     },
   ];
 
@@ -158,7 +175,7 @@ export default function WieVieleWochenPage() {
 
         {/* ── Hintergründe ── Cluster 4 ───────────────────────────── */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 id="hintergruende-wie-viele-wochen-hat-ein-jahr" className="text-2xl font-semibold mb-4">
             Hintergründe zu Wie viele Wochen hat ein Jahr
           </h2>
           <p className="text-text-secondary text-sm leading-relaxed mb-4">
@@ -211,7 +228,7 @@ export default function WieVieleWochenPage() {
 
         {/* ── Alltags-Tipps ── Cluster 4 ──────────────────────────── */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 id="so-nutzt-du-dieses-wissen-im-alltag" className="text-2xl font-semibold mb-4">
             So nutzt Du dieses Wissen im Alltag
           </h2>
           <p className="text-text-secondary text-sm leading-relaxed mb-4">
@@ -252,7 +269,7 @@ export default function WieVieleWochenPage() {
 
         {/* ── Tabelle: Wochen und Tage im Überblick ──────────────── */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 id="tabelle-wochen-und-tage-im-ueberblick" className="text-2xl font-semibold mb-4">
             Tabelle: Wochen und Tage im Überblick ({tableYears[0]}&ndash;{tableYears[tableYears.length - 1]})
           </h2>
           <div className="overflow-x-auto rounded-xl border border-border">
@@ -328,7 +345,7 @@ export default function WieVieleWochenPage() {
 
         {/* ── Zusammenfassung ── Cluster 4 ────────────────────────── */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-3">
+          <h2 id="zusammenfassung-und-ausblick" className="text-2xl font-semibold mb-3">
             Zusammenfassung &amp; Ausblick
           </h2>
           <p className="text-text-secondary text-sm leading-relaxed">
@@ -358,7 +375,7 @@ export default function WieVieleWochenPage() {
 
         {/* ── FAQ ── Cluster 4 ────────────────────────────────────── */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-5">
+          <h2 id="faq-nutzer-fragen-auch" className="text-2xl font-semibold mb-5">
             FAQ &ndash; Nutzer fragen auch
           </h2>
           <div className="space-y-2.5">
@@ -382,8 +399,51 @@ export default function WieVieleWochenPage() {
         </div>
 
         <LastUpdated date="2026-02-27" />
+
+        {/* ── Quellen & Weiterführendes ─────────────────────────── */}
+        <div className="mt-10 pt-8 border-t border-border">
+          <h2 id="quellen" className="text-sm font-semibold text-text-secondary uppercase tracking-wider mb-3">
+            Quellen &amp; Weiterführendes
+          </h2>
+          <ul className="text-sm text-text-secondary space-y-1.5">
+            <li>
+              <a
+                href="https://www.iso.org/iso-8601-date-and-time-format.html"
+                rel="nofollow noopener noreferrer"
+                target="_blank"
+                className="text-accent hover:underline"
+              >
+                ISO 8601 – Internationaler Standard für Datum und Uhrzeit
+              </a>{" "}
+              (iso.org)
+            </li>
+            <li>
+              <a
+                href="https://de.wikipedia.org/wiki/ISO_8601"
+                rel="nofollow noopener noreferrer"
+                target="_blank"
+                className="text-accent hover:underline"
+              >
+                ISO 8601 – Erklärung und Hintergrund
+              </a>{" "}
+              (Wikipedia)
+            </li>
+            <li>
+              <a
+                href="https://de.wikipedia.org/wiki/Woche"
+                rel="nofollow noopener noreferrer"
+                target="_blank"
+                className="text-accent hover:underline"
+              >
+                Woche – Definition und Kalenderwochen-System
+              </a>{" "}
+              (Wikipedia)
+            </li>
+          </ul>
+        </div>
+
         {/* ── Abschluss-Links ─────────────────────────────────────── */}
-        <div className="mt-10 pt-8 border-t border-border flex flex-wrap gap-4 text-sm">
+        <div className="mt-6 pt-6 border-t border-border flex flex-wrap gap-4 text-sm">
           <a href="/" className="text-accent hover:underline">
             &larr; Aktuelle KW
           </a>
