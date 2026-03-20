@@ -63,13 +63,36 @@ function WebSiteJsonLd() {
         "@type": "Organization",
         "@id": "https://aktuellekw.de/#organization",
         name: "aktuellekw.de",
+        alternateName: ["Aktuelle KW", "Aktuelle Kalenderwoche", "KW heute"],
         url: "https://aktuellekw.de",
-        // TODO: Social-Profile-URLs eintragen sobald vorhanden, z.B.:
-        // "https://twitter.com/aktuellekw"
+        foundingDate: "2025",
+        areaServed: [
+          { "@type": "Country", name: "Deutschland" },
+          { "@type": "Country", name: "Österreich" },
+          { "@type": "Country", name: "Schweiz" },
+        ],
+        knowsAbout: [
+          "Kalenderwoche",
+          "ISO 8601",
+          "Wochennummerierung",
+          "Zeitplanung",
+          "Feiertage Deutschland",
+          "Schulferien",
+          "DIN EN 28601",
+        ],
+        contactPoint: {
+          "@type": "ContactPoint",
+          contactType: "customer support",
+          url: "https://aktuellekw.de/impressum",
+          areaServed: ["DE", "AT", "CH"],
+          availableLanguage: "German",
+        },
+        // TODO: Social-Profile-URLs eintragen sobald vorhanden:
+        // "https://www.youtube.com/@aktuellekw"
         // "https://www.linkedin.com/company/aktuellekw"
-        // "https://www.facebook.com/aktuellekw"
         sameAs: [
           "https://github.com/CCUG777",
+          "https://aktuellekw.de",
         ],
       },
       {
