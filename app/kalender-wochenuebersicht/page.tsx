@@ -197,7 +197,7 @@ export default function KalenderWochenuebersichtPage() {
 
         {/* -- Definition: Was ist eine Kalender Wochenübersicht -- */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 className="text-2xl font-semibold mb-4" id="kalender-wochenuebersicht-definition-und-unterschied-zu-monats-und-tageskalender">
             Kalender Wochenübersicht: Definition und Unterschied zu Monats- und Tageskalender
           </h2>
           <p className="text-text-secondary text-sm leading-relaxed mb-4">
@@ -243,7 +243,7 @@ export default function KalenderWochenuebersichtPage() {
 
         {/* -- Aktuelle KW Section -- */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 className="text-2xl font-semibold mb-4" id="in-welcher-kalenderwoche-sind-wir-aktuell-aktuelle-kw-schnell-pruefen">
             In welcher Kalenderwoche sind wir aktuell? (aktuelle KW schnell prüfen)
           </h2>
           <p className="text-text-secondary text-sm leading-relaxed mb-4">
@@ -304,7 +304,7 @@ export default function KalenderWochenuebersichtPage() {
 
         {/* -- Kalenderwochen im Überblick: Jahresübersicht -- */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 className="text-2xl font-semibold mb-4" id="kalenderwochen-im-ueberblick-jahresuebersicht-kw-und-andere-jahre">
             Kalenderwochen im Überblick: Jahresübersicht (KW {kw.year} und andere Jahre)
           </h2>
           <p className="text-text-secondary text-sm leading-relaxed mb-4">
@@ -409,7 +409,7 @@ export default function KalenderWochenuebersichtPage() {
 
         {/* -- Layout-Vergleich: horizontal vs. vertikal -- */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 className="text-2xl font-semibold mb-4" id="welches-layout-ist-fuer-einen-wochenkalender-am-besten-geeignet-horizontal-vs-vertikal">
             Welches Layout ist für einen Wochenkalender am besten geeignet? (horizontal vs. vertikal)
           </h2>
           <p className="text-text-secondary text-sm leading-relaxed mb-4">
@@ -464,7 +464,7 @@ export default function KalenderWochenuebersichtPage() {
 
         {/* -- Wochenübersicht mit Uhrzeiten -- */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 className="text-2xl font-semibold mb-4" id="wochenuebersicht-mit-uhrzeiten-fuer-termine-und-zeitbloecke">
             Wochenübersicht mit Uhrzeiten: Für Termine und Zeitblöcke
           </h2>
           <p className="text-text-secondary text-sm leading-relaxed mb-4">
@@ -498,7 +498,7 @@ export default function KalenderWochenuebersichtPage() {
 
         {/* -- Wochenübersicht ohne Uhrzeiten -- */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 className="text-2xl font-semibold mb-4" id="wochenuebersicht-ohne-uhrzeiten-fuer-to-dos-ziele-und-routinen">
             Wochenübersicht ohne Uhrzeiten: Für To-dos, Ziele und Routinen
           </h2>
           <p className="text-text-secondary text-sm leading-relaxed mb-4">
@@ -513,7 +513,7 @@ export default function KalenderWochenuebersichtPage() {
 
         {/* -- PDF zum Ausdrucken -- */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 className="text-2xl font-semibold mb-4" id="kalender-wochenuebersicht-als-pdf-zum-ausdrucken-welche-vorlagen-wirklich-passen">
             Kalender Wochenübersicht als PDF zum Ausdrucken: Welche Vorlagen wirklich passen
           </h2>
           <p className="text-text-secondary text-sm leading-relaxed mb-4">
@@ -560,7 +560,7 @@ export default function KalenderWochenuebersichtPage() {
 
         {/* -- KW in Apps anzeigen -- */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 className="text-2xl font-semibold mb-4" id="wie-kann-man-kalenderwochen-anzeigen-google-kalender-outlook-iphone-android">
             Wie kann man Kalenderwochen anzeigen? (Google Kalender, Outlook, iPhone, Android)
           </h2>
           <p className="text-text-secondary text-sm leading-relaxed mb-4">
@@ -673,7 +673,7 @@ export default function KalenderWochenuebersichtPage() {
 
         {/* -- App vs. Papier Vergleich -- */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 className="text-2xl font-semibold mb-4" id="wochenkalender-app-oder-papier-entscheidungshilfe-fuer-die-passende-wochenuebersicht">
             Wochenkalender-App oder Papier: Entscheidungshilfe für die passende Wochenübersicht
           </h2>
           <p className="text-text-secondary text-sm leading-relaxed mb-4">
@@ -726,7 +726,7 @@ export default function KalenderWochenuebersichtPage() {
 
         {/* -- 7 praktische Tipps -- */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 className="text-2xl font-semibold mb-4" id="kalender-wochenuebersicht-richtig-nutzen-7-praktische-tipps-fuer-mehr-ueberblick">
             Kalender Wochenübersicht richtig nutzen: 7 praktische Tipps für mehr Überblick
           </h2>
           <p className="text-text-secondary text-sm leading-relaxed mb-4">
@@ -773,7 +773,7 @@ export default function KalenderWochenuebersichtPage() {
 
         {/* -- Häufige Fehler -- */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 className="text-2xl font-semibold mb-4" id="kalenderwochen-und-wochenuebersicht-haeufige-fehler-und-wie-man-sie-vermeidet">
             Kalenderwochen und Wochenübersicht: Häufige Fehler und wie man sie vermeidet
           </h2>
           <p className="text-text-secondary text-sm leading-relaxed mb-4">
@@ -834,7 +834,7 @@ export default function KalenderWochenuebersichtPage() {
 
         {/* -- Download/Vorlage erstellen CTA -- */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 className="text-2xl font-semibold mb-4" id="kalender-wochenuebersicht-downloaden-oder-vorlage-erstellen-naechste-schritte">
             Kalender Wochenübersicht downloaden oder Vorlage erstellen: Nächste Schritte
           </h2>
           <p className="text-text-secondary text-sm leading-relaxed mb-4">
@@ -874,7 +874,7 @@ export default function KalenderWochenuebersichtPage() {
 
         {/* -- Abschlusstext -- */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-3">
+          <h2 className="text-2xl font-semibold mb-3" id="zusammenfassung-und-ausblick">
             Zusammenfassung &amp; Ausblick
           </h2>
           <p className="text-text-secondary text-sm leading-relaxed">
@@ -890,7 +890,7 @@ export default function KalenderWochenuebersichtPage() {
 
         {/* -- FAQ Accordion -- */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-5">
+          <h2 className="text-2xl font-semibold mb-5" id="haeufig-gestellte-fragen">
             Häufig gestellte Fragen
           </h2>
           <div className="space-y-2.5">

@@ -447,7 +447,7 @@ export default async function OsternPage({
             CLUSTER 2: Feiertage (86.300 SV/Mo)
             ══════════════════════════════════════════════════════ */}
         <div>
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 className="text-2xl font-semibold mb-4" id="oster-feiertage-karfreitag-ostersonntag-und-ostermontag">
             Oster-Feiertage {year}: Karfreitag, Ostersonntag &amp; Ostermontag
           </h2>
           <p className="text-text-secondary text-sm leading-relaxed mb-4">
@@ -515,7 +515,7 @@ export default async function OsternPage({
 
         {/* ── Bewegliche Feiertage ────────────────────────────── */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 className="text-2xl font-semibold mb-4" id="bewegliche-feiertage-und-ndash-abhaengig-von-ostern">
             Bewegliche Feiertage {year} &ndash; abh&auml;ngig von Ostern
           </h2>
           <p className="text-text-secondary text-sm leading-relaxed mb-4">
@@ -564,7 +564,7 @@ export default async function OsternPage({
             CLUSTER 3: Osterferien (345.080 SV/Mo)
             ══════════════════════════════════════════════════════ */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 className="text-2xl font-semibold mb-4" id="osterferien-und-ndash-alle-bundeslaender-im-ueberblick">
             <Link href={`/osterferien/${year}`} className="hover:text-accent transition-colors">
               Osterferien {year} &ndash; alle Bundesl&auml;nder im &Uuml;berblick
             </Link>
@@ -636,7 +636,7 @@ export default async function OsternPage({
             CLUSTER 4: Brückentage & Urlaub (900 SV/Mo)
             ══════════════════════════════════════════════════════ */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 className="text-2xl font-semibold mb-4" id="brueckentage-ostern-so-planst-du-freie-tage">
             Br&uuml;ckentage Ostern {year}: So planst du freie Tage
           </h2>
           <p className="text-text-secondary text-sm leading-relaxed mb-4">
@@ -689,7 +689,7 @@ export default async function OsternPage({
 
         {/* ── Warum ändert sich Ostern? ───────────────────────── */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 className="text-2xl font-semibold mb-4" id="warum-faellt-ostern-jedes-jahr-auf-ein-anderes-datum">
             Warum f&auml;llt Ostern jedes Jahr auf ein anderes Datum?
           </h2>
           <div className="text-text-secondary text-sm leading-relaxed space-y-3">
@@ -721,7 +721,7 @@ export default async function OsternPage({
 
         {/* ── Ostern-Vergleichstabelle ────────────────────────── */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 className="text-2xl font-semibold mb-4" id="ostersonntag-im-jahresvergleich">
             Ostersonntag im Jahresvergleich
           </h2>
           <p className="text-text-secondary text-sm leading-relaxed mb-4">
@@ -762,7 +762,7 @@ export default async function OsternPage({
 
         {/* ── Orthodoxes Ostern ────────────────────────────────── */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 className="text-2xl font-semibold mb-4" id="orthodoxes-ostern">
             Orthodoxes Ostern {year}
           </h2>
           <div className="text-text-secondary text-sm leading-relaxed space-y-3">
@@ -796,7 +796,7 @@ export default async function OsternPage({
             CLUSTER 5: Tradition & Bräuche (12.890 SV/Mo)
             ══════════════════════════════════════════════════════ */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 className="text-2xl font-semibold mb-4" id="osterbraeuche-und-traditionen-in-deutschland">
             Osterbr&auml;uche &amp; Traditionen in Deutschland
           </h2>
           <div className="text-text-secondary text-sm leading-relaxed space-y-3">
@@ -833,7 +833,7 @@ export default async function OsternPage({
 
         {/* ── FAQ ──────────────────────────────────────────────── */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-5">
+          <h2 className="text-2xl font-semibold mb-5" id="haeufige-fragen-zu-ostern">
             H&auml;ufige Fragen zu Ostern {year}
           </h2>
           <div className="space-y-2.5">
@@ -858,7 +858,7 @@ export default async function OsternPage({
 
         {/* ── Karwoche (Palmsonntag bis Weißer Sonntag) ─────── */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 className="text-2xl font-semibold mb-4" id="karwoche-palmsonntag-bis-weisser-sonntag">
             Karwoche {year}: Palmsonntag bis Wei&szlig;er Sonntag
           </h2>
           <p className="text-text-secondary text-sm leading-relaxed mb-4">

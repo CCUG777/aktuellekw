@@ -230,7 +230,7 @@ export default function WocheJahrPage() {
 
         {/* ── Aktuelle KW: Hero-InfoBox ──────────────────────────── */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 className="text-2xl font-semibold mb-4" id="aktuelle-kalenderwoche-welche-woche-im-jahr-ist-heute">
             Aktuelle Kalenderwoche: Welche Woche im Jahr ist heute?
           </h2>
           <div className="bg-surface-secondary border border-border rounded-2xl p-6 mb-6">
@@ -316,7 +316,7 @@ export default function WocheJahrPage() {
 
         {/* ── KW-Rechner ─────────────────────────────────────────── */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 className="text-2xl font-semibold mb-4" id="kalenderwochen-rechner-kw-aus-datum-berechnen">
             Kalenderwochen-Rechner: KW aus Datum berechnen
           </h2>
           <p className="text-text-secondary text-sm leading-relaxed mb-4">
@@ -355,7 +355,7 @@ export default function WocheJahrPage() {
 
         {/* ── KW-Tabelle ─────────────────────────────────────────── */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 className="text-2xl font-semibold mb-4" id="kalenderwochen-tabelle-mit-kw-mo-und-ndash-so">
             Kalenderwochen {kw.year}: Tabelle mit KW (Mo&ndash;So)
           </h2>
           <p className="text-text-secondary text-sm leading-relaxed mb-5">
@@ -441,7 +441,7 @@ export default function WocheJahrPage() {
 
         {/* ── Gerade / Ungerade KW ───────────────────────────────── */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 className="text-2xl font-semibold mb-4" id="gerade-und-ungerade-kalenderwochen">
             Gerade und ungerade Kalenderwochen {kw.year}
           </h2>
           <p className="text-text-secondary text-sm leading-relaxed mb-4">
@@ -489,7 +489,7 @@ export default function WocheJahrPage() {
 
         {/* ── Was bedeutet KW? (ISO 8601) ────────────────────────── */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 className="text-2xl font-semibold mb-4" id="was-bedeutet-kw-definition-der-kalenderwoche-nach-iso-8601">
             Was bedeutet KW? Definition der Kalenderwoche nach ISO&nbsp;8601
           </h2>
           <p className="text-text-secondary text-sm leading-relaxed mb-4">
@@ -524,7 +524,7 @@ export default function WocheJahrPage() {
 
         {/* ── Wie viele Wochen hat ein Jahr ──────────────────────── */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 className="text-2xl font-semibold mb-4" id="wie-viele-wochen-hat-ein-jahr-52-oder-53-kalenderwochen">
             Wie viele Wochen hat ein Jahr: 52 oder 53 Kalenderwochen?
           </h2>
           <p className="text-text-secondary text-sm leading-relaxed mb-3">
@@ -597,7 +597,7 @@ export default function WocheJahrPage() {
 
         {/* ── Kalenderwoche auf Englisch ──────────────────────────── */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 className="text-2xl font-semibold mb-4" id="kalenderwoche-auf-englisch-abkuerzungen-und-schreibweise">
             Kalenderwoche auf Englisch: Abk&uuml;rzungen und Schreibweise
           </h2>
           <p className="text-text-secondary text-sm leading-relaxed mb-4">
@@ -645,7 +645,7 @@ export default function WocheJahrPage() {
 
         {/* ── Download ───────────────────────────────────────────── */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 className="text-2xl font-semibold mb-4" id="download-und-planung-kalenderwochen-als-pdf-oder-excel">
             Download &amp; Planung: Kalenderwochen als PDF oder Excel
           </h2>
           <p className="text-text-secondary text-sm leading-relaxed mb-4">
@@ -683,7 +683,7 @@ export default function WocheJahrPage() {
 
         {/* ── Zusammenfassung ────────────────────────────────────── */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 className="text-2xl font-semibold mb-4" id="zusammenfassung">
             Zusammenfassung
           </h2>
           <p className="text-text-secondary text-sm leading-relaxed">
@@ -705,7 +705,7 @@ export default function WocheJahrPage() {
 
         {/* ── FAQ Accordion ──────────────────────────────────────── */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-5">
+          <h2 className="text-2xl font-semibold mb-5" id="haeufig-gestellte-fragen">
             H&auml;ufig gestellte Fragen
           </h2>
           <div className="space-y-2.5">

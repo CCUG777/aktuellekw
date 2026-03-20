@@ -421,7 +421,7 @@ export default async function FeiertageBundeslandPage({
 
         {/* ── All holidays table ───────────────────────────────── */}
         <div>
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 className="text-2xl font-semibold mb-4" id="alle-gesetzlichen-feiertage-in">
             Alle {totalCount} gesetzlichen Feiertage in {bl.name} {year}
           </h2>
           <div className="overflow-x-auto rounded-xl border border-border">
@@ -518,7 +518,7 @@ export default async function FeiertageBundeslandPage({
 
         {/* ── Brückentage ──────────────────────────────────────── */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 className="text-2xl font-semibold mb-4" id="brueckentage-in">
             Br&uuml;ckentage {year} in {bl.name}
           </h2>
           <p className="text-text-secondary text-sm leading-relaxed mb-4">
@@ -596,7 +596,7 @@ export default async function FeiertageBundeslandPage({
         {/* ── Regional holidays detail ─────────────────────────── */}
         {regionalCount > 0 && (
           <div className="mt-14">
-            <h2 className="text-2xl font-semibold mb-4">
+            <h2 className="text-2xl font-semibold mb-4" id="regionale-feiertage-in">
               Regionale Feiertage in {bl.name}
             </h2>
             <p className="text-text-secondary text-sm leading-relaxed mb-4">
@@ -642,7 +642,7 @@ export default async function FeiertageBundeslandPage({
 
         {/* ── Year comparison ──────────────────────────────────── */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 className="text-2xl font-semibold mb-4" id="feiertage-im-jahresvergleich">
             Feiertage {bl.name} im Jahresvergleich
           </h2>
           <p className="text-text-secondary text-sm leading-relaxed mb-4">
@@ -716,7 +716,7 @@ export default async function FeiertageBundeslandPage({
 
         {/* ── Cross-state navigation ───────────────────────────── */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 className="text-2xl font-semibold mb-4" id="feiertage-in-anderen-bundeslaendern">
             Feiertage in anderen Bundesl&auml;ndern {year}
           </h2>
           <div className="flex flex-wrap gap-2">
@@ -734,7 +734,7 @@ export default async function FeiertageBundeslandPage({
 
         {/* ── FAQ ──────────────────────────────────────────────── */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-5">
+          <h2 className="text-2xl font-semibold mb-5" id="haeufige-fragen-zu-feiertagen-in">
             H&auml;ufige Fragen zu Feiertagen in {bl.name}
           </h2>
           <div className="space-y-2.5">

@@ -331,7 +331,7 @@ export default async function SchulferienBundeslandPage({
 
         {/* Ferienbalken-Visualisierung */}
         <section className="max-w-3xl mx-auto px-4 pb-10">
-          <h2 className="text-lg font-semibold mb-3">Ferienverteilung {year}</h2>
+          <h2 className="text-lg font-semibold mb-3" id="ferienverteilung">Ferienverteilung {year}</h2>
           <div className="space-y-2">
             {ferien.map((f, i) => {
               const dauer = ferienDauer(f.starts_on, f.ends_on);
@@ -363,7 +363,7 @@ export default async function SchulferienBundeslandPage({
 
         {/* Andere Bundesländer */}
         <section className="max-w-3xl mx-auto px-4 pb-10">
-          <h2 className="text-lg font-semibold mb-3">
+          <h2 className="text-lg font-semibold mb-3" id="schulferien-in-anderen-bundeslaendern">
             Schulferien {year} in anderen Bundesländern
           </h2>
           <div className="flex flex-wrap gap-2">

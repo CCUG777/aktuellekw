@@ -273,7 +273,7 @@ export default async function OsterferienPage({
 
         {/* ── Osterferien-Tabelle ──────────────────────────────── */}
         <div>
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 className="text-2xl font-semibold mb-4" id="osterferien-termine-nach-bundesland">
             Osterferien {year}: Termine nach Bundesland
           </h2>
           <p className="text-text-secondary text-sm leading-relaxed mb-4">
@@ -346,7 +346,7 @@ export default async function OsterferienPage({
         {/* ── NRW Detail ──────────────────────────────────────── */}
         {nrwData && (
           <div className="mt-14">
-            <h2 className="text-2xl font-semibold mb-4">
+            <h2 className="text-2xl font-semibold mb-4" id="osterferien-nrw-termin-und-dauer">
               Osterferien NRW {year}: Termin &amp; Dauer
             </h2>
             <div className="bg-surface-secondary border border-border rounded-xl p-5 text-sm text-text-secondary">
@@ -387,7 +387,7 @@ export default async function OsterferienPage({
         {/* ── Bayern Detail ───────────────────────────────────── */}
         {bayernData && (
           <div className="mt-10">
-            <h2 className="text-2xl font-semibold mb-4">
+            <h2 className="text-2xl font-semibold mb-4" id="osterferien-bayern-termin-und-dauer">
               Osterferien Bayern {year}: Termin &amp; Dauer
             </h2>
             <div className="bg-surface-secondary border border-border rounded-xl p-5 text-sm text-text-secondary">
@@ -427,7 +427,7 @@ export default async function OsterferienPage({
 
         {/* ── Wie kommen die Termine zustande? ─────────────────── */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 className="text-2xl font-semibold mb-4" id="wann-sind-die-osterferien-so-kommen-die-termine-zustande">
             Wann sind die Osterferien {year}? So kommen die Termine zustande
           </h2>
           <div className="text-text-secondary text-sm leading-relaxed space-y-3">
@@ -467,7 +467,7 @@ export default async function OsterferienPage({
 
         {/* ── Osterferien vs. bewegliche Ferientage ────────────── */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 className="text-2xl font-semibold mb-4" id="osterferien-und-bewegliche-ferientage-was-ist-der-unterschied">
             Osterferien und bewegliche Ferientage: Was ist der Unterschied?
           </h2>
           <div className="text-text-secondary text-sm leading-relaxed space-y-3">
@@ -500,7 +500,7 @@ export default async function OsterferienPage({
 
         {/* ── Brückentage rund um Osterferien ──────────────────── */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 className="text-2xl font-semibold mb-4" id="brueckentage-rund-um-die-osterferien">
             Br&uuml;ckentage rund um die Osterferien {year}
           </h2>
           <div className="text-text-secondary text-sm leading-relaxed space-y-3 mb-4">
@@ -559,7 +559,7 @@ export default async function OsterferienPage({
 
         {/* ── Tipps für Eltern ─────────────────────────────────── */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 className="text-2xl font-semibold mb-4" id="praktische-tipps-fuer-eltern-osterferien-planen">
             Praktische Tipps f&uuml;r Eltern: Osterferien {year} planen
           </h2>
           <div className="text-text-secondary text-sm leading-relaxed space-y-3">
@@ -594,7 +594,7 @@ export default async function OsterferienPage({
 
         {/* ── Ostern-Feiertage Kurzübersicht ───────────────────── */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 className="text-2xl font-semibold mb-4" id="osterfeiertage-und-ndash-fuer-die-ferienplanung">
             Osterfeiertage {year} &ndash; f&uuml;r die Ferienplanung
           </h2>
           <p className="text-text-secondary text-sm leading-relaxed mb-4">
@@ -648,7 +648,7 @@ export default async function OsterferienPage({
 
         {/* ── FAQ ─────────────────────────────────────────────── */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-5">
+          <h2 className="text-2xl font-semibold mb-5" id="haeufige-fragen-zu-den-osterferien">
             H&auml;ufige Fragen zu den Osterferien {year}
           </h2>
           <div className="space-y-2.5">

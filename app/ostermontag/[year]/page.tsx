@@ -354,7 +354,7 @@ export default async function OstermontagPage({
 
         {/* ── Karwoche & Osterfeiertage Tabelle ───────────────── */}
         <div>
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 className="text-2xl font-semibold mb-4" id="karwoche-und-osterfeiertage-im-ueberblick">
             Karwoche &amp; Osterfeiertage {year} im &Uuml;berblick
           </h2>
           <p className="text-text-secondary text-sm leading-relaxed mb-4">
@@ -405,7 +405,7 @@ export default async function OstermontagPage({
 
         {/* ── Gesetzlicher Feiertag ───────────────────────────── */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 className="text-2xl font-semibold mb-4" id="ist-ostermontag-ein-gesetzlicher-feiertag-in-deutschland">
             Ist Ostermontag ein gesetzlicher Feiertag in Deutschland?
           </h2>
           <div className="text-text-secondary text-sm leading-relaxed space-y-3">
@@ -455,7 +455,7 @@ export default async function OstermontagPage({
 
         {/* ── Bedeutung & Hintergrund ─────────────────────────── */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 className="text-2xl font-semibold mb-4" id="was-wird-am-ostermontag-gefeiert-bedeutung-und-hintergrund">
             Was wird am Ostermontag gefeiert? Bedeutung &amp; Hintergrund
           </h2>
           <div className="text-text-secondary text-sm leading-relaxed space-y-3">
@@ -477,7 +477,7 @@ export default async function OstermontagPage({
 
         {/* ── Unterschied Ostersonntag vs Ostermontag ──────────── */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 className="text-2xl font-semibold mb-4" id="unterschied-ostersonntag-und-ostermontag">
             Unterschied Ostersonntag &amp; Ostermontag
           </h2>
           <div className="overflow-x-auto rounded-xl border border-border">
@@ -520,7 +520,7 @@ export default async function OstermontagPage({
 
         {/* ── Bräuche ─────────────────────────────────────────── */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 className="text-2xl font-semibold mb-4" id="braeuche-am-ostermontag-traditionen-in-deutschland">
             Br&auml;uche am Ostermontag: Traditionen in Deutschland
           </h2>
           <div className="text-text-secondary text-sm leading-relaxed space-y-3">
@@ -555,7 +555,7 @@ export default async function OstermontagPage({
 
         {/* ── Öffnungszeiten / Arbeit / Schule ────────────────── */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 className="text-2xl font-semibold mb-4" id="ostermontag-oeffnungszeiten-arbeit-und-schule">
             Ostermontag {year}: &Ouml;ffnungszeiten, Arbeit &amp; Schule
           </h2>
           <div className="text-text-secondary text-sm leading-relaxed space-y-3">
@@ -587,7 +587,7 @@ export default async function OstermontagPage({
 
         {/* ── Feiertage im April ───────────────────────────────── */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 className="text-2xl font-semibold mb-4" id="feiertage-im-april">
             Feiertage im April {year}
           </h2>
           <p className="text-text-secondary text-sm leading-relaxed mb-4">
@@ -630,7 +630,7 @@ export default async function OstermontagPage({
 
         {/* ── Weitere Feiertage nach Ostern ────────────────────── */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 className="text-2xl font-semibold mb-4" id="bewegliche-feiertage-nach-ostern">
             Bewegliche Feiertage nach Ostern {year}
           </h2>
           <p className="text-text-secondary text-sm leading-relaxed mb-4">
@@ -667,7 +667,7 @@ export default async function OstermontagPage({
 
         {/* ── Debatte: Ostermontag abschaffen ──────────────────── */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 className="text-2xl font-semibold mb-4" id="debatte-und-bdquo-ostermontag-abschaffen-und-ldquo-und-ndash-was-steckt-dahinter">
             Debatte: &bdquo;Ostermontag abschaffen&ldquo; &ndash; was steckt dahinter?
           </h2>
           <div className="text-text-secondary text-sm leading-relaxed space-y-3">
@@ -688,7 +688,7 @@ export default async function OstermontagPage({
 
         {/* ── FAQ ─────────────────────────────────────────────── */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-5">
+          <h2 className="text-2xl font-semibold mb-5" id="haeufige-fragen-zum-ostermontag">
             H&auml;ufige Fragen zum Ostermontag {year}
           </h2>
           <div className="space-y-2.5">

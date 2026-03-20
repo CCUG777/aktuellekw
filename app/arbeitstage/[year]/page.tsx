@@ -243,7 +243,7 @@ export default async function ArbeitstageYearPage({
 
         {/* ═══ SECTION: Warum je Bundesland unterschiedlich ═══ */}
         <div className="mb-10">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 className="text-2xl font-semibold mb-4" id="warum-die-arbeitstage-je-bundesland-unterschiedlich-sind">
             Warum die Arbeitstage {year} je Bundesland unterschiedlich sind
           </h2>
           <div className="text-sm text-text-secondary leading-relaxed space-y-3 mb-4">
@@ -271,7 +271,7 @@ export default async function ArbeitstageYearPage({
 
         {/* ═══ SECTION 1: Arbeitstage nach Bundesland ═══ */}
         <div className="mb-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 className="text-2xl font-semibold mb-4" id="arbeitstage-nach-bundesland">
             Arbeitstage {year} nach Bundesland
           </h2>
           <p className="text-sm text-text-secondary leading-relaxed mb-4">
@@ -331,7 +331,7 @@ export default async function ArbeitstageYearPage({
 
         {/* ═══ SECTION 2: Arbeitstage pro Monat (bundesweit) ═══ */}
         <div className="mb-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 className="text-2xl font-semibold mb-4" id="arbeitstage-pro-monat-deutschland-5-tage-woche">
             Arbeitstage {year} pro Monat (Deutschland, 5-Tage-Woche)
           </h2>
           <p className="text-sm text-text-secondary leading-relaxed mb-4">
@@ -374,7 +374,7 @@ export default async function ArbeitstageYearPage({
 
         {/* ═══ SECTION 3: Arbeitstage pro Monat (NRW Beispiel) ═══ */}
         <div className="mb-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 className="text-2xl font-semibold mb-4" id="arbeitstage-nach-bundesland-und-monat-beispiel-nrw">
             Arbeitstage {year} nach Bundesland und Monat (Beispiel: NRW)
           </h2>
           <div className="overflow-x-auto rounded-xl border border-border">
@@ -428,7 +428,7 @@ export default async function ArbeitstageYearPage({
 
         {/* ═══ SECTION: Arbeitstage berechnen ═══ */}
         <div className="mb-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 className="text-2xl font-semibold mb-4" id="arbeitstage-berechnen-formel-beispiele-und-typische-sonderfaelle">
             Arbeitstage {year} berechnen: Formel, Beispiele und typische Sonderf&auml;lle
           </h2>
 
@@ -505,7 +505,7 @@ export default async function ArbeitstageYearPage({
 
         {/* ═══ SECTION: Rechner ═══ */}
         <div className="mb-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 className="text-2xl font-semibold mb-4" id="arbeitstage-rechner-jahresarbeitszeit-urlaub-und-feiertage-einbeziehen">
             Arbeitstage {year} Rechner: Jahresarbeitszeit, Urlaub und Feiertage einbeziehen
           </h2>
           <div className="text-sm text-text-secondary leading-relaxed space-y-3 mb-6">
@@ -578,7 +578,7 @@ export default async function ArbeitstageYearPage({
 
         {/* ═══ SECTION: Stunden → Arbeitstage ═══ */}
         <div className="mb-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 className="text-2xl font-semibold mb-4" id="stunden-in-arbeitstage-umrechnen-rechner-formeln-und-beispiele">
             Stunden in Arbeitstage umrechnen: Rechner-Formeln und Beispiele
           </h2>
           <div className="text-sm text-text-secondary leading-relaxed space-y-3 mb-6">
@@ -630,7 +630,7 @@ export default async function ArbeitstageYearPage({
 
         {/* ═══ SECTION: Steuererklärung ═══ */}
         <div className="mb-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 className="text-2xl font-semibold mb-4" id="arbeitstage-fuer-die-steuererklaerung-pendlerpauschale-was-zaehlt">
             Arbeitstage {year} f&uuml;r die Steuererkl&auml;rung (Pendlerpauschale): Was z&auml;hlt?
           </h2>
           <div className="text-sm text-text-secondary leading-relaxed space-y-3 mb-6">
@@ -717,7 +717,7 @@ export default async function ArbeitstageYearPage({
 
         {/* ═══ SECTION: Häufige Fehler ═══ */}
         <div className="mb-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 className="text-2xl font-semibold mb-4" id="haeufige-fehler-bei-der-ermittlung-der-arbeitstage">
             H&auml;ufige Fehler bei der Ermittlung der Arbeitstage {year}
           </h2>
 
@@ -768,7 +768,7 @@ export default async function ArbeitstageYearPage({
 
         {/* ═══ FAQ ═══ */}
         <div className="mb-14">
-          <h2 className="text-2xl font-semibold mb-5">
+          <h2 className="text-2xl font-semibold mb-5" id="haeufig-gestellte-fragen-zu-arbeitstagen">
             H&auml;ufig gestellte Fragen zu Arbeitstagen {year}
           </h2>
           <div className="space-y-2.5">

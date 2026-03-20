@@ -432,7 +432,7 @@ export default async function FeiertageYearPage({
             SECTION 1: Bundesweite Feiertage-Tabelle
             ═════════════════════════════════════════════════════════ */}
         <div>
-          <h2 className="text-2xl font-semibold mb-2">
+          <h2 className="text-2xl font-semibold mb-2" id="feiertage-in-deutschland-bundesweit-termine-und-wochentage">
             Feiertage {year} in Deutschland (bundesweit): Termine und Wochentage
           </h2>
           <p className="text-text-secondary text-sm leading-relaxed mb-4">
@@ -536,7 +536,7 @@ export default async function FeiertageYearPage({
             SECTION 2: Auf welche Tage fallen die Feiertage?
             ═════════════════════════════════════════════════════════ */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 className="text-2xl font-semibold mb-4" id="auf-welche-tage-fallen-die-feiertage">
             Auf welche Tage fallen die Feiertage {year}?
           </h2>
           <div className="text-text-secondary text-sm leading-relaxed space-y-3 mb-4">
@@ -595,7 +595,7 @@ export default async function FeiertageYearPage({
             SECTION 3: Feiertage nach Bundesland (enhanced)
             ═════════════════════════════════════════════════════════ */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 className="text-2xl font-semibold mb-4" id="gesetzliche-feiertage-nach-bundesland">
             Gesetzliche Feiertage {year} nach Bundesland
           </h2>
           <p className="text-text-secondary text-sm leading-relaxed mb-4">
@@ -863,7 +863,7 @@ export default async function FeiertageYearPage({
             SECTION 4: Brückentage
             ═════════════════════════════════════════════════════════ */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 className="text-2xl font-semibold mb-4" id="brueckentage-so-holen-sie-mit-wenig-urlaubstagen-mehr-freie-tage-heraus">
             Br&uuml;ckentage {year}: So holen Sie mit wenig Urlaubstagen mehr
             freie Tage heraus
           </h2>
@@ -955,7 +955,7 @@ export default async function FeiertageYearPage({
             SECTION 5: Bewegliche Feiertage
             ═════════════════════════════════════════════════════════ */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 className="text-2xl font-semibold mb-4" id="welche-feiertage-sind-beweglich">
             Welche Feiertage sind {year} beweglich?
           </h2>
           <p className="text-text-secondary text-sm leading-relaxed mb-4">
@@ -1044,7 +1044,7 @@ export default async function FeiertageYearPage({
             ═════════════════════════════════════════════════════════ */}
         {isCurrentYear && (
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 className="text-2xl font-semibold mb-4" id="gesetzliche-feiertage-erklaert">
             Gesetzliche Feiertage {year} erkl&auml;rt
           </h2>
           <div className="text-text-secondary text-sm leading-relaxed space-y-3">
@@ -1083,7 +1083,7 @@ export default async function FeiertageYearPage({
             SECTION 7: FAQ (expanded with year-specific)
             ═════════════════════════════════════════════════════════ */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-5">
+          <h2 className="text-2xl font-semibold mb-5" id="haeufige-fragen-zu-feiertagen">
             H&auml;ufige Fragen zu Feiertagen {year}
           </h2>
           <div className="space-y-2.5">
@@ -1111,7 +1111,7 @@ export default async function FeiertageYearPage({
             ═════════════════════════════════════════════════════════ */}
         {isCurrentYear && (
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 className="text-2xl font-semibold mb-4" id="feiertage-naechste-schritte">
             Feiertage {year}: N&auml;chste Schritte
           </h2>
           <p className="text-text-secondary text-sm leading-relaxed mb-4">

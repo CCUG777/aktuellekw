@@ -227,7 +227,7 @@ export default async function SchulferienJahrPage({
 
         {/* Vergleichstabelle */}
         <section className="max-w-4xl mx-auto px-4 pb-12">
-          <h2 className="text-xl font-semibold mb-4">
+          <h2 className="text-xl font-semibold mb-4" id="ferienvergleich-alle-bundeslaender">
             Ferienvergleich {year} – Alle Bundesländer
           </h2>
           <div className="overflow-x-auto rounded-xl border border-border">
@@ -290,7 +290,7 @@ export default async function SchulferienJahrPage({
 
         {/* Info-Bereich */}
         <section className="max-w-2xl mx-auto px-4 pb-12">
-          <h2 className="text-xl font-semibold mb-3">
+          <h2 className="text-xl font-semibold mb-3" id="schulferien-in-deutschland">
             Schulferien {year} in Deutschland
           </h2>
           <div className="text-text-secondary text-sm leading-relaxed space-y-3">
