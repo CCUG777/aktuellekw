@@ -1,31 +1,64 @@
 # aktuellekw.de
 
-> Deutschsprachiges Online-Tool zur Bestimmung der aktuellen Kalenderwoche (KW) nach ISO 8601. Zeigt die heutige KW, alle Kalenderwochen im Jahresüberblick, einen Datum-zu-KW-Rechner und umfassende FAQ. Zielregion: Deutschland, Österreich, Schweiz.
+> Deutschsprachiges Online-Tool für Kalenderwochen, Feiertage, Schulferien, Zeitumstellung und Datumsrechner. Alle Berechnungen nach ISO 8601. Zielregion: Deutschland, Österreich, Schweiz (DACH).
 
-aktuellekw.de berechnet Kalenderwochen nach dem internationalen Standard ISO 8601. Jede Woche beginnt am Montag, KW 1 ist die Woche mit dem ersten Donnerstag im Januar. Die meisten Jahre haben 52 Kalenderwochen, manche 53. Die Website wird mit Next.js (App Router) betrieben und als statische Seiten mit ISR (Incremental Static Regeneration) ausgeliefert.
+aktuellekw.de ist ein umfassendes deutschsprachiges Nachschlagewerk rund um Kalenderwochen und Zeitplanung. Kalenderwochen werden nach ISO 8601 berechnet: Jede Woche beginnt am Montag, KW 1 ist die Woche mit dem ersten Donnerstag im Januar. Die Website umfasst über 300 Seiten und wird mit Next.js (App Router) als statische Seiten mit ISR ausgeliefert.
 
-## Hauptseiten
+## Kalenderwochen
 
 - [Aktuelle KW – Startseite](https://aktuellekw.de/): Aktuelle Kalenderwoche mit Wochentagen, Jahresfortschritt, KW-Rechner und FAQ
-- [Kalenderwochen Jahresübersicht](https://aktuellekw.de/kalenderwoche): Alle KW des aktuellen Jahres mit Start- und Enddatum, Jahresnavigation und KW-Rechner
-- [FAQ zur Kalenderwoche](https://aktuellekw.de/faq): 9 häufig gestellte Fragen zur Kalenderwoche, ISO 8601, KW 53 und Berechnung
-- [Wie viele Wochen hat ein Jahr?](https://aktuellekw.de/wie-viele-wochen-hat-ein-jahr): Ratgeber zu 52 vs. 53 Kalenderwochen, Schaltjahren und ISO 8601
-- [Über uns](https://aktuellekw.de/ueber-uns): Informationen über aktuellekw.de – Mission, Team und angebotene Tools
+- [Welche Kalenderwoche haben wir?](https://aktuellekw.de/welche-kalenderwoche-haben-wir): Aktuelle KW mit Erklärung, Wochenansicht und Schnellübersicht
+- [Kalenderwochen Jahresübersicht](https://aktuellekw.de/kalenderwoche): Alle KW des aktuellen Jahres mit Start- und Enddatum
+- [Kalenderwochen-Übersicht](https://aktuellekw.de/kalenderwochen-uebersicht): Kompakte Übersicht aller KW des Jahres
+- [Kalender mit Kalenderwochen](https://aktuellekw.de/kalender-mit-kalenderwochen): Monatskalender mit KW-Anzeige
+- [Kalender Wochenübersicht](https://aktuellekw.de/kalender-wochenuebersicht): Wochenbasierte Kalenderansicht
+- [Kalender mit Wochen](https://aktuellekw.de/kalender-mit-wochen): Kalenderdarstellung mit Wochennummern
+- [Woche im Jahr](https://aktuellekw.de/woche-jahr): Welche Woche im Jahr ist heute
+- [FAQ zur Kalenderwoche](https://aktuellekw.de/faq): 13 häufig gestellte Fragen zu Kalenderwochen, ISO 8601 und KW-Berechnung
+- [Wie viele Wochen hat ein Jahr?](https://aktuellekw.de/wie-viele-wochen-hat-ein-jahr): Ratgeber zu 52 vs. 53 Kalenderwochen und Schaltjahren
 
-## Dynamische Seiten
+## Dynamische KW-Seiten
 
-- [KW-Einzelseiten](https://aktuellekw.de/kw/9-2026): Detailseite pro Kalenderwoche mit allen 7 Wochentagen, Start-/Enddatum und Navigation zu Vor-/Folgewoche. URL-Format: /kw/{nummer}-{jahr}
-- [Kalenderwochen nach Jahr](https://aktuellekw.de/kalenderwochen/2026): Jahresübersicht aller KW mit Navigation zu Vorjahr und Folgejahr. URL-Format: /kalenderwochen/{jahr}
+- [KW-Einzelseiten](https://aktuellekw.de/kw/12-2026): Detailseite pro Kalenderwoche mit 7 Wochentagen, Start-/Enddatum und Navigation. URL-Format: /kw/{nummer}-{jahr}
+- [Kalenderwochen nach Jahr](https://aktuellekw.de/kalenderwochen/2026): Jahresübersicht aller KW mit Navigation. URL-Format: /kalenderwochen/{jahr}
+
+## Feiertage
+
+- [Feiertage Deutschland](https://aktuellekw.de/feiertage): Übersicht aller gesetzlichen Feiertage im aktuellen Jahr mit Countdown zum nächsten Feiertag
+- [Feiertage nach Jahr](https://aktuellekw.de/feiertage/2026): Alle Feiertage eines bestimmten Jahres. URL-Format: /feiertage/{jahr}
+- [Feiertage nach Bundesland](https://aktuellekw.de/feiertage/2026/bayern): Gesetzliche Feiertage je Bundesland mit regionalen Besonderheiten. URL-Format: /feiertage/{jahr}/{bundesland}. Alle 16 Bundesländer verfügbar.
+
+## Schulferien
+
+- [Schulferien nach Jahr](https://aktuellekw.de/schulferien/2026): Übersicht aller Schulferien nach Bundesland. URL-Format: /schulferien/{jahr}
+- [Schulferien nach Bundesland](https://aktuellekw.de/schulferien/2026/bayern): Detaillierte Ferientermine je Bundesland und Ferienart. URL-Format: /schulferien/{jahr}/{bundesland}. Alle 16 Bundesländer verfügbar.
+
+## Ostern
+
+- [Ostern](https://aktuellekw.de/ostern/2026): Wann ist Ostern? Datum für Ostersonntag mit Berechnung. URL-Format: /ostern/{jahr}
+- [Ostermontag](https://aktuellekw.de/ostermontag/2026): Datum des Ostermontags. URL-Format: /ostermontag/{jahr}
+- [Osterferien](https://aktuellekw.de/osterferien/2026): Osterferien-Termine nach Bundesland. URL-Format: /osterferien/{jahr}
+
+## Zeitumstellung
+
+- [Sommerzeit](https://aktuellekw.de/sommerzeit): Wann beginnt die Sommerzeit? Datum, Uhrenumstellung und EU-Update zur Abschaffung
+- [Winterzeit](https://aktuellekw.de/winterzeit): Wann beginnt die Winterzeit? Datum, Uhrenumstellung und Merkhilfe
+- [Zeitumstellung nach Jahr](https://aktuellekw.de/zeitumstellung/2026): Alle Zeitumstellungen eines Jahres. URL-Format: /zeitumstellung/{jahr}
+
+## Datumsrechner & Tools
+
+- [Datum heute](https://aktuellekw.de/datum-heute): Heutiges Datum mit Wochentag, KW und Uhrzeit auf einen Blick
+- [Tagerechner](https://aktuellekw.de/tagerechner): Tage zwischen zwei Daten berechnen – kostenloser Online-Rechner
+- [Arbeitstage berechnen](https://aktuellekw.de/arbeitstage-berechnen): Arbeitstage zwischen zwei Daten berechnen (mit/ohne Feiertage)
+- [Arbeitstage nach Jahr](https://aktuellekw.de/arbeitstage/2026): Gesamtzahl Arbeitstage im Jahr, aufgeschlüsselt nach Monat und Bundesland. URL-Format: /arbeitstage/{jahr}
+- [Schaltjahr-Rechner](https://aktuellekw.de/schaltjahr): Ist dieses Jahr ein Schaltjahr? Erklärung, Regeln und Liste aller Schaltjahre
 
 ## Querverweise
 
-- [robots.txt](https://aktuellekw.de/robots.txt): Crawler-Regeln; KI-Bots (GPTBot, ClaudeBot, OAI-SearchBot, PerplexityBot, Google-Extended u.a.) sind explizit erlaubt
-- [Sitemap](https://aktuellekw.de/sitemap.xml): XML-Sitemap mit allen statisch generierten Seiten (~165 URLs)
-- [Strukturierte Daten](https://aktuellekw.de/): Schema.org JSON-LD (@graph-Format) auf allen Seiten – Typen: WebSite, WebApplication, FAQPage, Dataset, BreadcrumbList, WebPage
-
-## Optional
-
-- [Impressum](https://aktuellekw.de/impressum): Anbieterkennzeichnung nach TMG
+- [robots.txt](https://aktuellekw.de/robots.txt): Crawler-Regeln; KI-Bots (GPTBot, ClaudeBot, OAI-SearchBot, PerplexityBot, Google-Extended u.a.) explizit erlaubt
+- [Sitemap](https://aktuellekw.de/sitemap.xml): XML-Sitemap mit allen Seiten (~300+ URLs)
+- [Über uns](https://aktuellekw.de/ueber-uns): Informationen über aktuellekw.de – Mission und angebotene Tools
+- [Impressum](https://aktuellekw.de/impressum): Anbieterkennzeichnung nach § 5 TMG
 - [Datenschutzerklärung](https://aktuellekw.de/datenschutz): DSGVO-konforme Datenschutzerklärung
 
 ## Lizenz
