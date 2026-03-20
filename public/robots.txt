@@ -1,0 +1,38 @@
+# robots.txt – aktuellekw.de
+# llms.txt: https://aktuellekw.de/llms.txt
+# llms.txt (well-known): https://aktuellekw.de/.well-known/llms.txt
+
+User-agent: *
+Allow: /
+
+# KI-Suchmaschinen explizit erlauben (ChatGPT, Google SGE, Perplexity)
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+# Bytespider: TikTok/ByteDance KI-Crawler
+User-agent: Bytespider
+Allow: /
+
+# cohere-ai: Cohere Command R KI-Crawler
+User-agent: cohere-ai
+Allow: /
+
+Sitemap: https://aktuellekw.de/sitemap.xml
