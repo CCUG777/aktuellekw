@@ -23,7 +23,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const dateStr = formatDateDE(todayUTC);
 
   const title = `Datum heute \u25b7 Heutiges Datum & Wochentag`;
-  const description = `Datum heute: ${dayName}, ${dateStr} \u2013 Welcher Tag ist heute? Heutiges Datum mit Wochentag, KW ${kw.weekNumber}, Uhrzeit & Monat auf einen Blick. Tagesaktuell & nach ISO 8601.`;
+  const description = `Datum heute: ${dayName}, ${dateStr} \u2013 KW ${kw.weekNumber} ${kw.year}. ✓ Wochentag, Uhrzeit & Monat auf einen Blick. Tagesaktuell.`;
   const url = "https://aktuellekw.de/datum-heute";
 
   return {
@@ -363,7 +363,7 @@ export default function DatumHeutePage() {
             SECTION 1: Datum-Details-Tabelle
             ═════════════════════════════════════════════════════════ */}
         <div>
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 id="heutiges-datum-im-detail" className="text-2xl font-semibold mb-4">
             Heutiges Datum im Detail
           </h2>
           <div className="overflow-x-auto rounded-xl border border-border">
@@ -436,7 +436,7 @@ export default function DatumHeutePage() {
             SECTION 2: DACH – Welches Datum ist heute wirklich?
             ═════════════════════════════════════════════════════════ */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 id="welches-datum-ist-heute-wirklich" className="text-2xl font-semibold mb-4">
             Welches Datum ist heute wirklich? (Deutschland, &Ouml;sterreich, Schweiz)
           </h2>
           <div className="text-text-secondary text-sm leading-relaxed space-y-3 mb-5">
@@ -483,7 +483,7 @@ export default function DatumHeutePage() {
             SECTION 3: Datumsformate
             ═════════════════════════════════════════════════════════ */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 id="datum-heute-in-verschiedenen-formaten" className="text-2xl font-semibold mb-4">
             Datum heute in verschiedenen Formaten (kurz, ausgeschrieben, ISO&nbsp;8601)
           </h2>
           <div className="text-text-secondary text-sm leading-relaxed space-y-3 mb-5">
@@ -544,7 +544,7 @@ export default function DatumHeutePage() {
             SECTION 4: Fortschrittsbalken
             ═════════════════════════════════════════════════════════ */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 id="jahres-und-monatsfortschritt" className="text-2xl font-semibold mb-4">
             Jahres- &amp; Monatsfortschritt
           </h2>
 
@@ -593,7 +593,7 @@ export default function DatumHeutePage() {
             SECTION 5: Wochenübersicht
             ═════════════════════════════════════════════════════════ */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 id="aktuelle-woche-im-ueberblick" className="text-2xl font-semibold mb-4">
             Aktuelle Woche im &Uuml;berblick
           </h2>
           <div className="overflow-x-auto rounded-xl border border-border">
@@ -651,7 +651,7 @@ export default function DatumHeutePage() {
             SECTION 6: Gestern & Morgen (enhanced)
             ═════════════════════════════════════════════════════════ */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 id="datum-morgen" className="text-2xl font-semibold mb-4">
             Datum morgen: Welches Datum ist morgen?
           </h2>
 
@@ -714,7 +714,7 @@ export default function DatumHeutePage() {
             SECTION 7: Datum und Uhrzeit / Zeitzonen
             ═════════════════════════════════════════════════════════ */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 id="datum-heute-und-uhrzeit" className="text-2xl font-semibold mb-4">
             Datum heute und Uhrzeit: Warum Datum und Zeit abweichen k&ouml;nnen
           </h2>
           <div className="text-text-secondary text-sm leading-relaxed space-y-3 mb-5">
@@ -804,7 +804,7 @@ export default function DatumHeutePage() {
             SECTION 8: Datum weltweit
             ═════════════════════════════════════════════════════════ */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 id="datum-heute-weltweit" className="text-2xl font-semibold mb-4">
             Datum heute weltweit: aktuelles Datum in wichtigen Zeitzonen
           </h2>
           <div className="text-text-secondary text-sm leading-relaxed space-y-3 mb-5">
@@ -843,7 +843,7 @@ export default function DatumHeutePage() {
             SECTION 9: Monatskalender
             ═════════════════════════════════════════════════════════ */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 id="kalender-zum-heutigen-datum" className="text-2xl font-semibold mb-4">
             Kalender zum heutigen Datum: {monthName} {year}
           </h2>
           <div className="text-text-secondary text-sm leading-relaxed space-y-3 mb-5">
@@ -950,7 +950,7 @@ export default function DatumHeutePage() {
             SECTION 10: Startbildschirm
             ═════════════════════════════════════════════════════════ */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 id="datum-auf-den-startbildschirm-bringen" className="text-2xl font-semibold mb-4">
             Datum auf den Startbildschirm bringen: Android, iPhone, Windows &amp; Mac
           </h2>
           <div className="text-text-secondary text-sm leading-relaxed space-y-3 mb-5">
@@ -1047,7 +1047,7 @@ export default function DatumHeutePage() {
             SECTION 11: Excel & Google Sheets
             ═════════════════════════════════════════════════════════ */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 id="datum-heute-in-excel-und-google-sheets" className="text-2xl font-semibold mb-4">
             Datum heute in Excel und Google Sheets berechnen
           </h2>
           <div className="text-text-secondary text-sm leading-relaxed space-y-3 mb-5">
@@ -1153,7 +1153,7 @@ export default function DatumHeutePage() {
             ═════════════════════════════════════════════════════════ */}
         <div className="mt-14">
           <div className="bg-accent/5 border border-accent/20 rounded-2xl p-6 md:p-8">
-            <h2 className="text-xl font-bold text-text-primary mb-4">
+            <h2 id="datum-heute-immer-schnell-finden" className="text-xl font-bold text-text-primary mb-4">
               Datum heute immer schnell finden
             </h2>
             <div className="text-text-secondary text-sm leading-relaxed space-y-3">
@@ -1212,7 +1212,7 @@ export default function DatumHeutePage() {
             SECTION 13: FAQ
             ═════════════════════════════════════════════════════════ */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-5">
+          <h2 id="haeufige-fragen-zum-datum-heute" className="text-2xl font-semibold mb-5">
             H&auml;ufige Fragen zum Datum heute
           </h2>
           <div className="space-y-2.5">

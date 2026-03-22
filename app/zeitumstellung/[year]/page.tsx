@@ -29,7 +29,7 @@ export async function generateMetadata({
 
   const { sommerzeit, winterzeit } = getZeitumstellungen(year);
   const title = `Zeitumstellung ${year}: Termine, Datum & alle Infos`;
-  const description = `Zeitumstellung ${year} in Deutschland: Sommerzeit am ${sommerzeit.dateFormatted} (Uhr vor) & Winterzeit am ${winterzeit.dateFormatted} (Uhr zur\u00FCck). Alle Termine, Regeln & FAQ.`;
+  const description = `Zeitumstellung ${year}: Sommerzeit am ${sommerzeit.dateFormatted} & Winterzeit am ${winterzeit.dateFormatted}. ✓ Alle Termine & Regeln für Deutschland.`;
 
   return {
     title,
@@ -255,7 +255,7 @@ export default async function ZeitumstellungYearPage({
 
         {/* ── Termine Detail ── */}
         <section className="mb-12">
-          <h2 className="text-2xl font-bold mb-6">Termine der Zeitumstellung {year}</h2>
+          <h2 id="termine-der-zeitumstellung" className="text-2xl font-bold mb-6">Termine der Zeitumstellung {year}</h2>
           <div className="overflow-x-auto">
             <table className="w-full text-sm border-collapse">
               <thead>
@@ -289,7 +289,7 @@ export default async function ZeitumstellungYearPage({
 
         {/* ── Zeitumstellung März ── */}
         <section className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Zeitumstellung M&auml;rz {year}: Uhr vorstellen am {sommerzeit.dateFormatted}</h2>
+          <h2 id="zeitumstellung-maerz" className="text-2xl font-bold mb-4">Zeitumstellung M&auml;rz {year}: Uhr vorstellen am {sommerzeit.dateFormatted}</h2>
           <div className="text-sm text-text-secondary leading-relaxed space-y-3 max-w-3xl">
             <p>
               Bei der <strong className="text-text-primary">Zeitumstellung im M&auml;rz {year}</strong> wechselst du am {sommerzeit.dateFormatted} auf die Sommerzeit (MESZ). In der Nacht springt die Uhr von {sommerzeit.timeBefore} auf {sommerzeit.timeAfter} Uhr &ndash; du stellst die Uhr also eine Stunde vor.
@@ -305,7 +305,7 @@ export default async function ZeitumstellungYearPage({
 
         {/* ── Zeitumstellung Oktober ── */}
         <section className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Zeitumstellung Oktober {year}: Uhr zur&uuml;ckstellen am {winterzeit.dateFormatted}</h2>
+          <h2 id="zeitumstellung-oktober" className="text-2xl font-bold mb-4">Zeitumstellung Oktober {year}: Uhr zur&uuml;ckstellen am {winterzeit.dateFormatted}</h2>
           <div className="text-sm text-text-secondary leading-relaxed space-y-3 max-w-3xl">
             <p>
               Die <strong className="text-text-primary">Zeitumstellung Oktober {year}</strong> f&auml;llt auf den {winterzeit.dateFormatted}. In dieser Nacht beginnt die Normalzeit: Um {winterzeit.timeBefore} Uhr wird die Uhr auf {winterzeit.timeAfter} Uhr gestellt. Du musst also die <strong className="text-text-primary">Uhr zur&uuml;ckstellen</strong> &ndash; und gewinnst eine Stunde Schlaf.
@@ -321,7 +321,7 @@ export default async function ZeitumstellungYearPage({
 
         {/* ── Eselsbrücken ── */}
         <section className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Zeitumstellung {year}: vor oder zur&uuml;ck?</h2>
+          <h2 id="zeitumstellung-vor-oder-zurueck" className="text-2xl font-bold mb-4">Zeitumstellung {year}: vor oder zur&uuml;ck?</h2>
           <div className="text-sm text-text-secondary leading-relaxed space-y-3 max-w-3xl mb-6">
             <p>
               Im <strong className="text-text-primary">M&auml;rz</strong> stellst du die Uhr <strong className="text-text-primary">vor</strong>, im <strong className="text-text-primary">Oktober</strong> stellst du sie <strong className="text-text-primary">zur&uuml;ck</strong>. Im M&auml;rz springt die Uhr nachts von {sommerzeit.timeBefore} auf {sommerzeit.timeAfter}. Du verlierst eine Stunde Schlaf, daf&uuml;r bleibt es abends l&auml;nger hell. Im Oktober l&auml;uft es umgekehrt: von {winterzeit.timeBefore} auf {winterzeit.timeAfter}. Du bekommst eine Stunde zur&uuml;ck und der Morgen wirkt fr&uuml;her hell.
@@ -367,7 +367,7 @@ export default async function ZeitumstellungYearPage({
 
         {/* ── Zeitumstellung Jahresübersicht ── */}
         <section className="mb-12">
-          <h2 className="text-2xl font-bold mb-6">Zeitumstellung {year - 2}&ndash;{year + 4}</h2>
+          <h2 id="zeitumstellung-mehrjahres-ueberblick" className="text-2xl font-bold mb-6">Zeitumstellung {year - 2}&ndash;{year + 4}</h2>
           <div className="overflow-x-auto">
             <table className="w-full text-sm border-collapse">
               <thead>
@@ -403,7 +403,7 @@ export default async function ZeitumstellungYearPage({
 
         {/* ── Geräte-Check ── */}
         <section className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Welche Ger&auml;te stellen die Zeitumstellung {year} automatisch um?</h2>
+          <h2 id="welche-geraete-stellen-automatisch-um" className="text-2xl font-bold mb-4">Welche Ger&auml;te stellen die Zeitumstellung {year} automatisch um?</h2>
           <div className="text-sm text-text-secondary leading-relaxed space-y-3 max-w-3xl mb-6">
             <p>
               Die meisten Ger&auml;te stellen sich bei der <strong className="text-text-primary">Zeitumstellung {year} in Deutschland</strong> automatisch um &ndash; vorausgesetzt, die automatische Uhrzeit ist aktiviert. Das gilt f&uuml;r Smartphones, Tablets und Computer. Auch Smartwatches und viele Funkuhren &uuml;bernehmen die neue Zeit selbstst&auml;ndig. Trotzdem lohnt sich ein kurzer Check, besonders bei Arbeitsger&auml;ten, Zweitprofilen oder Ger&auml;ten, die selten online sind.
@@ -432,7 +432,7 @@ export default async function ZeitumstellungYearPage({
 
         {/* ── Probleme nach der Zeitumstellung ── */}
         <section className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Probleme nach der Zeitumstellung: Wecker, Kalender und Smart Home</h2>
+          <h2 id="probleme-nach-der-zeitumstellung" className="text-2xl font-bold mb-4">Probleme nach der Zeitumstellung: Wecker, Kalender und Smart Home</h2>
           <div className="text-sm text-text-secondary leading-relaxed space-y-3 max-w-3xl mb-4">
             <p>
               Nach der Zeitumstellung {year} lohnt sich am Abend davor ein kurzer Check. Pr&uuml;fe Wecker und Schichtzeiten, damit am n&auml;chsten Morgen alles stimmt. In Kalendern mit Zeitzonen (z.&nbsp;B. Teams oder Zoom) bleiben Termine korrekt, wenn in deinem Profil die richtige Zeitzone hinterlegt ist.
@@ -453,7 +453,7 @@ export default async function ZeitumstellungYearPage({
 
         {/* ── Abschaffung der Zeitumstellung ── */}
         <section className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Zeitumstellung {year} abgeschafft? Aktueller Stand in der EU</h2>
+          <h2 id="zeitumstellung-abgeschafft-aktueller-stand" className="text-2xl font-bold mb-4">Zeitumstellung {year} abgeschafft? Aktueller Stand in der EU</h2>
           <div className="text-sm text-text-secondary leading-relaxed space-y-3 max-w-3xl mb-4">
             <p>
               Stand heute ist die Frage &bdquo;Zeitumstellung {year} abgeschafft?&ldquo; klar zu beantworten: <strong className="text-text-primary">Nein</strong>. In Deutschland wird {year} weiterhin wie gewohnt zwischen Sommerzeit und Normalzeit umgestellt. Es gibt keine beschlossene Regel&auml;nderung, die das Ende verbindlich festlegt.
@@ -486,7 +486,7 @@ export default async function ZeitumstellungYearPage({
 
         {/* ── Auswirkungen ── */}
         <section className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Auswirkungen der Zeitumstellung: Schlaf, Gesundheit und Alltag</h2>
+          <h2 id="auswirkungen-der-zeitumstellung-schlaf-gesundheit" className="text-2xl font-bold mb-4">Auswirkungen der Zeitumstellung: Schlaf, Gesundheit und Alltag</h2>
           <div className="text-sm text-text-secondary leading-relaxed space-y-3 max-w-3xl mb-6">
             <p>
               Die <strong className="text-text-primary">Auswirkungen auf den K&ouml;rper</strong> sp&uuml;rst du oft sofort: Nach der Umstellung im M&auml;rz fehlt vielen eine Stunde Schlaf. Du bist m&uuml;de, unkonzentriert und wirst abends sp&auml;ter richtig schl&auml;frig. Im Oktober f&auml;llt die Anpassung h&auml;ufig leichter, weil du eine Stunde dazugewinnst.
@@ -513,7 +513,7 @@ export default async function ZeitumstellungYearPage({
 
         {/* ── MEZ vs MESZ ── */}
         <section className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">MEZ und MESZ &ndash; Zeitzonen in Deutschland</h2>
+          <h2 id="mez-und-mesz-zeitzonen-in-deutschland" className="text-2xl font-bold mb-4">MEZ und MESZ &ndash; Zeitzonen in Deutschland</h2>
           <div className="overflow-x-auto">
             <table className="w-full text-sm border-collapse">
               <thead>
@@ -556,7 +556,7 @@ export default async function ZeitumstellungYearPage({
 
         {/* ── USA vs. Deutschland ── */}
         <section className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Warum suchen viele nach &bdquo;Zeitumstellung {year} am {usDST.formatted}&ldquo;?</h2>
+          <h2 id="warum-suchen-viele-nach-zeitumstellung" className="text-2xl font-bold mb-4">Warum suchen viele nach &bdquo;Zeitumstellung {year} am {usDST.formatted}&ldquo;?</h2>
           <div className="text-sm text-text-secondary leading-relaxed space-y-3 max-w-3xl mb-6">
             <p>
               Viele suchen nach &bdquo;Zeitumstellung {year} {usDST.formatted}&ldquo;, weil sich Termine aus den USA und Europa im Netz vermischen. In <strong className="text-text-primary">Deutschland</strong> und der <strong className="text-text-primary">EU</strong> findet die Umstellung im Fr&uuml;hjahr jedoch <strong className="text-text-primary">nicht</strong> am {usDST.formatted} statt. Hier gilt weiterhin die Regel: <strong className="text-text-primary">letzter Sonntag im M&auml;rz</strong>.
@@ -592,7 +592,7 @@ export default async function ZeitumstellungYearPage({
 
         {/* ── Kalender-Reminder ── */}
         <section className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Kalender-Reminder: Termine speichern und nichts verpassen</h2>
+          <h2 id="kalender-reminder-termine-speichern" className="text-2xl font-bold mb-4">Kalender-Reminder: Termine speichern und nichts verpassen</h2>
           <div className="text-sm text-text-secondary leading-relaxed space-y-3 max-w-3xl">
             <p>
               Am einfachsten merkst du dir das Datum der Zeitumstellung {year}, wenn du dir zwei j&auml;hrliche Erinnerungen im Kalender speicherst. Lege je einen Termin Ende M&auml;rz und Ende Oktober an. Nenne die Termine direkt &bdquo;Uhr vor&ldquo; und &bdquo;Uhr zur&uuml;ck&ldquo;. So siehst du sofort, wann die Uhren umgestellt werden.
@@ -642,7 +642,7 @@ export default async function ZeitumstellungYearPage({
 
         {/* ── FAQ ── */}
         <section className="mb-12">
-          <h2 className="text-2xl font-bold mb-6">H&auml;ufige Fragen zur Zeitumstellung {year}</h2>
+          <h2 id="haeufige-fragen-zur-zeitumstellung" className="text-2xl font-bold mb-6">H&auml;ufige Fragen zur Zeitumstellung {year}</h2>
           <div className="space-y-4">
             {faqItems.map((faq, i) => (
               <details

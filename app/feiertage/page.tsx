@@ -17,7 +17,7 @@ export const revalidate = 3600;
 /* ── Metadata ────────────────────────────────────────────────────── */
 export async function generateMetadata(): Promise<Metadata> {
   const ogTitle = `Feiertage 2025, 2026 & 2027 Deutschland`;
-  const ogDescription = `Gesetzliche Feiertage 2025, 2026 & 2027 im Überblick. Datum, Wochentag & KW pro Bundesland. Nächster Feiertag + Brückentage.`;
+  const ogDescription = `Alle Feiertage 2025, 2026 & 2027 in Deutschland: Datum, Wochentag, KW & Bundesland. ✓ Nächster Feiertag ✓ Brückentage-Tipps.`;
   return {
     title: ogTitle,
     description: ogDescription,
@@ -184,7 +184,7 @@ export default function FeiertagePage() {
 
         {/* ── Nächster Feiertag Detail ────────────────────────────── */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 id="naechster-feiertag-in-deutschland" className="text-2xl font-semibold mb-4">
             N&auml;chster Feiertag in Deutschland
           </h2>
           <div className="bg-surface-secondary border border-border rounded-2xl p-5 md:p-6">
@@ -239,7 +239,7 @@ export default function FeiertagePage() {
           return (
             <div key={year} className="mt-14">
               <div className="flex items-center justify-between mb-4">
-                <h2 className="text-2xl font-semibold">
+                <h2 id={`gesetzliche-feiertage-${year}`} className="text-2xl font-semibold">
                   Gesetzliche Feiertage {year}
                 </h2>
                 <Link
@@ -340,7 +340,7 @@ export default function FeiertagePage() {
 
         {/* ── Feiertage nach Bundesland ──────────────────────────── */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 id="feiertage-nach-bundesland" className="text-2xl font-semibold mb-4">
             Feiertage {currentYear} nach Bundesland
           </h2>
           <p className="text-text-secondary text-sm leading-relaxed mb-4">
@@ -368,7 +368,7 @@ export default function FeiertagePage() {
 
         {/* ── SEO Erklärtext ──────────────────────────────────────── */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 id="gesetzliche-feiertage-in-deutschland-erklaert" className="text-2xl font-semibold mb-4">
             Gesetzliche Feiertage in Deutschland erkl&auml;rt
           </h2>
           <div className="text-text-secondary text-sm leading-relaxed space-y-3">
@@ -404,7 +404,7 @@ export default function FeiertagePage() {
 
         {/* ── FAQ ─────────────────────────────────────────────────── */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-5">
+          <h2 id="haeufige-fragen-zu-feiertagen" className="text-2xl font-semibold mb-5">
             H&auml;ufige Fragen zu Feiertagen
           </h2>
           <div className="space-y-2.5">

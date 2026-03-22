@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     absolute: "Über uns | aktuellekw.de – Planung & Termine",
   },
   description:
-    "Erfahre mehr über aktuellekw.de: Deine Anlaufstelle für die aktuelle Kalenderwoche, Feiertage, Schulferien und nützliche Zeitplanungs-Tools nach ISO 8601.",
+    "aktuellekw.de – Deine Anlaufstelle für Kalenderwoche, Feiertage, Schulferien & Zeitplanungs-Tools. ✓ Tagesaktuell ✓ ISO 8601.",
   alternates: {
     canonical: "https://aktuellekw.de/ueber-uns",
   },
@@ -105,7 +105,7 @@ export default function UeberUnsPage() {
         </p>
 
         {/* ── Wer wir sind ────────────────────────────────────── */}
-        <h2 className="text-2xl font-semibold mb-4">
+        <h2 id="wer-wir-sind-und-was-wir-dir-bieten" className="text-2xl font-semibold mb-4">
           Wer wir sind und was wir dir bieten
         </h2>
 
@@ -211,7 +211,7 @@ export default function UeberUnsPage() {
         </div>
 
         {/* ── Warum aktuellekw.de ─────────────────────────────── */}
-        <h2 className="text-2xl font-semibold mb-4">Warum aktuellekw.de?</h2>
+        <h2 id="warum-aktuellekwde" className="text-2xl font-semibold mb-4">Warum aktuellekw.de?</h2>
 
         <p className="text-text-secondary mb-6 leading-relaxed">
           Wir legen großen Wert auf Aktualität und Übersichtlichkeit. Anstatt

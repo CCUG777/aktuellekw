@@ -12,7 +12,7 @@ export const revalidate = 3600;
 export async function generateMetadata(): Promise<Metadata> {
   const kw = getCurrentKW();
   const ogTitle = "Welche Kalenderwoche haben wir? – KW heute";
-  const ogDescription = `Du möchtest wissen: Welche Kalenderwoche haben wir heute? Hier findest Du die Antwort sofort – aktuell KW ${kw.weekNumber} ${kw.year}, inklusive Datum, ISO-Standard und praktischen Excel-Tipps.`;
+  const ogDescription = `Welche Kalenderwoche haben wir heute? Jetzt ist KW ${kw.weekNumber} ${kw.year}. ✓ Datum, Wochentag & ISO-Standard auf einen Blick.`;
   return {
     title: ogTitle,
     description: ogDescription,
@@ -169,7 +169,7 @@ export default function WelcheKalenderwochePage() {
 
         {/* ── Hintergründe ── Cluster 3 ───────────────────────────── */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 id="hintergruende-welche-kalenderwoche-haben-wir" className="text-2xl font-semibold mb-4">
             Hintergründe zu &bdquo;Welche Kalenderwoche haben wir&ldquo;
           </h2>
           <p className="text-text-secondary text-sm leading-relaxed mb-4">
@@ -220,7 +220,7 @@ export default function WelcheKalenderwochePage() {
 
         {/* ── Alltags-Tipps ── Cluster 3 ──────────────────────────── */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 id="so-nutzt-du-die-kalenderwoche-im-alltag" className="text-2xl font-semibold mb-4">
             So nutzt Du die Kalenderwoche im Alltag
           </h2>
           <p className="text-text-secondary text-sm leading-relaxed mb-4">
@@ -263,7 +263,7 @@ export default function WelcheKalenderwochePage() {
 
         {/* ── Übersichts-Tabelle ── Cluster 3 ─────────────────────── */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 id="uebersicht-aktueller-zeitraum-und-ausblick" className="text-2xl font-semibold mb-4">
             Übersicht: Aktueller Zeitraum &amp; Ausblick {kw.year}
           </h2>
           <div className="overflow-x-auto rounded-xl border border-border">
@@ -310,7 +310,7 @@ export default function WelcheKalenderwochePage() {
 
         {/* ── Zusammenfassung ── Cluster 3 ────────────────────────── */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-3">
+          <h2 id="zusammenfassung-und-ausblick" className="text-2xl font-semibold mb-3">
             Zusammenfassung &amp; Ausblick
           </h2>
           <p className="text-text-secondary text-sm leading-relaxed">
@@ -333,7 +333,7 @@ export default function WelcheKalenderwochePage() {
 
         {/* ── FAQ ── Cluster 3 ────────────────────────────────────── */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-5">
+          <h2 id="faq-nutzer-fragen-auch" className="text-2xl font-semibold mb-5">
             FAQ &ndash; Nutzer fragen auch
           </h2>
           <div className="space-y-2.5">

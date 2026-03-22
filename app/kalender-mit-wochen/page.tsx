@@ -15,7 +15,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const kw = getCurrentKW();
   const ogTitle =
     "Kalender mit Wochen: aktuelle KW + Tabellen";
-  const ogDescription = `Kalender mit Wochen: aktuelle Kalenderwoche sofort sehen + KW-Tabellen (z.\u00a0B. KW\u00a03/25/26). Auswahlhilfe Print/PDF/Excel/App & Anleitungen iOS/Android/Outlook.`;
+  const ogDescription = `Kalender mit Wochen: Aktuelle KW sofort sehen + KW-Tabellen 2025/2026. ✓ Übersicht für Print, PDF, Excel & App-Anleitungen.`;
   return {
     title: ogTitle,
     description: ogDescription,
@@ -247,7 +247,7 @@ export default function KalenderMitWochenPage() {
 
         {/* ── Welche KW ist heute? ─────────────────────────────── */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 id="welche-kalenderwoche-ist-heute" className="text-2xl font-semibold mb-4">
             Welche Kalenderwoche ist heute? (aktuelle KW sofort finden)
           </h2>
           <div className="bg-accent/5 border border-accent/20 rounded-xl p-5 mb-4">
@@ -361,7 +361,7 @@ export default function KalenderMitWochenPage() {
 
         {/* ── Was bedeutet „Kalender mit Wochen"? ──────────────── */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 id="kalender-mit-wochen-was-bedeutet-das" className="text-2xl font-semibold mb-4">
             Kalender mit Wochen (Kalenderwochen/KW): Was bedeutet das genau?
           </h2>
           <p className="text-text-secondary text-sm leading-relaxed mb-4">
@@ -432,7 +432,7 @@ export default function KalenderMitWochenPage() {
 
         {/* ── ISO 8601 Regeln ──────────────────────────────────── */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 id="iso-8601-regeln-wann-beginnt-eine-kalenderwoche" className="text-2xl font-semibold mb-4">
             ISO-8601-Regeln: Wann beginnt eine Kalenderwoche und was ist
             KW&nbsp;1?
           </h2>
@@ -473,7 +473,7 @@ export default function KalenderMitWochenPage() {
 
         {/* ── KW berechnen ─────────────────────────────────────── */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 id="kalenderwoche-berechnen" className="text-2xl font-semibold mb-4">
             Kalenderwoche berechnen: So findest du die KW f&uuml;r ein Datum
           </h2>
           <p className="text-text-secondary text-sm leading-relaxed mb-4">
@@ -529,7 +529,7 @@ export default function KalenderMitWochenPage() {
 
         {/* ── KW-Tabelle 2026 ──────────────────────────────────── */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 id="kalender-mit-wochen-aktuelles-jahr" className="text-2xl font-semibold mb-4">
             Kalender mit Wochen {year}: Tabelle aller Kalenderwochen (KW) mit
             Datumsspannen
           </h2>
@@ -651,7 +651,7 @@ export default function KalenderMitWochenPage() {
 
         {/* ── KW-Tabelle 2027 ──────────────────────────────────── */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 id="kalender-mit-wochen-naechstes-jahr" className="text-2xl font-semibold mb-4">
             Kalender mit Wochen {nextYear}: Tabelle aller Kalenderwochen (KW)
             mit Datumsspannen
           </h2>
@@ -748,7 +748,7 @@ export default function KalenderMitWochenPage() {
 
         {/* ── Wie viele KW hat ein Jahr? ───────────────────────── */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 id="wie-viele-kalenderwochen-hat-ein-jahr" className="text-2xl font-semibold mb-4">
             Wie viele Kalenderwochen hat ein Jahr? (52 oder 53 KW einfach
             erkl&auml;rt)
           </h2>
@@ -788,7 +788,7 @@ export default function KalenderMitWochenPage() {
 
         {/* ── DE vs. USA ───────────────────────────────────────── */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 id="deutschland-europa-vs-usa-kalenderwochen" className="text-2xl font-semibold mb-4">
             Deutschland/Europa vs. USA: Warum Kalenderwochen unterschiedlich
             sein k&ouml;nnen
           </h2>
@@ -855,7 +855,7 @@ export default function KalenderMitWochenPage() {
 
         {/* ── KW in Apps einstellen ────────────────────────────── */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 id="kalender-mit-kw-in-apps-einstellen" className="text-2xl font-semibold mb-4">
             Kalender mit KW in Apps und Programmen einstellen (iOS, Android,
             Outlook, Google Kalender)
           </h2>
@@ -962,7 +962,7 @@ export default function KalenderMitWochenPage() {
 
         {/* ── Häufig gesuchte KWs ──────────────────────────────── */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 id="haeufig-gesuchte-kalenderwochen" className="text-2xl font-semibold mb-4">
             H&auml;ufig gesuchte Kalenderwochen schnell nachschlagen (z.&nbsp;B.
             KW&nbsp;3, KW&nbsp;25, KW&nbsp;26)
           </h2>
@@ -1029,7 +1029,7 @@ export default function KalenderMitWochenPage() {
 
         {/* ── Format-Vergleich ─────────────────────────────────── */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 id="kalender-mit-wochen-auswaehlen" className="text-2xl font-semibold mb-4">
             Kalender mit Wochen ausw&auml;hlen: Print-Kalender, PDF, Excel oder
             App &ndash; was passt wof&uuml;r?
           </h2>
@@ -1127,7 +1127,7 @@ export default function KalenderMitWochenPage() {
 
         {/* ── CTA ──────────────────────────────────────────────── */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 id="kalender-mit-kalenderwochen-nutzen" className="text-2xl font-semibold mb-4">
             Kalender mit Kalenderwochen nutzen &ndash; jetzt Tabelle speichern
             oder KW-Anzeige aktivieren
           </h2>
@@ -1154,7 +1154,7 @@ export default function KalenderMitWochenPage() {
 
         {/* ── Zusammenfassung ──────────────────────────────────── */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-3">
+          <h2 id="zusammenfassung-und-ausblick" className="text-2xl font-semibold mb-3">
             Zusammenfassung &amp; Ausblick
           </h2>
           <p className="text-text-secondary text-sm leading-relaxed">
@@ -1192,7 +1192,7 @@ export default function KalenderMitWochenPage() {
 
         {/* ── FAQ ──────────────────────────────────────────────── */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-5">
+          <h2 id="haeufig-gestellte-fragen" className="text-2xl font-semibold mb-5">
             H&auml;ufig gestellte Fragen
           </h2>
           <div className="space-y-2.5">

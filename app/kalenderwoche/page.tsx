@@ -242,7 +242,7 @@ export default function KalenderwochePage() {
 
         {/* ── Hintergründe ── Cluster 2 ───────────────────────────── */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 id="hintergruende-zu-kalenderwoche" className="text-2xl font-semibold mb-4">
             Hintergründe zu Kalenderwoche {currentKW.year}
           </h2>
           <p className="text-text-secondary text-sm leading-relaxed mb-4">
@@ -296,7 +296,7 @@ export default function KalenderwochePage() {
 
         {/* ── Alltags-Tipps ── Cluster 2 ──────────────────────────── */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 id="so-nutzt-du-die-kalenderwoche-im-alltag" className="text-2xl font-semibold mb-4">
             So nutzt Du die Kalenderwoche im Alltag
           </h2>
           <p className="text-text-secondary text-sm leading-relaxed mb-4">
@@ -343,7 +343,7 @@ export default function KalenderwochePage() {
 
         {/* ── Vergleichstabelle: KW prevYear vs. KW currentYear ──── */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 id="vergleich-kw" className="text-2xl font-semibold mb-4">
             Vergleich: KW {prevYear} vs. KW {currentKW.year}
           </h2>
           <div className="overflow-x-auto rounded-xl border border-border">
@@ -413,7 +413,7 @@ export default function KalenderwochePage() {
 
         {/* ── Zusammenfassung ── Cluster 2 ────────────────────────── */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-3">
+          <h2 id="zusammenfassung-und-ausblick" className="text-2xl font-semibold mb-3">
             Zusammenfassung &amp; Ausblick
           </h2>
           <p className="text-text-secondary text-sm leading-relaxed">
@@ -439,7 +439,7 @@ export default function KalenderwochePage() {
 
         {/* ── FAQ ── Cluster 2 ────────────────────────────────────── */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-5">
+          <h2 id="faq-nutzer-fragen-auch" className="text-2xl font-semibold mb-5">
             FAQ – Nutzer fragen auch
           </h2>
           <div className="space-y-2.5">

@@ -13,7 +13,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const kw = getCurrentKW();
   const weeksInYear = getWeeksInYear(kw.year);
   const ogTitle = `Kalenderwochen ${kw.year} – Alle KW im Überblick`;
-  const ogDescription = `Kalender mit Wochenübersicht: Alle ${weeksInYear} Kalenderwochen ${kw.year} im Überblick. KW 1 bis KW ${weeksInYear} mit Start- und Enddatum nach ISO 8601.`;
+  const ogDescription = `Kalenderwochen ${kw.year}: KW 1 bis KW ${weeksInYear} mit Start- & Enddatum im Überblick. ✓ Alle ${weeksInYear} Wochen nach ISO 8601.`;
   return {
     title: ogTitle,
     description: ogDescription,
@@ -123,7 +123,7 @@ export default function KalenderwochenUebersichtPage() {
         </div>
 
         {/* ── H2: Kalenderwochen im Überblick ─────────────────── */}
-        <h2 className="text-2xl font-semibold mb-4">
+        <h2 id="kalenderwochen-im-ueberblick" className="text-2xl font-semibold mb-4">
           Kalenderwochen im Überblick – {currentKW.year}
         </h2>
         <p className="text-text-secondary text-sm mb-5 leading-relaxed">
@@ -201,7 +201,7 @@ export default function KalenderwochenUebersichtPage() {
 
         {/* ── Erklärung ── Cluster 3 ──────────────────────────── */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 id="alle-kalenderwochen-im-ueberblick" className="text-2xl font-semibold mb-4">
             Alle Kalenderwochen {currentKW.year} im Überblick
           </h2>
           <div className="text-text-secondary text-sm leading-relaxed space-y-3">
@@ -223,7 +223,7 @@ export default function KalenderwochenUebersichtPage() {
 
         {/* ── SEO-TEXT – CLUSTER 3 ──────────────────────────────── */}
         <section className="mt-12 space-y-4">
-          <h2 className="text-2xl font-semibold">
+          <h2 id="alle-kalenderwochen-im-ueberblick-seo" className="text-2xl font-semibold">
             Alle Kalenderwochen {currentKW.year} im Überblick
           </h2>
           <div className="text-text-secondary text-sm leading-relaxed space-y-3">

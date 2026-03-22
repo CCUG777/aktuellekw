@@ -13,7 +13,7 @@ export const revalidate = 3600;
 export async function generateMetadata(): Promise<Metadata> {
   const kw = getCurrentKW();
   const ogTitle = `Kalender mit Kalenderwochen ${kw.year} – KW Übersicht`;
-  const ogDescription = `KW Kalender ${kw.year}: Alle ${getWeeksInYear(kw.year)} Kalenderwochen auf einen Blick. Kalender mit KW-Nummern, Start- und Enddatum nach ISO 8601.`;
+  const ogDescription = `Kalender ${kw.year} mit Kalenderwochen: Alle ${getWeeksInYear(kw.year)} KW auf einen Blick – Nummern, Start- & Enddatum. ✓ ISO 8601 ✓ Übersichtlich.`;
   return {
     title: ogTitle,
     description: ogDescription,
@@ -123,7 +123,7 @@ export default function KalenderMitKalenderwochenPage() {
         </div>
 
         {/* ── H2: Kalenderwochen ──────────────────────────────── */}
-        <h2 className="text-2xl font-semibold mb-4">
+        <h2 id="kalenderwochen-im-ueberblick" className="text-2xl font-semibold mb-4">
           Kalenderwochen {currentKW.year} im Überblick
         </h2>
         <p className="text-text-secondary text-sm mb-5 leading-relaxed">
@@ -173,7 +173,7 @@ export default function KalenderMitKalenderwochenPage() {
 
         {/* ── Erklärung: KW im Kalender ── Cluster 2 ─────────── */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 id="kw-im-kalender-richtig-nutzen" className="text-2xl font-semibold mb-4">
             KW im Kalender richtig nutzen
           </h2>
           <p className="text-text-secondary text-sm leading-relaxed mb-4">
@@ -211,7 +211,7 @@ export default function KalenderMitKalenderwochenPage() {
 
         {/* ── SEO-TEXT – CLUSTER 2 ──────────────────────────────── */}
         <section className="mt-12 space-y-4">
-          <h2 className="text-2xl font-semibold">
+          <h2 id="warum-ein-kalender-mit-kalenderwochen" className="text-2xl font-semibold">
             Warum ein Kalender mit Kalenderwochen?
           </h2>
           <div className="text-text-secondary text-sm leading-relaxed space-y-3">

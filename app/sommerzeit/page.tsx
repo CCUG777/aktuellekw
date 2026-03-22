@@ -17,7 +17,7 @@ export const revalidate = 86400;
 export async function generateMetadata(): Promise<Metadata> {
   const sz = getSommerzeitDatum(2026);
   const title = "Sommerzeit 2026: Wann wird die Uhr vorgestellt?";
-  const description = `Sommerzeit 2026 auf einen Blick: Start am ${sz.dateFormatted}, Ende am 25.10.2026. Merkhilfe vor/zur\u00FCck, Tabelle 2026\u20132027 und EU-Update zur Abschaffung.`;
+  const description = `Sommerzeit 2026: Am ${sz.dateFormatted} wird die Uhr vorgestellt. ✓ Eselsbrücke vor/zurück ✓ Termine 2026–2027 ✓ EU-Abschaffung.`;
 
   return {
     title,
@@ -223,7 +223,7 @@ export default function SommerzeitPage() {
 
         {/* ── Start Sommerzeit 2026 ── */}
         <section className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Sommerzeit 2026: Wann beginnt die Zeitumstellung in Deutschland?</h2>
+          <h2 id="sommerzeit-wann-beginnt-die-zeitumstellung" className="text-2xl font-bold mb-4">Sommerzeit 2026: Wann beginnt die Zeitumstellung in Deutschland?</h2>
 
           <div className="text-sm text-text-secondary leading-relaxed space-y-4 mb-6">
             <p>
@@ -287,7 +287,7 @@ export default function SommerzeitPage() {
 
         {/* ── Ende der Sommerzeit ── */}
         <section className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Sommerzeit 2026: Wann endet die Sommerzeit (Umstellung auf Winterzeit)?</h2>
+          <h2 id="sommerzeit-wann-endet-die-sommerzeit" className="text-2xl font-bold mb-4">Sommerzeit 2026: Wann endet die Sommerzeit (Umstellung auf Winterzeit)?</h2>
 
           <div className="text-sm text-text-secondary leading-relaxed space-y-4 mb-6">
             <p>
@@ -347,7 +347,7 @@ export default function SommerzeitPage() {
 
         {/* ── Was passiert bei der Umstellung ── */}
         <section className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Was passiert bei der Umstellung auf Sommerzeit?</h2>
+          <h2 id="was-passiert-bei-der-umstellung-auf-sommerzeit" className="text-2xl font-bold mb-4">Was passiert bei der Umstellung auf Sommerzeit?</h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div className="bg-card-bg border border-border rounded-2xl p-5 text-center">
               <p className="text-3xl font-bold text-accent mb-2">-1h</p>
@@ -369,7 +369,7 @@ export default function SommerzeitPage() {
 
         {/* ── Zeitumstellung Tabelle 2026–2027 ── */}
         <section className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Zeitumstellung 2026 im &Uuml;berblick: Tabelle f&uuml;r Sommerzeit und Winterzeit</h2>
+          <h2 id="zeitumstellung-im-ueberblick" className="text-2xl font-bold mb-4">Zeitumstellung 2026 im &Uuml;berblick: Tabelle f&uuml;r Sommerzeit und Winterzeit</h2>
 
           <p className="text-sm text-text-secondary leading-relaxed mb-6">
             Hier findest du eine kompakte Tabelle zur Zeitumstellung <strong className="text-text-primary">2026</strong> in
@@ -428,7 +428,7 @@ export default function SommerzeitPage() {
 
         {/* ── MEZ / MESZ / Sommerzeit / Winterzeit ── */}
         <section className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Sommerzeit in Deutschland: Unterschied zwischen MEZ, MESZ, Sommerzeit und &bdquo;Winterzeit&ldquo;</h2>
+          <h2 id="sommerzeit-unterschied-mez-mesz" className="text-2xl font-bold mb-4">Sommerzeit in Deutschland: Unterschied zwischen MEZ, MESZ, Sommerzeit und &bdquo;Winterzeit&ldquo;</h2>
 
           <div className="text-sm text-text-secondary leading-relaxed space-y-4 mb-6">
             <p>
@@ -490,7 +490,7 @@ export default function SommerzeitPage() {
 
         {/* ── Geschichte der Sommerzeit ── */}
         <section className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Warum gibt es die Sommerzeit? Ziel und Geschichte in Deutschland</h2>
+          <h2 id="warum-gibt-es-die-sommerzeit" className="text-2xl font-bold mb-4">Warum gibt es die Sommerzeit? Ziel und Geschichte in Deutschland</h2>
 
           <div className="text-sm text-text-secondary leading-relaxed space-y-4 mb-6">
             <p>
@@ -543,7 +543,7 @@ export default function SommerzeitPage() {
 
         {/* ── Auswirkungen der Zeitumstellung ── */}
         <section className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Auswirkungen der Zeitumstellung: Schlaf, Gesundheit und Alltag</h2>
+          <h2 id="auswirkungen-der-zeitumstellung" className="text-2xl font-bold mb-4">Auswirkungen der Zeitumstellung: Schlaf, Gesundheit und Alltag</h2>
 
           <div className="text-sm text-text-secondary leading-relaxed space-y-4 mb-6">
             <p>
@@ -591,7 +591,7 @@ export default function SommerzeitPage() {
 
         {/* ── Geräte, Kalender und Wecker ── */}
         <section className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Praktische Tipps: Ger&auml;te, Kalender und Wecker richtig umstellen</h2>
+          <h2 id="praktische-tipps-geraete-umstellen" className="text-2xl font-bold mb-4">Praktische Tipps: Ger&auml;te, Kalender und Wecker richtig umstellen</h2>
 
           <p className="text-sm text-text-secondary leading-relaxed mb-6">
             Viele Ger&auml;te &uuml;bernehmen die Uhr-Umstellung automatisch &ndash; zum Beispiel Smartphone, Computer
@@ -642,7 +642,7 @@ export default function SommerzeitPage() {
 
         {/* ── EU Abschaffung ── */}
         <section className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Sommerzeit abschaffen: Aktueller Stand in der EU und in Deutschland (Update 2026)</h2>
+          <h2 id="sommerzeit-abschaffen-aktueller-stand" className="text-2xl font-bold mb-4">Sommerzeit abschaffen: Aktueller Stand in der EU und in Deutschland (Update 2026)</h2>
 
           <div className="text-sm text-text-secondary leading-relaxed space-y-4 mb-6">
             <p>
@@ -675,7 +675,7 @@ export default function SommerzeitPage() {
 
         {/* ── Kurz-FAQ inline ── */}
         <section className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Kurz-FAQ zur Sommerzeit (Deutschland, 2026)</h2>
+          <h2 id="kurz-faq-zur-sommerzeit" className="text-2xl font-bold mb-4">Kurz-FAQ zur Sommerzeit (Deutschland, 2026)</h2>
 
           <div className="bg-card-bg border border-border rounded-2xl p-5 space-y-4 text-sm text-text-secondary leading-relaxed mb-6">
             <div>
@@ -718,7 +718,7 @@ export default function SommerzeitPage() {
 
         {/* ── 2 Uhr auf 3 Uhr erklärt ── */}
         <section className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Wann wird die Uhr umgestellt &ndash; nachts um 2 oder 3&nbsp;Uhr?</h2>
+          <h2 id="wann-wird-die-uhr-umgestellt" className="text-2xl font-bold mb-4">Wann wird die Uhr umgestellt &ndash; nachts um 2 oder 3&nbsp;Uhr?</h2>
 
           <div className="text-sm text-text-secondary leading-relaxed space-y-4">
             <p>
@@ -739,7 +739,7 @@ export default function SommerzeitPage() {
 
         {/* ── Bundesweit ── */}
         <section className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Gilt die Sommerzeit &uuml;berall in Deutschland gleich?</h2>
+          <h2 id="gilt-die-sommerzeit-ueberall-in-deutschland" className="text-2xl font-bold mb-4">Gilt die Sommerzeit &uuml;berall in Deutschland gleich?</h2>
 
           <p className="text-sm text-text-secondary leading-relaxed mb-4">
             Ja, die Sommerzeit gilt in Deutschland einheitlich: In allen Bundesl&auml;ndern wird gleichzeitig
@@ -759,7 +759,7 @@ export default function SommerzeitPage() {
 
         {/* ── Sommerzeit 2027 ── */}
         <section className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Sommerzeit 2027: Wann wird die Uhr umgestellt?</h2>
+          <h2 id="sommerzeit-2027" className="text-2xl font-bold mb-4">Sommerzeit 2027: Wann wird die Uhr umgestellt?</h2>
 
           <p className="text-sm text-text-secondary leading-relaxed mb-4">
             Die Termine f&uuml;r die <strong className="text-text-primary">Sommerzeit 2027</strong> findest du
@@ -779,7 +779,7 @@ export default function SommerzeitPage() {
 
         {/* ── Sommerzeit-Termine Jahresübersicht 2024–2030 ── */}
         <section className="mb-12">
-          <h2 className="text-2xl font-bold mb-6">Beginn der Sommerzeit 2024&ndash;2030</h2>
+          <h2 id="beginn-der-sommerzeit-2024-2030" className="text-2xl font-bold mb-6">Beginn der Sommerzeit 2024&ndash;2030</h2>
           <div className="overflow-x-auto">
             <table className="w-full text-sm border-collapse">
               <thead>
@@ -818,7 +818,7 @@ export default function SommerzeitPage() {
 
         {/* ── Nächste Schritte ── */}
         <section className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">N&auml;chste Schritte: Termine speichern und an Umstellung erinnert werden</h2>
+          <h2 id="naechste-schritte-termine-speichern" className="text-2xl font-bold mb-4">N&auml;chste Schritte: Termine speichern und an Umstellung erinnert werden</h2>
 
           <div className="text-sm text-text-secondary leading-relaxed space-y-4 mb-6">
             <p>
@@ -860,7 +860,7 @@ export default function SommerzeitPage() {
 
         {/* ── Tipps für die Umstellung ── */}
         <section className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Tipps f&uuml;r die Umstellung auf Sommerzeit</h2>
+          <h2 id="tipps-fuer-die-umstellung-auf-sommerzeit" className="text-2xl font-bold mb-4">Tipps f&uuml;r die Umstellung auf Sommerzeit</h2>
           <div className="space-y-3">
             {[
               { title: "Schrittweise anpassen", text: "Gehe in den Tagen vor der Umstellung jeweils 15\u201320 Minuten fr\u00FCher ins Bett." },
@@ -908,7 +908,7 @@ export default function SommerzeitPage() {
 
         {/* ── FAQ ── */}
         <section className="mb-12">
-          <h2 className="text-2xl font-bold mb-6">H&auml;ufig gestellte Fragen zur Sommerzeit 2026</h2>
+          <h2 id="haeufig-gestellte-fragen-zur-sommerzeit" className="text-2xl font-bold mb-6">H&auml;ufig gestellte Fragen zur Sommerzeit 2026</h2>
           <div className="space-y-4">
             {faqItems.map((faq, i) => (
               <details

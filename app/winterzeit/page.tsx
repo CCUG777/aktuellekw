@@ -17,7 +17,7 @@ export const revalidate = 86400;
 export async function generateMetadata(): Promise<Metadata> {
   const wz = getWinterzeitDatum(2026);
   const title = "Winterzeit 2026: Wann wird die Uhr zur\u00FCckgestellt?";
-  const description = `Winterzeit 2026: Am ${wz.dateFormatted} wird die Uhr von ${wz.timeBefore} auf ${wz.timeAfter} Uhr zur\u00FCckgestellt. Datum, Uhr umstellen (vor oder zur\u00FCck), Ger\u00E4te-Anleitung & EU-Update.`;
+  const description = `Winterzeit 2026: Am ${wz.dateFormatted} wird die Uhr von ${wz.timeBefore} auf ${wz.timeAfter} zurückgestellt. ✓ Eselsbrücke ✓ EU-Update.`;
 
   return {
     title,
@@ -222,7 +222,7 @@ export default function WinterzeitPage() {
 
         {/* ── Winterzeit 2026: Wann ist die Zeitumstellung? ── */}
         <section className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Winterzeit 2026: Wann ist die Zeitumstellung in Deutschland?</h2>
+          <h2 id="winterzeit-wann-ist-die-zeitumstellung" className="text-2xl font-bold mb-4">Winterzeit 2026: Wann ist die Zeitumstellung in Deutschland?</h2>
 
           <div className="text-sm text-text-secondary leading-relaxed space-y-4 mb-6">
             <p>
@@ -292,7 +292,7 @@ export default function WinterzeitPage() {
 
         {/* ── Was passiert bei der Umstellung ── */}
         <section className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Was passiert bei der Umstellung auf Winterzeit?</h2>
+          <h2 id="was-passiert-bei-der-umstellung-auf-winterzeit" className="text-2xl font-bold mb-4">Was passiert bei der Umstellung auf Winterzeit?</h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div className="bg-card-bg border border-border rounded-2xl p-5 text-center">
               <p className="text-3xl font-bold text-accent mb-2">+1h</p>
@@ -314,7 +314,7 @@ export default function WinterzeitPage() {
 
         {/* ── Was bedeutet Winterzeit? MEZ vs. MESZ ── */}
         <section className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Was bedeutet &bdquo;Winterzeit&ldquo; genau? Unterschied zwischen Winterzeit (MEZ) und Sommerzeit (MESZ)</h2>
+          <h2 id="was-bedeutet-winterzeit-unterschied-mez-mesz" className="text-2xl font-bold mb-4">Was bedeutet &bdquo;Winterzeit&ldquo; genau? Unterschied zwischen Winterzeit (MEZ) und Sommerzeit (MESZ)</h2>
 
           <div className="text-sm text-text-secondary leading-relaxed space-y-4 mb-6">
             <p>
@@ -373,7 +373,7 @@ export default function WinterzeitPage() {
 
         {/* ── Uhr richtig umstellen: Anleitung ── */}
         <section className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">So stellst du die Uhr richtig um: Anleitung f&uuml;r Smartphone, Funkuhr, Auto, Backofen</h2>
+          <h2 id="so-stellst-du-die-uhr-richtig-um" className="text-2xl font-bold mb-4">So stellst du die Uhr richtig um: Anleitung f&uuml;r Smartphone, Funkuhr, Auto, Backofen</h2>
 
           <div className="text-sm text-text-secondary leading-relaxed space-y-4 mb-6">
             <p>
@@ -479,7 +479,7 @@ export default function WinterzeitPage() {
 
         {/* ── Eselsbrücke ── */}
         <section className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Eselsbr&uuml;cke: Winterzeit vor oder zur&uuml;ck?</h2>
+          <h2 id="eselsbruecke-winterzeit-vor-oder-zurueck" className="text-2xl font-bold mb-4">Eselsbr&uuml;cke: Winterzeit vor oder zur&uuml;ck?</h2>
 
           <div className="text-sm text-text-secondary leading-relaxed space-y-4 mb-6">
             <p>
@@ -508,7 +508,7 @@ export default function WinterzeitPage() {
 
         {/* ── Auswirkungen ── */}
         <section className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Auswirkungen der Winterzeit: Schlaf, Gesundheit, Tageslicht und Arbeit</h2>
+          <h2 id="auswirkungen-der-winterzeit" className="text-2xl font-bold mb-4">Auswirkungen der Winterzeit: Schlaf, Gesundheit, Tageslicht und Arbeit</h2>
 
           <div className="text-sm text-text-secondary leading-relaxed space-y-4 mb-6">
             <p>
@@ -559,7 +559,7 @@ export default function WinterzeitPage() {
 
         {/* ── Sommerzeit Umstellung: 2 auf 3 ── */}
         <section className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Warum wird bei der Zeitumstellung von 2 auf 3&nbsp;Uhr umgestellt?</h2>
+          <h2 id="warum-wird-bei-der-zeitumstellung-von-2-auf-3-uhr-umgestellt" className="text-2xl font-bold mb-4">Warum wird bei der Zeitumstellung von 2 auf 3&nbsp;Uhr umgestellt?</h2>
 
           <div className="text-sm text-text-secondary leading-relaxed space-y-4">
             <p>
@@ -577,7 +577,7 @@ export default function WinterzeitPage() {
 
         {/* ── Abschaffung ── */}
         <section className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Zeitumstellung abschaffen? Stand in Deutschland und der EU (Update 2026)</h2>
+          <h2 id="zeitumstellung-abschaffen-aktueller-stand" className="text-2xl font-bold mb-4">Zeitumstellung abschaffen? Stand in Deutschland und der EU (Update 2026)</h2>
 
           <div className="text-sm text-text-secondary leading-relaxed space-y-4 mb-6">
             <p>
@@ -611,7 +611,7 @@ export default function WinterzeitPage() {
 
         {/* ── Termine 2025–2027 ── */}
         <section className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Winterzeit-Termine im &Uuml;berblick: Zeitumstellung 2025 bis 2027</h2>
+          <h2 id="winterzeit-termine-im-ueberblick" className="text-2xl font-bold mb-4">Winterzeit-Termine im &Uuml;berblick: Zeitumstellung 2025 bis 2027</h2>
 
           <p className="text-sm text-text-secondary leading-relaxed mb-6">
             Wenn du die Termine fr&uuml;h planen m&ouml;chtest, findest du hier die Zeitumstellung f&uuml;r
@@ -652,7 +652,7 @@ export default function WinterzeitPage() {
 
         {/* ── Beginn der Winterzeit 2024–2030 ── */}
         <section className="mb-12">
-          <h2 className="text-2xl font-bold mb-6">Beginn der Winterzeit 2024&ndash;2030</h2>
+          <h2 id="beginn-der-winterzeit-2024-2030" className="text-2xl font-bold mb-6">Beginn der Winterzeit 2024&ndash;2030</h2>
           <div className="overflow-x-auto">
             <table className="w-full text-sm border-collapse">
               <thead>
@@ -691,7 +691,7 @@ export default function WinterzeitPage() {
 
         {/* ── Häufige Probleme ── */}
         <section className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">H&auml;ufige Probleme rund um die Winterzeit: Termine, Tickets, Schichtarbeit, Technik</h2>
+          <h2 id="haeufige-probleme-rund-um-die-winterzeit" className="text-2xl font-bold mb-4">H&auml;ufige Probleme rund um die Winterzeit: Termine, Tickets, Schichtarbeit, Technik</h2>
 
           <div className="text-sm text-text-secondary leading-relaxed space-y-4 mb-6">
             <p>
@@ -748,7 +748,7 @@ export default function WinterzeitPage() {
 
         {/* ── Erinnerung aktivieren (CTA) ── */}
         <section className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Winterzeit 2026: Erinnerung einrichten und Zeitumstellung nicht verpassen</h2>
+          <h2 id="winterzeit-erinnerung-einrichten" className="text-2xl font-bold mb-4">Winterzeit 2026: Erinnerung einrichten und Zeitumstellung nicht verpassen</h2>
 
           <div className="text-sm text-text-secondary leading-relaxed space-y-4 mb-6">
             <p>
@@ -786,7 +786,7 @@ export default function WinterzeitPage() {
 
         {/* ── Tipps für die Umstellung ── */}
         <section className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Tipps f&uuml;r die Umstellung auf Winterzeit</h2>
+          <h2 id="tipps-fuer-die-umstellung-auf-winterzeit" className="text-2xl font-bold mb-4">Tipps f&uuml;r die Umstellung auf Winterzeit</h2>
           <div className="space-y-3">
             {[
               { title: "Gewonnene Stunde nutzen", text: "Die zus\u00E4tzliche Stunde in der Nacht kann f\u00FCr mehr Schlaf genutzt werden \u2013 optimal f\u00FCr alle, die chronisch zu wenig schlafen." },
@@ -834,7 +834,7 @@ export default function WinterzeitPage() {
 
         {/* ── FAQ ── */}
         <section className="mb-12">
-          <h2 className="text-2xl font-bold mb-6">H&auml;ufig gestellte Fragen zur Winterzeit 2026</h2>
+          <h2 id="haeufig-gestellte-fragen-zur-winterzeit" className="text-2xl font-bold mb-6">H&auml;ufig gestellte Fragen zur Winterzeit 2026</h2>
           <div className="space-y-4">
             {faqItems.map((faq, i) => (
               <details

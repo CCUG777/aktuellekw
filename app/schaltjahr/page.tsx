@@ -44,7 +44,7 @@ export async function generateMetadata(): Promise<Metadata> {
     : nextLeapYear(currentYear);
 
   const title = `Schaltjahr ${nextLY} ▷ Wann ist das nächste Schaltjahr?`;
-  const description = `Schaltjahr kurz erklärt: Nächstes Schaltjahr ist ${nextLY}. Prüfe jedes Jahr in Sekunden mit der 4/100/400-Regel + Liste früherer & kommender Schaltjahre.`;
+  const description = `Nächstes Schaltjahr: ${nextLY}. Die 4/100/400-Regel einfach erklärt + Liste aller Schaltjahre. ✓ Jedes Jahr sofort prüfen.`;
   const url = "https://aktuellekw.de/schaltjahr";
 
   return {
@@ -312,7 +312,7 @@ export default function SchaltjahrPage() {
             SECTION 2: Was ist ein Schaltjahr? (Definition)
             ═════════════════════════════════════════════════════════ */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 id="was-ist-ein-schaltjahr" className="text-2xl font-semibold mb-4">
             Was ist ein Schaltjahr? (Definition: 366 Tage und 29.&nbsp;Februar)
           </h2>
           <div className="text-text-secondary text-sm leading-relaxed space-y-3">
@@ -347,7 +347,7 @@ export default function SchaltjahrPage() {
             SECTION 3: Schaltjahr-Regel (4/100/400)
             ═════════════════════════════════════════════════════════ */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 id="schaltjahr-regel" className="text-2xl font-semibold mb-4">
             Schaltjahr-Regel: So erkennst du in Sekunden, ob ein Jahr ein Schaltjahr ist
           </h2>
           <div className="text-text-secondary text-sm leading-relaxed space-y-3">
@@ -439,7 +439,7 @@ export default function SchaltjahrPage() {
             SECTION 4: Ist 2026 ein Schaltjahr?
             ═════════════════════════════════════════════════════════ */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 id="ist-das-aktuelle-jahr-ein-schaltjahr" className="text-2xl font-semibold mb-4">
             Ist {currentYear} ein Schaltjahr? (Antworten f&uuml;r {currentYear - 1}, {currentYear}, {currentYear + 1} und {currentYear + 2})
           </h2>
           <div className="text-text-secondary text-sm leading-relaxed space-y-3 mb-5">
@@ -551,7 +551,7 @@ export default function SchaltjahrPage() {
             SECTION 5: Liste aller Schaltjahre
             ═════════════════════════════════════════════════════════ */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 id="liste-der-schaltjahre" className="text-2xl font-semibold mb-4">
             Liste der Schaltjahre: letzte und n&auml;chste Schaltjahre auf einen Blick
           </h2>
           <div className="text-text-secondary text-sm leading-relaxed space-y-3 mb-5">
@@ -638,7 +638,7 @@ export default function SchaltjahrPage() {
             SECTION 6: Wann ist das nächste Schaltjahr?
             ═════════════════════════════════════════════════════════ */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 id="wann-ist-das-naechste-schaltjahr" className="text-2xl font-semibold mb-4">
             Wann ist das n&auml;chste Schaltjahr?
           </h2>
           <div className="text-text-secondary text-sm leading-relaxed space-y-3">
@@ -684,7 +684,7 @@ export default function SchaltjahrPage() {
             SECTION 7: Wann hat der Februar wieder 29 Tage?
             ═════════════════════════════════════════════════════════ */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 id="wann-hat-der-februar-wieder-29-tage" className="text-2xl font-semibold mb-4">
             Wann hat der Februar wieder 29 Tage?
           </h2>
           <div className="text-text-secondary text-sm leading-relaxed space-y-3">
@@ -713,7 +713,7 @@ export default function SchaltjahrPage() {
             SECTION 8: Gibt es einen 30. Februar?
             ═════════════════════════════════════════════════════════ */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 id="gibt-es-einen-30-februar" className="text-2xl font-semibold mb-4">
             Gibt es einen 30. Februar? (Mythos und seltene Kalender-Ausnahme)
           </h2>
           <div className="text-text-secondary text-sm leading-relaxed space-y-3">
@@ -746,7 +746,7 @@ export default function SchaltjahrPage() {
             SECTION 9: Schaltjahr und Alltag
             ═════════════════════════════════════════════════════════ */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 id="schaltjahr-und-alltag" className="text-2xl font-semibold mb-4">
             Schaltjahr und Alltag: Was &auml;ndert sich wirklich?
           </h2>
           <div className="text-text-secondary text-sm leading-relaxed space-y-3">
@@ -808,7 +808,7 @@ export default function SchaltjahrPage() {
             SECTION 10: Schaltjahr schnell berechnen
             ═════════════════════════════════════════════════════════ */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 id="schaltjahr-schnell-berechnen" className="text-2xl font-semibold mb-4">
             Schaltjahr schnell berechnen (Formel, Beispiele und Tools)
           </h2>
           <div className="text-text-secondary text-sm leading-relaxed space-y-3">
@@ -912,7 +912,7 @@ export default function SchaltjahrPage() {
             SECTION 11: Geburtstag am 29. Februar / Schalttag
             ═════════════════════════════════════════════════════════ */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 id="geburtstag-am-29-februar" className="text-2xl font-semibold mb-4">
             Geburtstag am 29. Februar &ndash; der Schalttag
           </h2>
           <div className="text-text-secondary text-sm leading-relaxed space-y-3">
@@ -942,7 +942,7 @@ export default function SchaltjahrPage() {
             SECTION 12: CTA – Nächstes Schaltjahr merken
             ═════════════════════════════════════════════════════════ */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 id="naechstes-schaltjahr-merken" className="text-2xl font-semibold mb-4">
             N&auml;chstes Schaltjahr merken: 29.&nbsp;Februar {nextLY}
           </h2>
           <div className="text-text-secondary text-sm leading-relaxed space-y-3">
@@ -995,7 +995,7 @@ export default function SchaltjahrPage() {
             SECTION 13: FAQ (10 Fragen)
             ═════════════════════════════════════════════════════════ */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-5">
+          <h2 id="haeufig-gestellte-fragen-zum-schaltjahr" className="text-2xl font-semibold mb-5">
             H&auml;ufig gestellte Fragen zum Schaltjahr
           </h2>
           <div className="space-y-2.5">

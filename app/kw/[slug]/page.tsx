@@ -81,7 +81,7 @@ export async function generateMetadata({
   if (!kwInfo) return { title: "KW nicht gefunden" };
 
   const title = `Kalenderwoche ${kwInfo.weekNumber} – Datum & Infos zur KW ${kwInfo.weekNumber}`;
-  const description = `Kalenderwoche ${kwInfo.weekNumber} ${kwInfo.year}: ${formatDateDE(kwInfo.startDate)} (Montag) bis ${formatDateDE(kwInfo.endDate)} (Sonntag). Alle 7 Tage im Überblick, berechnet nach ISO 8601.`;
+  const description = `KW ${kwInfo.weekNumber} ${kwInfo.year}: ${formatDateDE(kwInfo.startDate)} (Mo) bis ${formatDateDE(kwInfo.endDate)} (So) – alle 7 Tage im Detail. ✓ Kalenderwoche ${kwInfo.weekNumber} nach ISO 8601.`;
   return {
     title,
     description,
@@ -227,7 +227,7 @@ export default async function KWDetailPage({
 
         {/* ── Weekday Table ────────────────────────────────────── */}
         <section className="mb-10 fade-in-delay">
-          <h2 className="text-lg font-semibold mb-4">
+          <h2 id="wochentage-kw" className="text-lg font-semibold mb-4">
             Wochentage KW {kwInfo.weekNumber} {kwInfo.year}
           </h2>
           <WeekdayTable startDate={kwInfo.startDate} today={todayUTC} />
@@ -236,7 +236,7 @@ export default async function KWDetailPage({
         {/* ── Info Card ────────────────────────────────────────── */}
         <section className="mb-10 fade-in-delay">
           <div className="bg-surface-secondary border border-border rounded-2xl p-5 md:p-6">
-            <h2 className="font-semibold text-base mb-4">
+            <h2 id="details-zu-kw" className="font-semibold text-base mb-4">
               Details zu KW {kwInfo.weekNumber} {kwInfo.year}
             </h2>
             <dl className="grid grid-cols-2 gap-x-8 gap-y-3 text-sm">
@@ -276,7 +276,7 @@ export default async function KWDetailPage({
          *   welche Woche ist [Datum], KW berechnen, ISO 8601
          * ──────────────────────────────────────────────────────────── */}
         <section className="mb-10 fade-in-delay-2">
-          <h2 className="text-lg font-semibold mb-4">
+          <h2 id="infos-zur-kalenderwoche" className="text-lg font-semibold mb-4">
             Infos zur Kalenderwoche {kwInfo.weekNumber}
           </h2>
           <div className="text-text-secondary text-sm leading-relaxed space-y-3">

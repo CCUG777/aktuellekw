@@ -9,7 +9,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const title =
     "Arbeitstage berechnen: Anleitung + Checkliste (2026)";
   const description =
-    "Arbeitstage berechnen in 5 Schritten: Unterschied zu Werktagen, Feiertage je Bundesland, Samstage & Teilzeit. Mit Fehler-Checkliste + Rechner-Start.";
+    "Arbeitstage berechnen in 5 Schritten: Werktage vs. Arbeitstage, Feiertage je Bundesland & Teilzeit. ✓ Checkliste + Rechner.";
   const url = "https://aktuellekw.de/arbeitstage-berechnen";
 
   return {
@@ -195,7 +195,7 @@ export default function ArbeitstageBerechnenPage() {
             SECTION 1: Definition und Unterschied zu Werktagen
             ═══════════════════════════════════════════════════════ */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 id="arbeitstage-berechnen-definition" className="text-2xl font-semibold mb-4">
             Arbeitstage berechnen: Definition und Unterschied zu Werktagen
           </h2>
           <div className="text-text-secondary leading-relaxed space-y-3 mb-6">
@@ -257,7 +257,7 @@ export default function ArbeitstageBerechnenPage() {
             SECTION 1b: Samstag als Arbeitstag
             ═══════════════════════════════════════════════════════ */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 id="ist-samstag-ein-arbeitstag" className="text-2xl font-semibold mb-4">
             Ist Samstag ein Arbeitstag? (Werktag vs. Arbeitstag)
           </h2>
           <div className="text-text-secondary leading-relaxed space-y-3 mb-5">
@@ -287,7 +287,7 @@ export default function ArbeitstageBerechnenPage() {
             SECTION 2: Schritt-für-Schritt-Berechnung
             ═══════════════════════════════════════════════════════ */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 id="so-berechnest-du-arbeitstage" className="text-2xl font-semibold mb-4">
             So berechnest du Arbeitstage im Zeitraum (Schritt-f&uuml;r-Schritt)
           </h2>
           <div className="text-text-secondary leading-relaxed space-y-3 mb-6">
@@ -367,7 +367,7 @@ export default function ArbeitstageBerechnenPage() {
             SECTION 2b: Zählregeln
             ═══════════════════════════════════════════════════════ */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 id="arbeitstage-zaehlen-regeln" className="text-2xl font-semibold mb-4">
             Arbeitstage z&auml;hlen: Z&auml;hlregeln (inkl./exkl. Start- und Enddatum)
           </h2>
           <div className="text-text-secondary leading-relaxed space-y-3 mb-5">
@@ -393,7 +393,7 @@ export default function ArbeitstageBerechnenPage() {
             SECTION 2c: Modelle Mo–Fr vs. Mo–Sa
             ═══════════════════════════════════════════════════════ */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 id="berechnung-werktage-mo-fr-vs-mo-sa" className="text-2xl font-semibold mb-4">
             Berechnung Werktage: Mo&ndash;Fr vs. Mo&ndash;Sa
           </h2>
           <div className="text-text-secondary leading-relaxed space-y-3 mb-6">
@@ -449,7 +449,7 @@ export default function ArbeitstageBerechnenPage() {
             SECTION 3: Feiertage richtig berücksichtigen
             ═══════════════════════════════════════════════════════ */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 id="feiertage-richtig-beruecksichtigen" className="text-2xl font-semibold mb-4">
             Feiertage richtig ber&uuml;cksichtigen: Bundesland, regionale Feiertage und Sonderf&auml;lle
           </h2>
           <div className="text-text-secondary leading-relaxed space-y-3 mb-5">
@@ -507,7 +507,7 @@ export default function ArbeitstageBerechnenPage() {
             SECTION 3b: Brückentage und Betriebsferien
             ═══════════════════════════════════════════════════════ */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 id="brueckentage-und-betriebsferien" className="text-2xl font-semibold mb-4">
             Br&uuml;ckentage und Betriebsferien: Z&auml;hlen sie als Arbeitstage?
           </h2>
           <div className="text-text-secondary leading-relaxed space-y-3 mb-5">
@@ -535,7 +535,7 @@ export default function ArbeitstageBerechnenPage() {
             SECTION 4: Arbeitstage-Rechner (Widget + Anleitung)
             ═══════════════════════════════════════════════════════ */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 id="arbeitstage-rechner-eingaben" className="text-2xl font-semibold mb-4">
             Arbeitstage-Rechner: Welche Eingaben du brauchst und wie du das Ergebnis pr&uuml;fst
           </h2>
           <div className="text-text-secondary leading-relaxed space-y-3 mb-6">
@@ -593,7 +593,7 @@ export default function ArbeitstageBerechnenPage() {
             SECTION 4b: Typische Fehler
             ═══════════════════════════════════════════════════════ */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 id="typische-fehler-beim-arbeitstage-berechnen" className="text-2xl font-semibold mb-4">
             Typische Fehler beim Arbeitstage berechnen (und wie du sie vermeidest)
           </h2>
           <p className="text-text-secondary leading-relaxed mb-5">
@@ -622,7 +622,7 @@ export default function ArbeitstageBerechnenPage() {
             SECTION 5: Anwendungsfälle
             ═══════════════════════════════════════════════════════ */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 id="anwendungsfaelle-arbeitstage-oder-werktage" className="text-2xl font-semibold mb-4">
             Anwendungsf&auml;lle: Wann du Arbeitstage oder Werktage brauchst
           </h2>
           <div className="text-text-secondary leading-relaxed space-y-3 mb-5">
@@ -667,7 +667,7 @@ export default function ArbeitstageBerechnenPage() {
             SECTION 6: Schnell-Anleitung zum Loslegen
             ═══════════════════════════════════════════════════════ */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 id="arbeitstage-berechnen-schnell" className="text-2xl font-semibold mb-4">
             Arbeitstage berechnen: Schnell im Rechner ermitteln
           </h2>
           <div className="text-text-secondary leading-relaxed space-y-3 mb-5">
@@ -736,7 +736,7 @@ export default function ArbeitstageBerechnenPage() {
             ═══════════════════════════════════════════════════════ */}
         <div className="mt-14">
           <div className="bg-accent/5 border border-accent/20 rounded-2xl p-6 md:p-8 text-center">
-            <h2 className="text-xl font-bold text-text-primary mb-3">
+            <h2 id="alle-arbeitstage-im-ueberblick" className="text-xl font-bold text-text-primary mb-3">
               Alle Arbeitstage {new Date().getFullYear()} im &Uuml;berblick
             </h2>
             <p className="text-text-secondary text-sm leading-relaxed mb-5 max-w-lg mx-auto">
@@ -784,7 +784,7 @@ export default function ArbeitstageBerechnenPage() {
             FAQ
             ═══════════════════════════════════════════════════════ */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-5">
+          <h2 id="haeufig-gestellte-fragen" className="text-2xl font-semibold mb-5">
             H&auml;ufig gestellte Fragen
           </h2>
           <div className="space-y-2.5">

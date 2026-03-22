@@ -14,7 +14,7 @@ export const revalidate = 3600;
 export async function generateMetadata(): Promise<Metadata> {
   const title = "Tagerechner \u25b7 Tage zwischen zwei Daten berechnen | Kostenlos";
   const description =
-    "Tagerechner von aktuellekw.de: Tage zwischen 2 Daten inkl./exkl. Start/Ende, Werktage vs. Kalendertage, +/\u2212 Tage & Countdown. Mit Fehler-Check.";
+    "Tagerechner: Tage zwischen zwei Daten berechnen – Werktage, Kalendertage & Countdown. ✓ Fehler-Check ✓ Kostenlos & sofort.";
   const url = "https://aktuellekw.de/tagerechner";
 
   return {
@@ -276,7 +276,7 @@ export default function TageBerechnenPage() {
             SECTION 2: Tagerechner – so funktioniert es
             ═════════════════════════════════════════════════════════ */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 id="tagerechner-tage-berechnen" className="text-2xl font-semibold mb-4">
             Tagerechner: Tage zwischen zwei Daten berechnen (so funktioniert es)
           </h2>
           <div className="text-text-secondary text-sm leading-relaxed space-y-3">
@@ -346,7 +346,7 @@ export default function TageBerechnenPage() {
             SECTION 3: Typische Anwendungsfälle
             ═════════════════════════════════════════════════════════ */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 id="tage-zwischen-zwei-daten-beispiele" className="text-2xl font-semibold mb-4">
             Tage zwischen zwei Daten berechnen: Beispiele f&uuml;r typische Anwendungsf&auml;lle
           </h2>
           <div className="text-text-secondary text-sm leading-relaxed space-y-3">
@@ -400,7 +400,7 @@ export default function TageBerechnenPage() {
             SECTION 4: Werktage statt Kalendertage
             ═════════════════════════════════════════════════════════ */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 id="tagerechner-werktage" className="text-2xl font-semibold mb-4">
             Tagerechner Werktage: Werktage statt Kalendertage berechnen
           </h2>
           <div className="text-text-secondary text-sm leading-relaxed space-y-3">
@@ -475,7 +475,7 @@ export default function TageBerechnenPage() {
             SECTION 5: Datum plus/minus Tage
             ═════════════════════════════════════════════════════════ */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 id="datum-plus-minus-tage" className="text-2xl font-semibold mb-4">
             Datum plus/minus Tage: Tagerechner f&uuml;r ein Zieldatum berechnen
           </h2>
           <div className="text-text-secondary text-sm leading-relaxed space-y-3">
@@ -530,7 +530,7 @@ export default function TageBerechnenPage() {
             SECTION 6: Countdown – Wie viele Tage bis ...
             ═════════════════════════════════════════════════════════ */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 id="countdown-tage-bis" className="text-2xl font-semibold mb-4">
             Countdown: Wie viele Tage bis Weihnachten, Urlaub oder Rente?
           </h2>
           <div className="text-text-secondary text-sm leading-relaxed space-y-3">
@@ -623,7 +623,7 @@ export default function TageBerechnenPage() {
             SECTION 7: Tagerechner mit Stunden
             ═════════════════════════════════════════════════════════ */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 id="tagerechner-mit-stunden" className="text-2xl font-semibold mb-4">
             Tagerechner mit Stunden: Wann reicht &bdquo;Tage z&auml;hlen&ldquo; nicht aus?
           </h2>
           <div className="text-text-secondary text-sm leading-relaxed space-y-3">
@@ -670,7 +670,7 @@ export default function TageBerechnenPage() {
             SECTION 8: Online vs. App
             ═════════════════════════════════════════════════════════ */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 id="tagerechner-online-vs-app" className="text-2xl font-semibold mb-4">
             Tagerechner online kostenlos vs. App: Was ist besser?
           </h2>
           <div className="text-text-secondary text-sm leading-relaxed space-y-3">
@@ -702,7 +702,7 @@ export default function TageBerechnenPage() {
             SECTION 9: Häufige Fehler
             ═════════════════════════════════════════════════════════ */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 id="haeufige-fehler-beim-tage-berechnen" className="text-2xl font-semibold mb-4">
             H&auml;ufige Fehler beim Tage berechnen (und wie du sie vermeidest)
           </h2>
           <div className="text-text-secondary text-sm leading-relaxed space-y-3">
@@ -749,7 +749,7 @@ export default function TageBerechnenPage() {
             SECTION 10: CTA – Jetzt Tage berechnen
             ═════════════════════════════════════════════════════════ */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-4">
+          <h2 id="tagerechner-nutzen" className="text-2xl font-semibold mb-4">
             Tagerechner nutzen: Jetzt Tage berechnen und Ergebnis speichern
           </h2>
           <div className="text-text-secondary text-sm leading-relaxed space-y-3">
@@ -795,7 +795,7 @@ export default function TageBerechnenPage() {
             SECTION 11: FAQ (8 Fragen)
             ═════════════════════════════════════════════════════════ */}
         <div className="mt-14">
-          <h2 className="text-2xl font-semibold mb-5">
+          <h2 id="haeufig-gestellte-fragen-zum-tagerechner" className="text-2xl font-semibold mb-5">
             H&auml;ufig gestellte Fragen zum Tagerechner
           </h2>
           <div className="space-y-2.5">

@@ -23,7 +23,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const ogDescription = `KW aktuell: Heute ist KW ${kw.weekNumber} ${kw.year} (${formatDateDE(kw.startDate)}–${formatDateDE(kw.endDate)}). Aktuelle KW nach ISO 8601.`;
   return {
     title: ogTitle,
-    description: `KW aktuell: Heute ist KW ${kw.weekNumber} ${kw.year} (${formatDateDE(kw.startDate)}–${formatDateDE(kw.endDate)}). Die aktuelle Kalenderwoche nach ISO 8601 – schnell & kostenlos.`,
+    description: `Aktuelle KW ${kw.weekNumber} ${kw.year}: ${formatDateDE(kw.startDate)} bis ${formatDateDE(kw.endDate)}. ✓ Kalenderwoche heute sofort sehen – nach ISO 8601, tagesaktuell & kostenlos.`,
     alternates: { canonical: "https://aktuellekw.de" },
     openGraph: {
       title: ogTitle,
