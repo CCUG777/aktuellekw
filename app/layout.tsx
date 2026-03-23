@@ -92,7 +92,6 @@ function WebSiteJsonLd() {
         // "https://www.linkedin.com/company/aktuellekw"
         sameAs: [
           "https://github.com/CCUG777",
-          "https://aktuellekw.de",
         ],
       },
       {
