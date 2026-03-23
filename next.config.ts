@@ -35,6 +35,7 @@ const securityHeaders = [
 ];
 
 const nextConfig: NextConfig = {
+  trailingSlash: false,   // Verhindert doppelte URLs mit/ohne Trailing Slash
   poweredByHeader: false, // Entfernt X-Powered-By: Next.js Header
 
   async headers() {
