@@ -67,80 +67,10 @@ function getISOWeek(date: Date): number {
   return Math.ceil(((d.getTime() - yearStart.getTime()) / 86400000 + 1) / 7);
 }
 
-/* ── Calendar data builders ────────────────────────────────────────── */
-interface MonthData {
-  year: number;
-  month: number; // 0-based
-  name: string;
-  weeks: WeekRow[];
-}
-
-interface WeekRow {
-  kw: number;
-  days: (DayCell | null)[];
-}
-
-interface DayCell {
-  day: number;
-  date: Date;
-  dateKey: string;
-  isToday: boolean;
-  isHoliday: boolean;
-  holidayName: string;
-}
-
 const MONTH_NAMES = [
   "Januar", "Februar", "März", "April", "Mai", "Juni",
   "Juli", "August", "September", "Oktober", "November", "Dezember",
 ];
-
-function buildCalendarData(year: number): MonthData[] {
-  const holidays = getNationwideHolidays(year);
-  const now = new Date();
-  const todayKey = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
-
-  const months: MonthData[] = [];
-
-  for (let m = 0; m < 12; m++) {
-    const daysInMonth = new Date(Date.UTC(year, m + 1, 0)).getUTCDate();
-    const weekRows: WeekRow[] = [];
-    let currentWeek: (DayCell | null)[] = new Array(7).fill(null);
-    let currentKW = 0;
-
-    for (let d = 1; d <= daysInMonth; d++) {
-      const date = new Date(Date.UTC(year, m, d));
-      const dow = date.getUTCDay(); // 0=Sun
-      const mondayIdx = dow === 0 ? 6 : dow - 1; // 0=Mon
-      const dateKey = `${year}-${String(m + 1).padStart(2, "0")}-${String(d).padStart(2, "0")}`;
-      const holidayName = holidays.get(dateKey) || "";
-
-      if (mondayIdx === 0 || d === 1) {
-        if (d > 1 && currentKW > 0) {
-          weekRows.push({ kw: currentKW, days: currentWeek });
-          currentWeek = new Array(7).fill(null);
-        }
-        currentKW = getISOWeek(date);
-      }
-
-      currentWeek[mondayIdx] = {
-        day: d,
-        date,
-        dateKey,
-        isToday: dateKey === todayKey,
-        isHoliday: !!holidayName,
-        holidayName,
-      };
-    }
-
-    if (currentKW > 0) {
-      weekRows.push({ kw: currentKW, days: currentWeek });
-    }
-
-    months.push({ year, month: m, name: MONTH_NAMES[m], weeks: weekRows });
-  }
-
-  return months;
-}
 
 /* ── SEO Content Placeholders ──────────────────────────────────────── */
 const SEO_CONTENT_BLOCKS = [
@@ -173,7 +103,6 @@ export default function CalendarPrintSection({ year = 2026 }: { year?: number })
   });
   const [downloading, setDownloading] = useState(false);
 
-  const calendarData = useMemo(() => buildCalendarData(year), [year]);
   const holidays = useMemo(() => getNationwideHolidays(year), [year]);
 
   const dynamicLabel = `Kostenlos als ${format === "pdf" ? "PDF" : "Excel"} · ${paperSize === "a4" ? "DIN A4" : "DIN A3"} · ${orientation === "landscape" ? "Querformat" : "Hochformat"}`;
@@ -235,23 +164,7 @@ export default function CalendarPrintSection({ year = 2026 }: { year?: number })
         ideal zum Drucken für Büro, Küche oder Schule.
       </p>
 
-      {/* ── A) Calendar Preview ── */}
-      <div
-        className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 mb-8"
-        aria-label={`Kalender ${year} Vorschau mit Kalenderwochen und Feiertagen`}
-      >
-        {calendarData.map((month) => (
-          <MonthCard
-            key={month.month}
-            month={month}
-            showKW={options.showKW}
-            showHolidays={options.showHolidays}
-            colorHolidays={options.colorHolidays}
-          />
-        ))}
-      </div>
-
-      {/* ── B) Download Configuration ── */}
+      {/* ── Download Configuration ── */}
       <div className="bg-surface-secondary border border-border rounded-2xl p-5 md:p-6 mb-8">
         <h3 className="font-semibold text-lg mb-1">
           Kalender {year} als PDF oder Excel herunterladen
@@ -349,83 +262,6 @@ export default function CalendarPrintSection({ year = 2026 }: { year?: number })
         </section>
       ))}
     </section>
-  );
-}
-
-/* ── MonthCard sub-component ───────────────────────────────────────── */
-function MonthCard({
-  month,
-  showKW,
-  showHolidays,
-  colorHolidays,
-}: {
-  month: MonthData;
-  showKW: boolean;
-  showHolidays: boolean;
-  colorHolidays: boolean;
-}) {
-  const DAY_HEADERS = ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"];
-
-  return (
-    <div className="bg-surface-secondary border border-border rounded-xl p-3">
-      <h4 className="text-sm font-semibold text-text-primary mb-2 text-center">
-        {month.name} {month.year}
-      </h4>
-      <table className="w-full text-xs tabular-nums" aria-label={`${month.name} ${month.year}`}>
-        <thead>
-          <tr>
-            {showKW && (
-              <th className="text-text-secondary/50 font-normal pb-1 w-7 text-left">KW</th>
-            )}
-            {DAY_HEADERS.map((d) => (
-              <th key={d} className="text-text-secondary font-medium pb-1 text-center w-[12%]">
-                {d}
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {month.weeks.map((week, wi) => (
-            <tr key={wi}>
-              {showKW && (
-                <td className="text-text-secondary/40 text-[10px] pr-1 align-middle">
-                  {week.kw}
-                </td>
-              )}
-              {week.days.map((cell, di) => {
-                if (!cell) {
-                  return <td key={di} />;
-                }
-                const isHolidayColored =
-                  showHolidays && colorHolidays && cell.isHoliday;
-                const isWeekend = di === 5 || di === 6;
-                return (
-                  <td
-                    key={di}
-                    className={`text-center py-0.5 align-middle ${
-                      cell.isToday
-                        ? "bg-accent/20 text-accent font-bold rounded"
-                        : isHolidayColored
-                        ? "text-red-500 dark:text-red-400 font-medium"
-                        : isWeekend
-                        ? "text-text-secondary/70"
-                        : "text-text-primary"
-                    }`}
-                    title={
-                      showHolidays && cell.holidayName
-                        ? cell.holidayName
-                        : undefined
-                    }
-                  >
-                    {cell.day}
-                  </td>
-                );
-              })}
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
   );
 }
 
