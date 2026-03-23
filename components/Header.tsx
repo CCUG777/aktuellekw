@@ -1,7 +1,7 @@
 import Link from "next/link";
 import ThemeToggle from "./ThemeToggle";
 import MobileMenu from "./MobileMenu";
-import ActiveNavLink from "./ActiveNavLink";
+import NavLinks from "./NavLinks";
 
 export default function Header() {
   return (
@@ -27,11 +27,7 @@ export default function Header() {
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center gap-5 text-sm text-text-secondary">
-          <ActiveNavLink href="/kalenderwoche" label="Kalenderwochen" />
-          <ActiveNavLink href="/feiertage/2026" label="Feiertage 2026" />
-          <ActiveNavLink href="/schulferien/2026" label="Schulferien 2026" />
-          <ActiveNavLink href="/datum-heute" label="Datum heute" />
-          <ActiveNavLink href="/tagerechner" label="Tagerechner" />
+          <NavLinks />
           <ThemeToggle />
         </div>
 
