@@ -1,7 +1,4 @@
-"use client";
-
 import Link from "next/link";
-import { useState } from "react";
 
 interface FooterLink {
   label: string;
@@ -16,7 +13,6 @@ interface FooterCategory {
 
 export default function Footer() {
   const year = new Date().getFullYear();
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   const categories: FooterCategory[] = [
     {
@@ -83,32 +79,27 @@ export default function Footer() {
 
         {/* ── Link-Gruppen ─────────────────────────────────────────
             Desktop (≥ md): 3-Spalten-Grid, alle Links sichtbar
-            Mobile (< md):  Accordions mit smooth height-Animation  */}
+            Mobile (< md):  Native <details> Accordions (kein JS)  */}
         <div className="md:grid md:grid-cols-3 md:gap-8 mb-8">
-          {categories.map((category, index) => {
-            const isOpen = openIndex === index;
-            return (
-              <div
-                key={category.title}
-                className="border-b border-border last:border-b-0 md:border-none"
-              >
-                {/* Mobile: klickbarer Accordion-Header (auf Desktop ausgeblendet)
-                    Fix P1: text-sm font-medium statt text-xs uppercase tracking-wider */}
-                <button
-                  type="button"
-                  onClick={() => setOpenIndex(isOpen ? null : index)}
-                  aria-expanded={isOpen}
-                  aria-controls={`footer-section-${index}`}
-                  className="w-full flex items-center justify-between py-3 md:hidden"
-                >
+          {categories.map((category, index) => (
+            <div
+              key={category.title}
+              className="border-b border-border last:border-b-0 md:border-none"
+            >
+              {/* Desktop: statische Überschrift (auf Mobile ausgeblendet) */}
+              <h3 className="hidden md:block text-sm font-medium text-text-primary mb-3">
+                {category.title}
+              </h3>
+
+              {/* Mobile: native <details> Accordion (auf Desktop ausgeblendet)
+                  Kein JS nötig – Browser-native open/close Animation */}
+              <details className="md:hidden group">
+                <summary className="flex items-center justify-between py-3 cursor-pointer list-none">
                   <span className="text-sm font-medium text-text-primary">
                     {category.title}
                   </span>
-                  {/* Chevron dreht sich 180° beim Öffnen – Fix P3: text-text-primary/60 */}
                   <svg
-                    className={`w-4 h-4 text-text-primary/60 transition-transform duration-300 ${
-                      isOpen ? "rotate-180" : ""
-                    }`}
+                    className="w-4 h-4 text-text-primary/60 transition-transform duration-300 group-open:rotate-180"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -121,45 +112,43 @@ export default function Footer() {
                       d="M19 9l-7 7-7-7"
                     />
                   </svg>
-                </button>
-
-                {/* Desktop: statische Überschrift (auf Mobile ausgeblendet)
-                    Fix P1: text-sm font-medium statt text-xs uppercase tracking-wider */}
-                <h3 className="hidden md:block text-sm font-medium text-text-primary mb-3">
-                  {category.title}
-                </h3>
-
-                {/* Link-Liste:
-                    Fix P2: max-h-0/max-h-[800px] statt grid-rows – robuster für alle Browser
-                    Mobile  → max-h-0 (geschlossen) / max-h-[800px] (offen), overflow-hidden
-                    Desktop → md:max-h-none md:overflow-visible, immer sichtbar              */}
-                <div
-                  id={`footer-section-${index}`}
-                  className={`overflow-hidden transition-[max-height] duration-300 ease-in-out md:max-h-none md:overflow-visible ${
-                    isOpen ? "max-h-[800px]" : "max-h-0"
-                  }`}
+                </summary>
+                <nav
+                  aria-label={category.ariaLabel}
+                  className="flex flex-col gap-3 pb-4"
                 >
-                  <nav
-                    aria-label={category.ariaLabel}
-                    className="flex flex-col gap-3 sm:gap-2 pb-4 md:pb-0"
+                  {category.links.map((link) => (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      className="text-sm text-text-primary/80 hover:text-accent transition-colors"
+                    >
+                      {link.label}
+                    </Link>
+                  ))}
+                </nav>
+              </details>
+
+              {/* Desktop: Links immer sichtbar (auf Mobile ausgeblendet) */}
+              <nav
+                aria-label={category.ariaLabel}
+                className="hidden md:flex flex-col gap-2"
+              >
+                {category.links.map((link) => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className="text-sm text-text-primary/80 hover:text-accent transition-colors"
                   >
-                    {category.links.map((link) => (
-                      <Link
-                        key={link.href}
-                        href={link.href}
-                        className="text-sm text-text-primary/80 hover:text-accent transition-colors"
-                      >
-                        {link.label}
-                      </Link>
-                    ))}
-                  </nav>
-                </div>
-              </div>
-            );
-          })}
+                    {link.label}
+                  </Link>
+                ))}
+              </nav>
+            </div>
+          ))}
         </div>
 
-        {/* Trennlinie + Copyright – Fix P4: pb-16 md:pb-0 für BackToTop-Clearance */}
+        {/* Trennlinie + Copyright */}
         <div className="border-t border-border pt-6 pb-16 md:pb-0 flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-xs text-text-secondary">
             &copy; {year} aktuellekw.de &middot; Alle Angaben nach ISO 8601
