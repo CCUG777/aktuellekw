@@ -194,6 +194,10 @@ export default function Home() {
       {
         "@type": "FAQPage",
         "@id": "https://aktuellekw.de/#faqpage",
+        inLanguage: "de-DE",
+        isPartOf: { "@id": "https://aktuellekw.de/#website" },
+        datePublished: "2026-01-01",
+        dateModified: new Date().toISOString().split("T")[0],
         mainEntity: homeFaqs.map((f) => ({
           "@type": "Question",
           name: f.question,

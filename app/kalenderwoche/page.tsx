@@ -142,7 +142,10 @@ export default function KalenderwochePage() {
       {
         "@type": "FAQPage",
         "@id": "https://aktuellekw.de/kalenderwoche#faqpage",
+        inLanguage: "de-DE",
         isPartOf: { "@id": "https://aktuellekw.de/#website" },
+        datePublished: "2026-01-01",
+        dateModified: new Date().toISOString().split("T")[0],
         mainEntity: kwFaqs.map((f) => ({
           "@type": "Question",
           name: f.question,
