@@ -463,7 +463,8 @@ async function generatePDF(
 ) {
   const jsPDFModule = await import("jspdf");
   const jsPDF = jsPDFModule.default || jsPDFModule.jsPDF;
-  await import("jspdf-autotable");
+  const autoTableModule = await import("jspdf-autotable");
+  const autoTable = autoTableModule.default || autoTableModule.autoTable;
 
   const isLandscape = orientation === "landscape";
   const doc = new jsPDF({
@@ -548,8 +549,7 @@ async function generatePDF(
 
     const tableFontSize = paperSize === "a3" ? 7 : 5.5;
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    (doc as any).autoTable({
+    autoTable(doc, {
       startY: y + 6,
       margin: { left: x, right: pageW - x - (cellW - cellPad * 2) },
       head: [dayHeaders],
@@ -571,7 +571,8 @@ async function generatePDF(
       columnStyles: opts.showKW
         ? { 0: { textColor: [160, 160, 160], halign: "left", cellWidth: paperSize === "a3" ? 8 : 6 } }
         : {},
-      didParseCell: (data: { section: string; column: { index: number }; cell: { text: string[]; styles: { textColor: number[] } } }) => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      didParseCell: (data: any) => {
         if (data.section !== "body") return;
         const dayNum = parseInt(data.cell.text[0], 10);
         if (!isNaN(dayNum) && holidayDays.has(dayNum)) {
