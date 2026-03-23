@@ -7,6 +7,7 @@ import {
 } from "@/lib/kw";
 import KWTable from "@/components/KWTable";
 import KWRechner from "@/components/KWRechner";
+import CalendarPrintSection from "@/components/CalendarPrintSection";
 
 export const revalidate = 3600;
 
@@ -170,6 +171,9 @@ export default function KalenderMitKalenderwochenPage() {
         <div className="mt-10">
           <KWRechner />
         </div>
+
+        {/* ── Kalender zum Ausdrucken ── Cluster C1 ─────────── */}
+        <CalendarPrintSection year={currentKW.year} />
 
         {/* ── Erklärung: KW im Kalender ── Cluster 2 ─────────── */}
         <div className="mt-14">
