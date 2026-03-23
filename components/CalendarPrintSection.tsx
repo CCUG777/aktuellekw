@@ -452,7 +452,33 @@ function Checkbox({
   );
 }
 
-/* ── PDF Generation (lazy-loaded) ──────────────────────────────────── */
+/* ── PDF Color Palette (aktuellekw.de Branding) ───────────────────── */
+const C = {
+  primary:       [37, 99, 235] as const,     // #2563EB
+  primaryLight:  [239, 246, 255] as const,    // #EFF6FF
+  textPrimary:   [17, 24, 39] as const,       // #111827
+  textSecondary: [107, 114, 128] as const,    // #6B7280
+  textTertiary:  [156, 163, 175] as const,    // #9CA3AF
+  textMuted:     [55, 65, 81] as const,       // #374151
+  holiday:       [220, 38, 38] as const,      // #DC2626
+  white:         [255, 255, 255] as const,
+  bgLight:       [249, 250, 251] as const,    // #F9FAFB
+  bgHeader:      [243, 244, 246] as const,    // #F3F4F6
+  border:        [229, 231, 235] as const,    // #E5E7EB
+};
+
+/* ── Holiday list builder for legend ───────────────────────────────── */
+function getHolidayList(year: number): { date: string; name: string }[] {
+  const holidays = getNationwideHolidays(year);
+  const list: { date: string; name: string }[] = [];
+  for (const [key, name] of holidays) {
+    const [, mm, dd] = key.split("-");
+    list.push({ date: `${dd}.${mm}.`, name });
+  }
+  return list;
+}
+
+/* ── PDF Generation (lazy-loaded) — aktuellekw.de Branded ─────────── */
 async function generatePDF(
   year: number,
   orientation: Orientation,
@@ -463,10 +489,11 @@ async function generatePDF(
 ) {
   const jsPDFModule = await import("jspdf");
   const jsPDF = jsPDFModule.default || jsPDFModule.jsPDF;
-  const autoTableModule = await import("jspdf-autotable");
-  const autoTable = autoTableModule.default || autoTableModule.autoTable;
 
   const isLandscape = orientation === "landscape";
+  const isA3 = paperSize === "a3";
+  const s = isA3 ? 1.35 : 1; // scale factor for A3
+
   const doc = new jsPDF({
     orientation: isLandscape ? "landscape" : "portrait",
     unit: "mm",
@@ -475,70 +502,120 @@ async function generatePDF(
 
   const pageW = doc.internal.pageSize.getWidth();
   const pageH = doc.internal.pageSize.getHeight();
-  const margin = paperSize === "a3" ? 12 : 8;
 
-  // Title
-  doc.setFontSize(paperSize === "a3" ? 18 : 14);
-  doc.setFont("helvetica", "bold");
-  doc.text(`Kalender ${year}`, pageW / 2, margin + 4, { align: "center" });
-
-  // Grid layout
+  // ── Layout constants ──
+  const marginX = isA3 ? 15 : 15;
+  const marginTop = isA3 ? 12 : 12;
+  const headerH = isA3 ? 22 : 18;
+  const cardGap = isA3 ? 5 : (isLandscape ? 3.5 : 4);
+  const cardPad = isA3 ? 4 : 3;
   const cols = isLandscape ? 4 : 3;
   const rows = isLandscape ? 3 : 4;
-  const startY = margin + 10;
-  const usableW = pageW - margin * 2;
-  const usableH = pageH - startY - margin - 6; // 6mm for footer
-  const cellW = usableW / cols;
-  const cellH = usableH / rows;
-  const cellPad = paperSize === "a3" ? 3 : 2;
 
-  const dayHeaders = opts.showKW
-    ? ["KW", "Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"]
-    : ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"];
+  // ── 1. HEADER BANNER ──
+  doc.setFillColor(...C.primary);
+  doc.rect(0, 0, pageW, marginTop + headerH, "F");
+
+  // Title
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(18 * s);
+  doc.setTextColor(...C.white);
+  doc.text(`Kalender ${year}`, marginX, marginTop + 7 * s);
+
+  // Subtitle
+  doc.setFont("helvetica", "normal");
+  doc.setFontSize(9 * s);
+  doc.setTextColor(255, 255, 255);
+  doc.text("mit Kalenderwochen & Feiertagen", marginX, marginTop + 12.5 * s);
+
+  // Branding right-aligned
+  doc.setFontSize(8 * s);
+  doc.text("aktuellekw.de", pageW - marginX, marginTop + 7 * s, { align: "right" });
+
+  // ── 2. MONTH CARDS GRID ──
+  const gridStartY = marginTop + headerH + (isA3 ? 8 : 6);
+  const legendH = opts.showHolidays ? (isA3 ? 18 : 14) : 0;
+  const footerH = isA3 ? 10 : 8;
+  const usableW = pageW - marginX * 2;
+  const usableH = pageH - gridStartY - legendH - footerH - 2;
+  const cardW = (usableW - (cols - 1) * cardGap) / cols;
+  const cardH = (usableH - (rows - 1) * cardGap) / rows;
+
+  // Font sizes
+  const monthNameSize = 9 * s;
+  const thSize = 6.5 * s;
+  const tdSize = 7 * s;
+  const kwSize = 6 * s;
+
+  const dayLabels = ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"];
 
   for (let m = 0; m < 12; m++) {
     const col = m % cols;
     const row = Math.floor(m / cols);
-    const x = margin + col * cellW + cellPad;
-    const y = startY + row * cellH;
+    const cx = marginX + col * (cardW + cardGap);
+    const cy = gridStartY + row * (cardH + cardGap);
+
+    // Card border (rounded rect)
+    doc.setDrawColor(...C.border);
+    doc.setLineWidth(0.4);
+    doc.roundedRect(cx, cy, cardW, cardH, 2, 2, "S");
 
     // Month name
-    const fontSize = paperSize === "a3" ? 9 : 7;
-    doc.setFontSize(fontSize);
     doc.setFont("helvetica", "bold");
-    doc.setTextColor(0, 0, 0);
-    doc.text(MONTH_NAMES[m], x + (cellW - cellPad * 2) / 2, y + 4, { align: "center" });
+    doc.setFontSize(monthNameSize);
+    doc.setTextColor(...C.textPrimary);
+    doc.text(MONTH_NAMES[m], cx + cardPad, cy + cardPad + 3.5 * s);
 
-    // Build table body
+    // Table area
+    const tableTop = cy + cardPad + 6 * s;
+    const innerW = cardW - cardPad * 2;
+    const kwColW = opts.showKW ? innerW * 0.12 : 0;
+    const dayColW = (innerW - kwColW) / 7;
+    const rowH = (cardH - cardPad * 2 - 6 * s - 4 * s) / 7; // max ~7 week rows incl header
+
+    // Table header background
+    doc.setFillColor(...C.bgHeader);
+    doc.rect(cx + cardPad, tableTop, innerW, rowH, "F");
+
+    // Table header text
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(thSize);
+    doc.setTextColor(...C.textSecondary);
+    let hx = cx + cardPad;
+    if (opts.showKW) {
+      doc.text("KW", hx + kwColW / 2, tableTop + rowH * 0.65, { align: "center" });
+      hx += kwColW;
+    }
+    for (let i = 0; i < 7; i++) {
+      doc.text(dayLabels[i], hx + dayColW / 2, tableTop + rowH * 0.65, { align: "center" });
+      hx += dayColW;
+    }
+
+    // Build week rows for this month
     const daysInMonth = new Date(Date.UTC(year, m + 1, 0)).getUTCDate();
-    const tableRows: string[][] = [];
-    let weekRow: string[] = opts.showKW ? [""] : [];
-    for (let i = 0; i < 7; i++) weekRow.push("");
-    let needsNewRow = true;
+    const weekRows: { kw: number; days: (number | null)[]; }[] = [];
+    let curDays: (number | null)[] = new Array(7).fill(null);
+    let curKW = 0;
+    let started = false;
 
     for (let d = 1; d <= daysInMonth; d++) {
       const date = new Date(Date.UTC(year, m, d));
       const dow = date.getUTCDay();
-      const mondayIdx = dow === 0 ? 6 : dow - 1;
+      const mi = dow === 0 ? 6 : dow - 1;
 
-      if (mondayIdx === 0 || d === 1) {
-        if (!needsNewRow) {
-          tableRows.push(weekRow);
+      if (mi === 0 || d === 1) {
+        if (started) {
+          weekRows.push({ kw: curKW, days: curDays });
+          curDays = new Array(7).fill(null);
         }
-        weekRow = opts.showKW ? [""] : [];
-        for (let i = 0; i < 7; i++) weekRow.push("");
-        if (opts.showKW) {
-          weekRow[0] = String(getISOWeek(date));
-        }
-        needsNewRow = false;
+        curKW = getISOWeek(date);
+        started = true;
       }
-
-      const colIdx = opts.showKW ? mondayIdx + 1 : mondayIdx;
-      weekRow[colIdx] = String(d);
+      curDays[mi] = d;
     }
-    if (!needsNewRow) tableRows.push(weekRow);
+    if (started) weekRows.push({ kw: curKW, days: curDays });
 
-    // Holiday date keys for this month
+    // Holiday lookup
     const holidayDays = new Set<number>();
     if (opts.showHolidays && opts.colorHolidays) {
       for (let d = 1; d <= daysInMonth; d++) {
@@ -547,55 +624,115 @@ async function generatePDF(
       }
     }
 
-    const tableFontSize = paperSize === "a3" ? 7 : 5.5;
+    // Render week rows
+    for (let ri = 0; ri < weekRows.length; ri++) {
+      const wr = weekRows[ri];
+      const ry = tableTop + rowH * (ri + 1);
 
-    autoTable(doc, {
-      startY: y + 6,
-      margin: { left: x, right: pageW - x - (cellW - cellPad * 2) },
-      head: [dayHeaders],
-      body: tableRows,
-      theme: "plain",
-      styles: {
-        fontSize: tableFontSize,
-        cellPadding: paperSize === "a3" ? 1 : 0.5,
-        halign: "center",
-        valign: "middle",
-        lineWidth: 0,
-        textColor: [30, 30, 30],
-      },
-      headStyles: {
-        fontStyle: "bold",
-        textColor: [100, 100, 100],
-        fontSize: tableFontSize,
-      },
-      columnStyles: opts.showKW
-        ? { 0: { textColor: [160, 160, 160], halign: "left", cellWidth: paperSize === "a3" ? 8 : 6 } }
-        : {},
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      didParseCell: (data: any) => {
-        if (data.section !== "body") return;
-        const dayNum = parseInt(data.cell.text[0], 10);
-        if (!isNaN(dayNum) && holidayDays.has(dayNum)) {
-          data.cell.styles.textColor = [220, 38, 38];
+      // Alternating row background
+      if (ri % 2 === 1) {
+        doc.setFillColor(...C.bgLight);
+        doc.rect(cx + cardPad, ry, innerW, rowH, "F");
+      }
+
+      let rx = cx + cardPad;
+
+      // KW number
+      if (opts.showKW) {
+        doc.setFont("helvetica", "normal");
+        doc.setFontSize(kwSize);
+        doc.setTextColor(...C.textTertiary);
+        doc.text(String(wr.kw), rx + kwColW / 2, ry + rowH * 0.65, { align: "center" });
+        rx += kwColW;
+      }
+
+      // Day numbers
+      for (let di = 0; di < 7; di++) {
+        const dayNum = wr.days[di];
+        if (dayNum !== null) {
+          const isHoliday = holidayDays.has(dayNum);
+          const isWeekend = di === 5 || di === 6;
+
+          if (isHoliday) {
+            doc.setFont("helvetica", "bold");
+            doc.setFontSize(tdSize);
+            doc.setTextColor(...C.holiday);
+          } else if (isWeekend) {
+            doc.setFont("helvetica", "normal");
+            doc.setFontSize(tdSize);
+            doc.setTextColor(...C.textSecondary);
+          } else {
+            doc.setFont("helvetica", "normal");
+            doc.setFontSize(tdSize);
+            doc.setTextColor(...C.textPrimary);
+          }
+          doc.text(String(dayNum), rx + dayColW / 2, ry + rowH * 0.65, { align: "center" });
         }
-      },
-    });
+        rx += dayColW;
+      }
+    }
   }
 
-  // Footer
-  doc.setFontSize(paperSize === "a3" ? 8 : 6);
-  doc.setTextColor(140, 140, 140);
+  // ── 3. HOLIDAY LEGEND ──
+  if (opts.showHolidays) {
+    const legendY = pageH - legendH - footerH;
+
+    // Divider line
+    doc.setDrawColor(...C.border);
+    doc.setLineWidth(0.3);
+    doc.line(marginX, legendY, pageW - marginX, legendY);
+
+    // Legend title
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(7.5 * s);
+    doc.setTextColor(...C.textPrimary);
+    doc.text(`Feiertage ${year} (bundesweit)`, marginX, legendY + 4.5 * s);
+
+    // Holiday entries in columns
+    const holidayList = getHolidayList(year);
+    const legendCols = isLandscape ? 4 : 3;
+    const entryW = usableW / legendCols;
+    const entryStartY = legendY + 8 * s;
+
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(6.5 * s);
+
+    for (let i = 0; i < holidayList.length; i++) {
+      const hCol = i % legendCols;
+      const hRow = Math.floor(i / legendCols);
+      const ex = marginX + hCol * entryW;
+      const ey = entryStartY + hRow * 3.5 * s;
+
+      // Red dot
+      doc.setFillColor(...C.holiday);
+      doc.circle(ex + 1.2, ey - 0.8, 0.8, "F");
+
+      // Date + name
+      doc.setTextColor(...C.textMuted);
+      doc.text(`${holidayList[i].date} ${holidayList[i].name}`, ex + 3.5, ey);
+    }
+  }
+
+  // ── 4. FOOTER ──
+  const footerY = pageH - footerH + 2;
+  doc.setDrawColor(...C.border);
+  doc.setLineWidth(0.3);
+  doc.line(marginX, footerY - 3, pageW - marginX, footerY - 3);
+
+  doc.setFont("helvetica", "normal");
+  doc.setFontSize(6.5 * s);
+  doc.setTextColor(...C.textTertiary);
   doc.text(
     "aktuellekw.de \u00B7 Kalenderwochen nach ISO 8601",
     pageW / 2,
-    pageH - margin + 2,
+    footerY,
     { align: "center" },
   );
 
   doc.save(`${fileName}.pdf`);
 }
 
-/* ── Excel Generation (lazy-loaded) ────────────────────────────────── */
+/* ── Excel Generation (lazy-loaded) — aktuellekw.de Branded ────────── */
 async function generateExcel(
   year: number,
   opts: CalendarOptions,
@@ -605,20 +742,128 @@ async function generateExcel(
   const XLSX = await import("xlsx");
 
   const wb = XLSX.utils.book_new();
+  const colCount = opts.showKW ? 8 : 7;
+
+  // ── Styles (xlsx-js-style compatible cell styles) ──
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const sHeader: any = {
+    font: { bold: true, color: { rgb: "FFFFFF" }, sz: 14 },
+    fill: { fgColor: { rgb: "2563EB" } },
+    alignment: { horizontal: "center", vertical: "center" },
+  };
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const sMonthName: any = {
+    font: { bold: true, color: { rgb: "111827" }, sz: 11 },
+    fill: { fgColor: { rgb: "F3F4F6" } },
+    alignment: { horizontal: "left", vertical: "center" },
+  };
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const sTableHead: any = {
+    font: { bold: true, color: { rgb: "6B7280" }, sz: 9 },
+    fill: { fgColor: { rgb: "F3F4F6" } },
+    alignment: { horizontal: "center", vertical: "center" },
+    border: { bottom: { style: "thin", color: { rgb: "E5E7EB" } } },
+  };
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const sDay: any = {
+    font: { color: { rgb: "111827" }, sz: 10 },
+    alignment: { horizontal: "center", vertical: "center" },
+  };
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const sWeekend: any = {
+    font: { color: { rgb: "6B7280" }, sz: 10 },
+    alignment: { horizontal: "center", vertical: "center" },
+  };
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const sHoliday: any = {
+    font: { bold: true, color: { rgb: "DC2626" }, sz: 10 },
+    alignment: { horizontal: "center", vertical: "center" },
+  };
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const sKW: any = {
+    font: { color: { rgb: "9CA3AF" }, sz: 9 },
+    alignment: { horizontal: "center", vertical: "center" },
+  };
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const sAltRow: any = {
+    fill: { fgColor: { rgb: "F9FAFB" } },
+  };
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const sFooter: any = {
+    font: { color: { rgb: "9CA3AF" }, sz: 8 },
+    alignment: { horizontal: "center", vertical: "center" },
+  };
+
   const wsData: (string | number | null)[][] = [];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const cellStyles: Record<string, any> = {};
+
+  function cellRef(r: number, c: number): string {
+    return XLSX.utils.encode_cell({ r, c });
+  }
+
+  // ── Title row ──
+  wsData.push([`Kalender ${year} — mit Kalenderwochen & Feiertagen`]);
+  for (let c = 0; c < colCount; c++) {
+    cellStyles[cellRef(0, c)] = sHeader;
+  }
+
+  // ── Empty row after header ──
+  wsData.push([]);
 
   for (let m = 0; m < 12; m++) {
-    // Month header
-    const headerRow: (string | null)[] = opts.showKW ? ["KW"] : [];
-    headerRow.push("Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag", "Sonntag");
+    const rowStart = wsData.length;
 
+    // Month name row
     wsData.push([MONTH_NAMES[m] + " " + year]);
-    wsData.push(headerRow);
+    for (let c = 0; c < colCount; c++) {
+      cellStyles[cellRef(rowStart, c)] = sMonthName;
+    }
 
+    // Table header row
+    const headerRow: string[] = opts.showKW ? ["KW"] : [];
+    headerRow.push("Mo", "Di", "Mi", "Do", "Fr", "Sa", "So");
+    wsData.push(headerRow);
+    for (let c = 0; c < colCount; c++) {
+      cellStyles[cellRef(rowStart + 1, c)] = sTableHead;
+    }
+
+    // Build week data
     const daysInMonth = new Date(Date.UTC(year, m + 1, 0)).getUTCDate();
     let weekRow: (string | number | null)[] = opts.showKW ? [null] : [];
     for (let i = 0; i < 7; i++) weekRow.push(null);
     let needsNewRow = true;
+    let weekIdx = 0;
+
+    const flushWeek = () => {
+      const r = wsData.length;
+      wsData.push([...weekRow]);
+
+      // Apply cell styles
+      for (let c = 0; c < colCount; c++) {
+        const isKWCol = opts.showKW && c === 0;
+        const dayIdx = opts.showKW ? c - 1 : c;
+        const val = weekRow[c];
+
+        let style = isKWCol ? { ...sKW } : (dayIdx === 5 || dayIdx === 6) ? { ...sWeekend } : { ...sDay };
+
+        // Check if this day is a holiday
+        if (!isKWCol && val !== null && typeof val === "number") {
+          const dateKey = `${year}-${String(m + 1).padStart(2, "0")}-${String(val).padStart(2, "0")}`;
+          if (opts.showHolidays && opts.colorHolidays && holidays.has(dateKey)) {
+            style = { ...sHoliday };
+          }
+        }
+
+        // Alternating row background
+        if (weekIdx % 2 === 1) {
+          style = { ...style, ...sAltRow, fill: sAltRow.fill };
+        }
+
+        cellStyles[cellRef(r, c)] = style;
+      }
+      weekIdx++;
+    };
 
     for (let d = 1; d <= daysInMonth; d++) {
       const date = new Date(Date.UTC(year, m, d));
@@ -627,7 +872,7 @@ async function generateExcel(
 
       if (mondayIdx === 0 || d === 1) {
         if (!needsNewRow) {
-          wsData.push(weekRow);
+          flushWeek();
         }
         weekRow = opts.showKW ? [null] : [];
         for (let i = 0; i < 7; i++) weekRow.push(null);
@@ -638,27 +883,60 @@ async function generateExcel(
       }
 
       const colIdx = opts.showKW ? mondayIdx + 1 : mondayIdx;
-      const dateKey = `${year}-${String(m + 1).padStart(2, "0")}-${String(d).padStart(2, "0")}`;
-      const holidayName = holidays.get(dateKey);
-      if (opts.showHolidays && holidayName) {
-        weekRow[colIdx] = `${d} (${holidayName})`;
-      } else {
-        weekRow[colIdx] = d;
-      }
+      weekRow[colIdx] = d;
     }
-    if (!needsNewRow) wsData.push(weekRow);
+    if (!needsNewRow) flushWeek();
 
     // Empty row between months
     wsData.push([]);
   }
 
+  // ── Holiday legend ──
+  if (opts.showHolidays) {
+    const legendStart = wsData.length;
+    wsData.push([`Feiertage ${year} (bundesweit)`]);
+    cellStyles[cellRef(legendStart, 0)] = {
+      font: { bold: true, color: { rgb: "111827" }, sz: 9 },
+    };
+
+    const holidayList = getHolidayList(year);
+    for (const h of holidayList) {
+      const r = wsData.length;
+      wsData.push([`${h.date} ${h.name}`]);
+      cellStyles[cellRef(r, 0)] = {
+        font: { color: { rgb: "DC2626" }, sz: 9 },
+      };
+    }
+    wsData.push([]);
+  }
+
+  // ── Footer ──
+  const footerRow = wsData.length;
+  wsData.push(["aktuellekw.de \u00B7 Kalenderwochen nach ISO 8601"]);
+  cellStyles[cellRef(footerRow, 0)] = sFooter;
+
+  // ── Build worksheet ──
   const ws = XLSX.utils.aoa_to_sheet(wsData);
 
-  // Set column widths
-  const colCount = opts.showKW ? 8 : 7;
+  // Column widths
   ws["!cols"] = Array.from({ length: colCount }, (_, i) =>
-    i === 0 && opts.showKW ? { wch: 5 } : { wch: 14 }
+    i === 0 && opts.showKW ? { wch: 5 } : { wch: 12 }
   );
+
+  // Merge title row
+  ws["!merges"] = [
+    { s: { r: 0, c: 0 }, e: { r: 0, c: colCount - 1 } },
+  ];
+
+  // Apply styles (only works with xlsx-js-style; plain xlsx ignores .s property)
+  for (const [ref, style] of Object.entries(cellStyles)) {
+    if (ws[ref]) {
+      ws[ref].s = style;
+    }
+  }
+
+  // Row heights (header taller)
+  ws["!rows"] = [{ hpt: 30 }];
 
   XLSX.utils.book_append_sheet(wb, ws, `Kalender ${year}`);
   XLSX.writeFile(wb, `${fileName}.xlsx`);
