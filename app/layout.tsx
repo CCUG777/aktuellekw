@@ -90,6 +90,12 @@ function WebSiteJsonLd() {
         // TODO: Social-Profile-URLs eintragen sobald vorhanden:
         // "https://www.youtube.com/@aktuellekw"
         // "https://www.linkedin.com/company/aktuellekw"
+        logo: {
+          "@type": "ImageObject",
+          url: "https://aktuellekw.de/apple-icon",
+          width: 180,
+          height: 180,
+        },
         sameAs: [
           "https://github.com/CCUG777",
         ],
