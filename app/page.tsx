@@ -877,10 +877,10 @@ export default function Home() {
           Die Kalenderwoche aktuell: Welche KW haben wir gerade, wie wird sie
           berechnet und wann beginnt KW&nbsp;1? Hier beantworten wir die
           häufigsten Fragen rund um die Kalenderwoche nach ISO&nbsp;8601.
-          Erfahren Sie, warum manche Jahre 53&nbsp;KW haben, wie Sie die
-          heutige Kalenderwoche schnell bestimmen und was der Unterschied
+          Erfahre, warum manche Jahre 53&nbsp;KW haben, wie du die
+          heutige Kalenderwoche schnell bestimmst und was der Unterschied
           zwischen deutschem und amerikanischem Wochensystem ist. Weitere
-          Antworten finden Sie auf unserer{" "}
+          Antworten findest du auf unserer{" "}
           <a href="/faq" className="text-accent hover:underline">
             ausführlichen FAQ-Seite
           </a>.
@@ -935,13 +935,13 @@ export default function Home() {
         <p className="text-text-secondary text-sm mb-5 leading-relaxed">
           Alle {weeksInYear} Kalenderwochen {kw.year} auf einen Blick – von
           KW&nbsp;1 bis KW&nbsp;{weeksInYear}. Die aktuelle KW
-          (KW&nbsp;{kw.weekNumber}) ist blau hervorgehoben. Klicken Sie auf
+          (KW&nbsp;{kw.weekNumber}) ist blau hervorgehoben. Klicke auf
           eine beliebige Woche, um Start- und Enddatum, Feiertage und
           Details nach ISO&nbsp;8601 zu sehen. Die vollständige{" "}
           <a href="/kalenderwoche" className="text-accent hover:underline">
             Kalenderwochen-Übersicht mit Jahresnavigation
           </a>{" "}
-          finden Sie auf der Unterseite.
+          findest du auf der Unterseite.
         </p>
         <KWTable weeks={allWeeks} currentWeek={kw.weekNumber} />
         <a
