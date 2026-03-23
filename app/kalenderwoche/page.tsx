@@ -446,6 +446,7 @@ export default function KalenderwochePage() {
             {kwFaqs.map((faq, i) => (
               <details
                 key={i}
+                open={i < 3 ? true : undefined}
                 className="group border border-border rounded-xl overflow-hidden"
               >
                 <summary className="flex items-center justify-between px-5 py-4 cursor-pointer font-medium hover:bg-surface-secondary transition-colors list-none">
