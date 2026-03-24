@@ -175,75 +175,99 @@ export default function KalenderMitKalenderwochenPage() {
         {/* ── Kalender zum Ausdrucken ── Cluster C1 ─────────── */}
         <CalendarPrintSection year={currentKW.year} />
 
-        {/* ── Erklärung: KW im Kalender ── Cluster 2 ─────────── */}
+        {/* ── KW in Kalender-Apps aktivieren ── einzigartig ──── */}
         <div className="mt-14">
-          <h2 id="kw-im-kalender-richtig-nutzen" className="text-2xl font-semibold mb-4">
-            KW im Kalender richtig nutzen
+          <h2 id="kw-in-kalender-apps-aktivieren" className="text-2xl font-semibold mb-4">
+            KW im Kalender aktivieren – App-Vergleich
           </h2>
-          <p className="text-text-secondary text-sm leading-relaxed mb-4">
-            Die <strong className="text-text-primary">Kalenderwochen</strong> im
-            ISO-8601-System starten immer am Montag. Der{" "}
-            <strong className="text-text-primary">Kalender mit Wochen</strong> auf
-            dieser Seite zeigt Dir für jede KW das exakte Start- und Enddatum:
+          <p className="text-text-secondary text-sm leading-relaxed mb-5">
+            Viele <strong className="text-text-primary">Kalender</strong> zeigen
+            Kalenderwochen nicht automatisch an. So aktivierst Du die{" "}
+            <strong className="text-text-primary">KW im Kalender</strong> in den
+            gängigsten Apps:
           </p>
-          <ul className="space-y-3 text-text-secondary text-sm leading-relaxed">
-            <li className="flex gap-2.5">
-              <span className="text-accent mt-0.5 shrink-0">•</span>
-              <span>
-                <strong className="text-text-primary">KW&nbsp;1 beginnt</strong>{" "}
-                am {formatDateDE(allWeeks[0].startDate)}. Die erste Woche enthält
-                immer den ersten Donnerstag des Jahres.
-              </span>
-            </li>
-            <li className="flex gap-2.5">
-              <span className="text-accent mt-0.5 shrink-0">•</span>
-              <span>
-                <strong className="text-text-primary">KW&nbsp;{weeksInYear} endet</strong>{" "}
-                am {formatDateDE(allWeeks[allWeeks.length - 1].endDate)}.
-                Das Jahr {currentKW.year} hat insgesamt {weeksInYear}&nbsp;Kalenderwochen.
-              </span>
-            </li>
-            <li className="flex gap-2.5">
-              <span className="text-accent mt-0.5 shrink-0">•</span>
-              <span>
-                Jede <strong className="text-text-primary">KW im Kalender</strong>{" "}
-                umfasst exakt 7&nbsp;Tage: Montag bis Sonntag nach DIN&nbsp;1355.
-              </span>
-            </li>
-          </ul>
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="border-b border-border text-text-secondary text-xs uppercase tracking-wider">
+                  <th className="text-left py-2 pr-4">App</th>
+                  <th className="text-left py-2 pr-4">Pfad</th>
+                  <th className="text-left py-2">ISO 8601</th>
+                </tr>
+              </thead>
+              <tbody className="text-text-secondary">
+                <tr className="border-b border-border/50">
+                  <td className="py-2.5 pr-4 font-medium text-text-primary">iPhone / iPad</td>
+                  <td className="py-2.5 pr-4">Einstellungen → Kalender → Wochennummern</td>
+                  <td className="py-2.5 text-green-500">✓ Standard</td>
+                </tr>
+                <tr className="border-b border-border/50">
+                  <td className="py-2.5 pr-4 font-medium text-text-primary">Google Kalender</td>
+                  <td className="py-2.5 pr-4">Einstellungen → Ansicht → Wochennummern anzeigen</td>
+                  <td className="py-2.5 text-green-500">✓ Standard</td>
+                </tr>
+                <tr className="border-b border-border/50">
+                  <td className="py-2.5 pr-4 font-medium text-text-primary">Outlook (Desktop)</td>
+                  <td className="py-2.5 pr-4">Datei → Optionen → Kalender → Wochennummern</td>
+                  <td className="py-2.5 text-yellow-500">⚠ Einstellung prüfen</td>
+                </tr>
+                <tr className="border-b border-border/50">
+                  <td className="py-2.5 pr-4 font-medium text-text-primary">Outlook 365 (Web)</td>
+                  <td className="py-2.5 pr-4">Zahnrad → Kalender → Wochennummern anzeigen</td>
+                  <td className="py-2.5 text-yellow-500">⚠ Einstellung prüfen</td>
+                </tr>
+                <tr className="border-b border-border/50">
+                  <td className="py-2.5 pr-4 font-medium text-text-primary">Samsung Kalender</td>
+                  <td className="py-2.5 pr-4">Menü → Einstellungen → Wochennummern anzeigen</td>
+                  <td className="py-2.5 text-green-500">✓ Standard</td>
+                </tr>
+                <tr>
+                  <td className="py-2.5 pr-4 font-medium text-text-primary">Thunderbird</td>
+                  <td className="py-2.5 pr-4">Einstellungen → Kalender → Wochennummern in Monatsansicht</td>
+                  <td className="py-2.5 text-green-500">✓ Standard</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p className="text-text-secondary text-xs mt-3">
+            ⚠ = Outlook nutzt je nach Regioneinstellung das US-System (Woche beginnt
+            am Sonntag). Stelle unter „Erste Woche des Jahres" → „Erste 4-Tage-Woche"
+            ein, um ISO&nbsp;8601 zu erhalten.
+          </p>
         </div>
 
-        {/* ── SEO-TEXT – CLUSTER 2 ──────────────────────────────── */}
+        {/* ── Kalender mit vs. ohne KW ────────────────────────── */}
         <section className="mt-12 space-y-4">
-          <h2 id="warum-ein-kalender-mit-kalenderwochen" className="text-2xl font-semibold">
-            Warum ein Kalender mit Kalenderwochen?
+          <h2 id="kalender-mit-oder-ohne-kw" className="text-2xl font-semibold mb-4">
+            Kalender mit oder ohne Kalenderwochen – was ist besser?
           </h2>
           <div className="text-text-secondary text-sm leading-relaxed space-y-3">
             <p>
-              Ein <strong className="text-text-primary">Kalender mit Wochen</strong>{" "}
-              erleichtert die Terminplanung im Beruf und Alltag erheblich. Statt
-              umständlich Tage zu zählen, genügt ein Blick auf die{" "}
-              <strong className="text-text-primary">KW im Kalender</strong>, um
-              Deadlines, Urlaubswochen oder Projektmeilensteine sofort einzuordnen.
-              Besonders in Deutschland, Österreich und der Schweiz ist die Angabe
-              der Kalenderwoche im geschäftlichen Umfeld Standard.
+              Ein <strong className="text-text-primary">Kalender mit Kalenderwochen</strong>{" "}
+              lohnt sich besonders, wenn Du beruflich mit Lieferfristen, Sprint-Zyklen
+              oder Gehaltsabrechnungen arbeitest. In Deutschland, Österreich und der
+              Schweiz sind KW-Angaben im Geschäftsverkehr üblich – Formulierungen
+              wie „Lieferung KW&nbsp;15" oder „Fertigstellung bis KW&nbsp;22"
+              setzen voraus, dass alle Beteiligten die gleiche Wochennummerierung nutzen.
             </p>
             <p>
-              Unser <strong className="text-text-primary">Kalender mit KW</strong>{" "}
-              zeigt alle {getWeeksInYear(currentKW.year)}&nbsp;Kalenderwochen
-              des Jahres {currentKW.year} mit Start- und Enddatum nach ISO&nbsp;8601.
-              Die aktuelle Woche (KW&nbsp;{currentKW.weekNumber}) ist farblich
-              hervorgehoben, vergangene Wochen sind abgedimmt. Ein Klick auf eine
-              beliebige Woche führt zur Detailseite mit allen Informationen.
+              Ohne <strong className="text-text-primary">KW im Kalender</strong> müsstest
+              Du jedes Mal manuell zählen oder nachschlagen, in welche Woche ein
+              bestimmtes Datum fällt. Das kostet Zeit und ist fehleranfällig – besonders
+              bei Jahresübergängen, wenn KW&nbsp;1 bereits im Dezember des Vorjahres
+              beginnen kann (wie {currentKW.year}: KW&nbsp;1 startet am{" "}
+              {formatDateDE(allWeeks[0].startDate)}).
             </p>
             <p>
-              Der <strong className="text-text-primary">KW Kalender</strong> eignet
-              sich ideal zum Abgleich mit Outlook, Google Calendar oder gedruckten
-              Wandkalendern. Über die Jahresnavigation oben kannst Du bequem
-              zwischen {currentKW.year - 1} und {currentKW.year + 1} wechseln –
-              so hast Du alle{" "}
-              <strong className="text-text-primary">Kalenderwochen</strong> immer
-              griffbereit.
+              Unser <strong className="text-text-primary">Kalender mit KW</strong> zeigt
+              Dir alle {weeksInYear}&nbsp;Wochen des Jahres {currentKW.year} auf einen
+              Blick. Die aktuelle KW&nbsp;{currentKW.weekNumber} ist blau markiert,
+              sodass Du sofort erkennst, wo im Jahr Du Dich befindest. Für die genaue
+              Zuordnung eines beliebigen Datums nutze den{" "}
+              <a href="#kw-rechner-input" className="text-accent hover:underline">
+                KW-Rechner
+              </a>{" "}
+              oben.
             </p>
           </div>
         </section>

@@ -35,10 +35,10 @@ function BreadcrumbJsonLd() {
 }
 
 /* ── Reusable section card ────────────────────────────────────── */
-function Section({ title, children }: { title: string; children: React.ReactNode }) {
+function Section({ title, id, children }: { title: string; id?: string; children: React.ReactNode }) {
   return (
     <section className="bg-surface-secondary border border-border rounded-2xl p-6">
-      <h2 className="text-base font-semibold mb-3">{title}</h2>
+      <h2 id={id} className="text-base font-semibold mb-3">{title}</h2>
       <div className="text-text-secondary text-sm leading-relaxed space-y-3">
         {children}
       </div>
@@ -79,7 +79,7 @@ export default function DatenschutzPage() {
         <div className="space-y-4">
 
           {/* 1. Verantwortliche Stelle */}
-          <Section title="1. Datenschutz auf einen Blick">
+          <Section id="datenschutz-auf-einen-blick" title="1. Datenschutz auf einen Blick">
             <p className="font-medium text-text-primary">Allgemeine Hinweise</p>
             <p>
               Die folgenden Hinweise geben einen einfachen Überblick darüber, was mit Ihren
@@ -128,7 +128,7 @@ export default function DatenschutzPage() {
           </Section>
 
           {/* 2. Verantwortliche Stelle */}
-          <Section title="2. Hinweis zur verantwortlichen Stelle">
+          <Section id="hinweis-zur-verantwortlichen-stelle" title="2. Hinweis zur verantwortlichen Stelle">
             <p>Die verantwortliche Stelle für die Datenverarbeitung auf dieser Website ist:</p>
             <address className="not-italic text-text-primary bg-surface-tertiary rounded-xl p-4 mt-2">
               <p className="font-semibold">Common Consulting UG</p>
@@ -155,7 +155,7 @@ export default function DatenschutzPage() {
           </Section>
 
           {/* 3. Speicherdauer */}
-          <Section title="3. Speicherdauer">
+          <Section id="speicherdauer" title="3. Speicherdauer">
             <p>
               Soweit innerhalb dieser Datenschutzerklärung keine speziellere Speicherdauer genannt
               wurde, verbleiben Ihre personenbezogenen Daten bei uns, bis der Zweck für die
@@ -169,7 +169,7 @@ export default function DatenschutzPage() {
           </Section>
 
           {/* 4. Allgemeine Hinweise zu Rechtsgrundlagen */}
-          <Section title="4. Allgemeine Hinweise zu den Rechtsgrundlagen der Datenverarbeitung">
+          <Section id="allgemeine-hinweise-rechtsgrundlagen" title="4. Allgemeine Hinweise zu den Rechtsgrundlagen der Datenverarbeitung">
             <p>
               Sofern Sie in die Datenverarbeitung eingewilligt haben, verarbeiten wir Ihre
               personenbezogenen Daten auf Grundlage von Art. 6 Abs. 1 lit. a DSGVO bzw. Art. 9 Abs.
@@ -191,7 +191,7 @@ export default function DatenschutzPage() {
           </Section>
 
           {/* 5. Empfänger */}
-          <Section title="5. Empfänger von personenbezogenen Daten">
+          <Section id="empfaenger-von-personenbezogenen-daten" title="5. Empfänger von personenbezogenen Daten">
             <p>
               Im Rahmen unserer Geschäftstätigkeit arbeiten wir mit verschiedenen externen Stellen
               zusammen. Dabei ist teilweise auch eine Übermittlung von personenbezogenen Daten an
@@ -205,7 +205,7 @@ export default function DatenschutzPage() {
           </Section>
 
           {/* 6. Hosting – Vercel */}
-          <Section title="6. Hosting">
+          <Section id="hosting" title="6. Hosting">
             <p className="font-medium text-text-primary">Vercel</p>
             <p>
               Wir hosten unsere Website bei Vercel Inc., 340 Pine Street, Suite 701, San Francisco,
@@ -249,7 +249,7 @@ export default function DatenschutzPage() {
           </Section>
 
           {/* 7. Allgemeine Hinweise */}
-          <Section title="7. SSL- bzw. TLS-Verschlüsselung">
+          <Section id="ssl-tls-verschluesselung" title="7. SSL- bzw. TLS-Verschlüsselung">
             <p>
               Diese Seite nutzt aus Sicherheitsgründen und zum Schutz der Übertragung vertraulicher
               Inhalte, wie zum Beispiel Bestellungen oder Anfragen, die Sie an uns als
@@ -264,7 +264,7 @@ export default function DatenschutzPage() {
           </Section>
 
           {/* 8. Server-Logfiles */}
-          <Section title="8. Server-Log-Dateien">
+          <Section id="server-log-dateien" title="8. Server-Log-Dateien">
             <p>
               Der Provider der Seiten erhebt und speichert automatisch Informationen in so genannten
               Server-Log-Dateien, die Ihr Browser automatisch an uns übermittelt. Dies sind:
@@ -287,7 +287,7 @@ export default function DatenschutzPage() {
           </Section>
 
           {/* 9. Anfrage per E-Mail */}
-          <Section title="9. Anfrage per E-Mail oder Telefon">
+          <Section id="anfrage-per-e-mail-oder-telefon" title="9. Anfrage per E-Mail oder Telefon">
             <p>
               Wenn Sie uns per E-Mail oder Telefon kontaktieren, wird Ihre Anfrage inklusive aller
               daraus hervorgehenden personenbezogenen Daten (Name, Anfrage) zum Zwecke der
@@ -313,7 +313,7 @@ export default function DatenschutzPage() {
           </Section>
 
           {/* 10. Rechte */}
-          <Section title="10. Ihre Rechte als betroffene Person">
+          <Section id="ihre-rechte-als-betroffene-person" title="10. Ihre Rechte als betroffene Person">
             <p className="font-medium text-text-primary">Recht auf Auskunft (Art. 15 DSGVO)</p>
             <p>
               Sie haben das Recht, eine Bestätigung darüber zu verlangen, ob betreffende Daten
@@ -364,7 +364,7 @@ export default function DatenschutzPage() {
           </Section>
 
           {/* 11. Widerspruchsrecht */}
-          <Section title="11. Widerspruchsrecht">
+          <Section id="widerspruchsrecht" title="11. Widerspruchsrecht">
             <p>
               Sofern Ihre personenbezogenen Daten auf Grundlage von berechtigten Interessen gemäß
               Art. 6 Abs. 1 S. 1 lit. f DSGVO verarbeitet werden, haben Sie das Recht, gemäß Art.
@@ -384,7 +384,7 @@ export default function DatenschutzPage() {
           </Section>
 
           {/* 12. Cookies */}
-          <Section title="12. Cookies">
+          <Section id="cookies" title="12. Cookies">
             <p>
               Unsere Website verwendet ausschließlich technisch notwendige Cookies. Diese Cookies
               sind erforderlich, damit die Website ordnungsgemäß funktioniert (z. B. zur Speicherung

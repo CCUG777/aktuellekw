@@ -199,57 +199,125 @@ export default function KalenderwochenUebersichtPage() {
           </div>
         </div>
 
-        {/* ── Erklärung ── Cluster 3 ──────────────────────────── */}
+        {/* ── Quartals-Übersicht ── einzigartig für diese Seite ── */}
         <div className="mt-14">
-          <h2 id="alle-kalenderwochen-im-ueberblick" className="text-2xl font-semibold mb-4">
-            Alle Kalenderwochen {currentKW.year} im Überblick
+          <h2 id="kalenderwochen-nach-quartal" className="text-2xl font-semibold mb-4">
+            Kalenderwochen nach Quartal – {currentKW.year}
           </h2>
-          <div className="text-text-secondary text-sm leading-relaxed space-y-3">
-            <p>
-              Die <strong className="text-text-primary">Kalenderwochen Überblick</strong>-Tabelle
-              oben zeigt Dir alle {weeksInYear}&nbsp;Wochen des Jahres {currentKW.year}
-              mit ihrem jeweiligen Start- und Enddatum. Die Berechnung folgt dem
-              internationalen Standard ISO&nbsp;8601.
-            </p>
-            <p>
-              Die <strong className="text-text-primary">Wochenübersicht</strong> beginnt
-              mit KW&nbsp;1 am {formatDateDE(allWeeks[0].startDate)} und endet
-              mit KW&nbsp;{weeksInYear} am{" "}
-              {formatDateDE(allWeeks[allWeeks.length - 1].endDate)}.
-              Jede Woche startet am Montag und endet am Sonntag.
-            </p>
+          <p className="text-text-secondary text-sm leading-relaxed mb-5">
+            Ein <strong className="text-text-primary">Kalenderwochen Überblick</strong> nach
+            Quartalen hilft Dir, Geschäftsjahre, Berichtszeiträume und Projektphasen
+            schnell einzuordnen. Hier siehst Du, welche KW zu welchem Quartal gehört:
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {[
+              { q: "Q1", label: "Januar – März", kw: "KW 1 – KW 13" },
+              { q: "Q2", label: "April – Juni", kw: "KW 14 – KW 26" },
+              { q: "Q3", label: "Juli – September", kw: "KW 27 – KW 39" },
+              { q: "Q4", label: "Oktober – Dezember", kw: `KW 40 – KW ${weeksInYear}` },
+            ].map(({ q, label, kw }) => (
+              <div
+                key={q}
+                className="bg-surface-secondary border border-border rounded-2xl p-5 flex flex-col gap-1"
+              >
+                <span className="text-accent text-xs font-semibold uppercase tracking-wider">
+                  {q}
+                </span>
+                <span className="text-text-primary font-bold">{kw}</span>
+                <span className="text-text-secondary text-xs">{label}</span>
+              </div>
+            ))}
           </div>
+          <p className="text-text-secondary text-sm leading-relaxed mt-4">
+            Beachte: Die Quartals-Zuordnung ist eine Näherung. Da ISO-Wochen am
+            Montag beginnen, kann die erste oder letzte Woche eines Quartals
+            Tage aus dem angrenzenden Quartal enthalten.
+          </p>
         </div>
 
-        {/* ── SEO-TEXT – CLUSTER 3 ──────────────────────────────── */}
+        {/* ── Wann ist welche KW wichtig? ─────────────────────── */}
         <section className="mt-12 space-y-4">
-          <h2 id="alle-kalenderwochen-im-ueberblick-seo" className="text-2xl font-semibold">
-            Alle Kalenderwochen {currentKW.year} im Überblick
+          <h2 id="wichtige-kalenderwochen" className="text-2xl font-semibold mb-4">
+            Wichtige Kalenderwochen {currentKW.year} im Überblick
+          </h2>
+          <p className="text-text-secondary text-sm leading-relaxed">
+            Nicht jede KW ist gleich relevant. Diese{" "}
+            <strong className="text-text-primary">Kalenderwochen Übersicht</strong> zeigt
+            Dir die wichtigsten Wochen des Jahres – von Quartalswechseln über Feiertags-Wochen
+            bis hin zu typischen Urlaubs- und Planungszeiträumen:
+          </p>
+          <div className="overflow-x-auto mt-4">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="border-b border-border text-text-secondary text-xs uppercase tracking-wider">
+                  <th className="text-left py-2 pr-4">KW</th>
+                  <th className="text-left py-2 pr-4">Zeitraum</th>
+                  <th className="text-left py-2">Bedeutung</th>
+                </tr>
+              </thead>
+              <tbody className="text-text-secondary">
+                <tr className="border-b border-border/50">
+                  <td className="py-2.5 pr-4 font-medium text-text-primary">KW 1</td>
+                  <td className="py-2.5 pr-4">{formatDateDE(allWeeks[0].startDate)}</td>
+                  <td className="py-2.5">Jahresstart, Beginn Q1</td>
+                </tr>
+                <tr className="border-b border-border/50">
+                  <td className="py-2.5 pr-4 font-medium text-text-primary">KW 13</td>
+                  <td className="py-2.5 pr-4">{allWeeks[12] ? formatDateDE(allWeeks[12].startDate) : "–"}</td>
+                  <td className="py-2.5">Ende Q1, Quartalsberichte fällig</td>
+                </tr>
+                <tr className="border-b border-border/50">
+                  <td className="py-2.5 pr-4 font-medium text-text-primary">KW 26</td>
+                  <td className="py-2.5 pr-4">{allWeeks[25] ? formatDateDE(allWeeks[25].startDate) : "–"}</td>
+                  <td className="py-2.5">Halbjahreswechsel, Ende Q2</td>
+                </tr>
+                <tr className="border-b border-border/50">
+                  <td className="py-2.5 pr-4 font-medium text-text-primary">KW 29 – 32</td>
+                  <td className="py-2.5 pr-4">Juli/August</td>
+                  <td className="py-2.5">Hauptferienzeit, typische Sommerpause</td>
+                </tr>
+                <tr className="border-b border-border/50">
+                  <td className="py-2.5 pr-4 font-medium text-text-primary">KW 39</td>
+                  <td className="py-2.5 pr-4">{allWeeks[38] ? formatDateDE(allWeeks[38].startDate) : "–"}</td>
+                  <td className="py-2.5">Ende Q3, Jahresendplanung beginnt</td>
+                </tr>
+                <tr>
+                  <td className="py-2.5 pr-4 font-medium text-text-primary">KW {weeksInYear}</td>
+                  <td className="py-2.5 pr-4">{formatDateDE(allWeeks[allWeeks.length - 1].startDate)}</td>
+                  <td className="py-2.5">Letzte KW des Jahres, Jahresabschluss</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        {/* ── KW-Übersicht für Gehaltsabrechnung & Projekte ──── */}
+        <section className="mt-12 space-y-4">
+          <h2 id="kalenderwochen-im-beruf" className="text-2xl font-semibold mb-4">
+            Kalenderwochen-Übersicht im Berufsalltag
           </h2>
           <div className="text-text-secondary text-sm leading-relaxed space-y-3">
             <p>
-              Diese <strong className="text-text-primary">Kalenderwochen Übersicht</strong>{" "}
-              zeigt Dir sämtliche {weeksInYear}&nbsp;KW des Jahres {currentKW.year} auf
-              einen Blick. Die <strong className="text-text-primary">Wochenübersicht</strong>{" "}
-              enthält das exakte Start- und Enddatum jeder Woche nach ISO&nbsp;8601 –
-              ideal zum schnellen Nachschlagen oder als Ergänzung zu Deinem
-              Taschenkalender.
+              Die <strong className="text-text-primary">Kalenderwochen Übersicht</strong>{" "}
+              ist im Berufsalltag unverzichtbar. In vielen Branchen werden Termine,
+              Lieferfristen und Projektmeilensteine nicht nach Datum, sondern
+              nach Kalenderwoche kommuniziert – etwa „Lieferung in KW&nbsp;15" oder
+              „Sprint-Review KW&nbsp;22".
             </p>
             <p>
-              Der <strong className="text-text-primary">Überblick Kalenderwochen</strong>{" "}
-              hilft Dir, auf einen Blick zu erkennen, wann eine bestimmte KW beginnt
-              und endet. Das ist besonders nützlich bei der Urlaubsplanung, für
-              Quartalsberichte oder die Abstimmung von Lieferterminen. Die aktuelle
-              KW&nbsp;{currentKW.weekNumber} ist blau markiert, vergangene Wochen
-              sind optisch abgedimmt.
+              <strong className="text-text-primary">Gehaltsabrechnung:</strong>{" "}
+              Für die monatliche Lohnabrechnung ist der{" "}
+              <strong className="text-text-primary">Überblick der Kalenderwochen</strong>{" "}
+              hilfreich, um Überstunden, Schichtpläne und Urlaubstage korrekt
+              zuzuordnen. Besonders bei wochenbasierter Zeiterfassung ist die
+              KW-Nummer die zentrale Referenz.
             </p>
             <p>
-              Über die Jahresnavigation oben wechselst Du bequem
-              zu {currentKW.year - 1} oder {currentKW.year + 1}. Für noch mehr
-              Details zu einer einzelnen Woche klicke auf die entsprechende
-              KW-Kachel – dort findest Du Wochentage, Feiertage und
-              weitere Informationen zur gewählten{" "}
-              <strong className="text-text-primary">Kalenderwoche</strong>.
+              <strong className="text-text-primary">Projektmanagement:</strong>{" "}
+              Gantt-Diagramme, Sprint-Zyklen und Meilensteinpläne nutzen die
+              Kalenderwoche als kleinste Zeiteinheit. Mit dieser Übersicht
+              kannst Du schnell prüfen, in welche KW ein bestimmtes Datum
+              fällt – und umgekehrt.
             </p>
           </div>
         </section>

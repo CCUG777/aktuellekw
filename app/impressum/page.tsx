@@ -107,7 +107,7 @@ export default function ImpressumPage() {
 
           {/* Anbieter */}
           <section className="bg-surface-secondary border border-border rounded-2xl p-6">
-            <h2 className="text-sm font-semibold text-text-secondary uppercase tracking-wider mb-4">
+            <h2 id="anbieter" className="text-sm font-semibold text-text-secondary uppercase tracking-wider mb-4">
               Anbieter
             </h2>
             <address className="not-italic space-y-1 text-text-primary">
@@ -120,7 +120,7 @@ export default function ImpressumPage() {
 
           {/* Vertreten durch */}
           <section className="bg-surface-secondary border border-border rounded-2xl p-6">
-            <h2 className="text-sm font-semibold text-text-secondary uppercase tracking-wider mb-4">
+            <h2 id="vertreten-durch" className="text-sm font-semibold text-text-secondary uppercase tracking-wider mb-4">
               Vertreten durch
             </h2>
             <p className="text-text-primary">Cornelia Witt</p>
@@ -128,7 +128,7 @@ export default function ImpressumPage() {
 
           {/* Kontakt */}
           <section className="bg-surface-secondary border border-border rounded-2xl p-6">
-            <h2 className="text-sm font-semibold text-text-secondary uppercase tracking-wider mb-4">
+            <h2 id="kontakt" className="text-sm font-semibold text-text-secondary uppercase tracking-wider mb-4">
               Kontakt
             </h2>
             <dl className="space-y-2 text-text-primary">
@@ -159,7 +159,7 @@ export default function ImpressumPage() {
 
           {/* Registerangaben */}
           <section className="bg-surface-secondary border border-border rounded-2xl p-6">
-            <h2 className="text-sm font-semibold text-text-secondary uppercase tracking-wider mb-4">
+            <h2 id="registerangaben" className="text-sm font-semibold text-text-secondary uppercase tracking-wider mb-4">
               Registerangaben
             </h2>
             <dl className="space-y-2 text-text-primary">
@@ -176,7 +176,7 @@ export default function ImpressumPage() {
 
           {/* Steuer */}
           <section className="bg-surface-secondary border border-border rounded-2xl p-6">
-            <h2 className="text-sm font-semibold text-text-secondary uppercase tracking-wider mb-4">
+            <h2 id="steuerliche-angaben" className="text-sm font-semibold text-text-secondary uppercase tracking-wider mb-4">
               Steuerliche Angaben
             </h2>
             <dl className="space-y-2 text-text-primary">
@@ -193,7 +193,7 @@ export default function ImpressumPage() {
 
           {/* EU-Streitschlichtung */}
           <section className="bg-surface-secondary border border-border rounded-2xl p-6">
-            <h2 className="text-base font-semibold mb-3">EU-Streitschlichtung</h2>
+            <h2 id="eu-streitschlichtung" className="text-base font-semibold mb-3">EU-Streitschlichtung</h2>
             <p className="text-text-secondary text-sm leading-relaxed">
               Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS)
               bereit:{" "}
@@ -211,7 +211,7 @@ export default function ImpressumPage() {
 
           {/* Verbraucherstreitbeilegung */}
           <section className="bg-surface-secondary border border-border rounded-2xl p-6">
-            <h2 className="text-base font-semibold mb-3">
+            <h2 id="verbraucherschlichtung" className="text-base font-semibold mb-3">
               Verbraucher&shy;streit&shy;beilegung /
               Universal&shy;schlichtungs&shy;stelle
             </h2>
