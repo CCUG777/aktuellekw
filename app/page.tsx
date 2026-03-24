@@ -99,33 +99,33 @@ export default function Home() {
     {
       question: "Was ist eine Kalenderwoche?",
       answer:
-        "Eine Kalenderwoche (KW) ist ein Zeitraum von sieben Tagen, der nach ISO\u00a08601 am Montag beginnt und am Sonntag endet. In Deutschland, Österreich und der Schweiz ist der ISO-8601-Standard verbindlich und bildet die Grundlage für Geschäftstermine, Lieferzeiten und Projektpläne. Die Nummerierung beginnt mit KW\u00a01 und endet je nach Jahr mit KW\u00a052 oder KW\u00a053. KW\u00a01 ist immer die Woche mit dem ersten Donnerstag des Jahres. Das US-amerikanische System beginnt die Woche am Sonntag und definiert KW\u00a01 anders – internationale Kalenderanwendungen weichen daher gelegentlich vom deutschen Standard ab.",
+        "Eine Kalenderwoche (KW) ist ein Zeitraum von sieben Tagen, der nach ISO\u00a08601 (Abschnitt\u00a03.2.2) am Montag beginnt und am Sonntag endet. In Deutschland, Österreich und der Schweiz ist dieser Standard nach DIN\u00a0EN\u00a028601 verbindlich und bildet die Grundlage für Geschäftstermine, Lieferzeiten und Projektpläne. Die Nummerierung beginnt mit KW\u00a01 und endet je nach Jahr mit KW\u00a052 oder KW\u00a053. KW\u00a01 ist immer die Woche mit dem ersten Donnerstag des Jahres (ISO\u00a08601, §\u00a02.2.10). Das US-amerikanische System beginnt die Woche am Sonntag und definiert KW\u00a01 anders – internationale Kalenderanwendungen weichen daher gelegentlich vom deutschen Standard ab.",
     },
     {
       question: "Wann beginnt die Kalenderwoche 1?",
       answer:
-        "KW\u00a01 ist die Woche, die den ersten Donnerstag des Jahres enthält. Der 4.\u00a0Januar liegt immer in KW\u00a01, egal auf welchen Wochentag er fällt. Dadurch kann KW\u00a01 bereits am letzten Montag des Dezembers des Vorjahres beginnen, und die ersten Januartage können noch zur letzten KW des Vorjahres gehören. Diese Regelung ist in Deutschland nach DIN\u00a0EN\u00a028601 verbindlich. Der Donnerstag wurde als Bezugstag gewählt, weil er genau in der Mitte einer Montag-bis-Sonntag-Woche liegt (Tag\u00a04 von\u00a07). Praktisches Beispiel: KW\u00a01\u00a02026 beginnt bereits am 29.\u00a0Dezember\u00a02025.",
+        "KW\u00a01 ist die Woche, die den ersten Donnerstag des Jahres enthält (ISO\u00a08601, §\u00a02.2.10). Der 4.\u00a0Januar liegt immer in KW\u00a01, egal auf welchen Wochentag er fällt. Dadurch kann KW\u00a01 bereits am letzten Montag des Dezembers des Vorjahres beginnen, und die ersten Januartage können noch zur letzten KW des Vorjahres gehören. Diese Regelung ist in Deutschland nach DIN\u00a0EN\u00a028601 (identisch mit ISO\u00a08601) verbindlich. Der Donnerstag wurde als Bezugstag gewählt, weil er genau in der Mitte einer Montag-bis-Sonntag-Woche liegt (Tag\u00a04 von\u00a07). Praktisches Beispiel: KW\u00a01\u00a02026 beginnt bereits am 29.\u00a0Dezember\u00a02025.",
     },
     {
       question: "Wie viele Wochen hat ein Jahr?",
-      answer: `Die meisten Jahre haben 52 Kalenderwochen. ${kw.year} hat ${weeksInYear}\u00a0KW. Eine 53.\u00a0KW gibt es, wenn der 1.\u00a0Januar auf einen Donnerstag fällt – oder in Schaltjahren auf einen Mittwoch. Ein normales Jahr hat 365 Tage, also 52 vollständige Wochen und einen Resttag. Fällt dieser Resttag auf einen Donnerstag, entsteht eine zusätzliche 53.\u00a0KW. In einem 400-Jahres-Zyklus gibt es genau 71 lange Jahre mit 53\u00a0KW – das entspricht ungefähr jedem fünften bis sechsten Jahr. Aktuelle Beispiele: 2015, 2020, 2026 und 2032.`,
+      answer: `Die meisten Jahre haben 52 Kalenderwochen. ${kw.year} hat ${weeksInYear}\u00a0KW. Eine 53.\u00a0KW gibt es, wenn der 1.\u00a0Januar auf einen Donnerstag fällt – oder in Schaltjahren auf einen Mittwoch (ISO\u00a08601, §\u00a02.2.10). Ein normales Jahr hat 365\u00a0Tage, also 52 vollständige Wochen und einen Resttag. Fällt dieser Resttag auf einen Donnerstag, entsteht eine zusätzliche 53.\u00a0KW. In einem 400-Jahres-Zyklus gibt es genau 71 lange Jahre mit 53\u00a0KW (Quelle: ISO\u00a08601 Annex\u00a0B) – das entspricht 17,75\u00a0% aller Jahre. Aktuelle Beispiele: 2015, 2020, 2026 und 2032.`,
     },
     {
       question: "Wie wird die Kalenderwoche berechnet?",
       answer:
-        "Die KW wird nach ISO\u00a08601 berechnet: Man bestimmt den Donnerstag der betreffenden Woche und zählt, die wievielte Woche des Jahres dieser Donnerstag angehört. Wochen beginnen stets am Montag. Die Berechnungslogik in drei Schritten: Finde den Montag der Woche, finde den Donnerstag (Montag\u00a0+\u00a03\u00a0Tage), zähle den wievielten Donnerstag des Jahres das ist. In Excel steht ISOKALENDERWOCHE() bereit, Smartphone-Kalender nutzen dieselbe Logik, sofern die Region auf Deutschland eingestellt ist. Unser KW-Rechner auf der Startseite erledigt die Berechnung sofort für jedes beliebige Datum.",
+        "Die KW wird nach ISO\u00a08601 (Abschnitt\u00a03.2.2) berechnet: Man bestimmt den Donnerstag der betreffenden Woche und zählt, die wievielte Woche des Jahres dieser Donnerstag angehört. Wochen beginnen stets am Montag (ISO\u00a08601, §\u00a02.2.8). Die Berechnungslogik in drei Schritten: Finde den Montag der Woche, finde den Donnerstag (Montag\u00a0+\u00a03\u00a0Tage), zähle den wievielten Donnerstag des Jahres das ist. In Excel steht ISOKALENDERWOCHE() bereit, Smartphone-Kalender nutzen dieselbe Logik, sofern die Region auf Deutschland eingestellt ist. Unser KW-Rechner auf der Startseite erledigt die Berechnung sofort für jedes beliebige Datum.",
     },
     {
       question: "Was bedeutet ISO 8601?",
       answer:
-        "ISO\u00a08601 ist ein internationaler Standard der ISO (International Organization for Standardization) zur einheitlichen Darstellung von Datum und Uhrzeit. Er legt fest, dass Wochen am Montag beginnen und KW\u00a01 den ersten Donnerstag des Jahres enthält. In Deutschland ist dieser Standard nach DIN\u00a0EN\u00a028601 verbindlich. Das abweichende US-amerikanische System startet die Woche am Sonntag – daher kann ein und dasselbe Datum in Europa und den USA unterschiedlichen KW-Nummern zugeordnet sein. In Outlook, Google Kalender und Apple Kalender lässt sich die KW-Anzeige auf den ISO-Standard umstellen, indem du die Region auf Deutschland setzt.",
+        "ISO\u00a08601 ist ein internationaler Standard der ISO (International Organization for Standardization, Genf) zur einheitlichen Darstellung von Datum und Uhrzeit, erstmals veröffentlicht 1988 und zuletzt aktualisiert 2019 (ISO\u00a08601-1:2019). Er legt fest, dass Wochen am Montag beginnen (§\u00a02.2.8) und KW\u00a01 den ersten Donnerstag des Jahres enthält (§\u00a02.2.10). In Deutschland ist dieser Standard nach DIN\u00a0EN\u00a028601 verbindlich. Das abweichende US-amerikanische System startet die Woche am Sonntag – daher kann ein und dasselbe Datum in Europa und den USA unterschiedlichen KW-Nummern zugeordnet sein. In Outlook, Google Kalender und Apple Kalender lässt sich die KW-Anzeige auf den ISO-Standard umstellen, indem du die Region auf Deutschland setzt.",
     },
     {
       question: `Hat ${kw.year} eine KW\u00a053?`,
       answer:
         weeksInYear === 53
-          ? `Ja, ${kw.year} hat 53\u00a0Kalenderwochen. Das tritt auf, weil der 1.\u00a0Januar\u00a0${kw.year} auf einen Donnerstag fällt. Nach ISO\u00a08601 wird eine Woche dem Jahr zugeordnet, in dem ihr Donnerstag liegt. Ein normales Jahr hat 365\u00a0Tage, also 52\u00a0volle Wochen plus einen Resttag. Fällt dieser Resttag auf einen Donnerstag, entsteht die zusätzliche 53.\u00a0KW. In einem 400-Jahres-Zyklus kommen genau 71 solche langen Jahre vor – ungefähr jedes fünfte bis sechste Jahr.`
-          : `Nein, ${kw.year} hat 52\u00a0Kalenderwochen. Eine KW\u00a053 gibt es, wenn der 1.\u00a0Januar auf einen Donnerstag fällt (oder in Schaltjahren auf einen Mittwoch). Das Jahr muss dann 53\u00a0Donnerstage enthalten. In einem 400-Jahres-Zyklus gibt es genau 71 solche langen Jahre – ungefähr jedes fünfte bis sechste Jahr. Die nächsten Jahre mit 53\u00a0KW sind 2026, 2032 und 2037.`,
+          ? `Ja, ${kw.year} hat 53\u00a0Kalenderwochen. Das tritt auf, weil der 1.\u00a0Januar\u00a0${kw.year} auf einen Donnerstag fällt. Nach ISO\u00a08601 (§\u00a02.2.10) wird eine Woche dem Jahr zugeordnet, in dem ihr Donnerstag liegt. Ein normales Jahr hat 365\u00a0Tage, also 52\u00a0volle Wochen plus einen Resttag. Fällt dieser Resttag auf einen Donnerstag, entsteht die zusätzliche 53.\u00a0KW. In einem 400-Jahres-Zyklus kommen genau 71 solche langen Jahre vor – das sind 17,75\u00a0% (Quelle: ISO\u00a08601 Annex\u00a0B).`
+          : `Nein, ${kw.year} hat 52\u00a0Kalenderwochen. Eine KW\u00a053 gibt es, wenn der 1.\u00a0Januar auf einen Donnerstag fällt oder in Schaltjahren auf einen Mittwoch (ISO\u00a08601, §\u00a02.2.10). In einem 400-Jahres-Zyklus gibt es genau 71 solche langen Jahre – das sind 17,75\u00a0% (Quelle: ISO\u00a08601 Annex\u00a0B). Die nächsten Jahre mit 53\u00a0KW sind 2026, 2032 und 2037.`,
     },
     {
       question: "Wie unterscheiden sich KW und Wochennummer?",
@@ -503,7 +503,8 @@ export default function Home() {
             <span className="text-accent mt-0.5 shrink-0">•</span>
             <span>
               <strong className="text-text-primary">Wochenstart:</strong>{" "}
-              Eine Kalenderwoche beginnt gemäß DIN&nbsp;1355 immer am{" "}
+              Eine Kalenderwoche beginnt gemäß ISO&nbsp;8601 (§&nbsp;2.2.8) und
+              DIN&nbsp;EN&nbsp;28601 immer am{" "}
               <strong className="text-text-primary">Montag</strong> und endet am
               Sonntag.
             </span>
@@ -515,7 +516,8 @@ export default function Home() {
               Ein Kalenderjahr hat in der Regel 52&nbsp;Wochen. Jahre mit
               53&nbsp;Kalenderwochen werden als{" "}
               <strong className="text-text-primary">„langes Jahr"</strong>{" "}
-              bezeichnet – sie kommen im Schnitt alle 5 bis 6 Jahre vor.
+              bezeichnet – sie kommen im Schnitt alle 5 bis 6 Jahre vor
+              (71 von 400 Jahren laut ISO&nbsp;8601 Annex&nbsp;B).
             </span>
           </li>
           <li className="flex gap-2.5">

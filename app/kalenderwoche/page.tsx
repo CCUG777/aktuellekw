@@ -90,7 +90,7 @@ export default function KalenderwochePage() {
     },
     {
       question: "Wie wird die Kalenderwoche berechnet?",
-      answer: `Die KW\u00a01 ist die Woche, die den ersten Donnerstag im Januar enthält. Dies ist die Grundlage für jede KW\u00a0${currentKW.year}.`,
+      answer: `Die KW\u00a01 ist laut ISO\u00a08601 (§\u00a02.2.10) die Woche, die den ersten Donnerstag im Januar enthält. Dies ist die Grundlage für jede KW\u00a0${currentKW.year}.`,
     },
     {
       question: "Wie finde ich die Kalenderwoche heute heraus?",
@@ -260,8 +260,8 @@ export default function KalenderwochePage() {
                 <strong className="text-text-primary">ISO&nbsp;8601 Standard:</strong>{" "}
                 In Deutschland und Europa wird die{" "}
                 <strong className="text-text-primary">Kalenderwoche</strong> nach
-                der Norm ISO&nbsp;8601 definiert. Der Montag ist stets der erste
-                Tag der Woche.
+                der Norm ISO&nbsp;8601 (§&nbsp;2.2.8) und DIN&nbsp;EN&nbsp;28601 definiert.
+                Der Montag ist stets der erste Tag der Woche.
               </span>
             </li>
             <li className="flex gap-2.5">

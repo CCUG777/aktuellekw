@@ -285,9 +285,9 @@ export default async function KWDetailPage({
               Jahr&nbsp;{kwInfo.year} beginnt am Montag,
               den&nbsp;{formatDateDE(kwInfo.startDate)}, und endet am Sonntag,
               den&nbsp;{formatDateDE(kwInfo.endDate)}. Die Berechnung folgt
-              dem internationalen Standard ISO&nbsp;8601, nach dem jede Woche am
-              Montag startet und die erste KW des Jahres die Woche ist, die den
-              ersten Donnerstag im Januar enthält.
+              dem internationalen Standard ISO&nbsp;8601 (§&nbsp;2.2.8 und §&nbsp;2.2.10),
+              nach dem jede Woche am Montag startet und die erste KW des Jahres
+              die Woche ist, die den ersten Donnerstag im Januar enthält.
             </p>
             <p>
               {isCurrent
