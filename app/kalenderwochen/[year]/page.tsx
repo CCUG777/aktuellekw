@@ -29,11 +29,13 @@ function parseYear(yearStr: string): number | null {
 }
 
 const titleMap: Record<number, string> = {
+  2025: `Kalenderwochen 2025 – Rückblick und Tabellen-Referenz`,
   2026: `Kalenderwochen 2026 – Die Übersicht zum 53-Wochen-Jahr`,
   2027: `Kalenderwochen 2027 – Termine und Vorab-Planung`,
 };
 
 const descMap: Record<number, string> = {
+  2025: `Kalenderwochen 2025: Alle 52 KW mit Start- & Enddatum. Rückblick auf das Gemeinjahr 2025 – ideal für Buchhaltung, Archivierung & Projektdokumentation nach ISO 8601.`,
   2026: `Kalenderwochen 2026: Alle 53 KW mit Start- & Enddatum im Überblick. 2026 ist ein langes Jahr mit KW 53 – Brückentage, Urlaubsplanung & ISO 8601.`,
   2027: `Kalenderwochen 2027: Alle 52 KW auf einen Blick. KW 1 beginnt erst am 4. Januar – Brückentage, Budgetierung & Vorab-Planung nach ISO 8601.`,
 };
@@ -205,7 +207,18 @@ export default async function KalenderwochenYearPage({
 
           {/* ── Einleitung (SEO-optimiert, ~100 Wörter) ─────────── */}
           <div className="text-text-secondary text-sm md:text-base leading-relaxed max-w-2xl space-y-3">
-            {year === 2026 ? (
+            {year === 2025 ? (
+              /* ── 2025: Rückblick & Archiv ───────────────────────── */
+              <>
+                <p>
+                  Das Jahr 2025 war ein klassisches Gemeinjahr mit insgesamt{" "}
+                  <strong className="text-text-primary">52&nbsp;Kalenderwochen</strong>.
+                  Für Buchhaltung, Archivierung oder die Nachbereitung von Projekten
+                  finden Sie hier die vollständige Übersicht aller KW-Termine
+                  des Jahres 2025.
+                </p>
+              </>
+            ) : year === 2026 ? (
               /* ── 2026: 53-Wochen-Jahr ─────────────────────────── */
               <>
                 <p>
@@ -336,6 +349,58 @@ export default async function KalenderwochenYearPage({
           </div>
         </section>
 
+        {/* ── H2: 2025 – Struktur des Kalenderjahres ────────── */}
+        {year === 2025 && (
+          <section className="mb-12 fade-in-delay">
+            <h2 id="struktur-kalenderjahr-2025" className="text-2xl font-semibold mb-4">
+              Struktur des Kalenderjahres 2025
+            </h2>
+            <div className="text-text-secondary text-sm leading-relaxed space-y-3">
+              <p>
+                Im Gegensatz zum Folgejahr 2026 startete 2025 direkt am
+                Neujahrstag (Mittwoch) mitten in der ersten Woche. Die
+                konkreten Eckdaten:
+              </p>
+              <ul className="space-y-2 ml-1">
+                <li className="flex gap-2.5">
+                  <span className="text-accent mt-0.5 shrink-0">•</span>
+                  <span>
+                    <strong className="text-text-primary">Start von KW&nbsp;1:</strong>{" "}
+                    Montag, 30.12.2024 – die erste Woche begann bereits im
+                    Dezember des Vorjahres.
+                  </span>
+                </li>
+                <li className="flex gap-2.5">
+                  <span className="text-accent mt-0.5 shrink-0">•</span>
+                  <span>
+                    <strong className="text-text-primary">Ende von KW&nbsp;52:</strong>{" "}
+                    Sonntag, 28.12.2025 – die letzten drei Tage des Jahres
+                    (29.–31.&nbsp;Dezember) gehörten bereits zur{" "}
+                    <a href="/kw/1-2026" className="text-accent hover:underline">
+                      KW&nbsp;1 des Jahres 2026
+                    </a>.
+                  </span>
+                </li>
+              </ul>
+              <p>
+                Dies bedeutete, dass die Tage nach dem 28.&nbsp;Dezember
+                bereits zur ersten Woche des Folgejahres zählten. Diese
+                „kurzen" Jahresenden sind typisch für 52-Wochen-Jahre und
+                erfordern in der Projektplanung oft ein Umdenken bei Fristen
+                zum Jahreswechsel.
+              </p>
+              <p>
+                <strong className="text-text-primary">Praxis-Tipp für die Archivierung:</strong>{" "}
+                Wenn Sie Projekte oder Abrechnungen aus 2025 nachträglich
+                dokumentieren, achten Sie darauf, dass KW&nbsp;1 bereits am
+                30.12.2024 begann und KW&nbsp;52 am 28.12.2025 endete –
+                Dezember-Buchungen können also über den Jahreswechsel
+                verteilt sein.
+              </p>
+            </div>
+          </section>
+        )}
+
         {/* ── H2: 2027 – Der verspätete Start ──────────────── */}
         {year === 2027 && (
           <section className="mb-12 fade-in-delay">
@@ -414,17 +479,77 @@ export default async function KalenderwochenYearPage({
         {/* ── H2: Urlaubsplanung & Brückentage (year-spezifisch) */}
         <section className="mb-12 fade-in-delay">
           <h2 id="urlaubsplanung-brueckentage" className="text-2xl font-semibold mb-4">
-            {year === 2027
-              ? `Vorschau auf die Brückentage ${year}`
-              : `Urlaubsplanung ${year}: Brückentage optimal nutzen`}
+            {year === 2025
+              ? `Feiertage & Brückentage 2025 im Rückblick`
+              : year === 2027
+                ? `Vorschau auf die Brückentage ${year}`
+                : `Urlaubsplanung ${year}: Brückentage optimal nutzen`}
           </h2>
           <p className="text-text-secondary text-sm leading-relaxed mb-4">
-            {year === 2027
-              ? "Planen Sie schon jetzt die freien Tage 2027 – einige Feiertage fallen günstig, andere weniger:"
-              : `Nutzen Sie die Verteilung der Kalenderwochen ${year} für mehr Freizeit. Mit geschickter Kombination aus Feiertagen und Urlaubstagen holen Sie das Maximum heraus:`}
+            {year === 2025
+              ? "Ein Blick zurück auf die Feiertagsverteilung 2025 – relevant für Zeiterfassung, Stundennachweise und Projektabrechnungen:"
+              : year === 2027
+                ? "Planen Sie schon jetzt die freien Tage 2027 – einige Feiertage fallen günstig, andere weniger:"
+                : `Nutzen Sie die Verteilung der Kalenderwochen ${year} für mehr Freizeit. Mit geschickter Kombination aus Feiertagen und Urlaubstagen holen Sie das Maximum heraus:`}
           </p>
           <ul className="space-y-3 text-text-secondary text-sm leading-relaxed">
-            {year === 2027 ? (
+            {year === 2025 ? (
+              /* ── Brückentage 2025 (Rückblick) ────────────────── */
+              <>
+                <li className="flex gap-2.5">
+                  <span className="text-accent mt-0.5 shrink-0">•</span>
+                  <span>
+                    <strong className="text-text-primary">Neujahr (KW&nbsp;1):</strong>{" "}
+                    Der 1.&nbsp;Januar 2025 fiel auf einen Mittwoch – kein
+                    klassischer Brückentag, aber mit zwei Urlaubstagen (Do + Fr)
+                    war eine ganze freie Woche möglich.
+                  </span>
+                </li>
+                <li className="flex gap-2.5">
+                  <span className="text-accent mt-0.5 shrink-0">•</span>
+                  <span>
+                    <strong className="text-text-primary">Ostern (KW&nbsp;16/17):</strong>{" "}
+                    Karfreitag am 18.&nbsp;April, Ostermontag am 21.&nbsp;April.
+                    Vier Urlaubstage ergaben zehn zusammenhängende freie Tage.
+                  </span>
+                </li>
+                <li className="flex gap-2.5">
+                  <span className="text-accent mt-0.5 shrink-0">•</span>
+                  <span>
+                    <strong className="text-text-primary">Tag der Arbeit (KW&nbsp;18):</strong>{" "}
+                    Der 1.&nbsp;Mai fiel 2025 auf einen{" "}
+                    <strong className="text-text-primary">Donnerstag</strong>{" "}
+                    – ein idealer Brückentag am Freitag bescherte ein
+                    langes Wochenende.
+                  </span>
+                </li>
+                <li className="flex gap-2.5">
+                  <span className="text-accent mt-0.5 shrink-0">•</span>
+                  <span>
+                    <strong className="text-text-primary">Christi Himmelfahrt (KW&nbsp;22):</strong>{" "}
+                    Am 29.&nbsp;Mai (Donnerstag) mit dem klassischen
+                    Brückentag-Freitag.
+                  </span>
+                </li>
+                <li className="flex gap-2.5">
+                  <span className="text-accent mt-0.5 shrink-0">•</span>
+                  <span>
+                    <strong className="text-text-primary">Tag der Deutschen Einheit (KW&nbsp;40):</strong>{" "}
+                    Der 3.&nbsp;Oktober fiel 2025 auf einen Freitag – ein
+                    automatisches langes Wochenende ohne Urlaubstag.
+                  </span>
+                </li>
+                <li className="flex gap-2.5">
+                  <span className="text-accent mt-0.5 shrink-0">•</span>
+                  <span>
+                    <strong className="text-text-primary">Weihnachten (KW&nbsp;52):</strong>{" "}
+                    Der 25.&nbsp;Dezember war ein Donnerstag, der
+                    26.&nbsp;Dezember ein Freitag – perfekt für einen
+                    langen Jahresausklang.
+                  </span>
+                </li>
+              </>
+            ) : year === 2027 ? (
               /* ── Brückentage 2027 ──────────────────────────── */
               <>
                 <li className="flex gap-2.5">
