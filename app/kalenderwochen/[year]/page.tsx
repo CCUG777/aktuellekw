@@ -144,7 +144,7 @@ export default async function KalenderwochenYearPage({
         description: `Alle ${weeksInYear} Kalenderwochen des Jahres ${year} nach ISO 8601 mit Start- und Enddatum.`,
         url: `https://aktuellekw.de/kalenderwochen/${year}`,
         inLanguage: "de-DE",
-        temporalCoverage: String(year),
+        temporalCoverage: `${allWeeks[0].startDate.toISOString().split("T")[0]}/${allWeeks[allWeeks.length - 1].endDate.toISOString().split("T")[0]}`,
         creator: {
           "@type": "Organization",
           "@id": "https://aktuellekw.de/#organization",

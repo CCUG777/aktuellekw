@@ -177,7 +177,7 @@ export default async function OsterferienPage({
       dateModified: year === new Date().getFullYear() ? new Date().toISOString().split("T")[0] : `${year}-01-01`,
       name: `Osterferien ${year} – Termine nach Bundesland`,
       description: `Schulferien rund um Ostern ${year} für alle 16 Bundesländer in Deutschland.`,
-      temporalCoverage: `${year}`,
+      temporalCoverage: `${year}-01-01/${year}-12-31`,
       creator: { "@id": "https://aktuellekw.de/#organization" },
       license: "https://creativecommons.org/licenses/by/4.0/",
     },

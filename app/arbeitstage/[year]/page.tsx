@@ -155,7 +155,7 @@ export default async function ArbeitstageYearPage({
         dateModified: year === new Date().getFullYear() ? new Date().toISOString().split("T")[0] : `${year}-01-01`,
         name: `Arbeitstage ${year} Deutschland`,
         description: `Arbeitstage ${year} f\u00fcr alle 16 Bundesl\u00e4nder mit monatlicher Aufschl\u00fcsselung`,
-        temporalCoverage: `${year}`,
+        temporalCoverage: `${year}-01-01/${year}-12-31`,
         creator: {
           "@type": "Organization",
           "@id": "https://aktuellekw.de/#organization",

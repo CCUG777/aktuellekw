@@ -75,7 +75,7 @@ export default function KalenderwochenUebersichtPage() {
       description: `Überblick aller ${weeksInYear} Kalenderwochen des Jahres ${currentKW.year}. Aktuelle KW: ${currentKW.weekNumber}.`,
       url: "https://aktuellekw.de/kalenderwochen-uebersicht",
       inLanguage: "de-DE",
-      temporalCoverage: `${currentKW.year}`,
+      temporalCoverage: `${currentKW.year}-01-01/${currentKW.year}-12-31`,
       creator: { "@id": "https://aktuellekw.de/#organization" },
       license: "https://creativecommons.org/licenses/by/4.0/",
     },

@@ -172,7 +172,7 @@ export default function KalenderMitKalenderwochenPage() {
       description: `Kalender mit allen ${weeksInYear} Kalenderwochen des Jahres ${year} nach ISO 8601. Aktuelle Woche: KW ${currentKW.weekNumber}.`,
       url: "https://aktuellekw.de/kalender-mit-kalenderwochen",
       inLanguage: "de-DE",
-      temporalCoverage: `${year}`,
+      temporalCoverage: `${year}-01-01/${year}-12-31`,
       creator: { "@id": "https://aktuellekw.de/#organization" },
       license: "https://creativecommons.org/licenses/by/4.0/",
     },

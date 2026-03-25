@@ -86,7 +86,7 @@ export default async function SchulferienJahrPage({
             dateModified: `${year}-01-01`,
             name: `Schulferien ${year} Deutschland`,
             description: `Schulferien-Termine ${year} für alle 16 deutschen Bundesländer nach offiziellen Angaben der Kultusministerien.`,
-            temporalCoverage: `${year}`,
+            temporalCoverage: `${year}-01-01/${year}-12-31`,
             spatial: {
               "@type": "Place",
               name: "Deutschland",

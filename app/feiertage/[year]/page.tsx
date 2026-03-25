@@ -289,7 +289,7 @@ export default async function FeiertageYearPage({
       dateModified: year === new Date().getFullYear() ? new Date().toISOString().split("T")[0] : `${year}-01-01`,
       name: `Gesetzliche Feiertage ${year} in Deutschland`,
       description: `Alle ${nationwideCount + regionalCount} gesetzlichen Feiertage in Deutschland f\u00fcr das Jahr ${year} mit Datum, Wochentag und Kalenderwoche.`,
-      temporalCoverage: `${year}`,
+      temporalCoverage: `${year}-01-01/${year}-12-31`,
       url: `https://aktuellekw.de/feiertage/${year}`,
       inLanguage: "de-DE",
       creator: { "@id": "https://aktuellekw.de/#organization" },

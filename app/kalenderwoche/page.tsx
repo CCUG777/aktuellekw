@@ -131,7 +131,7 @@ export default function KalenderwochePage() {
         description: `Alle ${weeksInYear} Kalenderwochen des Jahres ${currentKW.year} nach ISO 8601 mit Start- und Enddatum. Aktuelle Woche: KW ${currentKW.weekNumber}.`,
         url: "https://aktuellekw.de/kalenderwoche",
         inLanguage: "de-DE",
-        temporalCoverage: `${currentKW.year}`,
+        temporalCoverage: `${currentKW.year}-01-01/${currentKW.year}-12-31`,
         creator: {
           "@type": "Organization",
           "@id": "https://aktuellekw.de/#organization",

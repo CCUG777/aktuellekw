@@ -252,7 +252,7 @@ export default async function FeiertageBundeslandPage({
       dateModified: year === new Date().getFullYear() ? new Date().toISOString().split("T")[0] : `${year}-01-01`,
       name: `Gesetzliche Feiertage ${year} in ${bl.name}`,
       description: `Alle ${totalCount} gesetzlichen Feiertage ${year} in ${bl.name} mit Datum und Kalenderwoche.`,
-      temporalCoverage: `${year}`,
+      temporalCoverage: `${year}-01-01/${year}-12-31`,
       spatialCoverage: {
         "@type": "Place",
         name: bl.name,

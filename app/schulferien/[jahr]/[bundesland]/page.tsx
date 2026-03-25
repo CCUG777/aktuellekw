@@ -110,7 +110,7 @@ export default async function SchulferienBundeslandPage({
             dateModified: `${year}-01-01`,
             name: `Schulferien ${bl.name} ${year}`,
             description: `Schulferien ${year} in ${bl.name}: alle Ferientermine nach offiziellen Angaben der Kultusministerien.`,
-            temporalCoverage: `${year}`,
+            temporalCoverage: `${year}-01-01/${year}-12-31`,
             spatial: { "@type": "Place", name: bl.name, address: { "@type": "PostalAddress", addressCountry: "DE", addressRegion: bl.code } },
             creator: { "@type": "Organization", name: "aktuellekw.de", url: "https://aktuellekw.de" },
           }),
