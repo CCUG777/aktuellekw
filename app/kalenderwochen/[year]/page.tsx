@@ -28,6 +28,16 @@ function parseYear(yearStr: string): number | null {
   return yr;
 }
 
+const titleMap: Record<number, string> = {
+  2026: `Kalenderwochen 2026 – Die Übersicht zum 53-Wochen-Jahr`,
+  2027: `Kalenderwochen 2027 – Termine und Vorab-Planung`,
+};
+
+const descMap: Record<number, string> = {
+  2026: `Kalenderwochen 2026: Alle 53 KW mit Start- & Enddatum im Überblick. 2026 ist ein langes Jahr mit KW 53 – Brückentage, Urlaubsplanung & ISO 8601.`,
+  2027: `Kalenderwochen 2027: Alle 52 KW auf einen Blick. KW 1 beginnt erst am 4. Januar – Brückentage, Budgetierung & Vorab-Planung nach ISO 8601.`,
+};
+
 /* ── Metadata ─────────────────────────────────────────────────── */
 export async function generateMetadata({
   params,
@@ -39,12 +49,8 @@ export async function generateMetadata({
   if (!year) return { title: "Jahr nicht gefunden" };
 
   const weeksInYear = getWeeksInYear(year);
-  const title = weeksInYear === 53
-    ? `Kalenderwochen ${year} – Die Übersicht zum 53-Wochen-Jahr`
-    : `Kalenderwochen ${year} – Alle ${weeksInYear} KW im Überblick`;
-  const description = weeksInYear === 53
-    ? `Kalenderwochen ${year}: Alle 53 KW mit Start- & Enddatum im Überblick. ${year} ist ein langes Jahr mit KW 53 – Brückentage, Urlaubsplanung & ISO 8601.`
-    : `Alle Kalenderwochen ${year} auf einen Blick: KW 1 bis KW ${weeksInYear} mit Start- und Enddatum. Jahreskalender ${year} nach ISO 8601.`;
+  const title = titleMap[year] ?? `Kalenderwochen ${year} – Alle ${weeksInYear} KW im Überblick`;
+  const description = descMap[year] ?? `Alle Kalenderwochen ${year} auf einen Blick: KW 1 bis KW ${weeksInYear} mit Start- und Enddatum. Jahreskalender ${year} nach ISO 8601.`;
   return {
     title,
     description,
@@ -188,9 +194,7 @@ export default async function KalenderwochenYearPage({
         <section className="mb-10 fade-in">
           <div className="flex items-start justify-between gap-4 flex-wrap mb-3">
             <h1 className="text-3xl md:text-4xl font-bold">
-              {weeksInYear === 53
-                ? `Kalenderwochen ${year} – Die Übersicht zum 53-Wochen-Jahr`
-                : `Kalenderwochen ${year}`}
+              {titleMap[year] ?? `Kalenderwochen ${year}`}
             </h1>
             {isCurrentYear && (
               <span className="text-xs bg-accent text-white px-3 py-1 rounded-full font-semibold uppercase tracking-wide self-center">
@@ -201,7 +205,8 @@ export default async function KalenderwochenYearPage({
 
           {/* ── Einleitung (SEO-optimiert, ~100 Wörter) ─────────── */}
           <div className="text-text-secondary text-sm md:text-base leading-relaxed max-w-2xl space-y-3">
-            {weeksInYear === 53 ? (
+            {year === 2026 ? (
+              /* ── 2026: 53-Wochen-Jahr ─────────────────────────── */
               <>
                 <p>
                   Sie suchen die{" "}
@@ -222,12 +227,38 @@ export default async function KalenderwochenYearPage({
                     ` Die aktuelle KW\u00a0${currentKW.weekNumber} ist in der Tabelle blau hervorgehoben.`}
                 </p>
               </>
+            ) : year === 2027 ? (
+              /* ── 2027: Vorab-Planung, verspäteter KW-1-Start ── */
+              <>
+                <p>
+                  Wer früh plant, entspannt früher. Das Jahr 2027 kehrt nach dem
+                  „langen" Vorjahr wieder zum Standard von{" "}
+                  <strong className="text-text-primary">52&nbsp;Kalenderwochen</strong>{" "}
+                  zurück. Eine Besonderheit für Planer: Da der Neujahrstag 2027
+                  ein Freitag ist, gehört er offiziell noch zur{" "}
+                  <a href="/kw/53-2026" className="text-accent hover:underline">
+                    KW&nbsp;53 des Vorjahres 2026
+                  </a>.
+                </p>
+                <p>
+                  KW&nbsp;1 beginnt erst am{" "}
+                  <strong className="text-text-primary">Montag, dem {formatDateDE(allWeeks[0].startDate)}</strong>{" "}
+                  – nutzen Sie diese Übersicht für Ihre{" "}
+                  <strong className="text-text-primary">Budgetierung</strong> und{" "}
+                  <strong className="text-text-primary">Vorab-Planung</strong>.
+                  {isCurrentYear &&
+                    ` Die aktuelle KW\u00a0${currentKW.weekNumber} ist in der Tabelle blau hervorgehoben.`}
+                </p>
+              </>
             ) : (
+              /* ── Generisch ────────────────────────────────────── */
               <p>
                 Alle {weeksInYear} Kalenderwochen {year} mit Start- und Enddatum
                 (Montag bis Sonntag) nach ISO&nbsp;8601.
                 {isCurrentYear &&
                   ` Die aktuelle KW\u00a0${currentKW.weekNumber} ist hervorgehoben.`}
+                {weeksInYear === 53 &&
+                  ` ${year} ist ein langes Jahr mit 53\u00a0Kalenderwochen.`}
               </p>
             )}
           </div>
@@ -305,6 +336,43 @@ export default async function KalenderwochenYearPage({
           </div>
         </section>
 
+        {/* ── H2: 2027 – Der verspätete Start ──────────────── */}
+        {year === 2027 && (
+          <section className="mb-12 fade-in-delay">
+            <h2 id="verspaeteter-start-kw1" className="text-2xl font-semibold mb-4">
+              Der verspätete Start: Wann beginnt die KW&nbsp;1 2027?
+            </h2>
+            <div className="text-text-secondary text-sm leading-relaxed space-y-3">
+              <p>
+                Die erste Kalenderwoche des Jahres 2027 lässt auf sich warten.
+                Sie beginnt erst am{" "}
+                <strong className="text-text-primary">
+                  Montag, dem {formatDateDE(allWeeks[0].startDate)}
+                </strong>.
+                Für Business-Termine bedeutet das: Die erste volle Arbeitswoche
+                im neuen Jahr startet im Vergleich zu anderen Jahren sehr spät.
+              </p>
+              <p>
+                Achten Sie bei der{" "}
+                <strong className="text-text-primary">Budgetierung</strong> und dem{" "}
+                <strong className="text-text-primary">Projektstart</strong> darauf,
+                dass die ersten drei Januartage (1.–3.&nbsp;Januar) kalendarisch
+                noch dem „alten" Wochenzyklus angehören – sie zählen zur{" "}
+                <a href="/kw/53-2026" className="text-accent hover:underline">
+                  KW&nbsp;53 des Jahres 2026
+                </a>{" "}
+                (ISO&nbsp;8601, §&nbsp;2.2.10).
+              </p>
+              <p>
+                <strong className="text-text-primary">Praxis-Tipp:</strong>{" "}
+                Stimmen Sie interne Deadlines und Berichtszeiträume frühzeitig
+                ab, damit keine Buchungen oder Projektmeilensteine im
+                „Niemandsland" zwischen den Kalenderjahren verloren gehen.
+              </p>
+            </div>
+          </section>
+        )}
+
         {/* ── H2: Warum KW 53? (nur bei 53-Wochen-Jahren) ──── */}
         {weeksInYear === 53 && (
           <section className="mb-12 fade-in-delay">
@@ -343,54 +411,116 @@ export default async function KalenderwochenYearPage({
           </section>
         )}
 
-        {/* ── H2: Urlaubsplanung & Brückentage ──────────────── */}
+        {/* ── H2: Urlaubsplanung & Brückentage (year-spezifisch) */}
         <section className="mb-12 fade-in-delay">
           <h2 id="urlaubsplanung-brueckentage" className="text-2xl font-semibold mb-4">
-            Urlaubsplanung {year}: Brückentage optimal nutzen
+            {year === 2027
+              ? `Vorschau auf die Brückentage ${year}`
+              : `Urlaubsplanung ${year}: Brückentage optimal nutzen`}
           </h2>
           <p className="text-text-secondary text-sm leading-relaxed mb-4">
-            Nutzen Sie die Verteilung der Kalenderwochen {year} für mehr Freizeit.
-            Mit geschickter Kombination aus Feiertagen und Urlaubstagen holen
-            Sie das Maximum heraus:
+            {year === 2027
+              ? "Planen Sie schon jetzt die freien Tage 2027 – einige Feiertage fallen günstig, andere weniger:"
+              : `Nutzen Sie die Verteilung der Kalenderwochen ${year} für mehr Freizeit. Mit geschickter Kombination aus Feiertagen und Urlaubstagen holen Sie das Maximum heraus:`}
           </p>
           <ul className="space-y-3 text-text-secondary text-sm leading-relaxed">
-            <li className="flex gap-2.5">
-              <span className="text-accent mt-0.5 shrink-0">•</span>
-              <span>
-                <strong className="text-text-primary">Ostern (KW&nbsp;14/15):</strong>{" "}
-                Mit geschickter Planung in diesen zwei Wochen verdoppeln Sie
-                Ihre freien Tage. Karfreitag und Ostermontag sind bundesweit
-                Feiertage – ideal für einen Kurzurlaub.
-              </span>
-            </li>
-            <li className="flex gap-2.5">
-              <span className="text-accent mt-0.5 shrink-0">•</span>
-              <span>
-                <strong className="text-text-primary">Christi Himmelfahrt (KW&nbsp;20):</strong>{" "}
-                Der Klassiker für ein langes Wochenende. Fällt immer auf einen
-                Donnerstag – ein Brückentag am Freitag ergibt vier freie Tage.
-              </span>
-            </li>
-            <li className="flex gap-2.5">
-              <span className="text-accent mt-0.5 shrink-0">•</span>
-              <span>
-                <strong className="text-text-primary">Pfingsten (KW&nbsp;22):</strong>{" "}
-                Ideal für einen frühen Sommerurlaub. Pfingstmontag plus
-                anschließende Brückentage ergeben bis zu neun freie Tage
-                mit nur vier Urlaubstagen.
-              </span>
-            </li>
-            <li className="flex gap-2.5">
-              <span className="text-accent mt-0.5 shrink-0">•</span>
-              <span>
-                <strong className="text-text-primary">
-                  Weihnachten (KW&nbsp;{weeksInYear === 53 ? "52/53" : "52"}):
-                </strong>{" "}
-                {weeksInYear === 53
-                  ? "Durch die KW\u00a053 haben Sie zwischen den Jahren eine besondere Konstellation, die sich perfekt für den Jahresausklang eignet."
-                  : "Die Weihnachtswoche eignet sich ideal, um mit wenigen Urlaubstagen eine lange Auszeit zu genießen."}
-              </span>
-            </li>
+            {year === 2027 ? (
+              /* ── Brückentage 2027 ──────────────────────────── */
+              <>
+                <li className="flex gap-2.5">
+                  <span className="text-accent mt-0.5 shrink-0">•</span>
+                  <span>
+                    <strong className="text-text-primary">Neujahr (KW&nbsp;53/2026):</strong>{" "}
+                    Der 1.&nbsp;Januar 2027 gehört kalendarisch noch zur KW&nbsp;53
+                    des Vorjahres. Das erste Arbeitswochenende fällt damit spät – planen
+                    Sie einen sanften Jahresstart ein.
+                  </span>
+                </li>
+                <li className="flex gap-2.5">
+                  <span className="text-accent mt-0.5 shrink-0">•</span>
+                  <span>
+                    <strong className="text-text-primary">Ostern (KW&nbsp;13/14):</strong>{" "}
+                    Karfreitag fällt auf den 26.&nbsp;März, Ostermontag auf den
+                    29.&nbsp;März. Mit vier Urlaubstagen (Mo–Do vor Karfreitag)
+                    sichern Sie sich zehn freie Tage am Stück.
+                  </span>
+                </li>
+                <li className="flex gap-2.5">
+                  <span className="text-accent mt-0.5 shrink-0">•</span>
+                  <span>
+                    <strong className="text-text-primary">Tag der Arbeit (KW&nbsp;18):</strong>{" "}
+                    Der 1.&nbsp;Mai fällt 2027 auf einen <strong className="text-text-primary">Samstag</strong>{" "}
+                    – hier gibt es leider keinen Bonus-Brückentag.
+                  </span>
+                </li>
+                <li className="flex gap-2.5">
+                  <span className="text-accent mt-0.5 shrink-0">•</span>
+                  <span>
+                    <strong className="text-text-primary">Christi Himmelfahrt (KW&nbsp;20):</strong>{" "}
+                    Fällt auf Donnerstag, den 6.&nbsp;Mai – der Freitag danach
+                    ist der klassische Brückentag für ein langes Wochenende.
+                  </span>
+                </li>
+                <li className="flex gap-2.5">
+                  <span className="text-accent mt-0.5 shrink-0">•</span>
+                  <span>
+                    <strong className="text-text-primary">Pfingsten (KW&nbsp;21):</strong>{" "}
+                    Liegt 2027 recht früh im Mai (Pfingstmontag: 17.&nbsp;Mai) –
+                    ideal für Städtetrips oder einen frühen Sommerurlaub.
+                  </span>
+                </li>
+                <li className="flex gap-2.5">
+                  <span className="text-accent mt-0.5 shrink-0">•</span>
+                  <span>
+                    <strong className="text-text-primary">Weihnachten (KW&nbsp;52):</strong>{" "}
+                    Der 25.&nbsp;Dezember 2027 ist ein Samstag – mit
+                    geschickter Planung zwischen den Jahren holen Sie
+                    trotzdem maximale Erholung heraus.
+                  </span>
+                </li>
+              </>
+            ) : (
+              /* ── Brückentage 2026 / generisch ─────────────── */
+              <>
+                <li className="flex gap-2.5">
+                  <span className="text-accent mt-0.5 shrink-0">•</span>
+                  <span>
+                    <strong className="text-text-primary">Ostern (KW&nbsp;14/15):</strong>{" "}
+                    Mit geschickter Planung in diesen zwei Wochen verdoppeln Sie
+                    Ihre freien Tage. Karfreitag und Ostermontag sind bundesweit
+                    Feiertage – ideal für einen Kurzurlaub.
+                  </span>
+                </li>
+                <li className="flex gap-2.5">
+                  <span className="text-accent mt-0.5 shrink-0">•</span>
+                  <span>
+                    <strong className="text-text-primary">Christi Himmelfahrt (KW&nbsp;20):</strong>{" "}
+                    Der Klassiker für ein langes Wochenende. Fällt immer auf einen
+                    Donnerstag – ein Brückentag am Freitag ergibt vier freie Tage.
+                  </span>
+                </li>
+                <li className="flex gap-2.5">
+                  <span className="text-accent mt-0.5 shrink-0">•</span>
+                  <span>
+                    <strong className="text-text-primary">Pfingsten (KW&nbsp;22):</strong>{" "}
+                    Ideal für einen frühen Sommerurlaub. Pfingstmontag plus
+                    anschließende Brückentage ergeben bis zu neun freie Tage
+                    mit nur vier Urlaubstagen.
+                  </span>
+                </li>
+                <li className="flex gap-2.5">
+                  <span className="text-accent mt-0.5 shrink-0">•</span>
+                  <span>
+                    <strong className="text-text-primary">
+                      Weihnachten (KW&nbsp;{weeksInYear === 53 ? "52/53" : "52"}):
+                    </strong>{" "}
+                    {weeksInYear === 53
+                      ? "Durch die KW\u00a053 haben Sie zwischen den Jahren eine besondere Konstellation, die sich perfekt für den Jahresausklang eignet."
+                      : "Die Weihnachtswoche eignet sich ideal, um mit wenigen Urlaubstagen eine lange Auszeit zu genießen."}
+                  </span>
+                </li>
+              </>
+            )}
           </ul>
           <p className="text-text-secondary text-xs mt-4">
             Tipp: Eine vollständige Übersicht aller Feiertage finden Sie auf unserer{" "}
