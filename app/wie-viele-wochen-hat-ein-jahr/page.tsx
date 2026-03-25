@@ -4,7 +4,7 @@ import {
   getWeeksInYear,
   isLeapYear,
 } from "@/lib/kw";
-import LastUpdated from "@/components/LastUpdated";
+import AuthorByline from "@/components/AuthorByline";
 
 export const revalidate = 3600;
 
@@ -398,7 +398,8 @@ export default function WieVieleWochenPage() {
           </div>
         </div>
 
-        <LastUpdated date="2026-02-27" />
+        {/* ── Author Byline ─────────────────────────── */}
+        <AuthorByline date="2026-02-27" />
 
         {/* ── Quellen & Weiterführendes ─────────────────────────── */}
         <div className="mt-10 pt-8 border-t border-border">

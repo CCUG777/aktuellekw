@@ -8,6 +8,7 @@ import {
 } from "@/lib/kw";
 import KWDisplay from "@/components/KWDisplay";
 import WeekdayTable from "@/components/WeekdayTable";
+import AuthorByline from "@/components/AuthorByline";
 
 export const revalidate = 3600;
 
@@ -360,6 +361,9 @@ export default async function KWDetailPage({
             </span>
           </a>
         </nav>
+
+        {/* ── Author Byline ─────────────────────────── */}
+        <AuthorByline date={new Date()} />
 
         {/* ── Internal links ───────────────────────────────────── */}
         <div className="border-t border-border pt-6 flex flex-wrap gap-x-6 gap-y-2 text-sm">

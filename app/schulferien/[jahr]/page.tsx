@@ -8,7 +8,7 @@ import {
   formatDateShort,
   gesamtFerientage,
 } from "@/lib/schulferien";
-import LastUpdated from "@/components/LastUpdated";
+import AuthorByline from "@/components/AuthorByline";
 
 export const revalidate = 86400; // 24h
 
@@ -320,7 +320,9 @@ export default async function SchulferienJahrPage({
           </div>
         </section>
 
-        <LastUpdated date={year === new Date().getFullYear() ? new Date() : new Date(`${year}-01-01`)} />
+        {/* ── Author Byline ─────────────────────────── */}
+        <AuthorByline date={year === new Date().getFullYear() ? new Date() : new Date(`${year}-01-01`)} />
+
         {/* Interne Verlinkung */}
         <section className="max-w-2xl mx-auto px-4 pb-8">
           <nav className="flex flex-wrap gap-2 justify-center" aria-label="Weiterführende Links">

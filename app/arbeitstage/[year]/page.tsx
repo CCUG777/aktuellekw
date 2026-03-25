@@ -7,7 +7,7 @@ import {
   getArbeitstageForBundesland,
 } from "@/lib/arbeitstage";
 import { CONTENT_YEARS } from "@/lib/constants";
-import LastUpdated from "@/components/LastUpdated";
+import AuthorByline from "@/components/AuthorByline";
 
 export const revalidate = 86400;
 
@@ -808,7 +808,9 @@ export default async function ArbeitstageYearPage({
           </p>
         </div>
 
-        <LastUpdated date={year === new Date().getFullYear() ? new Date() : new Date(`${year}-01-01`)} />
+        {/* ── Author Byline ─────────────────────────── */}
+        <AuthorByline date={year === new Date().getFullYear() ? new Date() : new Date(`${year}-01-01`)} />
+
         {/* ── Abschluss-Links ──────────────────────────────────── */}
         <div className="pt-8 border-t border-border flex flex-wrap gap-4 text-sm">
           <Link href="/" className="text-accent hover:underline">

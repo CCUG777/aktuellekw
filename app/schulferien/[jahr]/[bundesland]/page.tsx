@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { BUNDESLAENDER, CONTENT_YEARS } from "@/lib/constants";
+import AuthorByline from "@/components/AuthorByline";
 import {
   getSchulferien,
   sortFerien,
@@ -380,6 +381,9 @@ export default async function SchulferienBundeslandPage({
               ))}
           </div>
         </section>
+
+        {/* ── Author Byline ─────────────────────────── */}
+        <AuthorByline date={year === new Date().getFullYear() ? new Date() : new Date(`${year}-01-01`)} />
 
         {/* Interne Verlinkung */}
         <section className="max-w-2xl mx-auto px-4 pb-8">

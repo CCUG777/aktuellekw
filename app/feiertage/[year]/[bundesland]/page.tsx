@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { CONTENT_YEARS, BUNDESLAENDER, getBundeslandBySlug } from "@/lib/constants";
+import AuthorByline from "@/components/AuthorByline";
 import {
   getFeiertageFuerJahr,
   getFeiertageFuerBundesland,
@@ -756,6 +757,9 @@ export default async function FeiertageBundeslandPage({
             ))}
           </div>
         </div>
+
+        {/* ── Author Byline ─────────────────────────── */}
+        <AuthorByline date={year === new Date().getFullYear() ? new Date() : new Date(`${year}-01-01`)} />
 
         {/* ── Year Navigation (bottom) ─────────────────────────── */}
         <div className="mt-10 flex items-center justify-between border-t border-border pt-6">

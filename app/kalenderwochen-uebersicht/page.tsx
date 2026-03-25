@@ -6,6 +6,7 @@ import {
   formatDateDE,
 } from "@/lib/kw";
 import KWTable from "@/components/KWTable";
+import AuthorByline from "@/components/AuthorByline";
 
 export const revalidate = 3600;
 
@@ -321,6 +322,9 @@ export default function KalenderwochenUebersichtPage() {
             </p>
           </div>
         </section>
+
+        {/* ── Author Byline ─────────────────────────── */}
+        <AuthorByline date={new Date()} />
 
         {/* ── Abschluss-Links ────────────────────────────────── */}
         <div className="mt-10 pt-8 border-t border-border flex flex-wrap gap-4 text-sm">

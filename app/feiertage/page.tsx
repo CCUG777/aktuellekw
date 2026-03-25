@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { getCurrentKW } from "@/lib/kw";
 import { CONTENT_YEARS } from "@/lib/constants";
+import AuthorByline from "@/components/AuthorByline";
 import {
   getFeiertageFuerJahr,
   getHolidaysPerState,
@@ -426,6 +427,9 @@ export default function FeiertagePage() {
             ))}
           </div>
         </div>
+
+        {/* ── Author Byline ─────────────────────────── */}
+        <AuthorByline date={new Date()} />
 
         {/* ── Abschluss-Links ─────────────────────────────────────── */}
         <div className="mt-10 pt-8 border-t border-border flex flex-wrap gap-4 text-sm">

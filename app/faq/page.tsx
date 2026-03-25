@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import LastUpdated from "@/components/LastUpdated";
+import AuthorByline from "@/components/AuthorByline";
 
 export const metadata: Metadata = {
   title: "FAQ – Häufige Fragen zur Kalenderwoche (KW)",
@@ -204,7 +204,8 @@ export default function FaqPage() {
           ))}
         </div>
 
-        <LastUpdated date="2026-02-01" />
+        {/* ── Author Byline ─────────────────────────── */}
+        <AuthorByline date="2026-02-01" />
 
         {/* ── Quellen & Weiterführendes ─────────────────────────── */}
         <div className="mt-10 pt-8 border-t border-border">
