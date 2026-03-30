@@ -138,20 +138,6 @@ export default async function ArbeitstageYearPage({
         ],
       },
       {
-        "@type": "FAQPage",
-        "@id": `https://aktuellekw.de/arbeitstage/${year}#faqpage`,
-        inLanguage: "de-DE",
-        isPartOf: { "@id": "https://aktuellekw.de/#website" },
-        mainEntity: pageFAQs.map((faq) => ({
-          "@type": "Question",
-          name: faq.question,
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: faq.answer,
-          },
-        })),
-      },
-      {
         "@type": "Dataset",
         "@id": `https://aktuellekw.de/arbeitstage/${year}#dataset`,
         inLanguage: "de-DE",

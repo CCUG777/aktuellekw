@@ -186,18 +186,6 @@ export default async function OsterferienPage({
       creator: { "@id": "https://aktuellekw.de/#organization" },
       license: "https://creativecommons.org/licenses/by/4.0/",
     },
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "@id": `https://aktuellekw.de/osterferien/${year}#faqpage`,
-      inLanguage: "de-DE",
-      isPartOf: { "@id": "https://aktuellekw.de/#website" },
-      mainEntity: faqs.map((f) => ({
-        "@type": "Question",
-        name: f.question,
-        acceptedAnswer: { "@type": "Answer", text: f.answer },
-      })),
-    },
   ];
 
   return (

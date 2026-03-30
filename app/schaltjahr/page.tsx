@@ -164,23 +164,6 @@ export default function SchaltjahrPage() {
         },
       ],
     },
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "@id": "https://aktuellekw.de/schaltjahr#faqpage",
-      inLanguage: "de-DE",
-      isPartOf: { "@id": "https://aktuellekw.de/#website" },
-      datePublished: "2026-01-01",
-      dateModified: "2026-01-01",
-      mainEntity: pageFAQs.map((faq) => ({
-        "@type": "Question",
-        name: faq.question,
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: faq.answer,
-        },
-      })),
-    },
   ];
 
   return (

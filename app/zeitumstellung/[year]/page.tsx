@@ -152,19 +152,6 @@ export default async function ZeitumstellungYearPage({
         ],
       },
       {
-        "@type": "FAQPage",
-        "@id": `https://aktuellekw.de/zeitumstellung/${year}#faqpage`,
-        inLanguage: "de-DE",
-        isPartOf: { "@id": "https://aktuellekw.de/#website" },
-        datePublished: `${year}-01-01`,
-        dateModified: year === new Date().getFullYear() ? new Date().toISOString().split("T")[0] : `${year}-01-01`,
-        mainEntity: faqItems.map((f) => ({
-          "@type": "Question",
-          name: f.q,
-          acceptedAnswer: { "@type": "Answer", text: f.a },
-        })),
-      },
-      {
         "@type": "Event",
         "@id": `https://aktuellekw.de/zeitumstellung/${year}#event`,
         inLanguage: "de-DE",

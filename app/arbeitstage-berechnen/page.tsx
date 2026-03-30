@@ -127,20 +127,6 @@ const jsonLd = [
     inLanguage: "de-DE",
     offers: { "@type": "Offer", price: "0", priceCurrency: "EUR" },
   },
-  {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "@id": "https://aktuellekw.de/arbeitstage-berechnen#faqpage",
-    isPartOf: { "@id": "https://aktuellekw.de/#website" },
-    mainEntity: pageFAQs.map((faq) => ({
-      "@type": "Question",
-      name: faq.question,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: faq.answer,
-      },
-    })),
-  },
 ];
 
 /* ── Page Component ────────────────────────────────────────────── */

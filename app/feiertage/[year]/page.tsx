@@ -304,20 +304,6 @@ export default async function FeiertageYearPage({
       creator: { "@id": "https://aktuellekw.de/#organization" },
       license: "https://creativecommons.org/licenses/by/4.0/",
     },
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "@id": `https://aktuellekw.de/feiertage/${year}#faqpage`,
-      isPartOf: { "@id": "https://aktuellekw.de/#website" },
-      mainEntity: allFAQs.map((faq) => ({
-        "@type": "Question",
-        name: faq.question,
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: faq.answer,
-        },
-      })),
-    },
   ];
 
   return (

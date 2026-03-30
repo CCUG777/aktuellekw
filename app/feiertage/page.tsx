@@ -78,25 +78,6 @@ export default function FeiertagePage() {
         },
       ],
     },
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      inLanguage: "de-DE",
-      datePublished: "2026-01-01",
-      dateModified: "2026-02-01",
-      mainEntity: FEIERTAGE_FAQS.map((faq) => ({
-        "@type": "Question",
-        name: faq.question,
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: faq.answer,
-        },
-      })),
-      speakable: {
-        "@type": "SpeakableSpecification",
-        cssSelector: ["h1", ".next-holiday-box"],
-      },
-    },
   ];
 
   return (

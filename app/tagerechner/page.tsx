@@ -147,20 +147,6 @@ export default function TageBerechnenPage() {
       },
       inLanguage: "de-DE",
     },
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "@id": "https://aktuellekw.de/tagerechner#faqpage",
-      isPartOf: { "@id": "https://aktuellekw.de/#website" },
-      mainEntity: pageFAQs.map((faq) => ({
-        "@type": "Question",
-        name: faq.question,
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: faq.answer,
-        },
-      })),
-    },
   ];
 
   return (

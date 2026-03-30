@@ -94,37 +94,6 @@ export default function WieVieleWochenPage() {
         },
       ],
     },
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "@id": "https://aktuellekw.de/wie-viele-wochen-hat-ein-jahr#faqpage",
-      inLanguage: "de-DE",
-      isPartOf: { "@id": "https://aktuellekw.de/#website" },
-      datePublished: "2026-01-01",
-      dateModified: "2026-02-27",
-      mainEntity: pageFaqs.map((f) => ({
-        "@type": "Question",
-        name: f.question,
-        acceptedAnswer: { "@type": "Answer", text: f.answer },
-      })),
-      citation: [
-        {
-          "@type": "CreativeWork",
-          name: "ISO 8601:2004 – Date and time format",
-          url: "https://www.iso.org/iso-8601-date-and-time-format.html",
-        },
-        {
-          "@type": "CreativeWork",
-          name: "ISO 8601 – Wikipedia",
-          url: "https://de.wikipedia.org/wiki/ISO_8601",
-        },
-        {
-          "@type": "CreativeWork",
-          name: "Woche – Wikipedia",
-          url: "https://de.wikipedia.org/wiki/Woche",
-        },
-      ],
-    },
   ];
 
   return (

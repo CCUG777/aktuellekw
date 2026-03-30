@@ -161,19 +161,6 @@ export default async function KalenderwochenYearPage({
         },
         license: "https://creativecommons.org/licenses/by/4.0/",
       },
-      {
-        "@type": "FAQPage",
-        "@id": `https://aktuellekw.de/kalenderwochen/${year}#faqpage`,
-        inLanguage: "de-DE",
-        isPartOf: { "@id": "https://aktuellekw.de/#website" },
-        datePublished: `${year}-01-01`,
-        dateModified: year === currentKW.year ? new Date().toISOString().split("T")[0] : `${year}-01-01`,
-        mainEntity: yearFaqs.map((f) => ({
-          "@type": "Question",
-          name: f.question,
-          acceptedAnswer: { "@type": "Answer", text: f.answer },
-        })),
-      },
     ],
   };
 

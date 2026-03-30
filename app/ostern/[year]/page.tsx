@@ -298,20 +298,6 @@ export default async function OsternPage({
       },
       organizer: { "@id": "https://aktuellekw.de/#organization" },
     },
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "@id": `https://aktuellekw.de/ostern/${year}#faqpage`,
-      inLanguage: "de-DE",
-      isPartOf: { "@id": "https://aktuellekw.de/#website" },
-      datePublished: `${year}-01-01`,
-      dateModified: year === new Date().getFullYear() ? new Date().toISOString().split("T")[0] : `${year}-01-01`,
-      mainEntity: osternFAQs.map((faq) => ({
-        "@type": "Question",
-        name: faq.question,
-        acceptedAnswer: { "@type": "Answer", text: faq.answer },
-      })),
-    },
   ];
 
   return (
