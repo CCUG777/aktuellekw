@@ -84,11 +84,16 @@ export async function generateMetadata({
   const title = `Ostermontag ${year}: Datum, Feiertag & Bedeutung`;
   const description = `Ostermontag ${year} am ${formatDateDE(ostermontag)} – gesetzlicher Feiertag in ganz Deutschland. Bedeutung, Bräuche, Öffnungszeiten & alle Osterfeiertage im Überblick.`;
   const url = `https://aktuellekw.de/ostermontag/${year}`;
+  const currentYear = new Date().getFullYear();
+  const isCurrentYear = year === currentYear;
 
   return {
     title,
     description,
-    alternates: { canonical: url },
+    ...(!isCurrentYear && {
+      robots: { index: false, follow: true },
+    }),
+    alternates: { canonical: isCurrentYear ? url : `https://aktuellekw.de/ostermontag/${currentYear}` },
     openGraph: {
       title,
       description,

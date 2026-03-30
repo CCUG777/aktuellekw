@@ -42,10 +42,16 @@ export async function generateMetadata({
   const description = `Schulferien ${year} in ${bl.name}: Alle Ferientermine von Winterferien bis Weihnachtsferien. Osterferien, Sommerferien, Herbstferien ${bl.name} ${year} im Überblick.`;
   const url = `https://aktuellekw.de/schulferien/${year}/${slug}`;
 
+  const currentYear = new Date().getFullYear();
+
   return {
     title,
     description,
-    alternates: { canonical: url },
+    // Phase 1.4: Bundesland-Seiten aus dem Index nehmen
+    robots: { index: false, follow: true },
+    alternates: {
+      canonical: `https://aktuellekw.de/schulferien/${currentYear}`,
+    },
     openGraph: {
       title,
       description,

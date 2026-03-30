@@ -75,11 +75,16 @@ export async function generateMetadata({
   const title = `Osterferien ${year} – Alle Bundesländer im Überblick`;
   const description = `Osterferien ${year}: Termine für alle 16 Bundesländer auf einen Blick. Wann sind Osterferien in NRW, Bayern & Co.? Plus Brückentage, Planungstipps & FAQ.`;
   const url = `https://aktuellekw.de/osterferien/${year}`;
+  const currentYear = new Date().getFullYear();
+  const isCurrentYear = year === currentYear;
 
   return {
     title,
     description,
-    alternates: { canonical: url },
+    ...(!isCurrentYear && {
+      robots: { index: false, follow: true },
+    }),
+    alternates: { canonical: isCurrentYear ? url : `https://aktuellekw.de/osterferien/${currentYear}` },
     openGraph: {
       title,
       description,

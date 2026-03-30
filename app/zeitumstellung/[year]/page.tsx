@@ -31,10 +31,16 @@ export async function generateMetadata({
   const title = `Zeitumstellung ${year}: Termine, Datum & alle Infos`;
   const description = `Zeitumstellung ${year}: Sommerzeit am ${sommerzeit.dateFormatted} & Winterzeit am ${winterzeit.dateFormatted}. ✓ Alle Termine & Regeln für Deutschland.`;
 
+  const currentYear = new Date().getFullYear();
+  const isCurrentYear = year === currentYear;
+
   return {
     title,
     description,
-    alternates: { canonical: `https://aktuellekw.de/zeitumstellung/${year}` },
+    ...(!isCurrentYear && {
+      robots: { index: false, follow: true },
+    }),
+    alternates: { canonical: isCurrentYear ? `https://aktuellekw.de/zeitumstellung/${year}` : `https://aktuellekw.de/zeitumstellung/${currentYear}` },
     openGraph: {
       title,
       description,

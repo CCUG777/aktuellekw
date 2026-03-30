@@ -83,10 +83,19 @@ export async function generateMetadata({
   const description = `Gesetzliche Feiertage ${year} in Deutschland: ${nationwide} bundesweite + ${regional} regionale Feiertage mit Datum, Wochentag & KW. Brückentage ${year} clever planen – inkl. Bundesland-Übersicht.`;
   const url = `https://aktuellekw.de/feiertage/${year}`;
 
+  const currentYear = new Date().getFullYear();
+  const isCurrentYear = year === currentYear;
+
   return {
     title,
     description,
-    alternates: { canonical: url },
+    // Phase 1.3: Nur aktuelles Jahr im Index halten
+    ...(!isCurrentYear && {
+      robots: { index: false, follow: true },
+    }),
+    alternates: {
+      canonical: isCurrentYear ? url : `https://aktuellekw.de/feiertage/${currentYear}`,
+    },
     openGraph: {
       title,
       description,

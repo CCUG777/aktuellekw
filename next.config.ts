@@ -49,35 +49,81 @@ const nextConfig: NextConfig = {
 
   async redirects() {
     return [
+      // ── Phase 1.1: Synonym-Seiten → Zielseite (301) ──────────
+      // Kalenderwochen-Synonyme → /kalenderwoche
+      {
+        source: "/kalender-mit-kalenderwochen",
+        destination: "/kalenderwoche",
+        permanent: true,
+      },
+      {
+        source: "/kalenderwochen-uebersicht",
+        destination: "/kalenderwoche",
+        permanent: true,
+      },
+      {
+        source: "/kalender-mit-wochen",
+        destination: "/kalenderwoche",
+        permanent: true,
+      },
+      {
+        source: "/kalender-wochenuebersicht",
+        destination: "/kalenderwoche",
+        permanent: true,
+      },
+      // "Welche KW haben wir?" → Startseite (identische Frage)
+      {
+        source: "/welche-kalenderwoche-haben-wir",
+        destination: "/",
+        permanent: true,
+      },
+      // Woche/Jahr → Ratgeber-Seite
+      {
+        source: "/woche-jahr",
+        destination: "/wie-viele-wochen-hat-ein-jahr",
+        permanent: true,
+      },
+      // Sommerzeit/Winterzeit → Zeitumstellung (zusammenführen)
+      {
+        source: "/sommerzeit",
+        destination: "/zeitumstellung/2026",
+        permanent: true,
+      },
+      {
+        source: "/winterzeit",
+        destination: "/zeitumstellung/2026",
+        permanent: true,
+      },
+      // ── Legacy-Redirects ──────────────────────────────────────
       {
         source: "/tage-berechnen",
         destination: "/tagerechner",
-        permanent: true, // 301 redirect
+        permanent: true,
       },
       {
         source: "/sommerzeit-2026",
-        destination: "/sommerzeit",
-        permanent: true, // 301 redirect
+        destination: "/zeitumstellung/2026",
+        permanent: true,
       },
       {
         source: "/winterzeit-2026",
-        destination: "/winterzeit",
-        permanent: true, // 301 redirect
+        destination: "/zeitumstellung/2026",
+        permanent: true,
       },
       {
         source: "/arbeitstage-rechner",
         destination: "/arbeitstage-berechnen",
-        permanent: true, // 301 redirect
+        permanent: true,
       },
       {
         source: "/arbeitstage-2026",
         destination: "/arbeitstage/2026",
-        permanent: true, // 301 redirect
+        permanent: true,
       },
       {
         source: "/zeitumstellung-2026",
         destination: "/zeitumstellung/2026",
-        permanent: true, // 301 redirect
+        permanent: true,
       },
     ];
   },

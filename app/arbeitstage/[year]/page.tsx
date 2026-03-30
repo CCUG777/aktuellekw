@@ -28,11 +28,16 @@ export async function generateMetadata({
   const title = `Arbeitstage ${year}: Gesamtzahl + Tabellen je Bundesland`;
   const description = `Arbeitstage ${year} sofort: Gesamtzahl (5-Tage-Woche) plus Tabellen nach Monat & Bundesland. Mit Rechenanleitung, Stunden-Umrechnung & Steuer-Kontext.`;
   const url = `https://aktuellekw.de/arbeitstage/${year}`;
+  const currentYear = new Date().getFullYear();
+  const isCurrentYear = year === currentYear;
 
   return {
     title,
     description,
-    alternates: { canonical: url },
+    ...(!isCurrentYear && {
+      robots: { index: false, follow: true },
+    }),
+    alternates: { canonical: isCurrentYear ? url : `https://aktuellekw.de/arbeitstage/${currentYear}` },
     openGraph: {
       title,
       description,

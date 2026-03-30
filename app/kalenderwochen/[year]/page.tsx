@@ -51,13 +51,21 @@ export async function generateMetadata({
   if (!year) return { title: "Jahr nicht gefunden" };
 
   const weeksInYear = getWeeksInYear(year);
+  const currentYear = getCurrentKW().year;
+  const isCurrentYear = year === currentYear;
   const title = titleMap[year] ?? `Kalenderwochen ${year} – Alle ${weeksInYear} KW im Überblick`;
   const description = descMap[year] ?? `Alle Kalenderwochen ${year} auf einen Blick: KW 1 bis KW ${weeksInYear} mit Start- und Enddatum. Jahreskalender ${year} nach ISO 8601.`;
   return {
     title,
     description,
+    // Phase 1.3: Nur aktuelles Jahr im Index halten
+    ...(!isCurrentYear && {
+      robots: { index: false, follow: true },
+    }),
     alternates: {
-      canonical: `https://aktuellekw.de/kalenderwochen/${year}`,
+      canonical: isCurrentYear
+        ? `https://aktuellekw.de/kalenderwochen/${year}`
+        : `https://aktuellekw.de/kalenderwochen/${currentYear}`,
     },
     openGraph: {
       title,

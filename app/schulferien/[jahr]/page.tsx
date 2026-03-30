@@ -32,10 +32,19 @@ export async function generateMetadata({
   const description = `Schulferien ${year} für alle 16 Bundesländer: Termine, Dauer und Ferienkalender. Osterferien, Sommerferien, Herbstferien & Weihnachtsferien ${year}.`;
   const url = `https://aktuellekw.de/schulferien/${year}`;
 
+  const currentYear = new Date().getFullYear();
+  const isCurrentYear = year === currentYear;
+
   return {
     title,
     description,
-    alternates: { canonical: url },
+    // Phase 1.3: Nur aktuelles Jahr im Index halten
+    ...(!isCurrentYear && {
+      robots: { index: false, follow: true },
+    }),
+    alternates: {
+      canonical: isCurrentYear ? url : `https://aktuellekw.de/schulferien/${currentYear}`,
+    },
     openGraph: {
       title,
       description,

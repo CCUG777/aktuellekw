@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
-import { getAllKWsForYear, getCurrentKW, getWeeksInYear } from "@/lib/kw";
-import { BUNDESLAENDER, CONTENT_YEARS } from "@/lib/constants";
+import { getCurrentKW } from "@/lib/kw";
+// BUNDESLAENDER + CONTENT_YEARS removed after Phase 1.3 consolidation
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
@@ -37,48 +37,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "yearly",
       priority: 0.75,
     },
-    // Cluster 3: Welche Kalenderwoche haben wir
-    {
-      url: "https://aktuellekw.de/welche-kalenderwoche-haben-wir",
-      lastModified: now,
-      changeFrequency: "daily",
-      priority: 0.8,
-    },
-    // Cluster 2: Kalender mit Kalenderwochen
-    {
-      url: "https://aktuellekw.de/kalender-mit-kalenderwochen",
-      lastModified: new Date("2026-01-01"),
-      changeFrequency: "yearly",
-      priority: 0.85,
-    },
-    // Cluster 3: Kalenderwochen-Übersicht
-    {
-      url: "https://aktuellekw.de/kalenderwochen-uebersicht",
-      lastModified: new Date("2026-01-01"),
-      changeFrequency: "yearly",
-      priority: 0.8,
-    },
-    // Cluster 4: Woche Jahr
-    {
-      url: "https://aktuellekw.de/woche-jahr",
-      lastModified: now,
-      changeFrequency: "daily",
-      priority: 0.75,
-    },
-    // Cluster 2+6: Kalender mit Wochen
-    {
-      url: "https://aktuellekw.de/kalender-mit-wochen",
-      lastModified: new Date("2026-01-01"),
-      changeFrequency: "yearly",
-      priority: 0.75,
-    },
-    // Cluster 6: Kalender Wochenübersicht
-    {
-      url: "https://aktuellekw.de/kalender-wochenuebersicht",
-      lastModified: new Date("2026-01-01"),
-      changeFrequency: "yearly",
-      priority: 0.75,
-    },
+    // Entfernt: /welche-kalenderwoche-haben-wir → 301 auf /
+    // Entfernt: /kalender-mit-kalenderwochen → 301 auf /kalenderwoche
+    // Entfernt: /kalenderwochen-uebersicht → 301 auf /kalenderwoche
+    // Entfernt: /woche-jahr → 301 auf /wie-viele-wochen-hat-ein-jahr
+    // Entfernt: /kalender-mit-wochen → 301 auf /kalenderwoche
+    // Entfernt: /kalender-wochenuebersicht → 301 auf /kalenderwoche
     // Datum heute
     {
       url: "https://aktuellekw.de/datum-heute",
@@ -107,20 +71,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "daily",
       priority: 0.85,
     },
-    // Sommerzeit 2026
-    {
-      url: "https://aktuellekw.de/sommerzeit",
-      lastModified: new Date("2026-01-01"),
-      changeFrequency: "yearly",
-      priority: 0.8,
-    },
-    // Winterzeit 2026
-    {
-      url: "https://aktuellekw.de/winterzeit",
-      lastModified: new Date("2026-01-01"),
-      changeFrequency: "yearly",
-      priority: 0.8,
-    },
+    // Entfernt: /sommerzeit → 301 auf /zeitumstellung/2026
+    // Entfernt: /winterzeit → 301 auf /zeitumstellung/2026
     // Feiertage Deutschland
     {
       url: "https://aktuellekw.de/feiertage",
@@ -138,133 +90,80 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // Rechtliches: robots: { index: false } → absichtlich nicht im Sitemap
   ];
 
-  // ── Feiertage Jahresseiten (/feiertage/[year]) ──────────────
-  const feiertageYearPages: MetadataRoute.Sitemap = CONTENT_YEARS.map(
-    (year) => ({
-      url: `https://aktuellekw.de/feiertage/${year}`,
-      lastModified: year === currentYear ? now : new Date(`${year}-01-01`),
-      changeFrequency: year === currentYear ? ("daily" as const) : ("yearly" as const),
-      priority: year === currentYear ? 0.85 : 0.6,
-    })
-  );
+  // ── Phase 1.3: Nur aktuelles Jahr in Sitemap ──────────────
+  // Feiertage Jahresseite (nur aktuelles Jahr)
+  const feiertageYearPages: MetadataRoute.Sitemap = [{
+    url: `https://aktuellekw.de/feiertage/${currentYear}`,
+    lastModified: now,
+    changeFrequency: "daily" as const,
+    priority: 0.85,
+  }];
 
-  // ── Cluster 2: Year overview pages (/kalenderwochen/[year]) ───
-  const yearPages: MetadataRoute.Sitemap = [
-    currentYear - 1,
-    currentYear,
-    currentYear + 1,
-  ].map((year) => ({
-    url: `https://aktuellekw.de/kalenderwochen/${year}`,
-    lastModified: year === currentYear ? now : new Date(`${year}-12-28`),
-    changeFrequency: year === currentYear ? ("yearly" as const) : ("never" as const),
-    priority: year === currentYear ? 0.85 : 0.6,
-  }));
-
-  // ── Cluster 5: Individual KW pages (/kw/[n]-[year]) ──────────
-  // Include current year ± 1 to cover searches for past/future KWs
-  const kwPages: MetadataRoute.Sitemap = [
-    currentYear - 1,
-    currentYear,
-    currentYear + 1,
-  ].flatMap((year) => {
-    const weeks = getAllKWsForYear(year);
-    return weeks.map((week) => ({
-      url: `https://aktuellekw.de/kw/${week.weekNumber}-${year}`,
-      lastModified:
-        week.weekNumber === currentKW.weekNumber && year === currentYear
-          ? now
-          : week.endDate,
-      changeFrequency: (
-        week.weekNumber === currentKW.weekNumber && year === currentYear
-          ? "weekly"
-          : "never"
-      ) as MetadataRoute.Sitemap[number]["changeFrequency"],
-      priority:
-        week.weekNumber === currentKW.weekNumber && year === currentYear
-          ? 0.8
-          : year === currentYear
-          ? 0.5
-          : 0.3,
-    }));
-  });
-
-  // ── Ostern-Seiten (/ostern/[year]) ──────────────────────
-  const osternPages: MetadataRoute.Sitemap = CONTENT_YEARS.map(
-    (year) => ({
-      url: `https://aktuellekw.de/ostern/${year}`,
-      lastModified: year === currentYear ? now : new Date(`${year}-01-01`),
-      changeFrequency: "yearly" as const,
-      priority: year === currentYear ? 0.75 : 0.6,
-    })
-  );
-
-  // ── Ostermontag-Seiten (/ostermontag/[year]) ────────────
-  const ostermontagPages: MetadataRoute.Sitemap = CONTENT_YEARS.map(
-    (year) => ({
-      url: `https://aktuellekw.de/ostermontag/${year}`,
-      lastModified: year === currentYear ? now : new Date(`${year}-01-01`),
-      changeFrequency: "yearly" as const,
-      priority: year === currentYear ? 0.7 : 0.5,
-    })
-  );
-
-  // ── Osterferien-Seiten (/osterferien/[year]) ────────────
-  const osterferienPages: MetadataRoute.Sitemap = CONTENT_YEARS.map(
-    (year) => ({
-      url: `https://aktuellekw.de/osterferien/${year}`,
-      lastModified: year === currentYear ? now : new Date(`${year}-01-01`),
-      changeFrequency: "yearly" as const,
-      priority: year === currentYear ? 0.75 : 0.55,
-    })
-  );
-
-  // ── Schulferien Hub-Seiten (/schulferien-[jahr]) ─────────
-  const schulferienHubPages: MetadataRoute.Sitemap = CONTENT_YEARS.map(
-    (year) => ({
-      url: `https://aktuellekw.de/schulferien/${year}`,
-      lastModified: year === currentYear ? now : new Date(`${year}-01-01`),
-      changeFrequency: "yearly" as const,
-      priority: year === currentYear ? 0.85 : 0.6,
-    })
-  );
-
-  // ── Feiertage Bundesland-Seiten (/feiertage/[year]/[bl]) ─────
-  const feiertageBundeslandPages: MetadataRoute.Sitemap = CONTENT_YEARS.flatMap(
-    (year) =>
-      BUNDESLAENDER.map((bl) => ({
-        url: `https://aktuellekw.de/feiertage/${year}/${bl.slug}`,
-        lastModified: year === currentYear ? now : new Date(`${year}-01-01`),
-        changeFrequency: "yearly" as const,
-        priority: year === currentYear ? 0.75 : 0.45,
-      }))
-  );
-
-  // ── Arbeitstage-Jahresseiten (/arbeitstage/[year]) ───────────
-  const arbeitstagePages: MetadataRoute.Sitemap = CONTENT_YEARS.map((year) => ({
-    url: `https://aktuellekw.de/arbeitstage/${year}`,
-    lastModified: year === currentYear ? now : new Date(`${year}-01-01`),
+  // Kalenderwochen Jahresübersicht (nur aktuelles Jahr)
+  const yearPages: MetadataRoute.Sitemap = [{
+    url: `https://aktuellekw.de/kalenderwochen/${currentYear}`,
+    lastModified: now,
     changeFrequency: "yearly" as const,
-    priority: year === currentYear ? 0.85 : 0.6,
-  }));
+    priority: 0.85,
+  }];
 
-  // ── Zeitumstellung-Jahresseiten (/zeitumstellung/[year]) ──────
-  const zeitumstellungPages: MetadataRoute.Sitemap = CONTENT_YEARS.map((year) => ({
-    url: `https://aktuellekw.de/zeitumstellung/${year}`,
-    lastModified: year === currentYear ? now : new Date(`${year}-01-01`),
+  // Phase 1.2: KW-Einzelseiten aus der Sitemap entfernt (noindex)
+  // ~160 Seiten mit minimalem Unterschied → Doorway-Page-Muster vermeiden
+  const kwPages: MetadataRoute.Sitemap = [];
+
+  // Ostern (nur aktuelles Jahr)
+  const osternPages: MetadataRoute.Sitemap = [{
+    url: `https://aktuellekw.de/ostern/${currentYear}`,
+    lastModified: now,
     changeFrequency: "yearly" as const,
-    priority: year === currentYear ? 0.85 : 0.6,
-  }));
+    priority: 0.75,
+  }];
 
-  // ── Schulferien Bundesland-Seiten (/schulferien-[jahr]/[bl]) ─
-  const schulferienBlPages: MetadataRoute.Sitemap = CONTENT_YEARS.flatMap(
-    (year) =>
-      BUNDESLAENDER.map((bl) => ({
-        url: `https://aktuellekw.de/schulferien/${year}/${bl.slug}`,
-        lastModified: year === currentYear ? now : new Date(`${year}-01-01`),
-        changeFrequency: "yearly" as const,
-        priority: year === currentYear ? 0.7 : 0.4,
-      }))
-  );
+  // Ostermontag (nur aktuelles Jahr)
+  const ostermontagPages: MetadataRoute.Sitemap = [{
+    url: `https://aktuellekw.de/ostermontag/${currentYear}`,
+    lastModified: now,
+    changeFrequency: "yearly" as const,
+    priority: 0.7,
+  }];
+
+  // Osterferien (nur aktuelles Jahr)
+  const osterferienPages: MetadataRoute.Sitemap = [{
+    url: `https://aktuellekw.de/osterferien/${currentYear}`,
+    lastModified: now,
+    changeFrequency: "yearly" as const,
+    priority: 0.75,
+  }];
+
+  // Schulferien (nur aktuelles Jahr)
+  const schulferienHubPages: MetadataRoute.Sitemap = [{
+    url: `https://aktuellekw.de/schulferien/${currentYear}`,
+    lastModified: now,
+    changeFrequency: "yearly" as const,
+    priority: 0.85,
+  }];
+
+  // Phase 1.4: Bundesland-Feiertage nur noch aktuelles Jahr (werden später zu Filter)
+  const feiertageBundeslandPages: MetadataRoute.Sitemap = [];
+
+  // Arbeitstage (nur aktuelles Jahr)
+  const arbeitstagePages: MetadataRoute.Sitemap = [{
+    url: `https://aktuellekw.de/arbeitstage/${currentYear}`,
+    lastModified: now,
+    changeFrequency: "yearly" as const,
+    priority: 0.85,
+  }];
+
+  // Zeitumstellung (nur aktuelles Jahr)
+  const zeitumstellungPages: MetadataRoute.Sitemap = [{
+    url: `https://aktuellekw.de/zeitumstellung/${currentYear}`,
+    lastModified: now,
+    changeFrequency: "yearly" as const,
+    priority: 0.85,
+  }];
+
+  // Schulferien Bundesland-Seiten: aus Sitemap entfernt (noindex geplant)
+  const schulferienBlPages: MetadataRoute.Sitemap = [];
 
   return [
     ...corePages,

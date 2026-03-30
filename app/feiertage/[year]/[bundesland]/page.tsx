@@ -132,10 +132,16 @@ export async function generateMetadata({
   const description = `Gesetzliche Feiertage ${year} in ${bl.name}: ${count} Feiertage mit Datum, Wochentag & KW. Plus ${brueckentage.length} Brückentage für maximale Freizeit.`;
   const url = `https://aktuellekw.de/feiertage/${year}/${slug}`;
 
+  const currentYear = new Date().getFullYear();
+
   return {
     title,
     description,
-    alternates: { canonical: url },
+    // Phase 1.4: Bundesland-Seiten aus dem Index nehmen → Hauptseite mit Filter
+    robots: { index: false, follow: true },
+    alternates: {
+      canonical: `https://aktuellekw.de/feiertage/${currentYear}`,
+    },
     openGraph: {
       title,
       description,

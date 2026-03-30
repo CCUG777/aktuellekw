@@ -110,11 +110,16 @@ export async function generateMetadata({
   const title = `Ostern ${year}: Datum, Termine & alle Feiertage`;
   const description = `Wann ist Ostern ${year}? Ostersonntag am ${easterDateStr}. Karfreitag, Ostermontag, Osterferien & Br\u00fcckentage \u2013 alle Termine mit KW auf einen Blick.`;
   const url = `https://aktuellekw.de/ostern/${year}`;
+  const currentYear = new Date().getFullYear();
+  const isCurrentYear = year === currentYear;
 
   return {
     title,
     description,
-    alternates: { canonical: url },
+    ...(!isCurrentYear && {
+      robots: { index: false, follow: true },
+    }),
+    alternates: { canonical: isCurrentYear ? url : `https://aktuellekw.de/ostern/${currentYear}` },
     openGraph: {
       title,
       description,

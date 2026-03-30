@@ -86,8 +86,13 @@ export async function generateMetadata({
   return {
     title,
     description,
+    // Phase 1.2: KW-Einzelseiten aus dem Index nehmen (Doorway-Page-Muster vermeiden)
+    robots: {
+      index: false,
+      follow: true,
+    },
     alternates: {
-      canonical: `https://aktuellekw.de/kw/${kwInfo.weekNumber}-${kwInfo.year}`,
+      canonical: "https://aktuellekw.de/kalenderwoche",
     },
     openGraph: {
       title,
