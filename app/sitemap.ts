@@ -3,7 +3,10 @@ import { getCurrentKW } from "@/lib/kw";
 // BUNDESLAENDER + CONTENT_YEARS removed after Phase 1.3 consolidation
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const now = new Date();
+  // lastmod: fester Inhaltsstand – bewusst NICHT `new Date()` (sonst ändert
+  // sich lastmod bei jedem Build/ISR-Revalidate und entwertet das Signal).
+  // Bei echten Inhaltsänderungen dieses Datum manuell hochsetzen.
+  const now = new Date("2026-07-05");
   const currentKW = getCurrentKW();
   const currentYear = currentKW.year;
 
@@ -187,12 +190,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
  * [x] Startseite: priority 1.0, changeFrequency "daily"
  * [x] /kalenderwoche: priority 0.9, changeFrequency "yearly"
  * [x] /faq: priority 0.7, changeFrequency "monthly"
- * [x] /kalenderwochen/[year]: 3 Jahre (aktuell ± 1), priority 0.6–0.85
- * [x] /kw/[n]-[year]: alle KWs für aktuelles Jahr ± 1
- *     – Aktuelle KW: priority 0.8, changeFrequency "weekly"
- *     – Restliche im aktuellen Jahr: priority 0.5, changeFrequency "never"
- *     – Andere Jahre: priority 0.3, changeFrequency "never"
- * [x] lastModified: endDate der KW für vergangene Wochen
+ * [x] /kalenderwochen/[year]: nur aktuelles Jahr (andere = noindex)
+ * [x] /kw/[n]-[year]: aktuell NICHT in Sitemap (noindex)
+ *     → wird in Phase 4 nach Aufwertung wieder aufgenommen
+ * [x] Nur indexierbare URLs in der Sitemap (keine noindex-Seiten)
+ * [x] lastModified: fester Inhaltsstand statt `new Date()` (Phase 2.3)
  * [x] /wie-viele-wochen-hat-ein-jahr in Sitemap (Cluster 4)
- * [ ] TODO: /kalender-download ergänzen (Cluster 6, geplant)
+ * [ ] TODO Phase 4: /kw-kalender-zum-ausdrucken, /kalenderwoche-excel,
+ *     /widget, /kalenderwochen-lieferplanung + aufgewertete /kw/[slug]
  */

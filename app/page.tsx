@@ -198,9 +198,8 @@ export default function Home() {
           Heute ist KW&nbsp;{kw.weekNumber}
         </p>
         <p className="text-text-secondary text-sm mt-1 text-center max-w-md">
-          KW heute: Die <strong className="text-text-primary">heutige Kalenderwoche</strong> ist
-          die KW&nbsp;{kw.weekNumber}&nbsp;{kw.year}. Die KW Woche heute
-          läuft vom {formatDateDE(kw.startDate)} bis {formatDateDE(kw.endDate)}.
+          Die <strong className="text-text-primary">heutige Kalenderwoche</strong> ist
+          KW&nbsp;{kw.weekNumber}&nbsp;{kw.year} – von {formatDateDE(kw.startDate)} bis {formatDateDE(kw.endDate)}.
         </p>
 
         {/* Prev / Next KW navigation */}
@@ -253,18 +252,15 @@ export default function Home() {
        * ──────────────────────────────────────────────────────────── */}
       <section className="max-w-2xl mx-auto px-4 pb-10 text-center fade-in">
         <h2 id="aktuelle-kalenderwoche-was-du-wissen-musst" className="text-xl font-semibold mb-3">
-          Aktuelle Kalenderwoche – Was Du wissen musst
+          Aktuelle Kalenderwoche
         </h2>
         <p className="text-text-secondary text-sm leading-relaxed">
-          Die kurze Antwort lautet: Wir haben heute den{" "}
-          <strong className="text-text-primary">{formatDateDE(todayUTC)}</strong>.
-          Die <strong className="text-text-primary">aktuelle KW</strong> ist die{" "}
-          <strong className="text-text-primary">Kalenderwoche&nbsp;{kw.weekNumber}</strong>.
-          Diese Woche begann am Montag, den {formatDateDE(kw.startDate)}, und
-          endet am Sonntag, den {formatDateDE(kw.endDate)}. Ob Du nach der{" "}
-          <strong className="text-text-primary">Kalenderwoche heute</strong>{" "}
-          oder der <strong className="text-text-primary">KW Woche heute</strong>{" "}
-          suchst – hier wirst Du fündig.
+          Die kurze Antwort: Heute ist der{" "}
+          <strong className="text-text-primary">{formatDateDE(todayUTC)}</strong> – das ist
+          die <strong className="text-text-primary">Kalenderwoche&nbsp;{kw.weekNumber}</strong>.
+          Die Woche begann am Montag, {formatDateDE(kw.startDate)}, und endet am
+          Sonntag, {formatDateDE(kw.endDate)}. Gezählt wird nach ISO&nbsp;8601:
+          maßgeblich für die Nummer ist der Donnerstag der Woche.
         </p>
       </section>
 
@@ -438,11 +434,11 @@ export default function Home() {
       {/* ── 3c. HINTERGRÜNDE: Aktuelle KW ── Cluster 1 ─────────── */}
       <section id="hintergruende" className="max-w-2xl mx-auto px-4 pb-14 scroll-mt-20">
         <h2 id="hintergruende-zu-aktuelle-kw" className="text-2xl font-semibold mb-4">
-          Hintergründe zu Aktuelle KW
+          So wird die Kalenderwoche gezählt
         </h2>
         <p className="text-text-secondary text-sm leading-relaxed mb-4">
-          Hier erfährst Du alles Wissenswerte über die Zählweise und Definition
-          der Wochen in Deutschland und Europa:
+          Die Zählweise der Wochen in Deutschland und Europa folgt einer festen
+          Norm. Die vier wichtigsten Regeln:
         </p>
         <ul className="space-y-3 text-text-secondary text-sm leading-relaxed">
           <li className="flex gap-2.5">
@@ -451,8 +447,7 @@ export default function Home() {
               <strong className="text-text-primary">ISO&nbsp;8601 Standard:</strong>{" "}
               In Deutschland und den meisten europäischen Ländern wird die{" "}
               <strong className="text-text-primary">aktuelle Kalenderwoche</strong>{" "}
-              (auch oft als <em>aktuelle Kalender&shy;Woche</em> gesucht) nach
-              der Norm ISO&nbsp;8601 bestimmt.
+              nach der Norm ISO&nbsp;8601 bestimmt.
             </span>
           </li>
           <li className="flex gap-2.5">
