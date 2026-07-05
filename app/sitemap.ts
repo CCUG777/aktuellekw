@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { getCurrentKW } from "@/lib/kw";
+import { getCurrentKW, getAllKWsForYear } from "@/lib/kw";
 // BUNDESLAENDER + CONTENT_YEARS removed after Phase 1.3 consolidation
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -110,9 +110,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.85,
   }];
 
-  // Phase 1.2: KW-Einzelseiten aus der Sitemap entfernt (noindex)
-  // ~160 Seiten mit minimalem Unterschied → Doorway-Page-Muster vermeiden
-  const kwPages: MetadataRoute.Sitemap = [];
+  // Phase 4.1: KW-Einzelseiten aufgewertet (Feiertage/Ferien/Arbeitstage/ICS)
+  // → wieder indexierbar. Aktuelles Jahr in die Sitemap; Nachbarjahre findet
+  // Google über die prev/next-Verlinkung selbst.
+  const kwPages: MetadataRoute.Sitemap = getAllKWsForYear(currentYear).map(
+    (w) => {
+      const isCurrent = w.weekNumber === currentKW.weekNumber;
+      return {
+        url: `https://aktuellekw.de/kw/${w.weekNumber}-${currentYear}`,
+        lastModified: w.endDate < now ? w.endDate : now,
+        changeFrequency: isCurrent ? ("weekly" as const) : ("monthly" as const),
+        priority: isCurrent ? 0.8 : 0.5,
+      };
+    }
+  );
 
   // Ostern (nur aktuelles Jahr)
   const osternPages: MetadataRoute.Sitemap = [{

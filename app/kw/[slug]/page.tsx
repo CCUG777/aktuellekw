@@ -8,6 +8,7 @@ import {
 } from "@/lib/kw";
 import KWDisplay from "@/components/KWDisplay";
 import WeekdayTable from "@/components/WeekdayTable";
+import KWWeekContext from "@/components/KWWeekContext";
 import AuthorByline from "@/components/AuthorByline";
 
 export const revalidate = 3600;
@@ -81,18 +82,19 @@ export async function generateMetadata({
   const kwInfo = getKWInfoByNumberAndYear(parsed.weekNumber, parsed.year);
   if (!kwInfo) return { title: "KW nicht gefunden" };
 
-  const title = `Kalenderwoche ${kwInfo.weekNumber} – Datum & Infos zur KW ${kwInfo.weekNumber}`;
-  const description = `KW ${kwInfo.weekNumber} ${kwInfo.year}: ${formatDateDE(kwInfo.startDate)} (Mo) bis ${formatDateDE(kwInfo.endDate)} (So) – alle 7 Tage im Detail. ✓ Kalenderwoche ${kwInfo.weekNumber} nach ISO 8601.`;
+  const title = `KW ${kwInfo.weekNumber} ${kwInfo.year}: Datum, Feiertage & Arbeitstage`;
+  const description = `KW ${kwInfo.weekNumber} ${kwInfo.year}: ${formatDateDE(kwInfo.startDate)} (Mo) bis ${formatDateDE(kwInfo.endDate)} (So). Mit Feiertagen, Arbeitstagen, Schulferien dieser Woche und ICS-Download – nach ISO 8601.`;
   return {
     title,
     description,
-    // Phase 1.2: KW-Einzelseiten aus dem Index nehmen (Doorway-Page-Muster vermeiden)
+    // Phase 4.1: KW-Einzelseiten aufgewertet (Feiertage/Ferien/Arbeitstage/ICS)
+    // → indexierbar mit Self-Canonical statt Doorway-noindex.
     robots: {
-      index: false,
+      index: true,
       follow: true,
     },
     alternates: {
-      canonical: "https://aktuellekw.de/kalenderwoche",
+      canonical: `https://aktuellekw.de/kw/${kwInfo.weekNumber}-${kwInfo.year}`,
     },
     openGraph: {
       title,
@@ -273,6 +275,14 @@ export default async function KWDetailPage({
             </dl>
           </div>
         </section>
+
+        {/* ── Woche im Detail: Feiertage / Arbeitstage / Ferien / ICS ── */}
+        <KWWeekContext
+          weekNumber={kwInfo.weekNumber}
+          year={kwInfo.year}
+          startDate={kwInfo.startDate}
+          endDate={kwInfo.endDate}
+        />
 
         {/* ── SEO-ERKLÄRTEXT ──────────────────────────────────────
          * SEO-TEXT PLATZHALTER – CLUSTER 5
