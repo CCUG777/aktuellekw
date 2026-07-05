@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const links = [
-  { href: "/kalenderwoche", label: "Kalenderwochen" },
+  { href: "/kalenderwoche", label: "Kalenderwoche" },
   { href: "/feiertage/2026", label: "Feiertage 2026" },
   { href: "/schulferien/2026", label: "Schulferien 2026" },
   { href: "/datum-heute", label: "Datum heute" },

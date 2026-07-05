@@ -6,7 +6,7 @@ export const metadata: Metadata = {
     absolute: "Über uns | aktuellekw.de – Redaktion, Expertise & Standards",
   },
   description:
-    "Wer steckt hinter aktuellekw.de? Erfahre mehr über unser Redaktionsteam, unsere fachliche Expertise zu ISO 8601, Kalenderwochen und Zeitplanung sowie unsere Redaktionsstandards.",
+    "Wer steckt hinter aktuellekw.de? Autor Marc Friedrich, Betreiber Common Consulting UG sowie unsere Quellen und Standards zu Kalenderwochen und ISO 8601.",
   alternates: {
     canonical: "https://aktuellekw.de/ueber-uns",
   },
