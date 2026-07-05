@@ -32,7 +32,7 @@ export default function AuthorByline({ date }: AuthorBylineProps) {
         href="/ueber-uns"
         className="text-accent hover:underline underline-offset-2"
       >
-        aktuellekw.de Redaktion
+        Marc Friedrich
       </a>
       {formattedDate && isoDate && (
         <>

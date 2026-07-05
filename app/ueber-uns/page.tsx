@@ -65,7 +65,7 @@ function PageJsonLd() {
       {
         "@type": "Person",
         "@id": "https://aktuellekw.de/#author",
-        name: "aktuellekw.de Redaktion",
+        name: "Marc Friedrich",
         url: "https://aktuellekw.de/ueber-uns",
         worksFor: { "@id": "https://aktuellekw.de/#organization" },
         knowsAbout: [
@@ -77,7 +77,7 @@ function PageJsonLd() {
           "DIN EN 28601",
         ],
         description:
-          "Die Redaktion von aktuellekw.de erstellt und pflegt alle Inhalte zu Kalenderwochen, Feiertagen, Schulferien und Zeitplanungs-Tools nach ISO 8601.",
+          "Marc Friedrich studiert Mathematik und hat die Inhalte von aktuellekw.de zu Kalenderwochen, Feiertagen und Zeitrechnung nach ISO 8601 konzipiert.",
       },
     ],
   };
@@ -225,18 +225,47 @@ export default function UeberUnsPage() {
           neuesten Stand gehalten.
         </p>
 
-        {/* ── Redaktionsteam & Expertise ──────────────────────── */}
-        <h2 id="redaktionsteam-expertise" className="text-2xl font-semibold mb-4">
-          Redaktionsteam &amp; Expertise
+        {/* ── Autor & Betreiber ───────────────────────────────── */}
+        <h2 id="autor-betreiber" className="text-2xl font-semibold mb-4">
+          Autor &amp; Betreiber
         </h2>
 
         <p className="text-text-secondary mb-5 leading-relaxed">
-          Hinter aktuellekw.de steht ein kleines, spezialisiertes Team aus
-          Entwicklern und Redakteuren mit Schwerpunkt auf Zeitplanung,
-          Kalenderrechnung und deutschem Normenwesen. Alle Inhalte werden von
-          Menschen erstellt, geprüft und regelmäßig aktualisiert – kein
-          automatisch generierter Text ohne Redaktionskontrolle.
+          Betrieben wird aktuellekw.de von der{" "}
+          <strong className="text-text-primary">Common Consulting UG</strong>{" "}
+          (siehe{" "}
+          <Link href="/impressum" className="text-accent hover:underline">
+            Impressum
+          </Link>
+          ). Die Inhalte werden von Menschen erstellt und vor der
+          Veröffentlichung geprüft – kein automatisch generierter Text ohne
+          Kontrolle.
         </p>
+
+        <div className="bg-surface-secondary border border-border rounded-2xl p-6 mb-8 flex gap-4 items-start">
+          <span
+            aria-hidden="true"
+            className="shrink-0 w-12 h-12 rounded-full bg-accent/15 text-accent flex items-center justify-center font-semibold text-lg"
+          >
+            MF
+          </span>
+          <div>
+            <p className="font-medium text-text-primary">Marc Friedrich</p>
+            <p className="text-xs text-text-secondary mb-2">
+              Autor · aktuellekw.de
+            </p>
+            <p className="text-text-secondary text-sm leading-relaxed">
+              Marc studiert Mathematik und hat die Inhalte dieser Seite zu
+              Kalenderwochen, Feiertagen und Zeitrechnung konzipiert. Sein
+              fachlicher Schwerpunkt liegt auf der korrekten Anwendung der
+              ISO-8601-Wochenzählung.
+            </p>
+          </div>
+        </div>
+
+        <h3 className="text-sm font-semibold uppercase tracking-wider text-text-secondary mb-3">
+          Fachliche Grundlagen
+        </h3>
 
         <div className="bg-surface-secondary border border-border rounded-2xl p-6 mb-8 space-y-5">
 
@@ -319,8 +348,8 @@ export default function UeberUnsPage() {
             },
             {
               icon: "🔍",
-              title: "Vier-Augen-Prinzip bei Norminhalten",
-              text: "Neue Inhalte zu ISO 8601, Feiertagsrecht oder Schulferienterminen werden vor der Veröffentlichung von einer zweiten Person aus dem Team gegengelesen und gegen die Primärquelle geprüft.",
+              title: "Abgleich mit der Primärquelle",
+              text: "Inhalte zu ISO 8601, Feiertagsrecht und Schulferienterminen werden vor der Veröffentlichung gegen die jeweilige Primärquelle (Normtext, Gesetz, KMK-Veröffentlichung) abgeglichen.",
             },
             {
               icon: "🤖",
