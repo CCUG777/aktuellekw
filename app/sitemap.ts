@@ -90,6 +90,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "yearly",
       priority: 0.8,
     },
+    // Gerade/ungerade Woche – GSC: "ist diese woche eine gerade woche" etc.
+    {
+      url: "https://aktuellekw.de/gerade-ungerade-woche",
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.7,
+    },
     // Über uns (E-E-A-T)
     {
       url: "https://aktuellekw.de/ueber-uns",
