@@ -83,6 +83,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "daily",
       priority: 0.85,
     },
+    // Cluster 6: KW-Kalender zum Ausdrucken (PDF/Excel) – GSC: "kw 2026 pdf" P1
+    {
+      url: "https://aktuellekw.de/kw-kalender-zum-ausdrucken",
+      lastModified: now,
+      changeFrequency: "yearly",
+      priority: 0.8,
+    },
     // Über uns (E-E-A-T)
     {
       url: "https://aktuellekw.de/ueber-uns",

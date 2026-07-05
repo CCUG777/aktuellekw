@@ -316,6 +316,24 @@ export default async function KalenderwochenYearPage({
           )}
         </section>
 
+        {/* ── CTA: Kalender zum Ausdrucken (kontextueller interner Link) ── */}
+        {isCurrentYear && (
+          <a
+            href="/kw-kalender-zum-ausdrucken"
+            className="flex items-center gap-3 bg-surface-secondary border border-border rounded-2xl p-4 mb-10 hover:border-accent/50 transition-all fade-in-delay"
+          >
+            <span aria-hidden="true" className="text-xl">🖨️</span>
+            <span className="text-sm">
+              <span className="text-text-primary font-medium block">
+                Diese Übersicht als KW-Kalender {year} ausdrucken
+              </span>
+              <span className="text-text-secondary">
+                Ganzes Jahr auf einem Blatt – PDF oder Excel, mit Feiertagen.
+              </span>
+            </span>
+          </a>
+        )}
+
         {/* ── Stats row ────────────────────────────────────────── */}
         <section className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-10 fade-in-delay">
           <div className="bg-surface-secondary border border-border rounded-2xl p-4">
